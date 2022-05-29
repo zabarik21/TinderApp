@@ -8,12 +8,17 @@
 import UIKit
 
 
+private enum Constants  {
+    static let ovalHeight: Int = 313
+}
+
 class MainTabBarController: UITabBarController {
     
     lazy var peopleVC = PeopleViewController()
     lazy var messagesVC = MessagerViewController()
     lazy var profileVC = ProfileViewController()
     
+    let headerOvalLayerMask = CAShapeLayer()
     let tabBarLayer = CAShapeLayer()
     let itemLayer = CAShapeLayer()
     var layerHeight = CGFloat()
@@ -30,6 +35,7 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
+        setupHeaderOvalLayer()
     }
     
     
@@ -57,7 +63,32 @@ class MainTabBarController: UITabBarController {
         setupItemLayer()
     }
     
-    
+    private func setupHeaderOvalLayer() {
+        let width = view.bounds.width * 1.289
+        let height = Constants.ovalHeight
+        let path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: Int(width), height: height)).cgPath
+        
+
+        headerOvalLayerMask.path = path
+        headerOvalLayerMask.frame.origin.x = self.view.center.x - width / 2
+        headerOvalLayerMask.frame.origin.y = -82
+        
+        // Gradient layer setup
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(named: "firstGradientColor")!.cgColor,
+            UIColor(named: "secondGradientColor")!.cgColor
+        ]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        // visible gradient will be on this frame
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: Int(width), height: height)
+        
+        gradientLayer.mask = headerOvalLayerMask
+
+        self.view.layer.addSublayer(gradientLayer)
+    }
     
     private func setupTabBarLayer() {
         let x: CGFloat = tabBarLayerHorizontalPadding
@@ -83,9 +114,6 @@ class MainTabBarController: UITabBarController {
         self.tabBarLayer.shadowRadius = 4
         
         self.tabBar.layer.insertSublayer(tabBarLayer, at: 0)
-        
-        print(tabBarLayer.frame)
-        print(tabBarLayer.bounds)
     }
     
     private func setupItemLayer() {
