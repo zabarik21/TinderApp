@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B478C3E2844EC1500AB653E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3D2844EC1500AB653E /* CardView.swift */; };
+		7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3F2844EEBD00AB653E /* CardContainerView.swift */; };
+		7B478C432844EF1800AB653E /* MTBC + Bacground layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */; };
 		7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EA8284111730081E71E /* AppDelegate.swift */; };
 		7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EAA284111730081E71E /* SceneDelegate.swift */; };
 		7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EAC284111730081E71E /* PeopleViewController.swift */; };
@@ -38,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B478C3D2844EC1500AB653E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		7B478C3F2844EEBD00AB653E /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
+		7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + Bacground layer.swift"; sourceTree = "<group>"; };
 		7BED5EA5284111730081E71E /* TinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BED5EA8284111730081E71E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BED5EAA284111730081E71E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +86,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B478C412844EEE700AB653E /* MainTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				7BED5ED9284111CF0081E71E /* MainTabBarController.swift */,
+				7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */,
+			);
+			path = MainTabBarController;
+			sourceTree = "<group>";
+		};
 		7BED5E9C284111730081E71E = {
 			isa = PBXGroup;
 			children = (
@@ -135,8 +150,8 @@
 		7BED5ED8284111BF0081E71E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B478C412844EEE700AB653E /* MainTabBarController */,
 				7BED5EE628411FCB0081E71E /* TabBarControllers */,
-				7BED5ED9284111CF0081E71E /* MainTabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -158,6 +173,8 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B478C3D2844EC1500AB653E /* CardView.swift */,
+				7B478C3F2844EEBD00AB653E /* CardContainerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,8 +346,11 @@
 			files = (
 				7BED5EE528411F050081E71E /* ProfileViewController.swift in Sources */,
 				7BED5EE0284114720081E71E /* MessagerViewController.swift in Sources */,
+				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,
+				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
+				7B478C432844EF1800AB653E /* MTBC + Bacground layer.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
 			);
