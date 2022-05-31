@@ -9,24 +9,28 @@ import UIKit
 
 
 
-class CardView: UIView {
-
-    // Main idea
-    // CardView is given to card containerView
-    // Card container is empty by default
-    // when new card is given to cardContainer -> start animation (bringing card to the top)
-    // self view is not touchable ()
-    // card container must have delegate
-    // that tells a container that the top card is left and new card needed to be shown
-    // or just by updating some container property in viewController
+class CardView: UIView, UserCardViewViewModelProtocol {
+  
+  var name: String
+  var age: Int
+  var city: String
+  var imageUrlString: String
     
-    init() {
-        super.init(frame: .zero)
-        backgroundColor = .red
-    }
+  init(with viewModel: UserCardViewViewModel) {
+    self.name = viewModel.name
+    self.age = viewModel.age
+    self.imageUrlString = viewModel.imageUrlString
+    self.city = viewModel.city
+    super.init(frame: .zero)
+    setupElements()
+  }
+  
+  private func setupElements() {
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+  }
+    
+  required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+  }
     
 }
