@@ -15,8 +15,9 @@ class CardView: UIView, UserCardViewViewModelProtocol {
   var age: Int
   var city: String
   var imageUrlString: String
+  var delegate: CardViewDeleagate?
     
-  init(with viewModel: UserCardViewViewModel) {
+  init(with viewModel: UserCardViewViewModelProtocol) {
     self.name = viewModel.name
     self.age = viewModel.age
     self.imageUrlString = viewModel.imageUrlString
@@ -25,8 +26,18 @@ class CardView: UIView, UserCardViewViewModelProtocol {
     setupElements()
   }
   
+  init() {
+    let viewModel = UserCardViewViewModel()
+    self.age = viewModel.age
+    self.imageUrlString = viewModel.imageUrlString
+    self.city = viewModel.city
+    self.name = viewModel.name
+    super.init(frame: .zero)
+    setupElements()
+  }
+  
   private func setupElements() {
-    
+    self.backgroundColor = .randomColor()
   }
     
   required init?(coder: NSCoder) {

@@ -6,54 +6,97 @@
 //
 
 import UIKit
+import SnapKit
 
 
+//    private var currentUserCard: UserCard
+//    private var nextUserCard: UserCard
+
+// has 2 properties that updates every time card swipe
+// properties are initing in init
+
+// at the init
+// setup top & bottom card
+// bring top card to the front via animation
+
+// after swipe
+// removing top card from superview
+// back card animating to top
+// configuring new back card
 
 
+// states
+// 0. no cards
+// 1. 2 cards is given
+// 2. top card swiped
+// 3. cards ended
 
 
-
-
+// how to notificate container that card is swiped
+// delegate for every view?
 
 protocol CardContainerDelagate {
-  func getNextUser(_ cardContainer: CardContainerViewProtocol) -> UserCardModel
+  func getNextUser(_ cardContainer: CardContainerView) -> UserCardModel
 }
 
-class CardContainerView: UIView, CardContainerViewProtocol {
+class CardContainerView: UIView, CardViewDeleagate {
   
+  var viewModel: CardContainerViewViewModelProtocol
   var delegate: CardContainerDelagate?
   
-  var backCardContainer: UIView
+  var backCardContainer: UIView!
   
-  var backCardView: CardView
-  var topCardView: CardView
+  var bottomCardView: CardView!
+  var topCardView: CardView!
   
-  
-  
-  //    private var currentUserCard: UserCard
-  //    private var nextUserCard: UserCard
-  
-  // has 2 properties that updates every time card swipe
-  // properties are initing in init
-  
-  // at the init
-  // setup top & bottom card
-  // bring top card to the front via animation
-  
-  // after swipe
-  // removing top card from superview
-  // back card animating to top
-  // configuring new back card
-  
-  
-  
-  init() {
-    backgroundColor = .blue
+  init(viewModel: CardContainerViewViewModelProtocol) {
+    self.viewModel = viewModel
     super.init(frame: .zero)
-//    self.backCardData = Data()
-//    self.frontCardData = Data()
-//    backCardContainer = UIView()
+    setupElements()
   }
+  
+  func loadCards() {
+    guard let bottomCard = viewModel.nextCard(),
+          let topCard = viewModel.nextCard() else { return }
+    topCardView = CardView(with: topCard)
+    bottomCardView = CardView(with: bottomCard)
+    
+    backCardContainer.addSubview(bottomCardView)
+    backCardContainer.addSubview(topCardView)
+  }
+  
+  func swiped() {
+    topCardView.removeFromSuperview()
+    guard let newData = delegate?.getNextUser(self) else { return }
+    viewModel.topCardViewModel = UserCardViewViewModel(with: newData)
+    showNewCard()
+  }
+  
+  
+  func showNewCard() {
+    
+    
+  }
+  
+  private func setupElements() {
+    backgroundColor = .blue
+    topCardView = CardView(with: viewModel.topCardViewModel)
+    bottomCardView = CardView(with: viewModel.bottomCardViewModel)
+    self.addSubview(bottomCardView)
+    self.addSubview(topCardView)
+   
+    bottomCardView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+    topCardView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+    
+    topCardView.delegate = self
+    
+  }
+  
+  
 //  
 //  private func swiped() {
 //    topCardView.removeFromSuperview()
@@ -87,6 +130,7 @@ class CardContainerView: UIView, CardContainerViewProtocol {
 //    }
 //  }
   
+ 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

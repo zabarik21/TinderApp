@@ -23,4 +23,12 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.name = userCardModel.name
     self.imageUrlString = userCardModel.imageUrlString
   }
+  
+  // init for tests
+  init() {
+    self.age = Int.random(in: 0...94)
+    self.city = ["Perm", "Ziben", "Moskow"].randomElement()!
+    self.name = ["Seva", "Niben", "Bebra"].randomElement()!
+    self.imageUrlString = "sdfasd"
+  }
 }

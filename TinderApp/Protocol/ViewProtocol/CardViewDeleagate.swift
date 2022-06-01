@@ -7,4 +7,6 @@
 
 import UIKit
 
-protocol CardViewProtocol: UIView, UserCardViewViewModelProtocol {}
+protocol CardViewDeleagate: UIView {
+  func swiped()
+}

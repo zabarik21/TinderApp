@@ -14,4 +14,12 @@ struct UserCardModel: Encodable {
   var city: String
   var imageUrlString: String
   
+
+  // test init
+  init () {
+    self.age = Int.random(in: 0...94)
+    self.city = ["Perm", "Ziben", "Moskow"].randomElement()!
+    self.name = ["Seva", "Niben", "Bebra"].randomElement()!
+    self.imageUrlString = "sdfasd"
+  }
 }

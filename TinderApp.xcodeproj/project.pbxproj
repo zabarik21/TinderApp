@@ -10,11 +10,18 @@
 		7B478C3E2844EC1500AB653E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3D2844EC1500AB653E /* CardView.swift */; };
 		7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3F2844EEBD00AB653E /* CardContainerView.swift */; };
 		7B478C432844EF1800AB653E /* MTBC + Bacground layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */; };
+		7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */; };
+		7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE62847177E00C692E0 /* Array + Shift.swift */; };
+		7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */; };
+		7B47BAEC28471A1100C692E0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B47BAEB28471A1100C692E0 /* SnapKit */; };
+		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
+		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
+		7B8906172847243B008B1D7A /* MTBC + TabBarSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906162847243B008B1D7A /* MTBC + TabBarSetup.swift */; };
+		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
 		7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */; };
-		7BCB99BD2845C985004EFC29 /* CardContainerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99BC2845C985004EFC29 /* CardContainerViewProtocol.swift */; };
 		7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */; };
 		7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */; };
-		7BCB99C52845DAA4004EFC29 /* CardViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C42845DAA4004EFC29 /* CardViewProtocol.swift */; };
+		7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */; };
 		7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EA8284111730081E71E /* AppDelegate.swift */; };
 		7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EAA284111730081E71E /* SceneDelegate.swift */; };
 		7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EAC284111730081E71E /* PeopleViewController.swift */; };
@@ -49,11 +56,17 @@
 		7B478C3D2844EC1500AB653E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7B478C3F2844EEBD00AB653E /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
 		7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + Bacground layer.swift"; sourceTree = "<group>"; };
+		7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelProtocol.swift; sourceTree = "<group>"; };
+		7B47BAE62847177E00C692E0 /* Array + Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Shift.swift"; sourceTree = "<group>"; };
+		7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
+		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
+		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
+		7B8906162847243B008B1D7A /* MTBC + TabBarSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarSetup.swift"; sourceTree = "<group>"; };
+		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
 		7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewViewModelProtocol.swift; sourceTree = "<group>"; };
-		7BCB99BC2845C985004EFC29 /* CardContainerViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewProtocol.swift; sourceTree = "<group>"; };
 		7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
 		7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
-		7BCB99C42845DAA4004EFC29 /* CardViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewProtocol.swift; sourceTree = "<group>"; };
+		7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewDeleagate.swift; sourceTree = "<group>"; };
 		7BED5EA5284111730081E71E /* TinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BED5EA8284111730081E71E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BED5EAA284111730081E71E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B47BAEC28471A1100C692E0 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +115,8 @@
 			children = (
 				7BED5ED9284111CF0081E71E /* MainTabBarController.swift */,
 				7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */,
+				7B8906162847243B008B1D7A /* MTBC + TabBarSetup.swift */,
+				7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */,
 			);
 			path = MainTabBarController;
 			sourceTree = "<group>";
@@ -116,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */,
+				7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */,
 			);
 			path = ViewModelProtocol;
 			sourceTree = "<group>";
@@ -123,8 +140,7 @@
 		7BCB99BB2845C976004EFC29 /* ViewProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				7BCB99BC2845C985004EFC29 /* CardContainerViewProtocol.swift */,
-				7BCB99C42845DAA4004EFC29 /* CardViewProtocol.swift */,
+				7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */,
 			);
 			path = ViewProtocol;
 			sourceTree = "<group>";
@@ -178,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				7BED5EBF284111750081E71E /* TinderAppTests.swift */,
+				7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */,
 			);
 			path = TinderAppTests;
 			sourceTree = "<group>";
@@ -204,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */,
+				7B846C76284679370013AA22 /* ContainerViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -229,6 +247,8 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B846C7D284681BF0013AA22 /* UIColor + Random.swift */,
+				7B47BAE62847177E00C692E0 /* Array + Shift.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,6 +297,9 @@
 			dependencies = (
 			);
 			name = TinderApp;
+			packageProductDependencies = (
+				7B47BAEB28471A1100C692E0 /* SnapKit */,
+			);
 			productName = TinderApp;
 			productReference = 7BED5EA5284111730081E71E /* TinderApp.app */;
 			productType = "com.apple.product-type.application";
@@ -349,6 +372,9 @@
 				Base,
 			);
 			mainGroup = 7BED5E9C284111730081E71E;
+			packageReferences = (
+				7B47BAEA28471A1100C692E0 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 7BED5EA6284111730081E71E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -391,17 +417,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8906172847243B008B1D7A /* MTBC + TabBarSetup.swift in Sources */,
 				7BED5EE528411F050081E71E /* ProfileViewController.swift in Sources */,
 				7BED5EE0284114720081E71E /* MessagerViewController.swift in Sources */,
 				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,
+				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
-				7BCB99BD2845C985004EFC29 /* CardContainerViewProtocol.swift in Sources */,
+				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
+				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,
+				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
+				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B478C432844EF1800AB653E /* MTBC + Bacground layer.swift in Sources */,
-				7BCB99C52845DAA4004EFC29 /* CardViewProtocol.swift in Sources */,
+				7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,
@@ -413,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BED5EC0284111750081E71E /* TinderAppTests.swift in Sources */,
+				7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +772,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B47BAEA28471A1100C692E0 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B47BAEB28471A1100C692E0 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B47BAEA28471A1100C692E0 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7BED5E9D284111730081E71E /* Project object */;
 }
