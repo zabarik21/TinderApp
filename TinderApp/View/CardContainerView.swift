@@ -39,7 +39,7 @@ protocol CardContainerDelagate {
   func getNextUser(_ cardContainer: CardContainerView) -> UserCardModel
 }
 
-class CardContainerView: UIView, CardViewDeleagate {
+class CardContainerView: UIView {
   
   var viewModel: CardContainerViewViewModelProtocol
   var delegate: CardContainerDelagate?
@@ -65,12 +65,9 @@ class CardContainerView: UIView, CardViewDeleagate {
     backCardContainer.addSubview(topCardView)
   }
   
-  func swiped() {
-    topCardView.removeFromSuperview()
-    guard let newData = delegate?.getNextUser(self) else { return }
-    viewModel.topCardViewModel = UserCardViewViewModel(with: newData)
-    showNewCard()
-  }
+  
+  
+  
   
   
   func showNewCard() {
@@ -96,6 +93,10 @@ class CardContainerView: UIView, CardViewDeleagate {
     
   }
   
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    print(#function)
+    print(#file)
+  }
   
 //  
 //  private func swiped() {
@@ -135,4 +136,13 @@ class CardContainerView: UIView, CardViewDeleagate {
     fatalError("init(coder:) has not been implemented")
   }
   
+}
+
+extension CardContainerView: CardViewDeleagate {
+  func swiped() {
+    topCardView.removeFromSuperview()
+    guard let newData = delegate?.getNextUser(self) else { return }
+    viewModel.topCardViewModel = UserCardViewViewModel(with: newData)
+    showNewCard()
+  }
 }
