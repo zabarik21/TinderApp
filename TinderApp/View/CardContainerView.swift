@@ -145,7 +145,7 @@ class CardContainerView: UIView {
 }
 
 extension CardContainerView: CardViewDeleagate {
-  func swiped() {
+  func swiped(liked: Bool) {
     print("swiped")
     topCardView.removeFromSuperview()
     guard let newData = delegate?.getNextUser(self) else { return }

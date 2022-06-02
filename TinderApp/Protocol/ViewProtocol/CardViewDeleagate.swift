@@ -8,5 +8,5 @@
 import UIKit
 
 protocol CardViewDeleagate: UIView {
-  func swiped()
+  func swiped(liked: Bool)
 }
