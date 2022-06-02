@@ -33,4 +33,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
       }
     }
   }
+  
+  func swapTopViewModel(with viewModel: UserCardViewViewModelProtocol) {
+    topCardViewModel = bottomCardViewModel
+    bottomCardViewModel = viewModel
+  }
 }

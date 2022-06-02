@@ -45,46 +45,62 @@ class CardView: UIView, UserCardViewViewModelProtocol {
     anchorPoint.x = touches.first!.location(in: window).x - frame.minX
     anchorPoint.y = touches.first!.location(in: window).y - frame.minY
     
-    startPoint = frame.origin
+    startPoint = center
   }
   
   
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    // delta is ok
     let delta = (touches.first!.location(in: window).x) - anchorPoint.x
     // delta max is 330 (if touch begin from edge of view to edge of screen)
     // and medium delta is about 160
     // maximum angle that we need is maximum 45 (if delta 330)1
     
-    let maxAngle: CGFloat = .pi / 4
+    let maxAngle: CGFloat = .pi / 8
+    // angle is ok
     let angle: CGFloat = maxAngle * (CGFloat(delta) * 10 / 33)
     print("delta \(delta)")
     print("angle \(angle)")
-    self.frame.origin.x = (touches.first!.location(in: window).x) - anchorPoint.x
-//    self.transform = CGAffineTransform(rotationAngle: (angle - self.currentAngle) / 100)
+    
+//    self.frame.origin.x = (touches.first!.location(in: window).x) - anchorPoint.x
+    let x = (delta  + (self.bounds.width / 2))
+    print("center x \(x)")
+    
+    self.transform = CGAffineTransform(rotationAngle: angle * .pi/180)
+    self.center.x = x
+    
+    
+    
+    
     currentAngle = angle
     
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     UIView.animate(withDuration: 0.3, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) { [ unowned self] in
+      let maxDelta: CGFloat = 200
       let delta = (touches.first!.location(in: window).x) - anchorPoint.x
-      if delta > 135 {
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear) {
+      if delta > maxDelta {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear) {
           self.frame.origin.x += 300
         } completion: { _ in
           self.delegate?.swiped()
         }
       }
-      else if delta < -135 {
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear) {
+      else if delta < -maxDelta {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear) {
           self.frame.origin.x -= 300
         } completion: { _ in
           self.delegate?.swiped()
         }
       }
       else {
-        self.frame.origin = self.startPoint
+        UIView.animate(withDuration: 0.2) {
+          self.transform = .identity
+          self.center = self.startPoint
+        }
         self.transform = .identity
+        self.center = self.startPoint
       }
     }
 

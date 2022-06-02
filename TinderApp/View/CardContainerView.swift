@@ -36,7 +36,7 @@ import SnapKit
 // delegate for every view?
 
 protocol CardContainerDelagate {
-  func getNextUser(_ cardContainer: CardContainerView) -> UserCardModel
+  func getNextUser(_ cardContainer: CardContainerView) -> UserCardViewViewModelProtocol
 }
 
 class CardContainerView: UIView {
@@ -70,9 +70,12 @@ class CardContainerView: UIView {
   
   
   
-  func showNewCard() {
-    
-    
+  func bringBottomCardToTop() {
+    UIView.animate(withDuration: 0.5) {
+      self.bottomCardView.snp.makeConstraints { make in
+        make.edges.equalToSuperview()
+      }
+    }
   }
   
   private func setupElements() {
@@ -83,7 +86,10 @@ class CardContainerView: UIView {
     self.addSubview(topCardView)
    
     bottomCardView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+      make.top.equalTo(self.snp.top).offset(5)
+      make.left.equalTo(self.snp.left).offset(12)
+      make.right.equalTo(self.snp.right).offset(-12)
+      make.bottom.equalTo(self.snp.bottom).offset(11)
     }
     topCardView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
@@ -140,9 +146,20 @@ class CardContainerView: UIView {
 
 extension CardContainerView: CardViewDeleagate {
   func swiped() {
+    print("swiped")
     topCardView.removeFromSuperview()
     guard let newData = delegate?.getNextUser(self) else { return }
-    viewModel.topCardViewModel = UserCardViewViewModel(with: newData)
-    showNewCard()
+    let newBottomView = CardView(with: newData)
+    bringBottomCardToTop()
+    topCardView = bottomCardView
+    bottomCardView = newBottomView
+    addSubview(bottomCardView)
+    bottomCardView.snp.makeConstraints { make in
+      make.top.equalTo(self.snp.top).offset(5)
+      make.left.equalTo(self.snp.left).offset(12)
+      make.right.equalTo(self.snp.right).offset(-12)
+      make.bottom.equalTo(self.snp.bottom).offset(11)
+    }
+    (viewModel as! CardContainerViewViewModel).swapTopViewModel(with: newData)
   }
 }

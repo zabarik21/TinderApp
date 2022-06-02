@@ -77,9 +77,12 @@ class MainTabBarController: UITabBarController {
 }
 
 extension MainTabBarController: CardContainerDelagate {
-  func getNextUser(_ cardContainer: CardContainerView) -> UserCardModel {
-    return UserCardModel()
+  
+  func getNextUser(_ cardContainer: CardContainerView) -> UserCardViewViewModelProtocol {
+    return UserCardViewViewModel()
   }
+  
+  
   
   
 }
