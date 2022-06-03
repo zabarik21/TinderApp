@@ -23,6 +23,7 @@
 		7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */; };
 		7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */; };
 		7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */; };
+		7BEBD960284A8A9200C3DF30 /* CardContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */; };
 		7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EA8284111730081E71E /* AppDelegate.swift */; };
 		7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EAA284111730081E71E /* SceneDelegate.swift */; };
 		7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EAC284111730081E71E /* PeopleViewController.swift */; };
@@ -69,6 +70,7 @@
 		7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
 		7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewDeleagate.swift; sourceTree = "<group>"; };
+		7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerDelegate.swift; sourceTree = "<group>"; };
 		7BED5EA5284111730081E71E /* TinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BED5EA8284111730081E71E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BED5EAA284111730081E71E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,8 @@
 		7BCB99B42845C91A004EFC29 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */,
+				7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -151,7 +155,6 @@
 		7BCB99BB2845C976004EFC29 /* ViewProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */,
 			);
 			path = ViewProtocol;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B8906172847243B008B1D7A /* MTBC + TabBarSetup.swift in Sources */,
+				7BEBD960284A8A9200C3DF30 /* CardContainerDelegate.swift in Sources */,
 				7BED5EE528411F050081E71E /* ProfileViewController.swift in Sources */,
 				7BED5EE0284114720081E71E /* MessagerViewController.swift in Sources */,
 				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,

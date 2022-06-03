@@ -35,9 +35,13 @@ import SnapKit
 // how to notificate container that card is swiped
 // delegate for every view?
 
-protocol CardContainerDelagate {
-  func getNextUser(_ cardContainer: CardContainerView) -> UserCardViewViewModelProtocol
-}
+
+// state 2:
+// top card is being moved by x on constant: shiftConstant
+// after bottom card animates to top
+// after top card moves behind the bottom
+// state is changing on state where top card now is bottom and bottom now on top
+
 
 class CardContainerView: UIView {
   
@@ -45,9 +49,10 @@ class CardContainerView: UIView {
   var delegate: CardContainerDelagate?
   
   var backCardContainer: UIView!
-  
   var bottomCardView: CardView!
   var topCardView: CardView!
+  
+  var topCardTurn: Bool = true
   
   init(viewModel: CardContainerViewViewModelProtocol) {
     self.viewModel = viewModel
@@ -55,48 +60,22 @@ class CardContainerView: UIView {
     setupElements()
   }
   
-  func loadCards() {
-    guard let bottomCard = viewModel.nextCard(),
-          let topCard = viewModel.nextCard() else { return }
-    topCardView = CardView(with: topCard)
-    bottomCardView = CardView(with: bottomCard)
-    
-    backCardContainer.addSubview(bottomCardView)
-    backCardContainer.addSubview(topCardView)
-  }
-  
-  
-  
-  
-  
-  
-  func bringBottomCardToTop() {
-    UIView.animate(withDuration: 0.5) {
-      self.bottomCardView.snp.makeConstraints { make in
-        make.edges.equalToSuperview()
-      }
-    }
-  }
-  
   private func setupElements() {
-    backgroundColor = .blue
+    backgroundColor = .black
     topCardView = CardView(with: viewModel.topCardViewModel)
     bottomCardView = CardView(with: viewModel.bottomCardViewModel)
     self.addSubview(bottomCardView)
     self.addSubview(topCardView)
    
     bottomCardView.snp.makeConstraints { make in
-      make.top.equalTo(self.snp.top).offset(5)
-      make.left.equalTo(self.snp.left).offset(12)
-      make.right.equalTo(self.snp.right).offset(-12)
-      make.bottom.equalTo(self.snp.bottom).offset(11)
+      make.edges.equalToSuperview()
     }
     topCardView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
     
     topCardView.delegate = self
-    
+    bottomCardView.delegate = self
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -104,62 +83,34 @@ class CardContainerView: UIView {
     print(#file)
   }
   
-//  
-//  private func swiped() {
-//    topCardView.removeFromSuperview()
-//    let card = CardView(CardContainerDelagate.?getNextUser(self))
-//    topCardView = backCardView
-//    showNew()
-//    backCardContainer.addSubview(card)
-//  }
-//  
-//  private func showNew() {
-//    UIView.animate(withDuration: 0.5) {
-//      // top anchor up to 5
-//      // left and right up to 12
-//      // bottom up to 11
-//    }
-//  }
-//  
-//  private func setupCards(_ front: Data, _ second: Data) {
-//    let frontCardView = CardView(front)
-//    let bottomCardView = CardView(bottom)
-//    frontCardView = currentCard
-//    backCardContainer.addSubview(bottomCardView)
-//    backCardContainer.addSubview(frontCardView)
-//    
-//    UIView.animate(withDuration: 0.5) {
-//      NSLayoutConstraint.activate([
-//        // top anchor up to 5
-//        // left and right up to 12
-//        // bottom up to 11
-//      ]])
-//    }
-//  }
-  
- 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
 }
 
+
 extension CardContainerView: CardViewDeleagate {
+  
   func swiped(liked: Bool) {
-    print("swiped")
-    topCardView.removeFromSuperview()
-    guard let newData = delegate?.getNextUser(self) else { return }
-    let newBottomView = CardView(with: newData)
-    bringBottomCardToTop()
-    topCardView = bottomCardView
-    bottomCardView = newBottomView
-    addSubview(bottomCardView)
-    bottomCardView.snp.makeConstraints { make in
-      make.top.equalTo(self.snp.top).offset(5)
-      make.left.equalTo(self.snp.left).offset(12)
-      make.right.equalTo(self.snp.right).offset(-12)
-      make.bottom.equalTo(self.snp.bottom).offset(11)
-    }
-    (viewModel as! CardContainerViewViewModel).swapTopViewModel(with: newData)
+    swapViews()
   }
+  
+  func swapViews() {
+    if topCardTurn {
+      topCardView.isUserInteractionEnabled = false
+      bottomCardView.isUserInteractionEnabled = true
+      topCardView.layer.zPosition = 0
+      bottomCardView.layer.zPosition = 1
+      topCardView.alpha = 1
+    } else {
+      bottomCardView.isUserInteractionEnabled = false
+      topCardView.isUserInteractionEnabled = true
+      bottomCardView.alpha = 0
+      topCardView.layer.zPosition = 1
+      bottomCardView.alpha = 1
+    }
+    topCardTurn.toggle()
+  }
+  
 }

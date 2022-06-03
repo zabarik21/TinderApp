@@ -65,9 +65,11 @@ class MainTabBarController: UITabBarController {
     cardContainer.snp.makeConstraints { make in
       make.leading.equalTo(self.view.snp.leading).offset(37)
       make.trailing.equalTo(self.view.snp.trailing).offset(-37)
-      make.height.equalTo(485)
+      make.height.equalTo(490)
       make.center.equalTo(self.view)
     }
+    
+    cardContainer.delegate = self
   }
   
   

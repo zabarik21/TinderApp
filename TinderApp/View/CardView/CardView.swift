@@ -12,6 +12,9 @@ enum CardViewConstants {
   static let swipedAngle: CGFloat = 60 * .pi / 180
   static let maxDelta: CGFloat = 180
   static let maxAngle: CGFloat = .pi / 8
+  static let topCardHorizontalOffset: CGFloat = 12
+  static let topCardTopOffset: CGFloat = 5
+  static let topCardBottomOffset: CGFloat = 11
 }
 
 class CardView: UIView, UserCardViewViewModelProtocol {
@@ -47,7 +50,7 @@ class CardView: UIView, UserCardViewViewModelProtocol {
   }
   
   func animateToIdentity() {
-    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 10, options: .curveEaseInOut) {
+    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .curveEaseInOut) {
       self.transform = .identity
       self.center = self.startPoint
     }
@@ -56,12 +59,18 @@ class CardView: UIView, UserCardViewViewModelProtocol {
   func swipe(liked: Bool) {
     let xShift: CGFloat = liked ? CardViewConstants.xShift : -CardViewConstants.xShift
     let angle: CGFloat = liked ? CardViewConstants.swipedAngle : -CardViewConstants.swipedAngle
-    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 10, options: .curveLinear) {
+    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .curveLinear) {
       self.transform = CGAffineTransform(rotationAngle: angle)
       self.center.x += xShift
+      self.alpha = 0
     } completion: { _ in
-      self.delegate?.swiped(liked: liked)
+      self.transform = .identity
+      self.center = self.startPoint
+      self.backgroundColor = .randomColor()
     }
+    self.delegate?.swiped(liked: liked)
+    
+    
   }
   
   private func setupElements() {
