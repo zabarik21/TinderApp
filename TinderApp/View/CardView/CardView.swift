@@ -6,45 +6,41 @@
 //
 
 import UIKit
+import SnapKit
+import Kingfisher
 
 enum CardViewConstants {
-  static let xShift: CGFloat = 400
-  static let swipedAngle: CGFloat = 60 * .pi / 180
-  static let maxDelta: CGFloat = 180
+  static let xShift: CGFloat = 1000
+  static let swipedAngle: CGFloat = 45 * .pi / 180
+  static let maxDelta: CGFloat = 130
   static let maxAngle: CGFloat = .pi / 8
   static let topCardHorizontalOffset: CGFloat = 12
   static let topCardTopOffset: CGFloat = 5
   static let topCardBottomOffset: CGFloat = 11
 }
 
-class CardView: UIView, UserCardViewViewModelProtocol {
+class CardView: UIView {
   
-  var name: String
-  var age: Int
-  var city: String
-  var imageUrlString: String
+  var viewModel: UserCardViewViewModelProtocol
   var delegate: CardViewDeleagate?
   
   var anchorPoint: CGPoint = .zero
   var startPoint: CGPoint = .zero
-  var currentAngle: CGFloat = 0
-  var oldAngle: CGFloat = 0
+  
+  var profileImage = UIImageView()
+  var nameAgeLabel = UILabel()
+  var cityDistanceLabel = UILabel()
+  var compatabilityView = UIView()
     
   init(with viewModel: UserCardViewViewModelProtocol) {
-    self.name = viewModel.name
-    self.age = viewModel.age
-    self.imageUrlString = viewModel.imageUrlString
-    self.city = viewModel.city
+    self.viewModel = viewModel
     super.init(frame: .zero)
     setupElements()
   }
   
   init() {
     let viewModel = UserCardViewViewModel()
-    self.age = viewModel.age
-    self.imageUrlString = viewModel.imageUrlString
-    self.city = viewModel.city
-    self.name = viewModel.name
+    self.viewModel = viewModel
     super.init(frame: .zero)
     setupElements()
   }
@@ -59,7 +55,7 @@ class CardView: UIView, UserCardViewViewModelProtocol {
   func swipe(liked: Bool) {
     let xShift: CGFloat = liked ? CardViewConstants.xShift : -CardViewConstants.xShift
     let angle: CGFloat = liked ? CardViewConstants.swipedAngle : -CardViewConstants.swipedAngle
-    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .curveLinear) {
+    UIView.animate(withDuration: Constants.cardDisappearTime, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 2, options: .curveLinear) {
       self.transform = CGAffineTransform(rotationAngle: angle)
       self.center.x += xShift
       self.alpha = 0
@@ -73,8 +69,50 @@ class CardView: UIView, UserCardViewViewModelProtocol {
     
   }
   
+  private func setupLabels() {
+    let nameLabelFont = UIFont.systemFont(ofSize: 24, weight: .bold)
+    let cityFont = UIFont.systemFont(ofSize: 12, weight: .bold)
+    nameAgeLabel.font = nameLabelFont
+    cityDistanceLabel.font = cityFont
+    
+    addSubview(nameAgeLabel)
+    addSubview(cityDistanceLabel)
+    
+    nameAgeLabel.snp.makeConstraints { make in
+      make.bottom.equalToSuperview().offset(-37)
+      make.leading.equalToSuperview().offset(26)
+    }
+    
+    cityDistanceLabel.snp.makeConstraints { make in
+      make.top.equalTo(nameAgeLabel.snp.bottom).offset(4)
+      make.leading.equalToSuperview().offset(26)
+    }
+  }
+  
+  private func setupImageView() {
+    addSubview(profileImage)
+    profileImage.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+  }
+  
+  private func fillUI() {
+    cityDistanceLabel.text = viewModel.cityDistanceLabelText()
+    nameAgeLabel.text = viewModel.nameAgeLabelText()
+//    guard let url = URL(string: viewModel.imageUrlString) else { return }
+//    profileImage.kf.setImage(with: url)
+  }
+  
   private func setupElements() {
     self.backgroundColor = .randomColor()
+    clipsToBounds = true
+    layer.cornerRadius = 20
+//     setup labels +
+//     setup imageView +
+//     setup compatability view
+    setupLabels()
+    setupImageView()
+    fillUI()
   }
     
   required init?(coder: NSCoder) {

@@ -11,8 +11,8 @@ import UIKit
 extension MainTabBarController {
   
   func setupTabBarLayer() {
-    let x: CGFloat = tabBarLayerHorizontalPadding
-    let y: CGFloat = tabBarLayerVerticalPadding
+    let x: CGFloat = Constants.tabBarLayerHorizontalPadding
+    let y: CGFloat = Constants.tabBarLayerVerticalPadding
     let width = self.tabBar.bounds.width - x * 2
     let height = CGFloat(Int(self.tabBar.bounds.height + y * 1.5))
     layerHeight = height
@@ -39,7 +39,7 @@ extension MainTabBarController {
   func setupItemLayer() {
     let width = layerWidth / 3
     let height = layerHeight - 4
-    let x = tabBarLayerHorizontalPadding + 3
+    let x = Constants.tabBarLayerHorizontalPadding + 3
     
     
     

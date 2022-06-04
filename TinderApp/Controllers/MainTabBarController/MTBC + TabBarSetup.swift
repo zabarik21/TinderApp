@@ -2,11 +2,11 @@
 //  MTBC + TabBarSetup.swift
 //  TinderApp
 //
-//  Created by Timofey on 1/6/22.
+//  Created by Timofey on 4/6/22.
 //
 
-
 import UIKit
+
 
 extension MainTabBarController {
   // TO-DO: complete floating tabbar setup

@@ -32,3 +32,14 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.imageUrlString = "sdfasd"
   }
 }
+
+
+extension UserCardViewViewModel {
+  func nameAgeLabelText() -> String {
+    return "\(name), \(age) 􀇻"
+  }
+  func cityDistanceLabelText() -> String {
+    var randomDistance = Int.random(in: 0...50)
+    return "\(city) •\(randomDistance) km"
+  }
+}
