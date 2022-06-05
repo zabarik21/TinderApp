@@ -18,10 +18,10 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   var imageUrlString: String
   
   init(with userCardModel: UserCardModel) {
-    self.age = userCardModel.age
-    self.city = userCardModel.city
-    self.name = userCardModel.name
-    self.imageUrlString = userCardModel.imageUrlString
+    self.age = userCardModel.birthDate.age
+    self.city = userCardModel.location.city
+    self.name = userCardModel.name.first
+    self.imageUrlString = userCardModel.picture.thumbnail
   }
   
   // init for tests

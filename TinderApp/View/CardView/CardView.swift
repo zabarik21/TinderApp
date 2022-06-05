@@ -45,11 +45,9 @@ class CardView: UIView {
     setupElements()
   }
   
-  func animateToIdentity() {
-    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .curveEaseInOut) {
-      self.transform = .identity
-      self.center = self.startPoint
-    }
+  func updateCard(with viewModel: UserCardViewViewModelProtocol) {
+    self.viewModel = viewModel
+    fillUI()
   }
   
   func swipe(liked: Bool) {
@@ -65,8 +63,6 @@ class CardView: UIView {
       self.backgroundColor = .randomColor()
     }
     self.delegate?.swiped(liked: liked)
-    
-    
   }
   
   private func setupLabels() {
@@ -91,6 +87,7 @@ class CardView: UIView {
   
   private func setupImageView() {
     addSubview(profileImage)
+    profileImage.contentMode = .scaleAspectFit
     profileImage.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
@@ -99,19 +96,16 @@ class CardView: UIView {
   private func fillUI() {
     cityDistanceLabel.text = viewModel.cityDistanceLabelText()
     nameAgeLabel.text = viewModel.nameAgeLabelText()
-//    guard let url = URL(string: viewModel.imageUrlString) else { return }
-//    profileImage.kf.setImage(with: url)
+    guard let url = URL(string: viewModel.imageUrlString) else { return }
+    profileImage.kf.setImage(with: url)
   }
   
   private func setupElements() {
     self.backgroundColor = .randomColor()
     clipsToBounds = true
     layer.cornerRadius = 20
-//     setup labels +
-//     setup imageView +
-//     setup compatability view
-    setupLabels()
     setupImageView()
+    setupLabels()
     fillUI()
   }
     

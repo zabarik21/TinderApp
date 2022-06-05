@@ -21,6 +21,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   var delegate: CardContainerDelagate?
   
   func nextCard() -> UserCardViewViewModelProtocol? {
+    if users.count < 5 {
+      loadUsers()
+    }
     return users.shift()
   }
   
@@ -32,10 +35,26 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
         self.topCardViewModel = topCard
       }
     }
+    loadUsers()
   }
   
-  func swapTopViewModel(with viewModel: UserCardViewViewModelProtocol) {
-    topCardViewModel = bottomCardViewModel
-    bottomCardViewModel = viewModel
+//   test func to try random people api
+  func loadUsers() {
+    guard let url = URL(string: "https://randomuser.me/api/?results=5") else { return }
+    let request = URLRequest(url: url)
+    URLSession.shared.dataTask(with: request) { data, _, error in
+      if let error = error {
+        print(error)
+      }
+      guard let data = data else { return }
+      print("Data not nil")
+      var newUsers: [UserCardModel]?
+      newUsers = try? JSONDecoder().decode(RandomPeopleApiResponce.self, from: data).results
+      if let newUsers = newUsers {
+        for user in newUsers {
+          self.users.append(UserCardViewViewModel(with: user))
+        }
+      }
+    }.resume()
   }
 }

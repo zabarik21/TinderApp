@@ -9,6 +9,13 @@ import UIKit
 
 extension CardView {
   
+  func animateToIdentity() {
+    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .curveEaseInOut) {
+      self.transform = .identity
+      self.center = self.startPoint
+    }
+  }
+  
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     anchorPoint.x = touches.first!.location(in: window).x - frame.minX
     anchorPoint.y = touches.first!.location(in: window).y - frame.minY

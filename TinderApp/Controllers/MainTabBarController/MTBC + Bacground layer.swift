@@ -9,7 +9,7 @@ import UIKit
 
 
 
-extension MainTabBarController {
+extension PeopleViewController {
     
     func setupHeaderOvalLayer() {
         let width = view.bounds.width * 1.289

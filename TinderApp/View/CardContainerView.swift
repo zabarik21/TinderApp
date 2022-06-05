@@ -138,6 +138,20 @@ extension CardContainerView: CardViewDeleagate {
   func swiped(liked: Bool) {
     updateCardConstraints()
     swapViews()
+    updateCurrentBottomCard()
+  }
+  
+  func updateCurrentBottomCard() {
+    if let cardViewModel = viewModel.nextCard() {
+      if topCardTurn {
+        topCardView.updateCard(with: cardViewModel)
+      }
+      else {
+        bottomCardView.updateCard(with: cardViewModel)
+      }
+    } else {
+      // alert on cardContainer that users are ended
+    }
   }
   
   func updateCardConstraints() {
@@ -148,30 +162,24 @@ extension CardContainerView: CardViewDeleagate {
       bottomCardTopAnchorConstraint.constant = 0
       bottomCardLeadingAnchorConstraint.constant = 0
       bottomCardTrailingAnchorConstraint.constant = 0
-//      bottomCardBottomAnchorConstraint.constant = 0
       
       topCardHeightConstraint.constant = CardContainerConstants.minimizedCardHeight
       topCardLeadingAnchorConstraint.constant = CardContainerConstants.horizontalCardOffset
       topCardTrailingAnchorConstraint.constant = -CardContainerConstants.horizontalCardOffset
       topCardTopAnchorConstraint.constant = CardContainerConstants.topAnchorCardOffset
-//      topCardBottomAnchorConstraint.constant = CardContainerConstants.bottomCardOffset
       
     } else {
       topCardHeightConstraint.constant = CardContainerConstants.maximizedCardHeight
       topCardTopAnchorConstraint.constant = 0
       topCardLeadingAnchorConstraint.constant = 0
       topCardTrailingAnchorConstraint.constant = 0
-//      topCardBottomAnchorConstraint.constant = 0
-      
       
       bottomCardHeightConstraint.constant = CardContainerConstants.minimizedCardHeight
       bottomCardTopAnchorConstraint.constant = CardContainerConstants.topAnchorCardOffset
       bottomCardLeadingAnchorConstraint.constant = CardContainerConstants.horizontalCardOffset
       bottomCardTrailingAnchorConstraint.constant = -CardContainerConstants.horizontalCardOffset
-//      bottomCardBottomAnchorConstraint.constant = CardContainerConstants.bottomCardOffset
     }
 
-    
     UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
       self.layoutIfNeeded()
     }

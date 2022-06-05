@@ -7,19 +7,54 @@
 
 import Foundation
 
+struct RandomPeopleApiResponce: Codable {
+  let results: [UserCardModel]
+}
 
-struct UserCardModel: Encodable {
-  var name: String
-  var age: Int
-  var city: String
-  var imageUrlString: String
+struct UserCardModel: Codable {
+  var name: Name
+  var gender: String
+  var location: Location
+  var birthDate: BirthDate
+  var picture: WebImage
+  var id: ID
   
-
-  // test init
-  init () {
-    self.age = Int.random(in: 0...94)
-    self.city = ["Perm", "Ziben", "Moskow"].randomElement()!
-    self.name = ["Seva", "Niben", "Bebra"].randomElement()!
-    self.imageUrlString = "sdfasd"
+  enum CodingKeys: String, CodingKey {
+    case birthDate = "dob"
+    case picture
+    case location
+    case name
+    case gender
+    case id
   }
+}
+
+struct ID: Codable {
+  var value: String
+}
+
+
+enum Gender: String {
+  case female
+  case male
+}
+
+struct Name: Codable {
+  var first: String
+  var last: String
+}
+
+struct WebImage: Codable {
+  var large: String
+  var medium: String
+  var thumbnail: String
+}
+
+struct BirthDate: Codable {
+  var date: String
+  var age: Int
+}
+
+struct Location: Codable {
+  var city: String
 }
