@@ -40,16 +40,17 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
 //   test func to try random people api
   func loadUsers() {
-    guard let url = URL(string: "https://randomuser.me/api/?results=5") else { return }
+    print("Users loading")
+    guard let url = URL(string: "https://randomuser.me/api/?results=15") else { return }
     let request = URLRequest(url: url)
     URLSession.shared.dataTask(with: request) { data, _, error in
       if let error = error {
         print(error)
       }
       guard let data = data else { return }
-      print("Data not nil")
       var newUsers: [UserCardModel]?
       newUsers = try? JSONDecoder().decode(RandomPeopleApiResponce.self, from: data).results
+      print("users loaded")
       if let newUsers = newUsers {
         for user in newUsers {
           self.users.append(UserCardViewViewModel(with: user))

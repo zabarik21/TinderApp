@@ -9,6 +9,6 @@ import Foundation
 
 
 protocol CardContainerDelagate {
-  
+  func usersLoaded()
 }
 

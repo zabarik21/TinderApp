@@ -38,8 +38,9 @@ extension MainTabBarController {
   
   func setupItemLayer() {
     let width = layerWidth / 3
+    itemWidth = width
     let height = layerHeight - 4
-    let x = Constants.tabBarLayerHorizontalPadding + 3
+    let x = Constants.tabBarLayerHorizontalPadding
     
     
     

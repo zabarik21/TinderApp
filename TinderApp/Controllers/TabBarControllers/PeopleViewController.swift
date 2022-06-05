@@ -47,7 +47,7 @@ class PeopleViewController: UIViewController {
 }
 
 extension PeopleViewController: CardContainerDelagate {
-  
-  
-
+  func usersLoaded() {
+    print("loaded")
+  }
 }

@@ -8,6 +8,11 @@
 import UIKit
 import SnapKit
 
+enum ViewControllers: Int {
+  case people
+  case messages
+  case profile
+}
 
 enum Constants  {
   static let ovalHeight: Int = 313
@@ -28,6 +33,7 @@ class MainTabBarController: UITabBarController {
   let itemLayer = CAShapeLayer()
   var layerHeight = CGFloat()
   var layerWidth = CGFloat()
+  var itemWidth = CGFloat()
   let appearence = UITabBarAppearance()
   
   
@@ -40,8 +46,35 @@ class MainTabBarController: UITabBarController {
 
 extension MainTabBarController: CardContainerDelagate {
   
+  func usersLoaded() {
+    print("loaded")
+  }
+  
+  
   func getNextUser(_ cardContainer: CardContainerView) -> UserCardViewViewModelProtocol {
     return UserCardViewViewModel()
   }
 
+}
+
+
+extension MainTabBarController {
+  override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    guard let index = tabBar.items?.firstIndex(of: item) else { return }
+    
+    var padding: CGFloat {
+      let vc = ViewControllers(rawValue: index)
+      switch vc {
+      case .people:
+        return 3
+      case .profile:
+        return -3
+      case .messages:
+        return 0
+      case .none:
+        return 0
+      }
+    }
+    itemLayer.frame.origin.x = CGFloat((index)) * itemWidth + padding
+  }
 }
