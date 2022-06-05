@@ -25,10 +25,6 @@ class PeopleViewController: UIViewController {
   private func setupCardContainer() {
     let viewModel = CardContainerViewViewModel(users: [
       .init(),
-      .init(),
-      .init(),
-      .init(),
-      .init(),
       .init()])
     cardContainer = CardContainerView(viewModel: viewModel)
     

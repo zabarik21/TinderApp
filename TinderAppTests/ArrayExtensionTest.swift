@@ -10,6 +10,7 @@ import XCTest
 
 class ArrayExtensionTest: XCTestCase {
   
+  
   override func setUpWithError() throws {
     
   }
@@ -29,4 +30,5 @@ class ArrayExtensionTest: XCTestCase {
     XCTAssertEqual(snd, array[0])
     XCTAssertEqual(fst, first)
   }
+
 }

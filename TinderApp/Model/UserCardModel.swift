@@ -11,9 +11,10 @@ struct RandomPeopleApiResponce: Codable {
   let results: [UserCardModel]
 }
 
+
 struct UserCardModel: Codable {
   var name: Name
-  var gender: String
+  var gender: Gender
   var location: Location
   var birthDate: BirthDate
   var picture: WebImage
@@ -30,11 +31,11 @@ struct UserCardModel: Codable {
 }
 
 struct ID: Codable {
-  var value: String
+  var value: String?
 }
 
 
-enum Gender: String {
+enum Gender: String, Codable {
   case female
   case male
 }
