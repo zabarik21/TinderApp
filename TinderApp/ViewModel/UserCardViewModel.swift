@@ -21,7 +21,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.age = userCardModel.birthDate.age
     self.city = userCardModel.location.city
     self.name = userCardModel.name.first
-    self.imageUrlString = userCardModel.picture.thumbnail
+    self.imageUrlString = userCardModel.picture.large
   }
   
   // init for tests

@@ -70,6 +70,8 @@ class CardView: UIView {
     let cityFont = UIFont.systemFont(ofSize: 12, weight: .bold)
     nameAgeLabel.font = nameLabelFont
     cityDistanceLabel.font = cityFont
+    nameAgeLabel.textColor = UIColor(named: "cardLabelTextColor") ?? .white
+    cityDistanceLabel.textColor = UIColor(named: "cardLabelTextColor") ?? .white
     
     addSubview(nameAgeLabel)
     addSubview(cityDistanceLabel)
@@ -87,7 +89,7 @@ class CardView: UIView {
   
   private func setupImageView() {
     addSubview(profileImage)
-    profileImage.contentMode = .scaleAspectFit
+    profileImage.contentMode = .scaleAspectFill
     profileImage.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
