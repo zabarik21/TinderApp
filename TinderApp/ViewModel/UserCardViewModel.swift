@@ -36,7 +36,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
 
 extension UserCardViewViewModel {
   func nameAgeLabelText() -> String {
-    return "\(name), \(age) 􀇻"
+    return "\(name), \(age)"
   }
   func cityDistanceLabelText() -> String {
     var randomDistance = Int.random(in: 0...50)

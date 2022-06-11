@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension CardView {
+extension CardView: UIGestureRecognizerDelegate {
   
   func animateToIdentity() {
     UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .curveEaseInOut) {
@@ -16,36 +16,45 @@ extension CardView {
     }
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    anchorPoint.x = touches.first!.location(in: window).x - frame.minX
-    anchorPoint.y = touches.first!.location(in: window).y - frame.minY
-    
-    startPoint = center
+  func setupGestures() {
+    let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+    gestureRecognizer.delegate = self
+    addGestureRecognizer(gestureRecognizer)
   }
   
-  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let deltaX = (touches.first!.location(in: window).x) - anchorPoint.x
-    let deltaY = (touches.first!.location(in: window).y) - anchorPoint.y
+  @objc func handlePan(_ recognizer: UIPanGestureRecognizer) {
+    switch recognizer.state {
+    case .began:
+      startPoint = center
+    case .changed:
+      onChange(recognizer)
+    case .ended:
+      gestureEnded()
+    @unknown default:
+      print("oknown")
+    }
+  }
+  
+  func onChange(_ recognizer: UIPanGestureRecognizer) {
+    let translation = recognizer.translation(in: self)
+    guard let gestureView = recognizer.view else { return }
     
-    let angle: CGFloat = CardViewConstants.maxAngle * (CGFloat(deltaX) * 10 / 33)
+    gestureView.center = CGPoint(x: gestureView.center.x + translation.x * 0.8,
+                                 y: gestureView.center.y + translation.y * 0.3)
     
-    let x = (deltaX / 2  + (self.bounds.width / 2))
-    let y = (deltaY / 5  + (self.bounds.height / 2))
-    
+    let xDelta = center.x - startPoint.x
+    let angle: CGFloat = CardViewConstants.maxAngle * (CGFloat(xDelta) * 10 / 21)
     self.transform = CGAffineTransform(rotationAngle: angle * .pi/180)
-    self.center.x = x
-    self.center.y = y
+    recognizer.setTranslation(.zero, in: self)
   }
   
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let delta = (touches.first!.location(in: window).x) - anchorPoint.x
-    if delta > CardViewConstants.maxDelta {
+  func gestureEnded() {
+    let xDelta = center.x - startPoint.x
+    if xDelta > CardViewConstants.maxDelta {
       swipe(liked: true)
-    }
-    else if delta < -CardViewConstants.maxDelta {
+    } else if xDelta < -CardViewConstants.maxDelta {
       swipe(liked: false)
-    }
-    else {
+    } else {
       animateToIdentity()
     }
   }

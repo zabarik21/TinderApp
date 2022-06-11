@@ -76,6 +76,7 @@ class CardContainerView: UIView {
   init(viewModel: CardContainerViewViewModelProtocol) {
     self.viewModel = viewModel
     super.init(frame: .zero)
+    isUserInteractidsonEnabled = true
     setupElements()
   }
   
@@ -122,8 +123,7 @@ class CardContainerView: UIView {
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    print(#function)
-    print(#file)
+    print("Card container touched")
   }
   
   required init?(coder: NSCoder) {
@@ -187,24 +187,29 @@ extension CardContainerView: CardViewDeleagate {
   
   func swapViews() {
     DispatchQueue.main.asyncAfter(deadline: .now() + Constants.cardDisappearTime) {
-      if self.topCardTurn {
-        self.topCardView.isUserInteractionEnabled = false
-        self.bottomCardView.isUserInteractionEnabled = true
-        self.topCardView.layer.zPosition = 0
-        self.bottomCardView.layer.zPosition = 1
-        UIView.animate(withDuration: 0.1) {
-          self.topCardView.alpha = 1
-        }
-      } else {
-        self.bottomCardView.isUserInteractionEnabled = false
-        self.topCardView.isUserInteractionEnabled = true
-        self.bottomCardView.alpha = 0
-        self.topCardView.layer.zPosition = 1
-        UIView.animate(withDuration: 0.2) {
-          self.bottomCardView.alpha = 1
-        }
+      let currentTopCard = self.topCardTurn ? self.bottomCardView! : self.topCardView!
+      let currentBottomCard = self.topCardTurn ? self.topCardView! : self.bottomCardView!
+      currentBottomCard.isUserInteractionEnabled = false
+      currentTopCard.isUserInteractionEnabled = true
+      currentTopCard.layer.zPosition = 1
+      currentBottomCard.layer.zPosition = 0
+      UIView.animate(withDuration: 0.2) {
+        currentBottomCard.alpha = 1
       }
       self.topCardTurn.toggle()
     }
   }
+}
+
+
+extension CardContainerView: ReactionViewDelegate {
+  
+  func reacted(liked: Bool) {
+    if topCardTurn {
+      topCardView.swipe(liked: liked, fromButton: true)
+    } else {
+      bottomCardView.swipe(liked: liked, fromButton: true)
+    }
+  }
+  
 }
