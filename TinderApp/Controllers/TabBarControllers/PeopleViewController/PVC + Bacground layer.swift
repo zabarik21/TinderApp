@@ -34,7 +34,6 @@ extension PeopleViewController {
         gradientLayer.frame = CGRect(x: 0, y: 0, width: Int(width), height: height)
         
         gradientLayer.mask = headerOvalLayerMask
-
         self.view.layer.addSublayer(gradientLayer)
     }
     

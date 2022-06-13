@@ -10,7 +10,7 @@
 		7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1A9090284B61B0006C7C3F /* MTBC + TabBarSetup.swift */; };
 		7B478C3E2844EC1500AB653E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3D2844EC1500AB653E /* CardView.swift */; };
 		7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3F2844EEBD00AB653E /* CardContainerView.swift */; };
-		7B478C432844EF1800AB653E /* MTBC + Bacground layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */; };
+		7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */; };
 		7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */; };
 		7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE62847177E00C692E0 /* Array + Shift.swift */; };
 		7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */; };
@@ -64,7 +64,7 @@
 		7B1A9090284B61B0006C7C3F /* MTBC + TabBarSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarSetup.swift"; sourceTree = "<group>"; };
 		7B478C3D2844EC1500AB653E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7B478C3F2844EEBD00AB653E /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
-		7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + Bacground layer.swift"; sourceTree = "<group>"; };
+		7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + Bacground layer.swift"; sourceTree = "<group>"; };
 		7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7B47BAE62847177E00C692E0 /* Array + Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Shift.swift"; sourceTree = "<group>"; };
 		7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
@@ -126,13 +126,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B0B0BB62856F9A600C1A46B /* PeopleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7BED5EAC284111730081E71E /* PeopleViewController.swift */,
+				7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */,
+			);
+			path = PeopleViewController;
+			sourceTree = "<group>";
+		};
 		7B478C412844EEE700AB653E /* MainTabBarController */ = {
 			isa = PBXGroup;
 			children = (
 				7BED5ED9284111CF0081E71E /* MainTabBarController.swift */,
-				7B478C422844EF1800AB653E /* MTBC + Bacground layer.swift */,
-				7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */,
 				7B1A9090284B61B0006C7C3F /* MTBC + TabBarSetup.swift */,
+				7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */,
 				7BBEABF4284C998900805A24 /* MTB + CardContainerDelegate.swift */,
 			);
 			path = MainTabBarController;
@@ -321,7 +329,7 @@
 		7BED5EE628411FCB0081E71E /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7BED5EAC284111730081E71E /* PeopleViewController.swift */,
+				7B0B0BB62856F9A600C1A46B /* PeopleViewController */,
 				7BED5EDF284114720081E71E /* MessagerViewController.swift */,
 				7BED5EE428411F050081E71E /* ProfileViewController.swift */,
 			);
@@ -517,7 +525,7 @@
 				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B93C06428511860002B0A00 /* ReactionViewDelegate.swift in Sources */,
-				7B478C432844EF1800AB653E /* MTBC + Bacground layer.swift in Sources */,
+				7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */,
 				7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */,
 				7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,

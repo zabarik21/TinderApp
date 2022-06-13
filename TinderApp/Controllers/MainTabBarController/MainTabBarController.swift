@@ -16,7 +16,7 @@ enum ViewControllers: Int {
 
 enum Constants  {
   static let ovalHeight: Int = 313
-  static var cardContainerHeight: Int = 485
+  static var cardContainerHeightMultiplier: CGFloat = 0.553
   static var cardDisappearTime: CGFloat = 0.1
   static var cardContainerHorizontalOffset: Int = 37
   static var tabBarLayerHorizontalPadding: CGFloat = 26

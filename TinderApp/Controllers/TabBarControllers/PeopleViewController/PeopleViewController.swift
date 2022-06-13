@@ -11,16 +11,35 @@ class PeopleViewController: UIViewController {
 
   var cardContainer: CardContainerView!
   var reactionsView: ReactionButtonsView!
-  
+  var titleLabel: UILabel!
   let headerOvalLayerMask = CAShapeLayer()
   
-    override func viewDidLoad() {
+  override func viewDidLoad() {
       super.viewDidLoad()
       self.view.backgroundColor = UIColor(named: "peopleBG")!
-      setupHeaderOvalLayer()
-      setupCardContainer()
-      setupReactionsView()
+      setupElements()
     }
+  
+  private func setupElements() {
+    setupHeaderOvalLayer()
+    setupReactionsView()
+    setupCardContainer()
+    setupTitleLabel()
+  }
+  
+  private func setupTitleLabel() {
+    titleLabel = UILabel()
+    titleLabel.text = "People Nearby"
+    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
+    titleLabel.textColor = UIColor(named: "peopleBG") ?? .black
+    
+    view.addSubview(titleLabel)
+    
+    titleLabel.snp.makeConstraints { make in
+      make.top.equalToSuperview().offset(70)
+      make.leading.equalToSuperview().offset(Constants.cardContainerHorizontalOffset)
+    }
+  }
   
   private func setupReactionsView(){
     reactionsView = ReactionButtonsView()
@@ -28,10 +47,12 @@ class PeopleViewController: UIViewController {
     
     view.addSubview(reactionsView)
     
+    let tabBarFrame = self.tabBarController!.tabBar.frame
+    print(tabBarFrame)
     reactionsView.snp.makeConstraints { make in
-      make.top.equalTo(cardContainer.snp.bottom).offset(30)
-      make.leading.equalToSuperview().offset(100)
-      make.trailing.equalToSuperview().offset(-100)
+      make.bottom.equalTo(tabBarFrame.origin.y).offset(-115)
+      make.leading.equalToSuperview().offset(90)
+      make.trailing.equalToSuperview().offset(-90)
       make.height.equalTo(75)
     }
   }
@@ -47,10 +68,11 @@ class PeopleViewController: UIViewController {
     cardContainer.snp.makeConstraints { make in
       make.leading.equalTo(self.view.snp.leading).offset(Constants.cardContainerHorizontalOffset)
       make.trailing.equalTo(self.view.snp.trailing).offset(-Constants.cardContainerHorizontalOffset)
-      make.height.equalTo(Constants.cardContainerHeight)
-      make.top.equalToSuperview().offset(120)
+      make.height.equalTo(self.view.bounds.height * Constants.cardContainerHeightMultiplier)
+      make.bottom.equalTo(reactionsView.snp.top).offset(-30)
     }
     cardContainer.delegate = self
+    cardContainer.layer.zPosition = 1
   }
 
 }

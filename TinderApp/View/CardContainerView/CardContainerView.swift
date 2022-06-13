@@ -13,8 +13,8 @@ enum CardContainerConstants {
   static var cardAppearTime: CGFloat = 0.25
   static let horizontalCardOffset: CGFloat = 12
   static let bottomCardOffset: CGFloat = 11
-  static var minimizedCardHeight: CGFloat = 491
-  static var maximizedCardHeight: CGFloat = 485
+  static var minimizedCardHeightDelta: CGFloat = 0
+  static var maximizedCardHeightDelta: CGFloat = -4
 }
 
 class CardContainerView: UIView {
@@ -68,13 +68,13 @@ class CardContainerView: UIView {
     bottomCardBottomAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: CardContainerConstants.bottomCardOffset)
     bottomCardLeadingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: CardContainerConstants.horizontalCardOffset)
     bottomCardTrailingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -CardContainerConstants.horizontalCardOffset)
-    bottomCardHeightConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CardContainerConstants.minimizedCardHeight)
+    bottomCardHeightConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.bounds.height * CardContainerConstants.minimizedCardHeightDelta)
     
     topCardTopAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
     topCardBottomAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
     topCardLeadingAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
     topCardTrailingAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
-    topCardHeightConstraint = NSLayoutConstraint(item: topCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CardContainerConstants.maximizedCardHeight)
+    topCardHeightConstraint = NSLayoutConstraint(item: topCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.bounds.height * CardContainerConstants.maximizedCardHeightDelta)
     
     
     
@@ -125,23 +125,23 @@ extension CardContainerView: CardViewDeleagate {
     bottomCardBottomAnchorConstraint.isActive = false
     topCardBottomAnchorConstraint.isActive = false
     if topCardTurn {
-      bottomCardHeightConstraint.constant = CardContainerConstants.maximizedCardHeight
+      bottomCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.maximizedCardHeightDelta
       bottomCardTopAnchorConstraint.constant = 0
       bottomCardLeadingAnchorConstraint.constant = 0
       bottomCardTrailingAnchorConstraint.constant = 0
       
-      topCardHeightConstraint.constant = CardContainerConstants.minimizedCardHeight
+      topCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.minimizedCardHeightDelta
       topCardLeadingAnchorConstraint.constant = CardContainerConstants.horizontalCardOffset
       topCardTrailingAnchorConstraint.constant = -CardContainerConstants.horizontalCardOffset
       topCardTopAnchorConstraint.constant = CardContainerConstants.topAnchorCardOffset
       
     } else {
-      topCardHeightConstraint.constant = CardContainerConstants.maximizedCardHeight
+      topCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.maximizedCardHeightDelta
       topCardTopAnchorConstraint.constant = 0
       topCardLeadingAnchorConstraint.constant = 0
       topCardTrailingAnchorConstraint.constant = 0
       
-      bottomCardHeightConstraint.constant = CardContainerConstants.minimizedCardHeight
+      bottomCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.minimizedCardHeightDelta
       bottomCardTopAnchorConstraint.constant = CardContainerConstants.topAnchorCardOffset
       bottomCardLeadingAnchorConstraint.constant = CardContainerConstants.horizontalCardOffset
       bottomCardTrailingAnchorConstraint.constant = -CardContainerConstants.horizontalCardOffset
