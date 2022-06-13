@@ -9,12 +9,11 @@ import Foundation
 
 
 struct UserCardViewViewModel: UserCardViewViewModelProtocol {
+  
+  var compatabilityScore: Int
   var name: String
-  
   var age: Int
-  
   var city: String
-  
   var imageUrlString: String
   
   init(with userCardModel: UserCardModel) {
@@ -22,6 +21,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.city = userCardModel.location.city
     self.name = userCardModel.name.first
     self.imageUrlString = userCardModel.picture.large
+    self.compatabilityScore = Int.random(in: 0...10)
   }
   
   // init for tests
@@ -30,6 +30,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.city = ["Perm", "Ziben", "Moskow"].randomElement()!
     self.name = ["Seva", "Niben", "Bebra"].randomElement()!
     self.imageUrlString = "sdfasd"
+    self.compatabilityScore = Int.random(in: 0...10)
   }
 }
 
@@ -39,7 +40,7 @@ extension UserCardViewViewModel {
     return "\(name), \(age)"
   }
   func cityDistanceLabelText() -> String {
-    var randomDistance = Int.random(in: 0...50)
+    let randomDistance = Int.random(in: 0...50)
     return "\(city) •\(randomDistance) km"
   }
 }

@@ -50,7 +50,6 @@ class PeopleViewController: UIViewController {
       make.height.equalTo(Constants.cardContainerHeight)
       make.top.equalToSuperview().offset(120)
     }
-    
     cardContainer.delegate = self
   }
 
@@ -64,13 +63,7 @@ extension PeopleViewController: CardContainerDelagate {
 
 
 extension PeopleViewController: ReactionViewDelegate {
-  
   func reacted(liked: Bool) {
-//    if liked {
-//      cardContainer.like()
-//    } else {
-//      cardContainer.dislike()
-//    }
+    cardContainer.reacted(liked: liked)
   }
-  
 }

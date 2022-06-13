@@ -15,6 +15,8 @@
 		7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE62847177E00C692E0 /* Array + Shift.swift */; };
 		7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */; };
 		7B47BAEC28471A1100C692E0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B47BAEB28471A1100C692E0 /* SnapKit */; };
+		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
+		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
 		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
 		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
 		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
@@ -66,6 +68,8 @@
 		7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7B47BAE62847177E00C692E0 /* Array + Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Shift.swift"; sourceTree = "<group>"; };
 		7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
+		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
+		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
 		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
 		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
 		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
@@ -132,6 +136,22 @@
 				7BBEABF4284C998900805A24 /* MTB + CardContainerDelegate.swift */,
 			);
 			path = MainTabBarController;
+			sourceTree = "<group>";
+		};
+		7B5C28BB2855F8EF0001212A /* CompatabilityView */ = {
+			isa = PBXGroup;
+			children = (
+				7B5C28B92855F8EB0001212A /* CompatabilityView.swift */,
+			);
+			path = CompatabilityView;
+			sourceTree = "<group>";
+		};
+		7B795B692856542B007FAA53 /* CGFloat */ = {
+			isa = PBXGroup;
+			children = (
+				7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */,
+			);
+			path = CGFloat;
 			sourceTree = "<group>";
 		};
 		7B9469EE2848EF4F0079568C /* CardView */ = {
@@ -262,6 +282,7 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B5C28BB2855F8EF0001212A /* CompatabilityView */,
 				7BFC9A632851ACD4009B6D8A /* CardContainerView */,
 				7BFC9A622851ACCC009B6D8A /* ReactionButtonsView */,
 				7B9469EE2848EF4F0079568C /* CardView */,
@@ -272,6 +293,7 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B795B692856542B007FAA53 /* CGFloat */,
 				7BFC9A652851ACE6009B6D8A /* Array */,
 				7BFC9A642851ACDF009B6D8A /* UIColor */,
 			);
@@ -483,6 +505,7 @@
 				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
+				7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
@@ -491,6 +514,7 @@
 				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
 				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,
 				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
+				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B93C06428511860002B0A00 /* ReactionViewDelegate.swift in Sources */,
 				7B478C432844EF1800AB653E /* MTBC + Bacground layer.swift in Sources */,

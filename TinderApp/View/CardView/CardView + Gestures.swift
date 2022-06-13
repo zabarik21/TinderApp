@@ -12,6 +12,7 @@ extension CardView: UIGestureRecognizerDelegate {
   func animateToIdentity() {
     UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .curveEaseInOut) {
       self.transform = .identity
+      self.alpha = 1
       self.center = self.startPoint
     }
   }

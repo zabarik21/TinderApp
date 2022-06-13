@@ -8,42 +8,9 @@
 import UIKit
 import SnapKit
 
-
-//    private var currentUserCard: UserCard
-//    private var nextUserCard: UserCard
-
-// has 2 properties that updates every time card swipe
-// properties are initing in init
-
-// at the init
-// setup top & bottom card
-// bring top card to the front via animation
-
-// after swipe
-// removing top card from superview
-// back card animating to top
-// configuring new back card
-
-
-// states
-// 0. no cards
-// 1. 2 cards is given
-// 2. top card swiped
-// 3. cards ended
-
-
-// how to notificate container that card is swiped
-// delegate for every view?
-
-
-// state 2:
-// top card is being moved by x on constant: shiftConstant
-// after bottom card animates to top
-// after top card moves behind the bottom
-// state is changing on state where top card now is bottom and bottom now on top
-
 enum CardContainerConstants {
   static var topAnchorCardOffset: CGFloat = 5
+  static var cardAppearTime: CGFloat = 0.25
   static let horizontalCardOffset: CGFloat = 12
   static let bottomCardOffset: CGFloat = 11
   static var minimizedCardHeight: CGFloat = 491
@@ -76,7 +43,7 @@ class CardContainerView: UIView {
   init(viewModel: CardContainerViewViewModelProtocol) {
     self.viewModel = viewModel
     super.init(frame: .zero)
-    isUserInteractidsonEnabled = true
+    isUserInteractionEnabled = true
     setupElements()
   }
   
@@ -86,7 +53,14 @@ class CardContainerView: UIView {
     bottomCardView = CardView(with: viewModel.bottomCardViewModel)
     self.addSubview(bottomCardView)
     self.addSubview(topCardView)
+   
+    setupConstraints()
     
+    topCardView.delegate = self
+    bottomCardView.delegate = self
+  }
+  
+  private func setupConstraints() {
     bottomCardView.translatesAutoresizingMaskIntoConstraints = false
     topCardView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -102,7 +76,7 @@ class CardContainerView: UIView {
     topCardTrailingAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
     topCardHeightConstraint = NSLayoutConstraint(item: topCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CardContainerConstants.maximizedCardHeight)
     
- 
+    
     
     NSLayoutConstraint.activate([
       bottomCardTopAnchorConstraint,
@@ -117,13 +91,6 @@ class CardContainerView: UIView {
       topCardBottomAnchorConstraint,
       topCardHeightConstraint
     ])
-    
-    topCardView.delegate = self
-    bottomCardView.delegate = self
-  }
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    print("Card container touched")
   }
   
   required init?(coder: NSCoder) {
@@ -186,14 +153,14 @@ extension CardContainerView: CardViewDeleagate {
   }
   
   func swapViews() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.cardDisappearTime) {
+    DispatchQueue.main.async {
       let currentTopCard = self.topCardTurn ? self.bottomCardView! : self.topCardView!
       let currentBottomCard = self.topCardTurn ? self.topCardView! : self.bottomCardView!
       currentBottomCard.isUserInteractionEnabled = false
       currentTopCard.isUserInteractionEnabled = true
       currentTopCard.layer.zPosition = 1
       currentBottomCard.layer.zPosition = 0
-      UIView.animate(withDuration: 0.2) {
+      UIView.animate(withDuration: CardContainerConstants.cardAppearTime) {
         currentBottomCard.alpha = 1
       }
       self.topCardTurn.toggle()

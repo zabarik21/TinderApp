@@ -12,6 +12,7 @@ protocol UserCardViewViewModelProtocol {
   var age: Int { get }
   var city: String { get }
   var imageUrlString: String { get }
+  var compatabilityScore: Int { get }
   
   func nameAgeLabelText() -> String
   func cityDistanceLabelText() -> String
