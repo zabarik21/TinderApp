@@ -13,12 +13,29 @@ class PeopleViewController: UIViewController {
   var reactionsView: ReactionButtonsView!
   var titleLabel: UILabel!
   let headerOvalLayerMask = CAShapeLayer()
+  var gradientLayer: CAGradientLayer!
   
   override func viewDidLoad() {
       super.viewDidLoad()
       self.view.backgroundColor = UIColor(named: "peopleBG")!
       setupElements()
     }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    actualizePath()
+  }
+  
+  func actualizePath() {
+    let width = Int(view.bounds.width * 1.289)
+    let height = Int(view.bounds.height * 0.385)
+    let x = Int(self.view.center.x) - width / 2
+    let y = -Int(self.view.bounds.maxY * 0.1)
+    print("x \(x) y \(y)")
+    let path = UIBezierPath(ovalIn: CGRect(x: x, y: y, width: Int(width), height: height)).cgPath
+    headerOvalLayerMask.path = path
+    gradientLayer.frame = CGRect(x: 0, y: 0, width: Int(width), height: height)
+  }
   
   private func setupElements() {
     setupHeaderOvalLayer()
