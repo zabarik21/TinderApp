@@ -12,7 +12,9 @@ import Kingfisher
 enum CardViewConstants {
   static let xShift: CGFloat = 300
   static let swipedAngle: CGFloat = 30 * .pi / 180
+  static let maxDeltaForHiddenView: CGFloat = 60
   static let maxDelta: CGFloat = 130
+  static let maxVelocity: CGFloat = 1000
   static let maxAngle: CGFloat = .pi / 8
   static let topCardHorizontalOffset: CGFloat = 12
   static let topCardTopOffset: CGFloat = 5
@@ -32,6 +34,7 @@ class CardView: UIView {
   var cityDistanceLabel = UILabel()
   var userInfoblurView: UIVisualEffectView!
   var compatabilityView: CompatabilityView!
+  var hiddenTopReactionView: HiddenReactionViewProtocol!
   
   init(with viewModel: UserCardViewViewModelProtocol) {
     self.viewModel = viewModel
@@ -65,9 +68,12 @@ class CardView: UIView {
     UIView.animate(withDuration: duration) { [unowned self] in
       self.transform = CGAffineTransform(rotationAngle: angle)
       self.center.x += xShift
+      self.hiddenTopReactionView.toggleReaction(like: liked)
+      self.hiddenTopReactionView.alpha = 1
       self.alpha = 0
     } completion: { _ in
       self.transform = .identity
+      self.hiddenTopReactionView.alpha = 0
       self.center = self.startPoint
       self.delegate?.swiped(liked: liked)
     }
@@ -90,7 +96,19 @@ class CardView: UIView {
     setupImageView()
     setupUserInfoView()
     setupCompatabilityView()
+    setupHiddenTopReactionView()
     fillUI()
+  }
+  
+  func setupHiddenTopReactionView() {
+    hiddenTopReactionView = HiddenReactionView()
+    hiddenTopReactionView.alpha = 0
+    
+    addSubview(hiddenTopReactionView)
+    
+    hiddenTopReactionView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
   }
   
   private func setupCompatabilityView() {

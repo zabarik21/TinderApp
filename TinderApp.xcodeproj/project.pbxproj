@@ -20,6 +20,8 @@
 		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
 		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
 		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
+		7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9332142860495C00D46E69 /* HiddenReactionView.swift */; };
+		7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B933216286049A400D46E69 /* HiddenReactionViewProtocol.swift */; };
 		7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */; };
 		7B93C06428511860002B0A00 /* ReactionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93C06328511860002B0A00 /* ReactionViewDelegate.swift */; };
 		7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9469EF2848EF5F0079568C /* CardView + Gestures.swift */; };
@@ -73,6 +75,8 @@
 		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
 		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
 		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
+		7B9332142860495C00D46E69 /* HiddenReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenReactionView.swift; sourceTree = "<group>"; };
+		7B933216286049A400D46E69 /* HiddenReactionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenReactionViewProtocol.swift; sourceTree = "<group>"; };
 		7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsView.swift; sourceTree = "<group>"; };
 		7B93C06328511860002B0A00 /* ReactionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionViewDelegate.swift; sourceTree = "<group>"; };
 		7B9469EF2848EF5F0079568C /* CardView + Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardView + Gestures.swift"; sourceTree = "<group>"; };
@@ -162,6 +166,14 @@
 			path = CGFloat;
 			sourceTree = "<group>";
 		};
+		7B9332132860493700D46E69 /* HiddenReactionView */ = {
+			isa = PBXGroup;
+			children = (
+				7B9332142860495C00D46E69 /* HiddenReactionView.swift */,
+			);
+			path = HiddenReactionView;
+			sourceTree = "<group>";
+		};
 		7B9469EE2848EF4F0079568C /* CardView */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +205,7 @@
 		7BCB99BB2845C976004EFC29 /* ViewProtocol */ = {
 			isa = PBXGroup;
 			children = (
+				7B933216286049A400D46E69 /* HiddenReactionViewProtocol.swift */,
 			);
 			path = ViewProtocol;
 			sourceTree = "<group>";
@@ -290,6 +303,7 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B9332132860493700D46E69 /* HiddenReactionView */,
 				7B5C28BB2855F8EF0001212A /* CompatabilityView */,
 				7BFC9A632851ACD4009B6D8A /* CardContainerView */,
 				7BFC9A622851ACCC009B6D8A /* ReactionButtonsView */,
@@ -516,6 +530,7 @@
 				7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
+				7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
 				7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */,
@@ -530,6 +545,7 @@
 				7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */,
+				7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,
 			);
