@@ -12,13 +12,15 @@ import Kingfisher
 enum CardViewConstants {
   static let xShift: CGFloat = 300
   static let swipedAngle: CGFloat = 30 * .pi / 180
-  static let maxDeltaForHiddenView: CGFloat = 60
+  static let maxDeltaForHiddenViewMultiplier: CGFloat = 0.16
   static let maxDelta: CGFloat = 130
   static let maxVelocity: CGFloat = 1000
   static let maxAngle: CGFloat = .pi / 8
   static let topCardHorizontalOffset: CGFloat = 12
   static let topCardTopOffset: CGFloat = 5
   static let topCardBottomOffset: CGFloat = 11
+  static let xTranslateMultiplier: CGFloat = 0.8
+  static let yTranslateMultiplier: CGFloat = 0.3
 }
 
 class CardView: UIView {

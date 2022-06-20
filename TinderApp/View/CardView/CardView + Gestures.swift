@@ -44,16 +44,17 @@ extension CardView: UIGestureRecognizerDelegate {
     let xDelta = center.x - startPoint.x
     
     // moving view
-    gestureView.center = CGPoint(x: gestureView.center.x + translation.x * 0.8,
-                                 y: gestureView.center.y + translation.y * 0.3)
+    gestureView.center = CGPoint(x: gestureView.center.x + translation.x * CardViewConstants.xTranslateMultiplier,
+                                 y: gestureView.center.y + translation.y * CardViewConstants.yTranslateMultiplier)
     // rotating view
     let angle: CGFloat = CardViewConstants.maxAngle * (CGFloat(xDelta) * 10 / 21)
-    self.transform = CGAffineTransform(rotationAngle: angle * .pi/180)
+    self.transform = CGAffineTransform(rotationAngle: angle.degreesToRadians)
     
     // hiding / showing hiddenReactionView
-    if abs(xDelta) > CardViewConstants.maxDeltaForHiddenView {
+    let maxDeltaForShowingReactionView = CardViewConstants.maxDeltaForHiddenViewMultiplier * self.bounds.width
+    if abs(xDelta) > maxDeltaForShowingReactionView {
       hiddenTopReactionView.toggleReaction(like: xDelta > 0)
-      let alpha = (abs(xDelta) - CardViewConstants.maxDeltaForHiddenView) / 100
+      let alpha = (abs(xDelta) - maxDeltaForShowingReactionView) / 100
       hiddenTopReactionView.alpha = alpha
     }
     

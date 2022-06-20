@@ -22,6 +22,7 @@ extension MainTabBarController {
     
     tabBar.tintColor = UIColor(named: "selectedBarItemColor")!
     tabBar.backgroundColor = .clear
+    tabBar.itemPositioning = .centered
     viewControllers = [
       peopleVC,
       messagesVC,

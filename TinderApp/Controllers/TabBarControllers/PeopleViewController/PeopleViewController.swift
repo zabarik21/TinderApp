@@ -54,7 +54,7 @@ class PeopleViewController: UIViewController {
     
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(70)
-      make.leading.equalToSuperview().offset(Constants.cardContainerHorizontalOffset)
+      make.leading.equalToSuperview().offset(Constants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
     }
   }
   
@@ -67,9 +67,9 @@ class PeopleViewController: UIViewController {
     let tabBarFrame = self.tabBarController!.tabBar.frame
     print(tabBarFrame)
     reactionsView.snp.makeConstraints { make in
-      make.bottom.equalTo(tabBarFrame.origin.y).offset(-115)
-      make.leading.equalToSuperview().offset(90)
-      make.trailing.equalToSuperview().offset(-90)
+      make.bottom.equalTo(tabBarFrame.origin.y).offset(-self.view.bounds.height * Constants.buttonsBottomOffsetMultiplier)
+      make.leading.equalToSuperview().offset(self.view.bounds.width * Constants.buttonsHorizontalOffsetMultiplier)
+      make.trailing.equalToSuperview().offset(-self.view.bounds.width * Constants.buttonsHorizontalOffsetMultiplier)
       make.height.equalTo(75)
     }
   }
@@ -83,9 +83,9 @@ class PeopleViewController: UIViewController {
     view.addSubview(cardContainer)
     
     cardContainer.snp.makeConstraints { make in
-      make.leading.equalTo(self.view.snp.leading).offset(Constants.cardContainerHorizontalOffset)
-      make.trailing.equalTo(self.view.snp.trailing).offset(-Constants.cardContainerHorizontalOffset)
-      make.height.equalTo(self.view.bounds.height * Constants.cardContainerHeightMultiplier)
+      make.leading.equalTo(self.view.snp.leading).offset(Constants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
+      make.trailing.equalTo(self.view.snp.trailing).offset(-Constants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
+      make.height.equalTo(Constants.cardContainerHeightMultiplier * self.view.bounds.height)
       make.bottom.equalTo(reactionsView.snp.top).offset(-30)
     }
     cardContainer.delegate = self
