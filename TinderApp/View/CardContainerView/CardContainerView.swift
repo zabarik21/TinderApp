@@ -11,7 +11,7 @@ import SnapKit
 enum CardContainerConstants {
   static var topAnchorCardOffset: CGFloat = 5
   static var cardAppearTime: CGFloat = 0.25
-  static let horizontalCardOffset: CGFloat = 12
+  static let horizontalCardOffset: CGFloat = 0.032
   static let bottomCardOffset: CGFloat = 11
   static var minimizedCardHeightDelta: CGFloat = 0
   static var maximizedCardHeightDelta: CGFloat = -4
@@ -43,7 +43,6 @@ class CardContainerView: UIView {
   init(viewModel: CardContainerViewViewModelProtocol) {
     self.viewModel = viewModel
     super.init(frame: .zero)
-    isUserInteractionEnabled = true
     setupElements()
   }
   

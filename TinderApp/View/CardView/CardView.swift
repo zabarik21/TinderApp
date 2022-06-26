@@ -66,7 +66,7 @@ class CardView: UIView {
   func swipe(liked: Bool, fromButton: Bool = false) {
     let xShift: CGFloat = liked ? CardViewConstants.xShift : -CardViewConstants.xShift
     let angle: CGFloat = liked ? CardViewConstants.swipedAngle : -CardViewConstants.swipedAngle
-    let duration = fromButton ? Constants.cardDisappearTime * 3 : Constants.cardDisappearTime
+    let duration = fromButton ? PeopleVCConstants.cardDisappearTime * 3 : PeopleVCConstants.cardDisappearTime
     UIView.animate(withDuration: duration) { [unowned self] in
       self.transform = CGAffineTransform(rotationAngle: angle)
       self.center.x += xShift
@@ -86,7 +86,17 @@ class CardView: UIView {
     nameAgeLabel.text = viewModel.nameAgeLabelText()
     guard let url = URL(string: viewModel.imageUrlString) else { return }
     compatabilityView.updateScore(with: viewModel.compatabilityScore)
-    profileImage.kf.setImage(with: url)
+    profileImage.kf.setImage(with: url,
+                             options: [
+                              .transition(.fade(0.2)),
+                             ]) { result in
+                               switch result {
+                               case .success(let value):
+                                 print(value.cacheType)
+                               case .failure(_): break
+                               }
+                             }
+    
   }
   
   private func setupElements() {

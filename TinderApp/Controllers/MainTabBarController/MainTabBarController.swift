@@ -14,14 +14,8 @@ enum ViewControllers: Int {
   case profile
 }
 
-enum Constants  {
-  static let ovalHeight: Int = 313
-  static var cardContainerHeightMultiplier: CGFloat = 0.553
-  static var cardDisappearTime: CGFloat = 0.1
-  static var cardContainerHorizontalOffsetMultiplier: CGFloat = 0.0986
-  static var buttonsHorizontalOffsetMultiplier: CGFloat = 0.24
-  static var buttonsBottomOffsetMultiplier: CGFloat = 0.141
-  static var tabBarLayerHorizontalPadding: CGFloat = 26
+enum MainTabBarVCConstants  {
+  static var tabBarLayerHorizontalPaddingMultiplier: CGFloat = 0.0695
   static var tabBarLayerVerticalPadding: CGFloat = 5
 }
 
@@ -42,6 +36,11 @@ class MainTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTabBar()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    actualizePath()
   }
     
 }

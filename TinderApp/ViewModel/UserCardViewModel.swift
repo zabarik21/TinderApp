@@ -15,6 +15,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   var age: Int
   var city: String
   var imageUrlString: String
+  var interests: Set<Interest>
   
   init(with userCardModel: UserCardModel) {
     self.age = userCardModel.birthDate.age
@@ -22,6 +23,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.name = userCardModel.name.first
     self.imageUrlString = userCardModel.picture.large
     self.compatabilityScore = Int.random(in: 0...10)
+    self.interests = Interest.getRandomCases()
   }
   
   // init for tests
@@ -31,6 +33,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.name = ["Seva", "Niben", "Bebra"].randomElement()!
     self.imageUrlString = "sdfasd"
     self.compatabilityScore = Int.random(in: 0...10)
+    self.interests = Interest.getRandomCases()
   }
 }
 

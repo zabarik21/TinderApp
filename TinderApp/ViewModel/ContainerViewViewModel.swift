@@ -11,13 +11,10 @@ import Foundation
 
 
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
-  
-  var users: [UserCardViewViewModel]
-  
+    
+  var users: [UserCardViewViewModelProtocol]
   var topCardViewModel: UserCardViewViewModelProtocol!
-  
   var bottomCardViewModel: UserCardViewViewModelProtocol!
-  
   var delegate: CardContainerDelagate?
   
   func nextCard() -> UserCardViewViewModelProtocol? {

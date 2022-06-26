@@ -90,6 +90,10 @@ class CompatabilityView: UIView {
                         clockwise: true).cgPath
   }
   
+  func changeLabelColor(with color: UIColor) {
+    self.scoreLabel.textColor = color
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

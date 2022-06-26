@@ -25,6 +25,9 @@
 		7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */; };
 		7B93C06428511860002B0A00 /* ReactionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93C06328511860002B0A00 /* ReactionViewDelegate.swift */; };
 		7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9469EF2848EF5F0079568C /* CardView + Gestures.swift */; };
+		7B9FCBAD28676EE10031518D /* Interests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FCBAC28676EE10031518D /* Interests.swift */; };
+		7B9FCBB0286772F50031518D /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FCBAF286772F50031518D /* UserInfoView.swift */; };
+		7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */; };
 		7BBEABF5284C998900805A24 /* MTB + CardContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBEABF4284C998900805A24 /* MTB + CardContainerDelegate.swift */; };
 		7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */; };
 		7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */; };
@@ -80,6 +83,9 @@
 		7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsView.swift; sourceTree = "<group>"; };
 		7B93C06328511860002B0A00 /* ReactionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionViewDelegate.swift; sourceTree = "<group>"; };
 		7B9469EF2848EF5F0079568C /* CardView + Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardView + Gestures.swift"; sourceTree = "<group>"; };
+		7B9FCBAC28676EE10031518D /* Interests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interests.swift; sourceTree = "<group>"; };
+		7B9FCBAF286772F50031518D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + TabBar.swift"; sourceTree = "<group>"; };
 		7BBEABF4284C998900805A24 /* MTB + CardContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTB + CardContainerDelegate.swift"; sourceTree = "<group>"; };
 		7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
@@ -183,6 +189,22 @@
 			path = CardView;
 			sourceTree = "<group>";
 		};
+		7B9FCBAE286772E20031518D /* ModalViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7B9FCBAF286772F50031518D /* UserInfoView.swift */,
+			);
+			path = ModalViewControllers;
+			sourceTree = "<group>";
+		};
+		7BA8AF6328682D4500B254CC /* UIVIewController */ = {
+			isa = PBXGroup;
+			children = (
+				7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */,
+			);
+			path = UIVIewController;
+			sourceTree = "<group>";
+		};
 		7BCB99B42845C91A004EFC29 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */,
+				7B9FCBAC28676EE10031518D /* Interests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +299,7 @@
 		7BED5ED8284111BF0081E71E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B9FCBAE286772E20031518D /* ModalViewControllers */,
 				7B478C412844EEE700AB653E /* MainTabBarController */,
 				7BED5EE628411FCB0081E71E /* TabBarControllers */,
 			);
@@ -315,6 +339,7 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7BA8AF6328682D4500B254CC /* UIVIewController */,
 				7B795B692856542B007FAA53 /* CGFloat */,
 				7BFC9A652851ACE6009B6D8A /* Array */,
 				7BFC9A642851ACDF009B6D8A /* UIColor */,
@@ -520,12 +545,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B9FCBAD28676EE10031518D /* Interests.swift in Sources */,
 				7BBEABF5284C998900805A24 /* MTB + CardContainerDelegate.swift in Sources */,
 				7BEBD960284A8A9200C3DF30 /* CardContainerDelegate.swift in Sources */,
 				7BED5EE528411F050081E71E /* ProfileViewController.swift in Sources */,
 				7BED5EE0284114720081E71E /* MessagerViewController.swift in Sources */,
 				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
+				7B9FCBB0286772F50031518D /* UserInfoView.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
@@ -538,6 +565,7 @@
 				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,
 				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
 				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
+				7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */,
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B93C06428511860002B0A00 /* ReactionViewDelegate.swift in Sources */,
 				7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */,
@@ -725,6 +753,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -753,6 +782,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

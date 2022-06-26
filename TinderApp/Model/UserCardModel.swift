@@ -11,7 +11,6 @@ struct RandomPeopleApiResponce: Codable {
   let results: [UserCardModel]
 }
 
-
 struct UserCardModel: Codable {
   var name: Name
   var gender: Gender
@@ -19,6 +18,7 @@ struct UserCardModel: Codable {
   var birthDate: BirthDate
   var picture: WebImage
   var id: ID
+  var interests: [Interest]?
   
   enum CodingKeys: String, CodingKey {
     case birthDate = "dob"
@@ -27,6 +27,7 @@ struct UserCardModel: Codable {
     case name
     case gender
     case id
+    case interests
   }
 }
 

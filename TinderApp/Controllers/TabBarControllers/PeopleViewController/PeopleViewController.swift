@@ -7,8 +7,18 @@
 
 import UIKit
 
-class PeopleViewController: UIViewController {
+enum PeopleVCConstants {
+  static var cardContainerHeightMultiplier: CGFloat = 0.553
+  static var cardDisappearTime: CGFloat = 0.1
+  static var cardContainerHorizontalOffsetMultiplier: CGFloat = 0.0986
+  static var buttonsHorizontalOffsetMultiplier: CGFloat = 0.24
+  static var buttonsBottomOffsetMultiplier: CGFloat = 0.141
+  static var ovalHeightMultiplier: CGFloat = 0.385
+  static var ovalWidthMultiplier: CGFloat = 1.289
+}
 
+class PeopleViewController: UIViewController {
+  
   var cardContainer: CardContainerView!
   var reactionsView: ReactionButtonsView!
   var titleLabel: UILabel!
@@ -16,25 +26,15 @@ class PeopleViewController: UIViewController {
   var gradientLayer: CAGradientLayer!
   
   override func viewDidLoad() {
-      super.viewDidLoad()
-      self.view.backgroundColor = UIColor(named: "peopleBG")!
-      setupElements()
-    }
+    super.viewDidLoad()
+    self.view.backgroundColor = UIColor(named: "peopleBG")!
+    setupElements()
+  }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     actualizePath()
-  }
-  
-  func actualizePath() {
-    let width = Int(view.bounds.width * 1.289)
-    let height = Int(view.bounds.height * 0.385)
-    let x = Int(self.view.center.x) - width / 2
-    let y = -Int(self.view.bounds.maxY * 0.1)
-    print("x \(x) y \(y)")
-    let path = UIBezierPath(ovalIn: CGRect(x: x, y: y, width: Int(width), height: height)).cgPath
-    headerOvalLayerMask.path = path
-    gradientLayer.frame = CGRect(x: 0, y: 0, width: Int(width), height: height)
+    self.tabBarController?.setTabBarHidden(true, animated: true, duration: 1)
   }
   
   private func setupElements() {
@@ -42,7 +42,18 @@ class PeopleViewController: UIViewController {
     setupReactionsView()
     setupCardContainer()
     setupTitleLabel()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      let uif = UserInfoView(with: self.cardContainer.viewModel.nextCard()!)
+      self.view.addSubview(uif)
+      uif.layer.zPosition = 2
+      uif.snp.makeConstraints { make in
+        make.horizontalEdges.equalToSuperview()
+        make.top.equalToSuperview()
+        make.bottom.equalToSuperview()
+      }
+    }
   }
+  
   
   private func setupTitleLabel() {
     titleLabel = UILabel()
@@ -54,7 +65,7 @@ class PeopleViewController: UIViewController {
     
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(70)
-      make.leading.equalToSuperview().offset(Constants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
+      make.leading.equalToSuperview().offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
     }
   }
   
@@ -67,13 +78,13 @@ class PeopleViewController: UIViewController {
     let tabBarFrame = self.tabBarController!.tabBar.frame
     print(tabBarFrame)
     reactionsView.snp.makeConstraints { make in
-      make.bottom.equalTo(tabBarFrame.origin.y).offset(-self.view.bounds.height * Constants.buttonsBottomOffsetMultiplier)
-      make.leading.equalToSuperview().offset(self.view.bounds.width * Constants.buttonsHorizontalOffsetMultiplier)
-      make.trailing.equalToSuperview().offset(-self.view.bounds.width * Constants.buttonsHorizontalOffsetMultiplier)
+      make.bottom.equalTo(tabBarFrame.origin.y).offset(-self.view.bounds.height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
+      make.leading.equalToSuperview().offset(self.view.bounds.width * PeopleVCConstants.buttonsHorizontalOffsetMultiplier)
+      make.trailing.equalToSuperview().offset(-self.view.bounds.width * PeopleVCConstants.buttonsHorizontalOffsetMultiplier)
       make.height.equalTo(75)
     }
   }
-
+  
   private func setupCardContainer() {
     let viewModel = CardContainerViewViewModel(users: [
       .init(),
@@ -83,15 +94,14 @@ class PeopleViewController: UIViewController {
     view.addSubview(cardContainer)
     
     cardContainer.snp.makeConstraints { make in
-      make.leading.equalTo(self.view.snp.leading).offset(Constants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
-      make.trailing.equalTo(self.view.snp.trailing).offset(-Constants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
-      make.height.equalTo(Constants.cardContainerHeightMultiplier * self.view.bounds.height)
+      make.horizontalEdges.equalToSuperview().inset(CardContainerConstants.horizontalCardOffset * self.view.bounds.width)
+      make.height.equalTo(PeopleVCConstants.cardContainerHeightMultiplier * self.view.bounds.height)
       make.bottom.equalTo(reactionsView.snp.top).offset(-30)
     }
     cardContainer.delegate = self
-    cardContainer.layer.zPosition = 1
+    cardContainer.layer.zPosition = 0
   }
-
+  
 }
 
 extension PeopleViewController: CardContainerDelagate {
