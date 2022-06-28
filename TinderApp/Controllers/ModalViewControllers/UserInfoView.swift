@@ -136,6 +136,12 @@ class UserInfoView: UIView {
       make.height.equalTo(40)
     }
     
+    infoView.addSubview(reactionView)
+    reactionView.snp.makeConstraints { make in
+      make.top.equalTo(interestView.snp.bottom).offset(24)
+      make.horizontalEdges.equalToSuperview().inset(100)
+      make.height.equalTo(75)
+    }
   }
   
   func fillUI() {
