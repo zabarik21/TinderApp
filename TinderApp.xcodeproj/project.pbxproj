@@ -16,6 +16,7 @@
 		7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */; };
 		7B47BAEC28471A1100C692E0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B47BAEB28471A1100C692E0 /* SnapKit */; };
 		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
+		7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E89BF286B7AF100732985 /* Interestlabel.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
 		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
 		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
@@ -74,6 +75,7 @@
 		7B47BAE62847177E00C692E0 /* Array + Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Shift.swift"; sourceTree = "<group>"; };
 		7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
 		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
+		7B5E89BF286B7AF100732985 /* Interestlabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interestlabel.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
 		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
 		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 				7B5C28B92855F8EB0001212A /* CompatabilityView.swift */,
 			);
 			path = CompatabilityView;
+			sourceTree = "<group>";
+		};
+		7B5E89BE286B7AE000732985 /* InterestLabel */ = {
+			isa = PBXGroup;
+			children = (
+				7B5E89BF286B7AF100732985 /* Interestlabel.swift */,
+			);
+			path = InterestLabel;
 			sourceTree = "<group>";
 		};
 		7B795B692856542B007FAA53 /* CGFloat */ = {
@@ -327,6 +337,7 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B5E89BE286B7AE000732985 /* InterestLabel */,
 				7B9332132860493700D46E69 /* HiddenReactionView */,
 				7B5C28BB2855F8EF0001212A /* CompatabilityView */,
 				7BFC9A632851ACD4009B6D8A /* CardContainerView */,
@@ -573,6 +584,7 @@
 				7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */,
+				7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */,
 				7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,

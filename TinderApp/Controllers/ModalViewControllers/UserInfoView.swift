@@ -7,9 +7,10 @@
 
 import UIKit
 
-enum UserInfoViewConstants {
-  static var imageViewHeightMultiplier: CGFloat = 0.7
+private enum Constants {
+  static var imageViewHeightMultiplier: CGFloat = 0.63
   static var infoViewCornerRadius: CGFloat = 30
+  static var horizontalPaddingMultiplier: CGFloat = 0.064
 }
 
 class UserInfoView: UIView {
@@ -21,7 +22,9 @@ class UserInfoView: UIView {
   private var interestLabel: UILabel!
   private var similarInterestLabel: UILabel!
   private var compatabilityView: CompatabilityView!
-  private var interestView: UICollectionViewController!
+  private var interestView: UIScrollView!
+  private var labelsStackView: UIStackView!
+  private var interestsLabelsStackView: UIStackView!
   private var reactionView: ReactionButtonsView!
   private var placeholderImage = UIImage(named: "person.fill")
   private var viewModel: UserCardViewViewModelProtocol
@@ -40,15 +43,21 @@ class UserInfoView: UIView {
     setupLabels()
     setupReactionView()
     setupCompatabilityView()
-    interestView = UICollectionViewController()
+    setupInterestView()
     fillUI()
     self.backgroundColor = .brown
   }
   
-  private func setupCompatabilityView() {
-    compatabilityView = CompatabilityView(with: viewModel.compatabilityScore)
-    compatabilityView.changeLabelColor(with: .black)
+  private func setupInterestView() {
+    interestView = UIScrollView()
+    interestView.layer.borderColor = UIColor.black.cgColor
+    interestView.layer.borderWidth = 1
   }
+  
+  private func setupCompatabilityView() {
+      compatabilityView = CompatabilityView(with: viewModel.compatabilityScore)
+      compatabilityView.changeLabelColor(with: .black)
+    }
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -58,8 +67,25 @@ class UserInfoView: UIView {
     }
   }
   
+  private func updateInterestsView() {
+    let label = Interestlabel()
+    label.textColor = UIColor(named: "firstGradientColor")!
+    label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+    label.layer.cornerRadius = 15
+    label.layer.masksToBounds = true
+    label.backgroundColor = UIColor(named: "firstGradientColor")!.withAlphaComponent(0.2)
+    
+    label.text = "Shopping"
+    interestView.addSubview(label)
+    
+    label.snp.makeConstraints { make in
+      make.leading.equalToSuperview().offset(5)
+      make.centerY.equalToSuperview()
+    }
+  }
+  
   private func setupConstraints() {
-    let imageHeight = UserInfoViewConstants.imageViewHeightMultiplier * self.bounds.height
+    let imageHeight = Constants.imageViewHeightMultiplier * self.bounds.height
     
     self.addSubview(userImageView)
     userImageView.snp.makeConstraints { make in
@@ -70,12 +96,12 @@ class UserInfoView: UIView {
     
     addSubview(infoView)
     infoView.snp.makeConstraints { make in
-      make.top.equalTo(userImageView.snp.bottom).offset(-UserInfoViewConstants.infoViewCornerRadius)
-      make.bottom.equalToSuperview().offset(UserInfoViewConstants.infoViewCornerRadius)
+      make.top.equalTo(userImageView.snp.bottom).offset(-Constants.infoViewCornerRadius)
+      make.bottom.equalToSuperview().offset(Constants.infoViewCornerRadius)
       make.left.right.equalToSuperview()
     }
     
-    let labelsStackView = UIStackView(arrangedSubviews: [nameAgeLabel, cityLabel])
+    labelsStackView = UIStackView(arrangedSubviews: [nameAgeLabel, cityLabel])
     labelsStackView.spacing = 12
     labelsStackView.axis = .vertical
     
@@ -83,15 +109,33 @@ class UserInfoView: UIView {
     
     labelsStackView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(22)
-      make.leading.equalToSuperview().offset(24)
+      make.leading.equalToSuperview().offset(Constants.horizontalPaddingMultiplier * self.bounds.width)
     }
     
     infoView.addSubview(compatabilityView)
     compatabilityView.snp.makeConstraints { make in
-      make.trailing.equalToSuperview().offset(-24)
+      make.trailing.equalToSuperview().offset(-Constants.horizontalPaddingMultiplier * self.bounds.width)
       make.height.width.equalTo(70)
       make.centerY.equalTo(labelsStackView)
     }
+    interestsLabelsStackView = UIStackView(arrangedSubviews: [interestLabel, similarInterestLabel])
+    interestsLabelsStackView.axis = .horizontal
+    interestsLabelsStackView.alignment = .center
+    interestsLabelsStackView.distribution = .fill
+    
+    infoView.addSubview(interestsLabelsStackView)
+    interestsLabelsStackView.snp.makeConstraints { make in
+      make.top.equalTo(labelsStackView.snp.bottom).offset(30)
+      make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
+    }
+    
+    infoView.addSubview(interestView)
+    interestView.snp.makeConstraints { make in
+      make.top.equalTo(interestsLabelsStackView.snp.bottom).offset(18)
+      make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
+      make.height.equalTo(40)
+    }
+    
   }
   
   func fillUI() {
@@ -103,8 +147,9 @@ class UserInfoView: UIView {
                               ])
     nameAgeLabel.text = viewModel.nameAgeLabelText()
     cityLabel.text = viewModel.cityDistanceLabelText()
-    similarInterestLabel.text = "\(viewModel.interests.count)"
+    similarInterestLabel.text = "\(viewModel.interests.count) Similar"
     compatabilityView.updateScore(with: viewModel.compatabilityScore)
+    updateInterestsView()
     // fill interests collection view
   }
   
@@ -143,7 +188,7 @@ class UserInfoView: UIView {
   private func setupInfoView() {
     infoView = UIView()
     infoView.backgroundColor = UIColor(named: "peopleBG") ?? .black
-    infoView.layer.cornerRadius = UserInfoViewConstants.infoViewCornerRadius
+    infoView.layer.cornerRadius = Constants.infoViewCornerRadius
   }
   
   
