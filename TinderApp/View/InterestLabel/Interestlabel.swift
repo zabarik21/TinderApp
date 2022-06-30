@@ -22,6 +22,4 @@ class Interestlabel: UILabel {
         return CGSize(width: width, height: heigth)
     }
 
-
-
 }

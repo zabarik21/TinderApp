@@ -17,6 +17,13 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   var imageUrlString: String
   var interests: Set<Interest>
   
+  var userInfoViewViewModel: UsersInfoViewViewModelProtocol {
+    return UsersInfoViewViewModel(nameAgeText: self.nameAgeLabelText(),
+                                  cityText: self.cityDistanceLabelText(),
+                                  compatabilityScore: self.compatabilityScore)
+  }
+  
+  
   init(with userCardModel: UserCardModel) {
     self.age = userCardModel.birthDate.age
     self.city = userCardModel.location.city

@@ -24,11 +24,13 @@ class PeopleViewController: UIViewController {
   var titleLabel: UILabel!
   let headerOvalLayerMask = CAShapeLayer()
   var gradientLayer: CAGradientLayer!
+  var userView: UserView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = UIColor(named: "peopleBG")!
     setupElements()
+    setupConstraints()
   }
   
   override func viewDidLayoutSubviews() {
@@ -42,54 +44,37 @@ class PeopleViewController: UIViewController {
     setupReactionsView()
     setupCardContainer()
     setupTitleLabel()
-    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-      let uif = UserInfoView(with: self.cardContainer.viewModel.nextCard()!)
-      self.view.addSubview(uif)
-      uif.layer.zPosition = 2
-      uif.snp.makeConstraints { make in
-        make.horizontalEdges.equalToSuperview()
-        make.top.equalToSuperview()
-        make.bottom.equalToSuperview()
-      }
+    setupUserView()
+  }
+  
+  private func setupUserView() {
+    userView = UserView()
+    view.addSubview(self.userView)
+    userView.layer.zPosition = 2
+    userView.snp.makeConstraints { make in
+      make.horizontalEdges.equalToSuperview()
+      make.top.equalToSuperview()
+      make.bottom.equalToSuperview()
     }
   }
   
-  
-  private func setupTitleLabel() {
-    titleLabel = UILabel()
-    titleLabel.text = "People Nearby"
-    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
-    titleLabel.textColor = UIColor(named: "peopleBG") ?? .black
-    
+  private func setupConstraints() {
     view.addSubview(titleLabel)
-    
+
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(70)
       make.leading.equalToSuperview().offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
     }
-  }
-  
-  private func setupReactionsView(){
-    reactionsView = ReactionButtonsView()
-    reactionsView.delegate = self
     
     view.addSubview(reactionsView)
     
     let tabBarFrame = self.tabBarController!.tabBar.frame
-    print(tabBarFrame)
     reactionsView.snp.makeConstraints { make in
       make.bottom.equalTo(tabBarFrame.origin.y).offset(-self.view.bounds.height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
       make.leading.equalToSuperview().offset(self.view.bounds.width * PeopleVCConstants.buttonsHorizontalOffsetMultiplier)
       make.trailing.equalToSuperview().offset(-self.view.bounds.width * PeopleVCConstants.buttonsHorizontalOffsetMultiplier)
       make.height.equalTo(75)
     }
-  }
-  
-  private func setupCardContainer() {
-    let viewModel = CardContainerViewViewModel(users: [
-      .init(),
-      .init()])
-    cardContainer = CardContainerView(viewModel: viewModel)
     
     view.addSubview(cardContainer)
     
@@ -100,6 +85,29 @@ class PeopleViewController: UIViewController {
     }
     cardContainer.delegate = self
     cardContainer.layer.zPosition = 0
+  }
+  
+  private func setupTitleLabel() {
+    titleLabel = UILabel()
+    titleLabel.text = "People Nearby"
+    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
+    titleLabel.textColor = UIColor(named: "peopleBG") ?? .black
+  }
+  
+  private func setupReactionsView(){
+    reactionsView = ReactionButtonsView()
+    reactionsView.delegate = self
+  }
+  
+  private func setupCardContainer() {
+    let viewModel = CardContainerViewViewModel(users: [
+      .init(),
+      .init()])
+    cardContainer = CardContainerView(viewModel: viewModel)
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    userView.alpha = 1
   }
   
 }

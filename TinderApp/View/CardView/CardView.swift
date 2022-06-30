@@ -37,6 +37,8 @@ class CardView: UIView {
   var userInfoblurView: UIVisualEffectView!
   var compatabilityView: CompatabilityView!
   var hiddenTopReactionView: HiddenReactionViewProtocol!
+  var userInfoView: UserInfoView!
+  var labelsStackView: UIStackView!
   
   init(with viewModel: UserCardViewViewModelProtocol) {
     self.viewModel = viewModel
@@ -82,10 +84,8 @@ class CardView: UIView {
   }
 
   private func fillUI() {
-    cityDistanceLabel.text = viewModel.cityDistanceLabelText()
-    nameAgeLabel.text = viewModel.nameAgeLabelText()
     guard let url = URL(string: viewModel.imageUrlString) else { return }
-    compatabilityView.updateScore(with: viewModel.compatabilityScore)
+    userInfoView.viewModel = viewModel.userInfoViewViewModel
     profileImage.kf.setImage(with: url,
                              options: [
                               .transition(.fade(0.2)),
@@ -96,7 +96,31 @@ class CardView: UIView {
                                case .failure(_): break
                                }
                              }
+  }
+  
+  private func setupConstraints() {
+    addSubview(profileImage)
+    profileImage.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
     
+    addSubview(userInfoblurView)
+    userInfoblurView.snp.makeConstraints { make in
+      make.leading.bottom.trailing.equalToSuperview()
+      make.height.equalToSuperview().multipliedBy(0.185)
+    }
+    
+    userInfoblurView.contentView.addSubview(userInfoView)
+    userInfoView.snp.makeConstraints { make in
+      make.horizontalEdges.equalToSuperview().inset(24)
+      make.height.equalTo(60)
+      make.centerY.equalToSuperview()
+    }
+    
+    addSubview(hiddenTopReactionView)
+    hiddenTopReactionView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
   }
   
   private func setupElements() {
@@ -107,72 +131,28 @@ class CardView: UIView {
     layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
     setupImageView()
     setupUserInfoView()
-    setupCompatabilityView()
     setupHiddenTopReactionView()
     fillUI()
+    setupConstraints()
   }
   
   func setupHiddenTopReactionView() {
     hiddenTopReactionView = HiddenReactionView()
     hiddenTopReactionView.alpha = 0
-    
-    addSubview(hiddenTopReactionView)
-    
-    hiddenTopReactionView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
-    }
   }
   
   private func setupCompatabilityView() {
-    compatabilityView = CompatabilityView(with: viewModel.compatabilityScore)
-    
-    userInfoblurView.contentView.addSubview(compatabilityView)
-    
-    compatabilityView.snp.makeConstraints { make in
-      make.trailing.equalToSuperview().offset(-24)
-      make.height.width.equalTo(60)
-      make.centerY.equalToSuperview()
-    }
+    compatabilityView = CompatabilityView()
   }
   
   private func setupUserInfoView() {
     let blur = UIBlurEffect(style: .dark)
     userInfoblurView = UIVisualEffectView(effect: blur)
-    
-    let nameLabelFont = UIFont.systemFont(ofSize: 24, weight: .bold)
-    let cityFont = UIFont.systemFont(ofSize: 12, weight: .bold)
-    nameAgeLabel.font = nameLabelFont
-    cityDistanceLabel.font = cityFont
-    nameAgeLabel.textColor = UIColor(named: "cardLabelTextColor") ?? .white
-    cityDistanceLabel.textColor = UIColor(named: "cardLabelTextColor") ?? .black
-    
-    let labelsStackView = UIStackView(arrangedSubviews: [nameAgeLabel, cityDistanceLabel])
-    labelsStackView.distribution = .equalSpacing
-    labelsStackView.alignment = .leading
-    labelsStackView.axis = .vertical
-    labelsStackView.spacing = 2
-    
-    addSubview(userInfoblurView)
-    userInfoblurView.contentView.addSubview(labelsStackView)
-    
-    userInfoblurView.snp.makeConstraints { make in
-      make.leading.bottom.trailing.equalToSuperview()
-      make.height.equalToSuperview().multipliedBy(0.185)
-    }
-    
-    labelsStackView.snp.makeConstraints { make in
-      make.leading.equalToSuperview().offset(24)
-      make.centerY.equalToSuperview()
-    }
-    
+    userInfoView = UserInfoView()
   }
   
   private func setupImageView() {
-    addSubview(profileImage)
     profileImage.contentMode = .scaleAspectFill
-    profileImage.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
-    }
   }
   
   required init?(coder: NSCoder) {

@@ -15,7 +15,11 @@ enum CompatabilityViewConstants {
 
 class CompatabilityView: UIView {
 
-  private var compatability: Int
+  public var compatability: Int! {
+    didSet {
+      updateScore(with: compatability)
+    }
+  }
   
   private var scoreLayer = CAShapeLayer()
   private var scoreLabel: UILabel!
@@ -26,8 +30,7 @@ class CompatabilityView: UIView {
     viewCenter = CGPoint(x: CGFloat(self.bounds.width / 2), y: CGFloat(self.bounds.height / 2))
   }
   
-  init(with compatabilityScore: Int) {
-    self.compatability = compatabilityScore
+  init() {
     super.init(frame: .zero)
     self.setupElements()
   }
@@ -56,9 +59,7 @@ class CompatabilityView: UIView {
     }
   }
   
-  func updateScore(with score: Int) {
-    compatability = Int(score)
-    
+  private func updateScore(with score: Int) {
     var strokeColor: CGColor {
       switch compatability {
       case _ where compatability < 3:
@@ -70,7 +71,6 @@ class CompatabilityView: UIView {
       }
     }
     scoreLayer.strokeColor = strokeColor
-    
     DispatchQueue.main.async {
       while self.viewCenter == nil {}
       self.scoreLayer.path = self.configurePath()
