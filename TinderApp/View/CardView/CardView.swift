@@ -12,7 +12,7 @@ import Kingfisher
 enum CardViewConstants {
   static let xShift: CGFloat = 300
   static let swipedAngle: CGFloat = 30 * .pi / 180
-  static let maxDeltaForHiddenViewMultiplier: CGFloat = 0.16
+  static let maxDeltaForHiddenViewMultiplier: CGFloat = 0.1
   static let maxDelta: CGFloat = 130
   static let maxVelocity: CGFloat = 1000
   static let maxAngle: CGFloat = .pi / 8
@@ -25,20 +25,20 @@ enum CardViewConstants {
 
 class CardView: UIView {
   
-  var viewModel: UserCardViewViewModelProtocol
-  var delegate: CardViewDeleagate?
+  var viewModel: UserCardViewViewModelProtocol {
+    didSet {
+      fillUI()
+    }
+  }
+  weak var delegate: CardViewDeleagate?
   
   var anchorPoint: CGPoint = .zero
   var startPoint: CGPoint = .zero
   
-  var profileImage = UIImageView()
-  var nameAgeLabel = UILabel()
-  var cityDistanceLabel = UILabel()
-  var userInfoblurView: UIVisualEffectView!
-  var compatabilityView: CompatabilityView!
+  private var profileImage: UIImageView!
+  var blurView: UIVisualEffectView!
   var hiddenTopReactionView: HiddenReactionViewProtocol!
   var userInfoView: UserInfoView!
-  var labelsStackView: UIStackView!
   
   init(with viewModel: UserCardViewViewModelProtocol) {
     self.viewModel = viewModel
@@ -60,16 +60,11 @@ class CardView: UIView {
     setupGestures()
   }
   
-  func updateCard(with viewModel: UserCardViewViewModelProtocol) {
-    self.viewModel = viewModel
-    fillUI()
-  }
-  
   func swipe(liked: Bool, fromButton: Bool = false) {
     let xShift: CGFloat = liked ? CardViewConstants.xShift : -CardViewConstants.xShift
     let angle: CGFloat = liked ? CardViewConstants.swipedAngle : -CardViewConstants.swipedAngle
     let duration = fromButton ? PeopleVCConstants.cardDisappearTime * 3 : PeopleVCConstants.cardDisappearTime
-    UIView.animate(withDuration: duration) { [unowned self] in
+    UIView.animate(withDuration: duration) { 
       self.transform = CGAffineTransform(rotationAngle: angle)
       self.center.x += xShift
       self.hiddenTopReactionView.toggleReaction(like: liked)
@@ -104,13 +99,13 @@ class CardView: UIView {
       make.edges.equalToSuperview()
     }
     
-    addSubview(userInfoblurView)
-    userInfoblurView.snp.makeConstraints { make in
+    addSubview(blurView)
+    blurView.snp.makeConstraints { make in
       make.leading.bottom.trailing.equalToSuperview()
       make.height.equalToSuperview().multipliedBy(0.185)
     }
     
-    userInfoblurView.contentView.addSubview(userInfoView)
+    blurView.contentView.addSubview(userInfoView)
     userInfoView.snp.makeConstraints { make in
       make.horizontalEdges.equalToSuperview().inset(24)
       make.height.equalTo(60)
@@ -141,17 +136,14 @@ class CardView: UIView {
     hiddenTopReactionView.alpha = 0
   }
   
-  private func setupCompatabilityView() {
-    compatabilityView = CompatabilityView()
-  }
-  
   private func setupUserInfoView() {
     let blur = UIBlurEffect(style: .dark)
-    userInfoblurView = UIVisualEffectView(effect: blur)
+    blurView = UIVisualEffectView(effect: blur)
     userInfoView = UserInfoView()
   }
   
   private func setupImageView() {
+    profileImage = UIImageView()
     profileImage.contentMode = .scaleAspectFill
   }
   

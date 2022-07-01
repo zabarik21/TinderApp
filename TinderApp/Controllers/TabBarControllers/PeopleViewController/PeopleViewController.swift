@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 enum PeopleVCConstants {
   static var cardContainerHeightMultiplier: CGFloat = 0.553
@@ -24,7 +25,7 @@ class PeopleViewController: UIViewController {
   var titleLabel: UILabel!
   let headerOvalLayerMask = CAShapeLayer()
   var gradientLayer: CAGradientLayer!
-  var userView: UserView!
+  var userView: UserViewProtocol!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,13 +50,28 @@ class PeopleViewController: UIViewController {
   
   private func setupUserView() {
     userView = UserView()
-    view.addSubview(self.userView)
-    userView.layer.zPosition = 2
-    userView.snp.makeConstraints { make in
-      make.horizontalEdges.equalToSuperview()
-      make.top.equalToSuperview()
-      make.bottom.equalToSuperview()
-    }
+    userView.reactionsDelegate = self
+    userView.alpha = 0
+  }
+  
+  private func setupTitleLabel() {
+    titleLabel = UILabel()
+    titleLabel.text = "People Nearby"
+    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
+    titleLabel.textColor = UIColor(named: "peopleBG") ?? .black
+  }
+  
+  private func setupReactionsView(){
+    reactionsView = ReactionButtonsView()
+    reactionsView.delegate = self
+  }
+  
+  private func setupCardContainer() {
+    let viewModel = CardContainerViewViewModel(users: [
+      .init(),
+      .init()])
+    cardContainer = CardContainerView(viewModel: viewModel)
+    cardContainer.delegate = self
   }
   
   private func setupConstraints() {
@@ -83,44 +99,15 @@ class PeopleViewController: UIViewController {
       make.height.equalTo(PeopleVCConstants.cardContainerHeightMultiplier * self.view.bounds.height)
       make.bottom.equalTo(reactionsView.snp.top).offset(-30)
     }
-    cardContainer.delegate = self
-    cardContainer.layer.zPosition = 0
+    
+    view.addSubview(userView)
+    
+    userView.snp.makeConstraints { make in
+      make.horizontalEdges.equalToSuperview()
+      make.top.equalToSuperview()
+      make.bottom.equalToSuperview()
+    }
   }
   
-  private func setupTitleLabel() {
-    titleLabel = UILabel()
-    titleLabel.text = "People Nearby"
-    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
-    titleLabel.textColor = UIColor(named: "peopleBG") ?? .black
-  }
   
-  private func setupReactionsView(){
-    reactionsView = ReactionButtonsView()
-    reactionsView.delegate = self
-  }
-  
-  private func setupCardContainer() {
-    let viewModel = CardContainerViewViewModel(users: [
-      .init(),
-      .init()])
-    cardContainer = CardContainerView(viewModel: viewModel)
-  }
-  
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    userView.alpha = 1
-  }
-  
-}
-
-extension PeopleViewController: CardContainerDelagate {
-  func usersLoaded() {
-    print("loaded")
-  }
-}
-
-
-extension PeopleViewController: ReactionViewDelegate {
-  func reacted(liked: Bool) {
-    cardContainer.reacted(liked: liked)
-  }
 }

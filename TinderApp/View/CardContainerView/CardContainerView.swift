@@ -20,7 +20,7 @@ enum CardContainerConstants {
 class CardContainerView: UIView {
   
   var viewModel: CardContainerViewViewModelProtocol
-  var delegate: CardContainerDelagate?
+  weak var delegate: CardContainerDelagate?
   
   var backCardContainer: UIView!
   var bottomCardView: CardView!
@@ -46,13 +46,16 @@ class CardContainerView: UIView {
     setupElements()
   }
   
+//  init() {
+//    super.init(frame: .zero)
+//    setupElements()
+//  }
+  
   private func setupElements() {
     backgroundColor = .clear
-    topCardView = CardView(with: viewModel.topCardViewModel)
-    bottomCardView = CardView(with: viewModel.bottomCardViewModel)
-    self.addSubview(bottomCardView)
-    self.addSubview(topCardView)
-   
+    topCardView = CardView(with: viewModel.users[0])
+    bottomCardView = CardView(with: viewModel.users[1])
+    
     setupConstraints()
     
     topCardView.delegate = self
@@ -60,6 +63,10 @@ class CardContainerView: UIView {
   }
   
   private func setupConstraints() {
+    
+    addSubview(bottomCardView)
+    addSubview(topCardView)
+    
     bottomCardView.translatesAutoresizingMaskIntoConstraints = false
     topCardView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -92,10 +99,19 @@ class CardContainerView: UIView {
     ])
   }
   
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    print(#function)
+    if topCardTurn {
+      delegate?.cardTouched(with: topCardView.viewModel)
+    }
+    else {
+      delegate?.cardTouched(with: bottomCardView.viewModel)
+    }
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
 }
 
 
@@ -110,10 +126,10 @@ extension CardContainerView: CardViewDeleagate {
   func updateCurrentBottomCard() {
     if let cardViewModel = viewModel.nextCard() {
       if topCardTurn {
-        topCardView.updateCard(with: cardViewModel)
+        topCardView.viewModel = cardViewModel
       }
       else {
-        bottomCardView.updateCard(with: cardViewModel)
+        bottomCardView.viewModel = cardViewModel
       }
     } else {
       // alert on cardContainer that users are ended

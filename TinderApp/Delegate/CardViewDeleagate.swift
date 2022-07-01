@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol CardViewDeleagate: UIView {
+protocol CardViewDeleagate: UIView, AnyObject {
   func swiped(liked: Bool)
 }

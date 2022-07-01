@@ -38,7 +38,8 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.age = Int.random(in: 0...94)
     self.city = ["Perm", "Ziben", "Moskow"].randomElement()!
     self.name = ["Seva", "Niben", "Bebra"].randomElement()!
-    self.imageUrlString = "sdfasd"
+    self.imageUrlString = "https://ru.citaty.net/media/authors/steve-jobs.jpeg"
+    
     self.compatabilityScore = Int.random(in: 0...10)
     self.interests = Interest.getRandomCases()
   }
@@ -46,11 +47,14 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
 
 
 extension UserCardViewViewModel {
+  
   func nameAgeLabelText() -> String {
     return "\(name), \(age)"
   }
+  
   func cityDistanceLabelText() -> String {
     let randomDistance = Int.random(in: 0...50)
     return "\(city) •\(randomDistance) km"
   }
+  
 }

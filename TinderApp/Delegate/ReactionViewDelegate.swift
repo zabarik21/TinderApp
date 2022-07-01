@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ReactionViewDelegate {
+protocol ReactionViewDelegate: AnyObject {
   func reacted(liked: Bool)
 }

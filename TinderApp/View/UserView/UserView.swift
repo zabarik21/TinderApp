@@ -7,65 +7,41 @@
 
 import UIKit
 
-private enum Constants {
+enum Constants {
   static var imageViewHeightMultiplier: CGFloat = 0.63
   static var infoViewCornerRadius: CGFloat = 30
   static var horizontalPaddingMultiplier: CGFloat = 0.064
   static var horizontalReactiovViewPaddingMultiplier: CGFloat = 0.24
 }
 
-class UserView: UIView {
+class UserView: UIView, UserViewProtocol {
   
   private var userImageView: UIImageView!
   private var infoViewContainer: UIView!
   private var interestLabel: UILabel!
   private var similarInterestLabel: UILabel!
   private var interestView: UIScrollView!
-  private var labelsStackView: UIStackView!
   private var interestsLabelsStackView: UIStackView!
   private var reactionView: ReactionButtonsView!
-  private var placeholderImage = UIImage(named: "person.fill")
   private var userInfoView: UserInfoView!
-  public var viewModel: UserCardViewViewModelProtocol! {
+  private var placeholderImage = UIImage(named: "person.fill")
+  // must set deleagte in peoplevc
+  weak var reactionsDelegate: ReactionViewDelegate?
+  var viewModel: UserCardViewViewModelProtocol! {
     didSet {
       fillUI()
     }
   }
   
+  var viewHieght: CGFloat!
+  
   var flag = true
-//  with viewModel: UserCardViewViewModelProtocol
+  
   init() {
-//    self.viewModel = viewModel
     super.init(frame: .zero)
     setupElements()
+    setupGestures()
   }
-
-  private func setupElements() {
-    setupUserImageView()
-    setupInfoViewContainer()
-    setupLabels()
-    setupReactionView()
-    setupUserInfoView()
-    setupCompatabilityView()
-    setupInterestView()
-    self.backgroundColor = .brown
-  }
-  
-  private func setupUserInfoView() {
-    userInfoView = UserInfoView()
-    userInfoView.changeCompatabilityLabelTextColor(with: .black)
-  }
-  
-  private func setupInterestView() {
-    interestView = UIScrollView()
-    interestView.layer.borderColor = UIColor.black.cgColor
-    interestView.layer.borderWidth = 1
-  }
-  
-  private func setupCompatabilityView() {
-//      compatabilityView = CompatabilityView(with: viewModel.compatabilityScore)
-//      compatabilityView.changeLabelColor(with: .black)
-    }
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -73,6 +49,7 @@ class UserView: UIView {
       setupConstraints()
       flag.toggle()
     }
+    viewHieght = self.bounds.height
   }
   
   private func updateInterestsView() {
@@ -92,13 +69,60 @@ class UserView: UIView {
     }
   }
   
+  private func setupElements() {
+    setupUserImageView()
+    setupInfoViewContainer()
+    setupLabels()
+    setupReactionView()
+    setupUserInfoView()
+    setupInterestView()
+    self.backgroundColor = .brown
+  }
+  
+  private func setupUserInfoView() {
+    userInfoView = UserInfoView()
+    userInfoView.changeCompatabilityLabelTextColor(with: .black)
+  }
+  
+  private func setupInterestView() {
+    interestView = UIScrollView()
+    interestView.layer.borderColor = UIColor.black.cgColor
+    interestView.layer.borderWidth = 1
+  }
+  
+  private func setupReactionView() {
+    reactionView = ReactionButtonsView()
+    reactionView.delegate = reactionsDelegate
+  }
+  
+  private func setupLabels() {
+    interestLabel = UILabel()
+    interestLabel.font = .systemFont(ofSize: 18, weight: .bold)
+    interestLabel.textColor = .black
+    interestLabel.text = "Interests"
+    similarInterestLabel = UILabel()
+    similarInterestLabel.font = .systemFont(ofSize: 14, weight: .bold)
+    similarInterestLabel.textColor = UIColor(named: "firstGradientColor")!.withAlphaComponent(0.6)
+    similarInterestLabel.text = "0 Similar"
+  }
+  
+  private func setupUserImageView() {
+    userImageView = UIImageView()
+    userImageView.contentMode = .scaleAspectFill
+  }
+  
+  private func setupInfoViewContainer() {
+    infoViewContainer = UIView()
+    infoViewContainer.backgroundColor = UIColor(named: "peopleBG") ?? .black
+    infoViewContainer.layer.cornerRadius = Constants.infoViewCornerRadius
+  }
+  
   private func setupConstraints() {
     let imageHeight = Constants.imageViewHeightMultiplier * self.bounds.height
     
     self.addSubview(userImageView)
     userImageView.snp.makeConstraints { make in
-      make.top.equalToSuperview()
-      make.left.right.equalToSuperview()
+      make.top.left.right.equalToSuperview()
       make.height.equalTo(imageHeight)
     }
     
@@ -155,52 +179,8 @@ class UserView: UIView {
     updateInterestsView()
   }
   
-  private func setupReactionView() {
-    reactionView = ReactionButtonsView()
-    reactionView.delegate = self
-  }
-  
-  private func setupLabels() {
-    interestLabel = UILabel()
-    interestLabel.font = .systemFont(ofSize: 18, weight: .bold)
-    interestLabel.textColor = .black
-    interestLabel.text = "Interests"
-    similarInterestLabel = UILabel()
-    similarInterestLabel.font = .systemFont(ofSize: 14, weight: .bold)
-    similarInterestLabel.textColor = UIColor(named: "firstGradientColor")!.withAlphaComponent(0.6)
-    similarInterestLabel.text = "0 Similar"
-  }
-  
-  private func setupUserImageView() {
-    userImageView = UIImageView()
-    let image = UIImage(systemName: "person.fill")!
-    userImageView.contentMode = .scaleToFill
-  }
-  
-  private func setupInfoViewContainer() {
-    infoViewContainer = UIView()
-    infoViewContainer.backgroundColor = UIColor(named: "peopleBG") ?? .black
-    infoViewContainer.layer.cornerRadius = Constants.infoViewCornerRadius
-  }
-  
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    DispatchQueue.main.async {
-      self.alpha = 0
-    }
-  }
-  
 }
 
-
-extension UserView: ReactionViewDelegate {
-
-  func reacted(liked: Bool) {
-    print(liked ? "like" : "disliked")
-  }
-  
-}

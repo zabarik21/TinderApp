@@ -8,7 +8,8 @@
 import Foundation
 
 
-protocol CardContainerDelagate {
+protocol CardContainerDelagate: AnyObject {
   func usersLoaded()
+  func cardTouched(with viewModel: UserCardViewViewModelProtocol)
 }
 

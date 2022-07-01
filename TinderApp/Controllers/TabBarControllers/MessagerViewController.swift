@@ -24,7 +24,6 @@ class MessagerViewController: UIViewController {
     self.view.layer.addSublayer(arc)
     
     
-    
     // try animating path
     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
       arc.path = UIBezierPath(arcCenter: self.view.center, radius: 100, startAngle: 0, endAngle: CGFloat(180).degreesToRadians, clockwise: true).cgPath

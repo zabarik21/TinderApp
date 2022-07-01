@@ -85,6 +85,7 @@ class UserInfoView: UIView {
   }
   
   private func fillUI() {
+    print(#function)
     compatabilityView.compatability = viewModel.compatabilityScore
     nameAgeLabel.text = viewModel.nameAgeText
     cityLabel.text = viewModel.cityText

@@ -13,8 +13,6 @@ import Foundation
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     
   var users: [UserCardViewViewModelProtocol]
-  var topCardViewModel: UserCardViewViewModelProtocol!
-  var bottomCardViewModel: UserCardViewViewModelProtocol!
   var delegate: CardContainerDelagate?
   
   func nextCard() -> UserCardViewViewModelProtocol? {
@@ -26,16 +24,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
   init(users: [UserCardViewViewModel]) {
     self.users = users
-    if let bottomCard = self.users.shift() {
-      self.bottomCardViewModel = bottomCard
-      if let topCard = self.users.shift() {
-        self.topCardViewModel = topCard
-      }
-    }
     loadUsers()
   }
   
-//   test func to try random people api
   func loadUsers() {
     guard let url = URL(string: "https://randomuser.me/api/?results=30&inc=gender,name,dob,location,picture,id&noinfo") else { return }
     let request = URLRequest(url: url)

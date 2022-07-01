@@ -17,7 +17,7 @@ class CompatabilityView: UIView {
 
   public var compatability: Int! {
     didSet {
-      updateScore(with: compatability)
+      updateScore()
     }
   }
   
@@ -59,7 +59,7 @@ class CompatabilityView: UIView {
     }
   }
   
-  private func updateScore(with score: Int) {
+  private func updateScore() {
     var strokeColor: CGColor {
       switch compatability {
       case _ where compatability < 3:
@@ -76,7 +76,7 @@ class CompatabilityView: UIView {
       self.scoreLayer.path = self.configurePath()
     }
     
-    scoreLabel.text = "\(Int(score))"
+    scoreLabel.text = "\(Int(compatability))"
   }
   
   private func configurePath() -> CGPath {
