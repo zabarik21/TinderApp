@@ -67,11 +67,13 @@ class PeopleViewController: UIViewController {
   }
   
   private func setupCardContainer() {
-    let viewModel = CardContainerViewViewModel(users: [
-      .init(),
-      .init()])
-    cardContainer = CardContainerView(viewModel: viewModel)
+    // let cachedUsers = ...
+    let viewModel = CardContainerViewViewModel(users: [])
+    cardContainer = CardContainerView()
+    //what???
     cardContainer.delegate = self
+    cardContainer.viewModel = viewModel
+    cardContainer.viewModel?.delegate = self
   }
   
   private func setupConstraints() {

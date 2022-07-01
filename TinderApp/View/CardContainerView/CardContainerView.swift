@@ -19,7 +19,7 @@ enum CardContainerConstants {
 
 class CardContainerView: UIView {
   
-  var viewModel: CardContainerViewViewModelProtocol
+  var viewModel: CardContainerViewViewModelProtocol?
   weak var delegate: CardContainerDelagate?
   
   var backCardContainer: UIView!
@@ -40,22 +40,16 @@ class CardContainerView: UIView {
   
   var topCardTurn: Bool = true
   
-  init(viewModel: CardContainerViewViewModelProtocol) {
-    self.viewModel = viewModel
+  init() {
     super.init(frame: .zero)
     setupElements()
   }
   
-//  init() {
-//    super.init(frame: .zero)
-//    setupElements()
-//  }
   
   private func setupElements() {
     backgroundColor = .clear
-    topCardView = CardView(with: viewModel.users[0])
-    bottomCardView = CardView(with: viewModel.users[1])
-    
+    topCardView = CardView(with: viewModel?.nextCard())
+    bottomCardView = CardView(with: viewModel?.nextCard())
     setupConstraints()
     
     topCardView.delegate = self
@@ -101,6 +95,7 @@ class CardContainerView: UIView {
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     print(#function)
+    // fix unwrap
     if topCardTurn {
       delegate?.cardTouched(with: topCardView.viewModel)
     }
@@ -124,7 +119,7 @@ extension CardContainerView: CardViewDeleagate {
   }
   
   func updateCurrentBottomCard() {
-    if let cardViewModel = viewModel.nextCard() {
+    if let cardViewModel = viewModel?.nextCard() {
       if topCardTurn {
         topCardView.viewModel = cardViewModel
       }
@@ -188,9 +183,13 @@ extension CardContainerView: ReactionViewDelegate {
   
   func reacted(liked: Bool) {
     if topCardTurn {
+      guard topCardView.isSwipeble != false else { return }
       topCardView.swipe(liked: liked, fromButton: true)
+      // send reaction request
     } else {
+      guard bottomCardView.isSwipeble != false else { return }
       bottomCardView.swipe(liked: liked, fromButton: true)
+      // send reaction request
     }
   }
   

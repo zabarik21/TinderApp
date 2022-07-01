@@ -53,6 +53,7 @@ extension CardView: UIGestureRecognizerDelegate {
     // hiding / showing hiddenReactionView
     let maxDeltaForShowingReactionView = CardViewConstants.maxDeltaForHiddenViewMultiplier * self.bounds.width
     if abs(xDelta) > maxDeltaForShowingReactionView {
+      
       hiddenTopReactionView.toggleReaction(like: xDelta > 0)
       let alpha = (abs(xDelta) - maxDeltaForShowingReactionView) / 100
       hiddenTopReactionView.alpha = alpha
@@ -62,6 +63,10 @@ extension CardView: UIGestureRecognizerDelegate {
   }
   
   func gestureEnded(with velocity: CGFloat = 0) {
+    guard isSwipeble != false else {
+      animateToIdentity()
+      return
+    }
     let xDelta = center.x - startPoint.x
     if xDelta > CardViewConstants.maxDelta || velocity > CardViewConstants.maxVelocity {
       swipe(liked: true)

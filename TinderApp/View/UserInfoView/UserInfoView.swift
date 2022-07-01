@@ -27,15 +27,24 @@ class UserInfoView: UIView {
   private var nameAgeLabel: UILabel!
   private var cityLabel: UILabel!
   private var labelsStackView: UIStackView!
-  var viewModel: UsersInfoViewViewModelProtocol! {
+  private var unfilled = true
+  var viewModel: UsersInfoViewViewModelProtocol? {
     didSet {
       fillUI()
     }
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    if (viewModel == nil) && (unfilled != true) {
+      unfillUI()
+    }
+  }
+  
   init() {
     super.init(frame: .zero)
-    self.setupElements()
+    setupElements()
+    unfillUI()
   }
   
   private func setupElements() {
@@ -85,10 +94,21 @@ class UserInfoView: UIView {
   }
   
   private func fillUI() {
-    print(#function)
-    compatabilityView.compatability = viewModel.compatabilityScore
-    nameAgeLabel.text = viewModel.nameAgeText
-    cityLabel.text = viewModel.cityText
+    if let viewModel = viewModel {
+      compatabilityView.compatability = viewModel.compatabilityScore
+      nameAgeLabel.text = viewModel.nameAgeText
+      cityLabel.text = viewModel.cityText
+      unfilled = false
+    } else {
+      unfillUI()
+    }
+  }
+  
+  private func unfillUI() {
+    unfilled = true
+    self.nameAgeLabel.text = "Your future frend"
+    self.cityLabel.text = "Nearby"
+    self.compatabilityView.compatability = 10
   }
   
   required init?(coder: NSCoder) {

@@ -9,12 +9,15 @@ import UIKit
 
 extension PeopleViewController: CardContainerDelagate {
   
-  func cardTouched(with viewModel: UserCardViewViewModelProtocol) {
+  func cardTouched(with viewModel: UserCardViewViewModelProtocol?) {
     userView.viewModel = viewModel
     userView.show()
+    
   }
   
   func usersLoaded() {
-    print("loaded")
+    print("users loaded")
+    cardContainer.topCardView.viewModel = cardContainer.viewModel?.nextCard()
+    cardContainer.bottomCardView.viewModel = cardContainer.viewModel?.nextCard()
   }
 }

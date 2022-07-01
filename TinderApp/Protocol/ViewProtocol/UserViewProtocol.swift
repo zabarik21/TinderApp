@@ -14,6 +14,6 @@ protocol HideShowView {
 }
 
 protocol UserViewProtocol: UIView, HideShowView {
-  var viewModel: UserCardViewViewModelProtocol! { get set }
+  var viewModel: UserCardViewViewModelProtocol? { get set }
   var reactionsDelegate: ReactionViewDelegate? { get set }
 }

@@ -27,7 +27,7 @@ class UserView: UIView, UserViewProtocol {
   private var placeholderImage = UIImage(named: "person.fill")
   // must set deleagte in peoplevc
   weak var reactionsDelegate: ReactionViewDelegate?
-  var viewModel: UserCardViewViewModelProtocol! {
+  var viewModel: UserCardViewViewModelProtocol? {
     didSet {
       fillUI()
     }
@@ -76,6 +76,7 @@ class UserView: UIView, UserViewProtocol {
     setupReactionView()
     setupUserInfoView()
     setupInterestView()
+    fillUI()
     self.backgroundColor = .brown
   }
   
@@ -168,15 +169,22 @@ class UserView: UIView, UserViewProtocol {
   }
   
   func fillUI() {
-    let url = URL(string: viewModel.imageUrlString)
-    userImageView.kf.setImage(with: url,
-                              placeholder: placeholderImage,
-                              options: [
-                                .transition(.fade(0.2))
-                              ])
-    similarInterestLabel.text = "\(viewModel.interests.count) Similar"
-    userInfoView.viewModel = viewModel.userInfoViewViewModel
-    updateInterestsView()
+    if let viewModel = viewModel {
+      let url = URL(string: viewModel.imageUrlString)
+      userImageView.kf.setImage(with: url,
+                                placeholder: placeholderImage,
+                                options: [
+                                  .transition(.fade(0.2))
+                                ])
+      similarInterestLabel.text = "\(viewModel.interests.count) Similar"
+      userInfoView.viewModel = viewModel.userInfoViewViewModel
+      updateInterestsView()
+    } else {
+      userInfoView.viewModel = nil
+      let factor = Int.random(in: 0...1)
+      let imgName = "user\(factor)"
+      userImageView.image = UIImage(named: imgName)
+    }
   }
   
   required init?(coder: NSCoder) {

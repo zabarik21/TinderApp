@@ -22,6 +22,7 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     return users.shift()
   }
   
+  // init with users for случая when there are old saved users left in memory 
   init(users: [UserCardViewViewModel]) {
     self.users = users
     loadUsers()
@@ -41,7 +42,10 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
         for user in newUsers {
           self.users.append(UserCardViewViewModel(with: user))
         }
+        print("users loaded")
+        self.delegate?.usersLoaded()
       }
+      
     }.resume()
   }
 }

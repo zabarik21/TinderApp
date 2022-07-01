@@ -25,7 +25,7 @@ enum CardViewConstants {
 
 class CardView: UIView {
   
-  var viewModel: UserCardViewViewModelProtocol {
+  var viewModel: UserCardViewViewModelProtocol? {
     didSet {
       fillUI()
     }
@@ -36,11 +36,12 @@ class CardView: UIView {
   var startPoint: CGPoint = .zero
   
   private var profileImage: UIImageView!
-  var blurView: UIVisualEffectView!
+  private var blurView: UIVisualEffectView!
   var hiddenTopReactionView: HiddenReactionViewProtocol!
-  var userInfoView: UserInfoView!
+  private var userInfoView: UserInfoView!
+  var isSwipeble = false
   
-  init(with viewModel: UserCardViewViewModelProtocol) {
+  init(with viewModel: UserCardViewViewModelProtocol?) {
     self.viewModel = viewModel
     super.init(frame: .zero)
     setupElements()
@@ -53,8 +54,6 @@ class CardView: UIView {
   }
   
   init() {
-    let viewModel = UserCardViewViewModel()
-    self.viewModel = viewModel
     super.init(frame: .zero)
     setupElements()
     setupGestures()
@@ -79,18 +78,28 @@ class CardView: UIView {
   }
 
   private func fillUI() {
-    guard let url = URL(string: viewModel.imageUrlString) else { return }
-    userInfoView.viewModel = viewModel.userInfoViewViewModel
-    profileImage.kf.setImage(with: url,
-                             options: [
-                              .transition(.fade(0.2)),
-                             ]) { result in
-                               switch result {
-                               case .success(let value):
-                                 print(value.cacheType)
-                               case .failure(_): break
+    if let viewModel = viewModel {
+      isSwipeble = true
+      guard let url = URL(string: viewModel.imageUrlString) else { return }
+      userInfoView.viewModel = viewModel.userInfoViewViewModel
+      profileImage.kf.setImage(with: url,
+                               options: [
+                                .transition(.fade(0.2)),
+                               ]) { result in
+                                 switch result {
+                                 case .success(let value):
+                                   print(value.cacheType)
+                                 case .failure(_): break
+                                 }
                                }
-                             }
+    } else {
+      isSwipeble = false
+      userInfoView.viewModel = nil
+      let factor = Int.random(in: 0...1)
+      let imgName = "user\(factor)"
+      profileImage.image = UIImage(named: imgName)
+    }
+    
   }
   
   private func setupConstraints() {
