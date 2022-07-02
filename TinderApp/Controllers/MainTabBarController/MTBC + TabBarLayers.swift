@@ -48,7 +48,7 @@ extension MainTabBarController {
     let height = layerHeight - 4
     let x = MainTabBarVCConstants.tabBarLayerHorizontalPaddingMultiplier * self.view.bounds.width
     
-    itemLayer.fillColor = UIColor(named: "itemLayerColor")!.cgColor
+    itemLayer.fillColor = UIColor.itemLayerColor.cgColor
     itemLayer.opacity = 0.69
     itemLayer.path = UIBezierPath(roundedRect: CGRect(x: x,
                                                       y: -0.5,

@@ -49,7 +49,7 @@ class CompatabilityView: UIView {
   private func setupLabel() {
     scoreLabel = UILabel()
     scoreLabel.font = .systemFont(ofSize: 14)
-    scoreLabel.textColor = UIColor(named: "cardLabelTextColor") ?? .black
+    scoreLabel.textColor = UIColor.cardLabelTextColor
     scoreLabel.textAlignment = .center
     
     addSubview(scoreLabel)
@@ -63,11 +63,11 @@ class CompatabilityView: UIView {
     var strokeColor: CGColor {
       switch compatability {
       case _ where compatability < 3:
-        return UIColor(named: "lowCompatableColor")!.cgColor
+        return UIColor.lowCompatabilityColor.cgColor
       case _ where compatability < 6:
-        return UIColor(named: "midCompatableColor")!.cgColor
+        return UIColor.medCompatabilityColor.cgColor
       default:
-        return UIColor(named: "highCompatableColor")!.cgColor
+        return UIColor.highCompatabilityColor.cgColor
       }
     }
     scoreLayer.strokeColor = strokeColor
@@ -81,7 +81,6 @@ class CompatabilityView: UIView {
   
   private func configurePath() -> CGPath {
     let angle = CGFloat((360 * self.compatability / 10) - 90)
-    let height = self.bounds.height
     let radius = self.bounds.height / 2 - CompatabilityViewConstants.strokeWidth
     return UIBezierPath(arcCenter: self.viewCenter,
                         radius: radius,

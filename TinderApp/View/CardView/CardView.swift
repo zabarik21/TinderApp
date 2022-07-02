@@ -23,7 +23,7 @@ enum CardViewConstants {
   static let yTranslateMultiplier: CGFloat = 0.3
 }
 
-class CardView: UIView {
+class CardView: UIView, CardViewProtocol {
   
   var viewModel: UserCardViewViewModelProtocol? {
     didSet {
@@ -90,7 +90,7 @@ class CardView: UIView {
                                  ]) { result in
                                    switch result {
                                    case .success(let value):
-                                     print(value.cacheType)
+                                     break
                                    case .failure(_): break
                                    }
                                  }

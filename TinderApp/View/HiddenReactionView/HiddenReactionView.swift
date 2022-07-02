@@ -16,8 +16,6 @@ class HiddenReactionView: UIView {
   private let likeText = "のように"
   private var liked: Bool = true
   private let dislikeText = "いいえ。."
-  private let dislikeColor = UIColor(named: "firstGradientColor")!
-  private let likeColor = UIColor(named: "highCompatableColor")!
   private let config = UIImage.SymbolConfiguration(pointSize: 144, weight: .bold)
   private lazy var dislikeImage = UIImage(systemName: "multiply", withConfiguration: config)
   private lazy var likeImage = UIImage(systemName: "heart.fill", withConfiguration: config)
@@ -28,14 +26,14 @@ class HiddenReactionView: UIView {
   }
   
   private func setupElements() {
-    backgroundColor = likeColor
+    backgroundColor = UIColor.highCompatabilityColor
     setupSymbolImageView()
     setupReactionLabel()
   }
   
   private func setupSymbolImageView() {
     sybmolImage.image = likeImage
-    sybmolImage.tintColor = UIColor(named: "cardLabelTextColor")!
+    sybmolImage.tintColor = .cardLabelTextColor
     
     addSubview(sybmolImage)
     
@@ -49,7 +47,7 @@ class HiddenReactionView: UIView {
     reactionLabel.text = likeText
     reactionLabel.font = .boldSystemFont(ofSize: 50)
     
-    reactionLabel.textColor = UIColor(named: "cardLabelTextColor")!
+    reactionLabel.textColor = .cardLabelTextColor
     
     addSubview(reactionLabel)
     
@@ -70,7 +68,7 @@ extension HiddenReactionView: HiddenReactionViewProtocol {
   func toggleReaction(like: Bool) {
     if like == liked { return }
     liked = like
-    backgroundColor = like ? likeColor : dislikeColor
+    backgroundColor = like ? .highCompatabilityColor : .lowCompatabilityColor
     reactionLabel.text = like ? likeText : dislikeText
     sybmolImage.image = like ? likeImage : dislikeImage
   }

@@ -20,7 +20,6 @@ extension UserView: UIGestureRecognizerDelegate {
     let velocity = recognizer.velocity(in: self)
     switch recognizer.state {
     case .began:
-      print(center.y)
       break
     case .changed:
       onChange(recognizer)
@@ -58,6 +57,7 @@ extension UserView: UIGestureRecognizerDelegate {
       self.alpha = 0
     } completion: { _ in
       self.userViewDelegate?.hided()
+      self.isHidden = true
     }
   }
   
@@ -66,5 +66,6 @@ extension UserView: UIGestureRecognizerDelegate {
       self.center.y = self.viewHieght / 2
       self.alpha = 1
     }
+    self.isHidden = false
   }
 }

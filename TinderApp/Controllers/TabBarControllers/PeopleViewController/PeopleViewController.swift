@@ -20,7 +20,7 @@ enum PeopleVCConstants {
 
 class PeopleViewController: UIViewController {
   
-  var cardContainer: CardContainerView!
+  var cardContainer: CardContainerViewProtocol!
   var reactionsView: ReactionButtonsView!
   var titleLabel: UILabel!
   let headerOvalLayerMask = CAShapeLayer()
@@ -29,7 +29,6 @@ class PeopleViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = UIColor(named: "peopleBG")!
     setupElements()
     setupConstraints()
   }
@@ -38,44 +37,10 @@ class PeopleViewController: UIViewController {
     super.viewDidLayoutSubviews()
     actualizePath()
   }
-  
-  private func setupElements() {
-    setupHeaderOvalLayer()
-    setupReactionsView()
-    setupCardContainer()
-    setupTitleLabel()
-    setupUserView()
-  }
-  
-  private func setupUserView() {
-    userView = UserView()
-    userView.userViewDelegate = self
-    userView.reactionsDelegate = self
-    userView.alpha = 0
-  }
-  
-  private func setupTitleLabel() {
-    titleLabel = UILabel()
-    titleLabel.text = "People Nearby"
-    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
-    titleLabel.textColor = UIColor(named: "peopleBG") ?? .black
-  }
-  
-  private func setupReactionsView(){
-    reactionsView = ReactionButtonsView()
-    reactionsView.delegate = self
-  }
-  
-  private func setupCardContainer() {
-    // let cachedUsers = ...
-    let viewModel = CardContainerViewViewModel(users: [])
-    cardContainer = CardContainerView()
-    //what???
-    cardContainer.delegate = self
-    cardContainer.viewModel = viewModel
-    cardContainer.viewModel?.delegate = self
-  }
-  
+}
+
+// MARK: - Setup Constraints and Elements
+extension PeopleViewController {
   private func setupConstraints() {
     view.addSubview(titleLabel)
 
@@ -89,16 +54,15 @@ class PeopleViewController: UIViewController {
     let tabBarFrame = self.tabBarController!.tabBar.frame
     reactionsView.snp.makeConstraints { make in
       make.bottom.equalTo(tabBarFrame.origin.y).offset(-self.view.bounds.height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
-      make.leading.equalToSuperview().offset(self.view.bounds.width * PeopleVCConstants.buttonsHorizontalOffsetMultiplier)
-      make.trailing.equalToSuperview().offset(-self.view.bounds.width * PeopleVCConstants.buttonsHorizontalOffsetMultiplier)
+      make.horizontalEdges.equalToSuperview().inset(PeopleVCConstants.buttonsBottomOffsetMultiplier * self.view.bounds.width)
       make.height.equalTo(75)
     }
     
     view.addSubview(cardContainer)
     
     cardContainer.snp.makeConstraints { make in
+      make.height.equalTo(Int(PeopleVCConstants.cardContainerHeightMultiplier * self.view.bounds.height))
       make.horizontalEdges.equalToSuperview().inset(CardContainerConstants.horizontalCardOffset * self.view.bounds.width)
-      make.height.equalTo(PeopleVCConstants.cardContainerHeightMultiplier * self.view.bounds.height)
       make.bottom.equalTo(reactionsView.snp.top).offset(-30)
     }
     
@@ -111,5 +75,41 @@ class PeopleViewController: UIViewController {
     }
   }
   
+  private func setupElements() {
+    view.backgroundColor = UIColor.peopleViewControllerBackground
+    setupHeaderOvalLayer()
+    setupReactionsView()
+    setupCardContainer()
+    setupTitleLabel()
+    setupUserView()
+  }
   
+  private func setupUserView() {
+    userView = UserView()
+    userView.userViewDelegate = self
+    userView.reactionsDelegate = self
+    userView.isHidden = true
+  }
+  
+  private func setupTitleLabel() {
+    titleLabel = UILabel()
+    titleLabel.text = "People Nearby"
+    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
+    titleLabel.textColor = UIColor.peopleViewControllerBackground
+  }
+  
+  private func setupReactionsView(){
+    reactionsView = ReactionButtonsView()
+    reactionsView.delegate = self
+  }
+  
+  private func setupCardContainer() {
+    // let cachedUsers = ...
+    let viewModel = CardContainerViewViewModel(users: [])
+    cardContainer = CardContainerView()
+    cardContainer.delegate = self
+    cardContainer.viewModel = viewModel
+    // delegate for telling viewController that users have loaded and cards must be showedw
+    cardContainer.viewModel?.delegate = self
+  }
 }

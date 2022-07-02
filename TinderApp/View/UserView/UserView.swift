@@ -53,11 +53,11 @@ class UserView: UIView, UserViewProtocol {
   
   private func updateInterestsView() {
     let label = Interestlabel()
-    label.textColor = UIColor(named: "firstGradientColor")!
+    label.textColor = .firstGradientColor
     label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     label.layer.cornerRadius = 15
     label.layer.masksToBounds = true
-    label.backgroundColor = UIColor(named: "firstGradientColor")!.withAlphaComponent(0.2)
+    label.backgroundColor = UIColor.firstGradientColor.withAlphaComponent(0.2)
     
     label.text = "Shopping"
     interestView.addSubview(label)
@@ -102,7 +102,7 @@ class UserView: UIView, UserViewProtocol {
     interestLabel.text = "Interests"
     similarInterestLabel = UILabel()
     similarInterestLabel.font = .systemFont(ofSize: 14, weight: .bold)
-    similarInterestLabel.textColor = UIColor(named: "firstGradientColor")!.withAlphaComponent(0.6)
+    similarInterestLabel.textColor = UIColor.firstGradientColor.withAlphaComponent(0.6)
     similarInterestLabel.text = "0 Similar"
   }
   
@@ -113,7 +113,7 @@ class UserView: UIView, UserViewProtocol {
   
   private func setupInfoViewContainer() {
     infoViewContainer = UIView()
-    infoViewContainer.backgroundColor = UIColor(named: "peopleBG") ?? .black
+    infoViewContainer.backgroundColor = UIColor.peopleViewControllerBackground
     infoViewContainer.layer.cornerRadius = Constants.infoViewCornerRadius
   }
   

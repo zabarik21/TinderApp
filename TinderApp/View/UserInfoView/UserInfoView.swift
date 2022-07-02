@@ -68,8 +68,8 @@ class UserInfoView: UIView {
     cityLabel = UILabel()
     nameAgeLabel.font = .systemFont(ofSize: 24, weight: .bold)
     cityLabel.font = .systemFont(ofSize: 12, weight: .bold)
-    nameAgeLabel.textColor = UIColor(named: "cardLabelTextColor") ?? .white
-    cityLabel.textColor = UIColor(named: "cardLabelTextColor") ?? .black
+    nameAgeLabel.textColor = UIColor.cardLabelTextColor
+    cityLabel.textColor = UIColor.cardLabelTextColor
     
     labelsStackView = UIStackView(arrangedSubviews: [nameAgeLabel, cityLabel])
     labelsStackView.axis = .vertical

@@ -37,8 +37,8 @@ class ReactionButtonsView: UIView {
   private func setupGradientLayer() {
     let gradientLayer = CAGradientLayer()
     gradientLayer.colors = [
-        UIColor(named: "firstGradientColor")!.cgColor,
-        UIColor(named: "secondGradientColor")!.cgColor
+        UIColor.firstGradientColor.cgColor,
+        UIColor.secondGradientColor.cgColor
     ]
     gradientLayer.locations = [0.0, 1.0]
     gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
@@ -65,7 +65,7 @@ class ReactionButtonsView: UIView {
     dislikeButton.setImage(dislikeImage, for: .normal)
     
     likeButton.tintColor = .white
-    dislikeButton.tintColor = UIColor(named: "firstGradientColor")!
+    dislikeButton.tintColor = UIColor.firstGradientColor
     
     setupShadow(likeButton.layer)
     setupShadow(dislikeButton.layer)

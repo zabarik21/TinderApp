@@ -17,26 +17,15 @@ enum CardContainerConstants {
   static var maximizedCardHeightDelta: CGFloat = -4
 }
 
-class CardContainerView: UIView {
+
+class CardContainerView: UIView, CardContainerViewProtocol {
   
   var viewModel: CardContainerViewViewModelProtocol?
   weak var delegate: CardContainerDelagate?
   
   var backCardContainer: UIView!
-  var bottomCardView: CardView!
-  var topCardView: CardView!
-  
-  var bottomCardTopAnchorConstraint: NSLayoutConstraint!
-  var bottomCardLeadingAnchorConstraint: NSLayoutConstraint!
-  var bottomCardTrailingAnchorConstraint: NSLayoutConstraint!
-  var bottomCardBottomAnchorConstraint: NSLayoutConstraint!
-  var bottomCardHeightConstraint: NSLayoutConstraint!
-  
-  var topCardTopAnchorConstraint: NSLayoutConstraint!
-  var topCardLeadingAnchorConstraint: NSLayoutConstraint!
-  var topCardTrailingAnchorConstraint: NSLayoutConstraint!
-  var topCardBottomAnchorConstraint: NSLayoutConstraint!
-  var topCardHeightConstraint: NSLayoutConstraint!
+  var bottomCardView: CardViewProtocol!
+  var topCardView: CardViewProtocol!
   
   var topCardTurn: Bool = true
   
@@ -45,57 +34,21 @@ class CardContainerView: UIView {
     setupElements()
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    setupConstraints()
+  }
   
   private func setupElements() {
     backgroundColor = .clear
     topCardView = CardView(with: viewModel?.nextCard())
     bottomCardView = CardView(with: viewModel?.nextCard())
-    setupConstraints()
     
     topCardView.delegate = self
     bottomCardView.delegate = self
   }
   
-  private func setupConstraints() {
-    
-    addSubview(bottomCardView)
-    addSubview(topCardView)
-    
-    bottomCardView.translatesAutoresizingMaskIntoConstraints = false
-    topCardView.translatesAutoresizingMaskIntoConstraints = false
-    
-    bottomCardTopAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: CardContainerConstants.topAnchorCardOffset)
-    bottomCardBottomAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: CardContainerConstants.bottomCardOffset)
-    bottomCardLeadingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: CardContainerConstants.horizontalCardOffset * self.bounds.width)
-    bottomCardTrailingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -CardContainerConstants.horizontalCardOffset * self.bounds.width)
-    bottomCardHeightConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.bounds.height * CardContainerConstants.minimizedCardHeightDelta)
-    
-    topCardTopAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)
-    topCardBottomAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
-    topCardLeadingAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0)
-    topCardTrailingAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0)
-    topCardHeightConstraint = NSLayoutConstraint(item: topCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.bounds.height * CardContainerConstants.maximizedCardHeightDelta)
-    
-    
-    
-    NSLayoutConstraint.activate([
-      bottomCardTopAnchorConstraint,
-      bottomCardBottomAnchorConstraint,
-      bottomCardLeadingAnchorConstraint,
-      bottomCardTrailingAnchorConstraint,
-      bottomCardHeightConstraint,
-      
-      topCardTopAnchorConstraint,
-      topCardLeadingAnchorConstraint,
-      topCardTrailingAnchorConstraint,
-      topCardBottomAnchorConstraint,
-      topCardHeightConstraint
-    ])
-  }
-  
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    print(#function)
-    // fix unwrap
     if topCardTurn {
       delegate?.cardTouched(with: topCardView.viewModel)
     }
@@ -110,87 +63,31 @@ class CardContainerView: UIView {
 }
 
 
-extension CardContainerView: CardViewDeleagate {
-  
-  func swiped(liked: Bool) {
-    updateCardConstraints()
-    swapViews()
-    updateCurrentBottomCard()
-  }
-  
-  func updateCurrentBottomCard() {
-    if let cardViewModel = viewModel?.nextCard() {
-      if topCardTurn {
-        topCardView.viewModel = cardViewModel
-      }
-      else {
-        bottomCardView.viewModel = cardViewModel
-      }
-    } else {
-      // alert on cardContainer that users are ended
-    }
-  }
-  
-  func updateCardConstraints() {
-    bottomCardBottomAnchorConstraint.isActive = false
-    topCardBottomAnchorConstraint.isActive = false
-    if topCardTurn {
-      bottomCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.maximizedCardHeightDelta
-      bottomCardTopAnchorConstraint.constant = 0
-      bottomCardLeadingAnchorConstraint.constant = 0
-      bottomCardTrailingAnchorConstraint.constant = 0
-      
-      topCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.minimizedCardHeightDelta
-      topCardLeadingAnchorConstraint.constant = CardContainerConstants.horizontalCardOffset
-      topCardTrailingAnchorConstraint.constant = -CardContainerConstants.horizontalCardOffset
-      topCardTopAnchorConstraint.constant = CardContainerConstants.topAnchorCardOffset
-      
-    } else {
-      topCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.maximizedCardHeightDelta
-      topCardTopAnchorConstraint.constant = 0
-      topCardLeadingAnchorConstraint.constant = 0
-      topCardTrailingAnchorConstraint.constant = 0
-      
-      bottomCardHeightConstraint.constant = self.bounds.height + CardContainerConstants.minimizedCardHeightDelta
-      bottomCardTopAnchorConstraint.constant = CardContainerConstants.topAnchorCardOffset
-      bottomCardLeadingAnchorConstraint.constant = CardContainerConstants.horizontalCardOffset
-      bottomCardTrailingAnchorConstraint.constant = -CardContainerConstants.horizontalCardOffset
-    }
-
-    UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
-      self.layoutIfNeeded()
-    }
-  }
-  
-  func swapViews() {
-    DispatchQueue.main.async {
-      let currentTopCard = self.topCardTurn ? self.bottomCardView! : self.topCardView!
-      let currentBottomCard = self.topCardTurn ? self.topCardView! : self.bottomCardView!
-      currentBottomCard.isUserInteractionEnabled = false
-      currentTopCard.isUserInteractionEnabled = true
-      currentTopCard.layer.zPosition = 1
-      currentBottomCard.layer.zPosition = 0
-      UIView.animate(withDuration: CardContainerConstants.cardAppearTime) {
-        currentBottomCard.alpha = 1
-      }
-      self.topCardTurn.toggle()
-    }
-  }
-}
 
 
-extension CardContainerView: ReactionViewDelegate {
-  
-  func reacted(liked: Bool) {
-    if topCardTurn {
-      guard topCardView.isSwipeble != false else { return }
-      topCardView.swipe(liked: liked, fromButton: true)
-      // send reaction request
-    } else {
-      guard bottomCardView.isSwipeble != false else { return }
-      bottomCardView.swipe(liked: liked, fromButton: true)
-      // send reaction request
+
+
+// MARK: - Setup constraints
+extension CardContainerView {
+  private func setupConstraints() {
+    
+    addSubview(bottomCardView)
+    addSubview(topCardView)
+    
+    bottomCardView.snp.makeConstraints { make in
+      make.top.equalToSuperview().offset(CardContainerConstants.topAnchorCardOffset)
+      make.bottom.equalToSuperview().offset(CardContainerConstants.bottomCardOffset)
+      make.leading.equalToSuperview().offset(CardContainerConstants.horizontalCardOffset * self.bounds.width)
+      make.trailing.equalToSuperview().offset(-CardContainerConstants.horizontalCardOffset * self.bounds.width)
     }
+    
+    topCardView.snp.makeConstraints { make in
+      make.top.equalToSuperview()
+      make.bottom.equalToSuperview()
+      make.leading.equalToSuperview()
+      make.trailing.equalToSuperview()
+      make.height.equalTo(self.bounds.height * CardContainerConstants.maximizedCardHeightDelta)
+    }
+    
   }
-  
 }

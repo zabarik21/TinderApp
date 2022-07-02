@@ -20,7 +20,7 @@ extension MainTabBarController {
     setupVCTabBar(viewController: messagesVC, title: "Messages", image: messagesTabBarImage)
     setupVCTabBar(viewController: profileVC, title: "Profile", image: profileTabBarImage)
     
-    tabBar.tintColor = UIColor(named: "selectedBarItemColor")!
+    tabBar.tintColor = UIColor.barItemColor
     tabBar.backgroundColor = .clear
     tabBar.itemPositioning = .centered
     viewControllers = [
