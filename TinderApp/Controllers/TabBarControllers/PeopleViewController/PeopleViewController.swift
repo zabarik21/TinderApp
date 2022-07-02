@@ -37,7 +37,6 @@ class PeopleViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     actualizePath()
-    self.tabBarController?.setTabBarHidden(true, animated: true, duration: 1)
   }
   
   private func setupElements() {

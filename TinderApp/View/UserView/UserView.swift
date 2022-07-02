@@ -24,7 +24,6 @@ class UserView: UIView, UserViewProtocol {
   private var interestsLabelsStackView: UIStackView!
   private var reactionView: ReactionButtonsView!
   private var userInfoView: UserInfoView!
-  // must set deleagte in peoplevc
   weak var userViewDelegate: UserViewDelegate?
   weak var reactionsDelegate: ReactionViewDelegate?
   var viewModel: UserCardViewViewModelProtocol? {
