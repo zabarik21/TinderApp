@@ -8,12 +8,10 @@
 import Foundation
 
 
-
-
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     
   var users: [UserCardViewViewModelProtocol]
-  var delegate: CardContainerDelagate?
+  weak var delegate: CardContainerViewViewModelDelegate?
   
   func nextCard() -> UserCardViewViewModelProtocol? {
     if users.count < 5 {

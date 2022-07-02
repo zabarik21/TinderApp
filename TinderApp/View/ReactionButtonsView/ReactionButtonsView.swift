@@ -34,21 +34,31 @@ class ReactionButtonsView: UIView {
     
   }
   
-  private func setupGradientLayer() {
-    let gradientLayer = CAGradientLayer()
-    gradientLayer.colors = [
-        UIColor.firstGradientColor.cgColor,
-        UIColor.secondGradientColor.cgColor
-    ]
-    gradientLayer.locations = [0.0, 1.0]
-    gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-    gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-    
-    gradientLayer.frame = dislikeButton.frame
-    gradientLayer.cornerRadius = frame.height / 2
-    
-    likeButton.layer.insertSublayer(gradientLayer, at: 0)
+  @objc func touchDown(_ sender: UIButton) {
+    UIView.animate(withDuration: 0.3) {
+      sender.layer.shadowOpacity = 0
+    }
   }
+  
+  @objc func touchUpInside(_ sender: UIButton) {
+    if sender === likeButton {
+      delegate?.reacted(liked: true)
+    } else {
+      delegate?.reacted(liked: false)
+    }
+    UIView.animate(withDuration: 0.3) {
+      sender.layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
+    }
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+}
+
+// MARK: - Setup Elements & Constraints
+extension ReactionButtonsView {
   
   private func setupElements() {
     likeButton = UIButton(type: .system)
@@ -81,22 +91,27 @@ class ReactionButtonsView: UIView {
     setupConstraints()
   }
   
-  @objc func touchDown(_ sender: UIButton) {
-    UIView.animate(withDuration: 0.3) {
-      sender.layer.shadowOpacity = 0
-    }
+  private func setupShadow(_ layer: CALayer) {
+    layer.shadowColor = UIColor.black.cgColor
+    layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
+    layer.shadowOffset = CGSize(width: 0, height: 2)
+    layer.shadowRadius = ReactionButtonsViewConstants.shadowBlur
   }
   
-  @objc func touchUpInside(_ sender: UIButton) {
-    if sender === likeButton {
-      delegate?.reacted(liked: true)
-    } else {
-      delegate?.reacted(liked: false)
-    }
-    UIView.animate(withDuration: 0.3) {
-      sender.layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
-    }
+  private func setupGradientLayer() {
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.colors = [
+        UIColor.firstGradientColor.cgColor,
+        UIColor.secondGradientColor.cgColor
+    ]
+    gradientLayer.locations = [0.0, 1.0]
+    gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+    gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
     
+    gradientLayer.frame = dislikeButton.frame
+    gradientLayer.cornerRadius = frame.height / 2
+    
+    likeButton.layer.insertSublayer(gradientLayer, at: 0)
   }
   
   private func setupConstraints() {
@@ -114,16 +129,4 @@ class ReactionButtonsView: UIView {
       make.width.height.equalTo(self.snp.height)
     }
   }
-  
-  private func setupShadow(_ layer: CALayer) {
-    layer.shadowColor = UIColor.black.cgColor
-    layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
-    layer.shadowOffset = CGSize(width: 0, height: 2)
-    layer.shadowRadius = ReactionButtonsViewConstants.shadowBlur
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
 }

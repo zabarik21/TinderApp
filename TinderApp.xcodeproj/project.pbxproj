@@ -26,6 +26,10 @@
 		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
 		7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E89BF286B7AF100732985 /* Interestlabel.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
+		7B7F817F2870C86B00223A37 /* CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F817E2870C86A00223A37 /* CardContainerViewViewModelDelegate.swift */; };
+		7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */; };
+		7B7F81832870D04000223A37 /* UsersInfoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */; };
+		7B7F81852870D07000223A37 /* UsersInfoViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81842870D07000223A37 /* UsersInfoViewViewModelProtocol.swift */; };
 		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
 		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
 		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
@@ -98,6 +102,10 @@
 		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
 		7B5E89BF286B7AF100732985 /* Interestlabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interestlabel.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
+		7B7F817E2870C86A00223A37 /* CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelDelegate.swift; sourceTree = "<group>"; };
+		7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerViewViewModelDelegate.swift"; sourceTree = "<group>"; };
+		7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfoViewViewModel.swift; sourceTree = "<group>"; };
+		7B7F81842870D07000223A37 /* UsersInfoViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfoViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
 		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
 		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
@@ -172,6 +180,7 @@
 				7B2907DE286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift */,
 				7B2907E0286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift */,
 				7B5BFDC82870519B00F070F7 /* PVC + UserViewDelegate.swift */,
+				7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */,
 			);
 			path = PeopleViewController;
 			sourceTree = "<group>";
@@ -235,13 +244,6 @@
 			path = CardView;
 			sourceTree = "<group>";
 		};
-		7B9FCBAE286772E20031518D /* ModalViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ModalViewControllers;
-			sourceTree = "<group>";
-		};
 		7BA467EA286D91C2001016E1 /* UserInfoView */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +277,7 @@
 				7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */,
 				7B93C06328511860002B0A00 /* ReactionViewDelegate.swift */,
 				7B5BFDC62870515800F070F7 /* UserViewDelegate.swift */,
+				7B7F817E2870C86A00223A37 /* CardContainerViewViewModelDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			children = (
 				7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */,
 				7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */,
+				7B7F81842870D07000223A37 /* UsersInfoViewViewModelProtocol.swift */,
 			);
 			path = ViewModelProtocol;
 			sourceTree = "<group>";
@@ -366,7 +370,6 @@
 		7BED5ED8284111BF0081E71E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7B9FCBAE286772E20031518D /* ModalViewControllers */,
 				7B478C412844EEE700AB653E /* MainTabBarController */,
 				7BED5EE628411FCB0081E71E /* TabBarControllers */,
 			);
@@ -378,6 +381,7 @@
 			children = (
 				7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */,
 				7B846C76284679370013AA22 /* ContainerViewViewModel.swift */,
+				7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -643,6 +647,7 @@
 				7B9FCBAD28676EE10031518D /* Interests.swift in Sources */,
 				7BB2FED62870B68700A2731E /* CardContainerView + CardViewDelegate.swift in Sources */,
 				7B5BFDCE2870553F00F070F7 /* UserView + ReactionsDelegate.swift in Sources */,
+				7B7F81852870D07000223A37 /* UsersInfoViewViewModelProtocol.swift in Sources */,
 				7BEBD960284A8A9200C3DF30 /* CardContainerDelegate.swift in Sources */,
 				7BED5EE528411F050081E71E /* ProfileViewController.swift in Sources */,
 				7BED5EE0284114720081E71E /* MessagerViewController.swift in Sources */,
@@ -656,6 +661,7 @@
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7BA467ED286D9221001016E1 /* UserInfoView.swift in Sources */,
 				7B2907E3286ED57300CB52EB /* UserView + Gestures.swift in Sources */,
+				7B7F817F2870C86B00223A37 /* CardContainerViewViewModelDelegate.swift in Sources */,
 				7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
@@ -664,8 +670,10 @@
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
 				7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */,
+				7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */,
 				7B5BFDC92870519B00F070F7 /* PVC + UserViewDelegate.swift in Sources */,
 				7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */,
+				7B7F81832870D04000223A37 /* UsersInfoViewViewModel.swift in Sources */,
 				7BB2FEDA2870B6E900A2731E /* CardContainerViewProtocol.swift in Sources */,
 				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
 				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,

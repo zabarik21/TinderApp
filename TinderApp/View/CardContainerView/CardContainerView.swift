@@ -39,15 +39,6 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     setupConstraints()
   }
   
-  private func setupElements() {
-    backgroundColor = .clear
-    topCardView = CardView(with: viewModel?.nextCard())
-    bottomCardView = CardView(with: viewModel?.nextCard())
-    
-    topCardView.delegate = self
-    bottomCardView.delegate = self
-  }
-  
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if topCardTurn {
       delegate?.cardTouched(with: topCardView.viewModel)
@@ -69,6 +60,16 @@ class CardContainerView: UIView, CardContainerViewProtocol {
 
 // MARK: - Setup constraints
 extension CardContainerView {
+  
+  private func setupElements() {
+    backgroundColor = .clear
+    topCardView = CardView(with: viewModel?.nextCard())
+    bottomCardView = CardView(with: viewModel?.nextCard())
+    
+    topCardView.delegate = self
+    bottomCardView.delegate = self
+  }
+  
   private func setupConstraints() {
     
     addSubview(bottomCardView)

@@ -12,6 +12,7 @@ enum Constants {
   static var infoViewCornerRadius: CGFloat = 30
   static var horizontalPaddingMultiplier: CGFloat = 0.064
   static var horizontalReactiovViewPaddingMultiplier: CGFloat = 0.24
+  static var viewDissappearTime: TimeInterval = 0.3
 }
 
 class UserView: UIView, UserViewProtocol {
@@ -24,6 +25,7 @@ class UserView: UIView, UserViewProtocol {
   private var interestsLabelsStackView: UIStackView!
   private var reactionView: ReactionButtonsView!
   private var userInfoView: UserInfoView!
+  
   weak var userViewDelegate: UserViewDelegate?
   weak var reactionsDelegate: ReactionViewDelegate?
   var viewModel: UserCardViewViewModelProtocol? {
@@ -51,6 +53,63 @@ class UserView: UIView, UserViewProtocol {
     viewHieght = self.bounds.height
   }
   
+  func fillUI() {
+    if let viewModel = viewModel {
+      let url = URL(string: viewModel.imageUrlString)
+      DispatchQueue.main.async {
+        self.userImageView.kf.setImage(with: url,
+                                  options: [
+                                    .transition(.fade(0.2))
+                                  ])
+        self.similarInterestLabel.text = "\(viewModel.interests.count) Similar"
+        self.userInfoView.viewModel = viewModel.userInfoViewViewModel
+      }
+      updateInterestsView()
+    } else {
+      DispatchQueue.main.async {
+        self.userImageView.image = .userPlaceholderImage
+        self.userInfoView.viewModel = nil
+      }
+    }
+  }
+  
+  func hide() {
+    UIView.animate(withDuration: Constants.viewDissappearTime, delay: 0, options: .curveEaseOut) {
+      self.center.y = self.viewHieght * 2
+      self.alpha = 0
+    } completion: { _ in
+      self.userViewDelegate?.hided()
+      self.isHidden = true
+    }
+  }
+  
+  func show() {
+    UIView.animate(withDuration: Constants.viewDissappearTime) {
+      self.center.y = self.viewHieght / 2
+      self.alpha = 1
+    }
+    self.isHidden = false
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+// MARK: - Setup Elements & Constraints
+extension UserView {
+  
+  private func setupElements() {
+    setupUserImageView()
+    setupInfoViewContainer()
+    setupLabels()
+    setupReactionView()
+    setupUserInfoView()
+    setupInterestView()
+    fillUI()
+    self.backgroundColor = .brown
+  }
+  
   private func updateInterestsView() {
     let label = Interestlabel()
     label.textColor = .firstGradientColor
@@ -66,17 +125,6 @@ class UserView: UIView, UserViewProtocol {
       make.leading.equalToSuperview().offset(5)
       make.centerY.equalToSuperview()
     }
-  }
-  
-  private func setupElements() {
-    setupUserImageView()
-    setupInfoViewContainer()
-    setupLabels()
-    setupReactionView()
-    setupUserInfoView()
-    setupInterestView()
-    fillUI()
-    self.backgroundColor = .brown
   }
   
   private func setupUserInfoView() {
@@ -165,30 +213,6 @@ class UserView: UIView, UserViewProtocol {
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalReactiovViewPaddingMultiplier * self.bounds.width)
       make.height.equalTo(75)
     }
-  }
-  
-  func fillUI() {
-    if let viewModel = viewModel {
-      let url = URL(string: viewModel.imageUrlString)
-      DispatchQueue.main.async {
-        self.userImageView.kf.setImage(with: url,
-                                  options: [
-                                    .transition(.fade(0.2))
-                                  ])
-        self.similarInterestLabel.text = "\(viewModel.interests.count) Similar"
-        self.userInfoView.viewModel = viewModel.userInfoViewViewModel
-      }
-      updateInterestsView()
-    } else {
-      DispatchQueue.main.async {
-        self.userImageView.image = .userPlaceholderImage
-        self.userInfoView.viewModel = nil
-      }
-    }
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 }
 

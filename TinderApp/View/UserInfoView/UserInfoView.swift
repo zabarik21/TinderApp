@@ -9,17 +9,7 @@ import Foundation
 import UIKit
 
 
-protocol UsersInfoViewViewModelProtocol {
-  var nameAgeText: String { get }
-  var cityText: String { get }
-  var compatabilityScore: Int { get }
-}
 
-struct UsersInfoViewViewModel: UsersInfoViewViewModelProtocol {
-  var nameAgeText: String
-  var cityText: String
-  var compatabilityScore: Int
-}
 
 class UserInfoView: UIView {
   
@@ -46,6 +36,35 @@ class UserInfoView: UIView {
     setupElements()
     unfillUI()
   }
+  
+  private func fillUI() {
+    DispatchQueue.main.async {
+      if let viewModel = self.viewModel {
+        self.compatabilityView.compatability = viewModel.compatabilityScore
+        self.nameAgeLabel.text = viewModel.nameAgeText
+        self.cityLabel.text = viewModel.cityText
+        self.unfilled = false
+      } else {
+        self.unfillUI()
+      }
+    }
+  }
+  
+  private func unfillUI() {
+    unfilled = true
+    self.nameAgeLabel.text = "Your future frend"
+    self.cityLabel.text = "Nearby"
+    self.compatabilityView.compatability = 10
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+}
+
+// MARK: - Setup Constraints & Elements
+extension UserInfoView {
   
   private func setupElements() {
     setupCompatabilityView()
@@ -92,29 +111,4 @@ class UserInfoView: UIView {
       make.top.equalToSuperview()
     }
   }
-  
-  private func fillUI() {
-    DispatchQueue.main.async {
-      if let viewModel = self.viewModel {
-        self.compatabilityView.compatability = viewModel.compatabilityScore
-        self.nameAgeLabel.text = viewModel.nameAgeText
-        self.cityLabel.text = viewModel.cityText
-        self.unfilled = false
-      } else {
-        self.unfillUI()
-      }
-    }
-  }
-  
-  private func unfillUI() {
-    unfilled = true
-    self.nameAgeLabel.text = "Your future frend"
-    self.cityLabel.text = "Nearby"
-    self.compatabilityView.compatability = 10
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
 }

@@ -10,7 +10,7 @@ import Foundation
 
 protocol CardContainerViewViewModelProtocol {
   var users: [UserCardViewViewModelProtocol] { get set }
-  var delegate: CardContainerDelagate? { get set }
+  var delegate: CardContainerViewViewModelDelegate? { get set }
   
   func nextCard() -> UserCardViewViewModelProtocol?
 }

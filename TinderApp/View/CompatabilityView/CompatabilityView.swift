@@ -35,30 +35,6 @@ class CompatabilityView: UIView {
     self.setupElements()
   }
   
-  private func setupElements() {
-    setupLabel()
-    setupScoreLayer()
-  }
-  
-  private func setupScoreLayer() {
-    scoreLayer.lineWidth = CompatabilityViewConstants.strokeWidth
-    scoreLayer.fillColor = UIColor.clear.cgColor
-    layer.addSublayer(scoreLayer)
-  }
-  
-  private func setupLabel() {
-    scoreLabel = UILabel()
-    scoreLabel.font = .systemFont(ofSize: 14)
-    scoreLabel.textColor = UIColor.cardLabelTextColor
-    scoreLabel.textAlignment = .center
-    
-    addSubview(scoreLabel)
-    
-    scoreLabel.snp.makeConstraints { make in
-      make.center.equalToSuperview()
-    }
-  }
-  
   private func updateScore() {
     var strokeColor: CGColor {
       switch compatability {
@@ -97,4 +73,31 @@ class CompatabilityView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+}
+
+// MARK: - Setup Elements
+extension CompatabilityView {
+  private func setupElements() {
+    setupLabel()
+    setupScoreLayer()
+  }
+  
+  private func setupScoreLayer() {
+    scoreLayer.lineWidth = CompatabilityViewConstants.strokeWidth
+    scoreLayer.fillColor = UIColor.clear.cgColor
+    layer.addSublayer(scoreLayer)
+  }
+  
+  private func setupLabel() {
+    scoreLabel = UILabel()
+    scoreLabel.font = .systemFont(ofSize: 14)
+    scoreLabel.textColor = UIColor.cardLabelTextColor
+    scoreLabel.textAlignment = .center
+    
+    addSubview(scoreLabel)
+    
+    scoreLabel.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
+  }
 }

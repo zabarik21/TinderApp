@@ -9,7 +9,6 @@ import Foundation
 
 
 protocol CardContainerDelagate: AnyObject {
-  func usersLoaded()
   func cardTouched(with viewModel: UserCardViewViewModelProtocol?)
 }
 

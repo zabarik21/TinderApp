@@ -45,27 +45,10 @@ extension UserView: UIGestureRecognizerDelegate {
     if velocity > 1000 || frame.minY > (self.viewHieght / 3) {
       hide()
     } else {
-      UIView.animate(withDuration: 0.3) {
+      UIView.animate(withDuration: Constants.viewDissappearTime) {
         self.center.y = self.viewHieght / 2
       }
     }
   }
   
-  func hide() {
-    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
-      self.center.y = self.viewHieght * 2
-      self.alpha = 0
-    } completion: { _ in
-      self.userViewDelegate?.hided()
-      self.isHidden = true
-    }
-  }
-  
-  func show() {
-    UIView.animate(withDuration: 0.3) {
-      self.center.y = self.viewHieght / 2
-      self.alpha = 1
-    }
-    self.isHidden = false
-  }
 }

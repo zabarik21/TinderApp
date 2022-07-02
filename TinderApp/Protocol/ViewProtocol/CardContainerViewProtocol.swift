@@ -14,4 +14,5 @@ protocol CardContainerViewProtocol: UIView {
   var topCardView: CardViewProtocol! { get set }
   
   func reacted(liked: Bool)
+  func fillCards()
 }

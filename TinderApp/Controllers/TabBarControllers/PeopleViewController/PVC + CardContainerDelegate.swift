@@ -15,8 +15,4 @@ extension PeopleViewController: CardContainerDelagate {
     userView.show()
   }
   
-  func usersLoaded() {
-    cardContainer.topCardView.viewModel = cardContainer.viewModel?.nextCard()
-    cardContainer.bottomCardView.viewModel = cardContainer.viewModel?.nextCard()
-  }
 }

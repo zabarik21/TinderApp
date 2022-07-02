@@ -15,6 +15,11 @@ extension CardContainerView: CardViewDeleagate {
     updateCurrentBottomCard()
   }
   
+  func fillCards() {
+    topCardView.viewModel = viewModel?.nextCard()
+    bottomCardView.viewModel = viewModel?.nextCard()
+  }
+  
   func updateCurrentBottomCard() {
     let cardViewModel = viewModel?.nextCard()
     if topCardTurn {

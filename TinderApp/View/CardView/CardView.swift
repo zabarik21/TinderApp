@@ -89,7 +89,7 @@ class CardView: UIView, CardViewProtocol {
                                   .transition(.fade(0.2)),
                                  ]) { result in
                                    switch result {
-                                   case .success(let value):
+                                   case .success( _):
                                      break
                                    case .failure(_): break
                                    }
@@ -102,31 +102,19 @@ class CardView: UIView, CardViewProtocol {
     }
   }
   
-  private func setupConstraints() {
-    addSubview(profileImage)
-    profileImage.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
-    }
-    
-    addSubview(blurView)
-    blurView.snp.makeConstraints { make in
-      make.leading.bottom.trailing.equalToSuperview()
-      make.height.equalToSuperview().multipliedBy(0.185)
-    }
-    
-    blurView.contentView.addSubview(userInfoView)
-    userInfoView.snp.makeConstraints { make in
-      make.horizontalEdges.equalToSuperview().inset(24)
-      make.height.equalTo(60)
-      make.centerY.equalToSuperview()
-    }
-    
-    addSubview(hiddenTopReactionView)
-    hiddenTopReactionView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
-    }
+  
+  
+  
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
+}
+
+
+// MARK: - Setup Elements & Constraints
+extension CardView {
   private func setupElements() {
     self.backgroundColor = .randomColor()
     clipsToBounds = true
@@ -156,8 +144,28 @@ class CardView: UIView, CardViewProtocol {
     profileImage.contentMode = .scaleAspectFill
   }
   
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+  private func setupConstraints() {
+    addSubview(profileImage)
+    profileImage.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+    
+    addSubview(blurView)
+    blurView.snp.makeConstraints { make in
+      make.leading.bottom.trailing.equalToSuperview()
+      make.height.equalToSuperview().multipliedBy(0.185)
+    }
+    
+    blurView.contentView.addSubview(userInfoView)
+    userInfoView.snp.makeConstraints { make in
+      make.horizontalEdges.equalToSuperview().inset(24)
+      make.height.equalTo(60)
+      make.centerY.equalToSuperview()
+    }
+    
+    addSubview(hiddenTopReactionView)
+    hiddenTopReactionView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
   }
-  
 }

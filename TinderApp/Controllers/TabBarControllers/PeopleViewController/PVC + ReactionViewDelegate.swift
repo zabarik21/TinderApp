@@ -9,9 +9,6 @@ import UIKit
 
 extension PeopleViewController: ReactionViewDelegate {
   func reacted(liked: Bool) {
-    if userView.isHidden == false {
-      userView.hide()
-    }
     cardContainer.reacted(liked: liked)
   }
 }
