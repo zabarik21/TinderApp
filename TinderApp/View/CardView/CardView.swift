@@ -78,28 +78,28 @@ class CardView: UIView {
   }
 
   private func fillUI() {
-    if let viewModel = viewModel {
-      isSwipeble = true
-      guard let url = URL(string: viewModel.imageUrlString) else { return }
-      userInfoView.viewModel = viewModel.userInfoViewViewModel
-      profileImage.kf.setImage(with: url,
-                               options: [
-                                .transition(.fade(0.2)),
-                               ]) { result in
-                                 switch result {
-                                 case .success(let value):
-                                   print(value.cacheType)
-                                 case .failure(_): break
+    DispatchQueue.main.async {
+      if let viewModel = self.viewModel {
+        self.isSwipeble = true
+        guard let url = URL(string: viewModel.imageUrlString) else { return }
+        
+        self.userInfoView.viewModel = viewModel.userInfoViewViewModel
+        self.profileImage.kf.setImage(with: url,
+                                 options: [
+                                  .transition(.fade(0.2)),
+                                 ]) { result in
+                                   switch result {
+                                   case .success(let value):
+                                     print(value.cacheType)
+                                   case .failure(_): break
+                                   }
                                  }
-                               }
-    } else {
-      isSwipeble = false
-      userInfoView.viewModel = nil
-      let factor = Int.random(in: 0...1)
-      let imgName = "user\(factor)"
-      profileImage.image = UIImage(named: imgName)
+      } else {
+        self.isSwipeble = false
+        self.userInfoView.viewModel = nil
+        self.profileImage.image = .userPlaceholderImage
+      }
     }
-    
   }
   
   private func setupConstraints() {

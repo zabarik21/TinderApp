@@ -24,8 +24,8 @@ class UserView: UIView, UserViewProtocol {
   private var interestsLabelsStackView: UIStackView!
   private var reactionView: ReactionButtonsView!
   private var userInfoView: UserInfoView!
-  private var placeholderImage = UIImage(named: "person.fill")
   // must set deleagte in peoplevc
+  weak var userViewDelegate: UserViewDelegate?
   weak var reactionsDelegate: ReactionViewDelegate?
   var viewModel: UserCardViewViewModelProtocol? {
     didSet {
@@ -93,7 +93,7 @@ class UserView: UIView, UserViewProtocol {
   
   private func setupReactionView() {
     reactionView = ReactionButtonsView()
-    reactionView.delegate = reactionsDelegate
+    reactionView.delegate = self
   }
   
   private func setupLabels() {
@@ -171,19 +171,20 @@ class UserView: UIView, UserViewProtocol {
   func fillUI() {
     if let viewModel = viewModel {
       let url = URL(string: viewModel.imageUrlString)
-      userImageView.kf.setImage(with: url,
-                                placeholder: placeholderImage,
-                                options: [
-                                  .transition(.fade(0.2))
-                                ])
-      similarInterestLabel.text = "\(viewModel.interests.count) Similar"
-      userInfoView.viewModel = viewModel.userInfoViewViewModel
+      DispatchQueue.main.async {
+        self.userImageView.kf.setImage(with: url,
+                                  options: [
+                                    .transition(.fade(0.2))
+                                  ])
+        self.similarInterestLabel.text = "\(viewModel.interests.count) Similar"
+        self.userInfoView.viewModel = viewModel.userInfoViewViewModel
+      }
       updateInterestsView()
     } else {
-      userInfoView.viewModel = nil
-      let factor = Int.random(in: 0...1)
-      let imgName = "user\(factor)"
-      userImageView.image = UIImage(named: imgName)
+      DispatchQueue.main.async {
+        self.userImageView.image = .userPlaceholderImage
+        self.userInfoView.viewModel = nil
+      }
     }
   }
   

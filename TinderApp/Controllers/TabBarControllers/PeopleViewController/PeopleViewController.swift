@@ -50,6 +50,7 @@ class PeopleViewController: UIViewController {
   
   private func setupUserView() {
     userView = UserView()
+    userView.userViewDelegate = self
     userView.reactionsDelegate = self
     userView.alpha = 0
   }

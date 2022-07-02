@@ -66,8 +66,8 @@ class CardContainerView: UIView {
     
     bottomCardTopAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: CardContainerConstants.topAnchorCardOffset)
     bottomCardBottomAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: CardContainerConstants.bottomCardOffset)
-    bottomCardLeadingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: CardContainerConstants.horizontalCardOffset)
-    bottomCardTrailingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -CardContainerConstants.horizontalCardOffset)
+    bottomCardLeadingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: CardContainerConstants.horizontalCardOffset * self.bounds.width)
+    bottomCardTrailingAnchorConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -CardContainerConstants.horizontalCardOffset * self.bounds.width)
     bottomCardHeightConstraint = NSLayoutConstraint(item: bottomCardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.bounds.height * CardContainerConstants.minimizedCardHeightDelta)
     
     topCardTopAnchorConstraint = NSLayoutConstraint(item: topCardView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0)

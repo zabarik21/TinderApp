@@ -94,13 +94,15 @@ class UserInfoView: UIView {
   }
   
   private func fillUI() {
-    if let viewModel = viewModel {
-      compatabilityView.compatability = viewModel.compatabilityScore
-      nameAgeLabel.text = viewModel.nameAgeText
-      cityLabel.text = viewModel.cityText
-      unfilled = false
-    } else {
-      unfillUI()
+    DispatchQueue.main.async {
+      if let viewModel = self.viewModel {
+        self.compatabilityView.compatability = viewModel.compatabilityScore
+        self.nameAgeLabel.text = viewModel.nameAgeText
+        self.cityLabel.text = viewModel.cityText
+        self.unfilled = false
+      } else {
+        self.unfillUI()
+      }
     }
   }
   

@@ -10,9 +10,9 @@ import UIKit
 extension PeopleViewController: CardContainerDelagate {
   
   func cardTouched(with viewModel: UserCardViewViewModelProtocol?) {
+    self.tabBarController?.setTabBarHidden(true, animated: true, duration: PeopleVCConstants.cardDisappearTime)
     userView.viewModel = viewModel
     userView.show()
-    
   }
   
   func usersLoaded() {

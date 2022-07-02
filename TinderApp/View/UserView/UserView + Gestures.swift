@@ -57,7 +57,7 @@ extension UserView: UIGestureRecognizerDelegate {
       self.center.y = self.viewHieght * 2
       self.alpha = 0
     } completion: { _ in
-      //
+      self.userViewDelegate?.hided()
     }
   }
   

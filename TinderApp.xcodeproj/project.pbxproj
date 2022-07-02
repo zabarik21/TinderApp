@@ -19,6 +19,10 @@
 		7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE62847177E00C692E0 /* Array + Shift.swift */; };
 		7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */; };
 		7B47BAEC28471A1100C692E0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B47BAEB28471A1100C692E0 /* SnapKit */; };
+		7B5BFDC72870515800F070F7 /* UserViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDC62870515800F070F7 /* UserViewDelegate.swift */; };
+		7B5BFDC92870519B00F070F7 /* PVC + UserViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDC82870519B00F070F7 /* PVC + UserViewDelegate.swift */; };
+		7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */; };
+		7B5BFDCE2870553F00F070F7 /* UserView + ReactionsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDCD2870553F00F070F7 /* UserView + ReactionsDelegate.swift */; };
 		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
 		7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E89BF286B7AF100732985 /* Interestlabel.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
@@ -82,6 +86,10 @@
 		7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7B47BAE62847177E00C692E0 /* Array + Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Shift.swift"; sourceTree = "<group>"; };
 		7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
+		7B5BFDC62870515800F070F7 /* UserViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewDelegate.swift; sourceTree = "<group>"; };
+		7B5BFDC82870519B00F070F7 /* PVC + UserViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + UserViewDelegate.swift"; sourceTree = "<group>"; };
+		7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + PlaceholderImage.swift"; sourceTree = "<group>"; };
+		7B5BFDCD2870553F00F070F7 /* UserView + ReactionsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserView + ReactionsDelegate.swift"; sourceTree = "<group>"; };
 		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
 		7B5E89BF286B7AF100732985 /* Interestlabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interestlabel.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 				7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */,
 				7B2907DE286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift */,
 				7B2907E0286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift */,
+				7B5BFDC82870519B00F070F7 /* PVC + UserViewDelegate.swift */,
 			);
 			path = PeopleViewController;
 			sourceTree = "<group>";
@@ -165,6 +174,14 @@
 				7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */,
 			);
 			path = MainTabBarController;
+			sourceTree = "<group>";
+		};
+		7B5BFDCA2870522800F070F7 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */,
+			);
+			path = UIImage;
 			sourceTree = "<group>";
 		};
 		7B5C28BB2855F8EF0001212A /* CompatabilityView */ = {
@@ -228,6 +245,7 @@
 			children = (
 				7B9FCBAF286772F50031518D /* UserView.swift */,
 				7B2907E2286ED57300CB52EB /* UserView + Gestures.swift */,
+				7B5BFDCD2870553F00F070F7 /* UserView + ReactionsDelegate.swift */,
 			);
 			path = UserView;
 			sourceTree = "<group>";
@@ -246,6 +264,7 @@
 				7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */,
 				7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */,
 				7B93C06328511860002B0A00 /* ReactionViewDelegate.swift */,
+				7B5BFDC62870515800F070F7 /* UserViewDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -378,6 +397,7 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B5BFDCA2870522800F070F7 /* UIImage */,
 				7BA8AF6328682D4500B254CC /* UIVIewController */,
 				7B795B692856542B007FAA53 /* CGFloat */,
 				7BFC9A652851ACE6009B6D8A /* Array */,
@@ -606,12 +626,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B9FCBAD28676EE10031518D /* Interests.swift in Sources */,
+				7B5BFDCE2870553F00F070F7 /* UserView + ReactionsDelegate.swift in Sources */,
 				7BEBD960284A8A9200C3DF30 /* CardContainerDelegate.swift in Sources */,
 				7BED5EE528411F050081E71E /* ProfileViewController.swift in Sources */,
 				7BED5EE0284114720081E71E /* MessagerViewController.swift in Sources */,
 				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7B9FCBB0286772F50031518D /* UserView.swift in Sources */,
+				7B5BFDC72870515800F070F7 /* UserViewDelegate.swift in Sources */,
 				7B2907DF286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7BA467ED286D9221001016E1 /* UserInfoView.swift in Sources */,
@@ -622,6 +644,8 @@
 				7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
+				7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */,
+				7B5BFDC92870519B00F070F7 /* PVC + UserViewDelegate.swift in Sources */,
 				7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */,
 				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
 				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,
