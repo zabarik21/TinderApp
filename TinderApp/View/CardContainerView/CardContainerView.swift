@@ -71,24 +71,30 @@ extension CardContainerView {
   }
   
   private func setupConstraints() {
-    
+      
     addSubview(bottomCardView)
     addSubview(topCardView)
     
     bottomCardView.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(CardContainerConstants.topAnchorCardOffset)
-      make.bottom.equalToSuperview().offset(CardContainerConstants.bottomCardOffset)
-      make.leading.equalToSuperview().offset(CardContainerConstants.horizontalCardOffset * self.bounds.width)
-      make.trailing.equalToSuperview().offset(-CardContainerConstants.horizontalCardOffset * self.bounds.width)
+      make.edges.equalToSuperview()
     }
     
     topCardView.snp.makeConstraints { make in
-      make.top.equalToSuperview()
-      make.bottom.equalToSuperview()
-      make.leading.equalToSuperview()
-      make.trailing.equalToSuperview()
-      make.height.equalTo(self.bounds.height * CardContainerConstants.maximizedCardHeightDelta)
+      make.edges.equalToSuperview()
     }
     
+//    bottomCardView.snp.makeConstraints { make in
+//      make.width.equalToSuperview().offset(-20)
+//      make.top.equalToSuperview()
+//      make.bottom.equalToSuperview()
+//      make.centerX.equalToSuperview()
+//    }
+//
+//    topCardView.snp.makeConstraints { make in
+//      make.width.equalToSuperview()
+//      make.top.equalToSuperview()
+//      make.bottom.equalToSuperview().offset(-5)
+//      make.centerX.equalToSuperview()
+//    }
   }
 }

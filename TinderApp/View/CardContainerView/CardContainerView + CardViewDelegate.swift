@@ -31,39 +31,35 @@ extension CardContainerView: CardViewDeleagate {
   }
   
   func updateCardConstraints() {
-    
-    if topCardTurn {
-      topCardView.snp.updateConstraints { make in
-        make.top.equalToSuperview().offset(CardContainerConstants.topAnchorCardOffset)
-        make.leading.equalToSuperview()
-        make.trailing.equalToSuperview()
-        make.bottom.equalToSuperview().offset(Int(CardContainerConstants.topAnchorCardOffset * 2))
+      
+      if topCardTurn {
+        
+        bottomCardView.snp.updateConstraints { make in
+          make.width.equalToSuperview()
+          make.bottom.equalToSuperview().offset(-5)
+        }
+        
+//        topCardView.snp.remakeConstraints { make in
+//          make.width.equalToSuperview().multipliedBy(0.9)
+//          make.bottom.equalToSuperview()
+//        }
+        
+      } else {
+//        topCardView.snp.remakeConstraints { make in
+//          make.width.equalToSuperview().priority(.high)
+//          make.bottom.equalToSuperview().priority(.high)
+//        }
+//        bottomCardView.snp.remakeConstraints { make in
+//          make.width.equalToSuperview().multipliedBy(0.9)
+//          make.bottom.equalToSuperview().offset(5)
+//        }
       }
-      bottomCardView.snp.makeConstraints { make in
-        make.top.equalToSuperview()
-        make.leading.equalToSuperview()
-        make.trailing.equalToSuperview()
-        make.bottom.equalToSuperview()
-      }
-    } else {
-      topCardView.snp.updateConstraints { make in
-        make.top.equalToSuperview()
-        make.leading.equalToSuperview()
-        make.trailing.equalToSuperview()
-        make.bottom.equalToSuperview()
-      }
-      bottomCardView.snp.makeConstraints { make in
-        make.top.equalToSuperview().offset(CardContainerConstants.topAnchorCardOffset)
-        make.leading.equalToSuperview()
-        make.trailing.equalToSuperview()
-        make.bottom.equalToSuperview().offset(Int(CardContainerConstants.topAnchorCardOffset * 2))
-      }
-    }
 
-    UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
-      self.layoutIfNeeded()
+//      UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
+//        self.layoutIfNeeded()
+//      }
     }
-  }
+    
   
   func swapViews() {
     DispatchQueue.main.async {

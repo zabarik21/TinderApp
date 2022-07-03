@@ -51,6 +51,7 @@ class CardView: UIView, CardViewProtocol {
   override func layoutSubviews() {
     super.layoutSubviews()
     self.startPoint = center
+    setupConstraints()
   }
   
   init() {
@@ -125,7 +126,6 @@ extension CardView {
     setupUserInfoView()
     setupHiddenTopReactionView()
     fillUI()
-    setupConstraints()
   }
   
   func setupHiddenTopReactionView() {
