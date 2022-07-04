@@ -11,6 +11,7 @@ import SnapKit
 enum ReactionButtonsViewConstants {
   static var shadowOpacity: Float = 0.3
   static var shadowBlur: CGFloat = 10
+  static var delay: TimeInterval = 0.3
 }
 
 class ReactionButtonsView: UIView {
@@ -19,6 +20,7 @@ class ReactionButtonsView: UIView {
   
   var likeButton: UIButton!
   var dislikeButton: UIButton!
+  var delayIsOn = false
   
   init() {
     super.init(frame: .zero)
@@ -41,14 +43,19 @@ class ReactionButtonsView: UIView {
   }
   
   @objc func touchUpInside(_ sender: UIButton) {
+    UIView.animate(withDuration: 0.3) {
+      sender.layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
+    }
+    guard delayIsOn != true else { return }
     if sender === likeButton {
       delegate?.reacted(liked: true)
     } else {
       delegate?.reacted(liked: false)
     }
-    UIView.animate(withDuration: 0.3) {
-      sender.layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
-    }
+    delayIsOn = true
+    DispatchQueue.main.asyncAfter(deadline: .now() + ReactionButtonsViewConstants.delay, execute: {
+      self.delayIsOn.toggle()
+    })
   }
   
   required init?(coder: NSCoder) {
