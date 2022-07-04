@@ -79,28 +79,29 @@ class CardView: UIView, CardViewProtocol {
   }
 
   private func fillUI() {
-    DispatchQueue.main.async {
       if let viewModel = self.viewModel {
         self.isSwipeble = true
         guard let url = URL(string: viewModel.imageUrlString) else { return }
-        
         self.userInfoView.viewModel = viewModel.userInfoViewViewModel
-        self.profileImage.kf.setImage(with: url,
-                                 options: [
-                                  .transition(.fade(0.2)),
-                                 ]) { result in
-                                   switch result {
-                                   case .success( _):
-                                     break
-                                   case .failure(_): break
+        DispatchQueue.main.async {
+          self.profileImage.kf.setImage(with: url,
+                                   options: [
+                                    .transition(.fade(0.2)),
+                                   ]) { result in
+                                     switch result {
+                                     case .success( _):
+                                       break
+                                     case .failure(_): break
+                                     }
                                    }
-                                 }
+        }
       } else {
         self.isSwipeble = false
         self.userInfoView.viewModel = nil
-        self.profileImage.image = .userPlaceholderImage
+        DispatchQueue.main.async {
+          self.profileImage.image = .userPlaceholderImage
+        }
       }
-    }
   }
   
   
@@ -120,7 +121,6 @@ extension CardView {
     self.backgroundColor = .randomColor()
     clipsToBounds = true
     layer.cornerRadius = 20
-    layer.borderWidth = 0.2
     layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
     setupImageView()
     setupUserInfoView()

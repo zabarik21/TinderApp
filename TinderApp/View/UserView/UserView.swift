@@ -46,11 +46,11 @@ class UserView: UIView, UserViewProtocol {
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    viewHieght = self.bounds.height
     if flag {
       setupConstraints()
       flag.toggle()
     }
-    viewHieght = self.bounds.height
   }
   
   func fillUI() {
@@ -73,23 +73,21 @@ class UserView: UIView, UserViewProtocol {
     }
   }
   
-  func hide() {
-    UIView.animate(withDuration: Constants.viewDissappearTime, delay: 0, options: .curveEaseOut) {
-      self.center.y = self.viewHieght * 2
-      self.alpha = 0
-    } completion: { _ in
-      self.userViewDelegate?.hided()
-      self.isHidden = true
-    }
-  }
-  
-  func show() {
-    UIView.animate(withDuration: Constants.viewDissappearTime) {
-      self.center.y = self.viewHieght / 2
-      self.alpha = 1
-    }
-    self.isHidden = false
-  }
+//  func hide(updateDelegate: Bool = true) {
+//    UIView.animate(withDuration: Constants.viewDissappearTime, delay: 0, options: .curveEaseOut) {
+//      self.center.y = self.viewHieght
+//      self.alpha = 0
+//    } completion: { _ in
+//      if updateDelegate { self.userViewDelegate?.hided() }
+//    }
+//  }
+//  
+//  func show() {
+//    UIView.animate(withDuration: Constants.viewDissappearTime) {
+//      self.frame.origin.y += self.viewHieght
+//      self.alpha = 1
+//    } 
+//  }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -107,7 +105,7 @@ extension UserView {
     setupUserInfoView()
     setupInterestView()
     fillUI()
-    self.backgroundColor = .brown
+    self.backgroundColor = .peopleViewControllerBackground
   }
   
   private func updateInterestsView() {

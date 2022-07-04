@@ -2,11 +2,12 @@
 //  UserViewDelegate.swift
 //  TinderApp
 //
-//  Created by Timofey on 2/7/22.
+//  Created by Timofey on 4/7/22.
 //
 
 import Foundation
 
+
 protocol UserViewDelegate: AnyObject {
-  func hided()
+  func hide()
 }

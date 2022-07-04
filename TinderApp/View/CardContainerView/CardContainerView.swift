@@ -39,6 +39,11 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     setupConstraints()
   }
   
+  func fillCards() {
+    topCardView.viewModel = viewModel?.nextCard()
+    bottomCardView.viewModel = viewModel?.nextCard()
+  }
+  
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if topCardTurn {
       delegate?.cardTouched(with: topCardView.viewModel)
@@ -82,19 +87,5 @@ extension CardContainerView {
     topCardView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    
-//    bottomCardView.snp.makeConstraints { make in
-//      make.width.equalToSuperview().offset(-20)
-//      make.top.equalToSuperview()
-//      make.bottom.equalToSuperview()
-//      make.centerX.equalToSuperview()
-//    }
-//
-//    topCardView.snp.makeConstraints { make in
-//      make.width.equalToSuperview()
-//      make.top.equalToSuperview()
-//      make.bottom.equalToSuperview().offset(-5)
-//      make.centerX.equalToSuperview()
-//    }
   }
 }

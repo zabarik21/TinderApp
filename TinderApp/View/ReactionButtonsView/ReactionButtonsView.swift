@@ -14,7 +14,7 @@ enum ReactionButtonsViewConstants {
   static var delay: TimeInterval = 0.3
 }
 
-class ReactionButtonsView: UIView {
+class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
 
   var delegate: ReactionViewDelegate?
   

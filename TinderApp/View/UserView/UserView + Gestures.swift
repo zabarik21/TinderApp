@@ -43,7 +43,7 @@ extension UserView: UIGestureRecognizerDelegate {
   
   func gestureEnded(with velocity: CGFloat) {
     if velocity > 1000 || frame.minY > (self.viewHieght / 3) {
-      hide()
+      self.userViewDelegate?.hide()
     } else {
       UIView.animate(withDuration: Constants.viewDissappearTime) {
         self.center.y = self.viewHieght / 2

@@ -10,7 +10,7 @@ import UIKit
 extension UserView: ReactionViewDelegate {
   
   func reacted(liked: Bool) {
-    hide()
+    self.userViewDelegate?.hide()
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
       self.reactionsDelegate?.reacted(liked: liked)
     }

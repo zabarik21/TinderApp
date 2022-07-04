@@ -21,7 +21,7 @@ enum PeopleVCConstants {
 class PeopleViewController: UIViewController {
   
   var cardContainer: CardContainerViewProtocol!
-  var reactionsView: ReactionButtonsView!
+  var reactionsView: ReactionButtonsViewProtocol!
   var titleLabel: UILabel!
   let headerOvalLayerMask = CAShapeLayer()
   var gradientLayer: CAGradientLayer!
@@ -54,7 +54,7 @@ extension PeopleViewController {
     let tabBarFrame = self.tabBarController!.tabBar.frame
     reactionsView.snp.makeConstraints { make in
       make.bottom.equalTo(tabBarFrame.origin.y).offset(-self.view.bounds.height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
-      make.horizontalEdges.equalToSuperview().inset(PeopleVCConstants.buttonsBottomOffsetMultiplier * self.view.bounds.width)
+      make.horizontalEdges.equalToSuperview().inset(PeopleVCConstants.buttonsHorizontalOffsetMultiplier * self.view.bounds.width)
       make.height.equalTo(75)
     }
     
@@ -70,8 +70,8 @@ extension PeopleViewController {
     
     userView.snp.makeConstraints { make in
       make.horizontalEdges.equalToSuperview()
-      make.top.equalToSuperview()
-      make.bottom.equalToSuperview()
+      make.height.equalToSuperview()
+      make.top.equalTo(self.view.snp.bottom).offset(0)
     }
   }
   
@@ -88,7 +88,7 @@ extension PeopleViewController {
     userView = UserView()
     userView.userViewDelegate = self
     userView.reactionsDelegate = self
-    userView.isHidden = true
+    userView.alpha = 0
   }
   
   private func setupTitleLabel() {

@@ -9,8 +9,7 @@ import UIKit
 
 
 protocol HideShowView {
-  func show()
-  func hide()
+  
 }
 
 protocol UserViewProtocol: UIView, HideShowView {
