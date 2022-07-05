@@ -7,23 +7,47 @@
 
 import Foundation
 
-enum Interest: Codable, CaseIterable {
+enum Interest: String, Codable, CaseIterable {
   case shopping
   case netflix
   case gaming
   case sport
   case drinking
-  case learning
   case books
+  case blogging
+  case cooking
+  case music
+  case drawing
+  case dances
+  case parkour
+  case fishing
+  case radio
+  case tier
+  case animals
+  case horse
+  case gardening
+  case tourism
+  case singing
+  case photo
   
   static func getRandomCases() -> Set<Interest> {
     let allCases = Interest.allCases
-    let n = Int.random(in: 0...3)
+    let n = Int.random(in: 1...(Interest.allCases.count))
     var res = Set<Interest>()
     for _ in 0...n {
-      let rand = Int.random(in: 0...(allCases.count - 1))
+      let rand = Int.random(in: 0...n - 1)
       res.insert(allCases[rand])
     }
     return res
   }
+  
+  static func getAllCases() -> Set<Interest> {
+    let allCases = Interest.allCases
+    var res = Set<Interest>()
+    for interset in allCases {
+      res.insert(interset)
+    }
+    return res
+  }
+  
 }

@@ -11,6 +11,8 @@ struct RandomPeopleApiResponce: Codable {
   let results: [UserCardModel]
 }
 
+
+// add new model for non api responce user where interests arent optional
 struct UserCardModel: Codable {
   var name: Name
   var gender: Gender
@@ -18,7 +20,7 @@ struct UserCardModel: Codable {
   var birthDate: BirthDate
   var picture: WebImage
   var id: ID
-  var interests: [Interest]?
+  var interests: Set<Interest>?
   
   enum CodingKeys: String, CodingKey {
     case birthDate = "dob"
@@ -48,7 +50,6 @@ struct Name: Codable {
 
 struct WebImage: Codable {
   var large: String
-  var medium: String
   var thumbnail: String
 }
 
