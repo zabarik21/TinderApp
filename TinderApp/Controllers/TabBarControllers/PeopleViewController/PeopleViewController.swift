@@ -26,6 +26,7 @@ class PeopleViewController: UIViewController {
   let headerOvalLayerMask = CAShapeLayer()
   var gradientLayer: CAGradientLayer!
   var userView: UserViewProtocol!
+  var user: UserCardModel
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,9 +34,18 @@ class PeopleViewController: UIViewController {
     setupConstraints()
   }
   
+  init(user: UserCardModel) {
+    self.user = user
+    super.init(nibName: nil, bundle: nil)
+  }
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     actualizePath()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }
 
@@ -85,7 +95,7 @@ extension PeopleViewController {
   }
   
   private func setupUserView() {
-    userView = UserView()
+    userView = UserView(user: self.user)
     userView.userViewDelegate = self
     userView.reactionsDelegate = self
     userView.alpha = 0
@@ -105,7 +115,7 @@ extension PeopleViewController {
   
   private func setupCardContainer() {
     // let cachedUsers = ...
-    let viewModel = CardContainerViewViewModel(users: [])
+    let viewModel = CardContainerViewViewModel(users: [], user: self.user)
     // delegate for telling viewController that users have loaded and cards must be showedw
     viewModel.delegate = self
     cardContainer = CardContainerView()

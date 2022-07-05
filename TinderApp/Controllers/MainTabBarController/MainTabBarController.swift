@@ -21,7 +21,18 @@ enum MainTabBarVCConstants  {
 
 class MainTabBarController: UITabBarController {
   
-  lazy var peopleVC = PeopleViewController()
+  
+  
+  let user = UserCardModel(name: Name(first: "Тимофей", last: "Резвых"),
+                           gender: .male,
+                           location: Location(city: "Perm"),
+                           birthDate: .init(date: "03.03.02", age: 19),
+                           picture: WebImage(large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
+                                             thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
+                           id: ID.init(value: "id"),
+                           interests: Interest.getAllCases())
+  
+  lazy var peopleVC = PeopleViewController(user: user)
   lazy var messagesVC = MessagerViewController()
   lazy var profileVC = ProfileViewController()
   

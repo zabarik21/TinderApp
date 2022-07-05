@@ -13,6 +13,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   var users: [UserCardViewViewModelProtocol]
   weak var delegate: CardContainerViewViewModelDelegate?
   
+  // remake by adding user global property or some else
+  var user: UserCardModel
+  
   func nextCard() -> UserCardViewViewModelProtocol? {
     if users.count < 5 {
       loadUsers()
@@ -21,8 +24,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   }
   
   // init with users for случая when there are old saved users left in memory 
-  init(users: [UserCardViewViewModel]) {
+  init(users: [UserCardViewViewModel], user: UserCardModel) {
     self.users = users
+    self.user = user
     loadUsers()
   }
   
@@ -37,8 +41,11 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
       var newUsers: [UserCardModel]?
       newUsers = try? JSONDecoder().decode(RandomPeopleApiResponce.self, from: data).results
       if let newUsers = newUsers {
-        for user in newUsers {
-          self.users.append(UserCardViewViewModel(with: user))
+        for newUser in newUsers {
+          // remove optional when non api model added
+          var userWithInterest = newUser
+          userWithInterest.interests = Interest.getRandomCases()
+          self.users.append(UserCardViewViewModel(with: userWithInterest, myInterests: self.user.interests!))
         }
         print("users loaded")
         self.delegate?.usersLoaded()

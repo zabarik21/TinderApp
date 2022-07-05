@@ -11,30 +11,42 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="interestCell" id="gTV-IL-0wX" customClass="InterestCell" customModule="TinderApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="103" height="30"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                <rect key="frame" x="0.0" y="0.0" width="103" height="30"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6X-9F-hjo">
-                        <rect key="frame" x="29" y="5" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6X-9F-hjo">
+                        <rect key="frame" x="14" y="8" width="75" height="14"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                        <color key="textColor" name="firstGradientColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" name="firstGradientColor"/>
-            <size key="customSize" width="100" height="30"/>
-            <point key="canvasLocation" x="168.11594202898553" y="93.080357142857139"/>
+            <color key="backgroundColor" name="firstGradientColor0.2"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="w6X-9F-hjo" secondAttribute="bottom" constant="8" id="Ous-cN-DdI"/>
+                <constraint firstAttribute="trailing" secondItem="w6X-9F-hjo" secondAttribute="trailing" constant="14" id="bCW-0D-DM4"/>
+                <constraint firstItem="w6X-9F-hjo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="gPZ-rx-Nny"/>
+                <constraint firstItem="w6X-9F-hjo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="14" id="wDi-Qr-PWU"/>
+            </constraints>
+            <size key="customSize" width="103" height="30"/>
+            <connections>
+                <outlet property="interestCell" destination="w6X-9F-hjo" id="0AC-z2-9xE"/>
+                <outlet property="interestLabel" destination="w6X-9F-hjo" id="UWD-s3-rSb"/>
+            </connections>
+            <point key="canvasLocation" x="170.28985507246378" y="93.080357142857139"/>
         </collectionViewCell>
     </objects>
     <resources>
         <namedColor name="firstGradientColor">
             <color red="0.90980392156862744" green="0.25490196078431371" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="firstGradientColor0.2">
+            <color red="0.90980392156862744" green="0.25490196078431371" blue="0.38823529411764707" alpha="0.20099867258640314" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

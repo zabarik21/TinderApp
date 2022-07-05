@@ -21,8 +21,8 @@ class UserView: UIView, UserViewProtocol {
   private var infoViewContainer: UIView!
   private var interestLabel: UILabel!
   private var similarInterestLabel: UILabel!
-  private var interestView: UIScrollView!
   private var interestsLabelsStackView: UIStackView!
+  private var interestsCollectionView: InterestsCollectionViewController!
   private var reactionView: ReactionButtonsView!
   private var userInfoView: UserInfoView!
   
@@ -37,8 +37,10 @@ class UserView: UIView, UserViewProtocol {
   var viewHieght: CGFloat!
   
   var flag = true
+  var user: UserCardModel
   
-  init() {
+  init(user: UserCardModel) {
+    self.user = user
     super.init(frame: .zero)
     setupElements()
     setupGestures()
@@ -63,8 +65,8 @@ class UserView: UIView, UserViewProtocol {
                                   ])
         self.similarInterestLabel.text = "\(viewModel.interests.count) Similar"
         self.userInfoView.viewModel = viewModel.userInfoViewViewModel
+        self.updateInterestsView()
       }
-      updateInterestsView()
     } else {
       DispatchQueue.main.async {
         self.userImageView.image = .userPlaceholderImage
@@ -72,22 +74,6 @@ class UserView: UIView, UserViewProtocol {
       }
     }
   }
-  
-//  func hide(updateDelegate: Bool = true) {
-//    UIView.animate(withDuration: Constants.viewDissappearTime, delay: 0, options: .curveEaseOut) {
-//      self.center.y = self.viewHieght
-//      self.alpha = 0
-//    } completion: { _ in
-//      if updateDelegate { self.userViewDelegate?.hided() }
-//    }
-//  }
-//  
-//  func show() {
-//    UIView.animate(withDuration: Constants.viewDissappearTime) {
-//      self.frame.origin.y += self.viewHieght
-//      self.alpha = 1
-//    } 
-//  }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -109,20 +95,10 @@ extension UserView {
   }
   
   private func updateInterestsView() {
-    let label = Interestlabel()
-    label.textColor = .firstGradientColor
-    label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-    label.layer.cornerRadius = 15
-    label.layer.masksToBounds = true
-    label.backgroundColor = UIColor.firstGradientColor.withAlphaComponent(0.2)
-    
-    label.text = "Shopping"
-    interestView.addSubview(label)
-    
-    label.snp.makeConstraints { make in
-      make.leading.equalToSuperview().offset(5)
-      make.centerY.equalToSuperview()
-    }
+    let array = viewModel?.interests.map({ i in
+      return (i, user.interests!.contains(i))
+    }) ?? []
+    interestsCollectionView.interests = array
   }
   
   private func setupUserInfoView() {
@@ -131,9 +107,13 @@ extension UserView {
   }
   
   private func setupInterestView() {
-    interestView = UIScrollView()
-    interestView.layer.borderColor = UIColor.black.cgColor
-    interestView.layer.borderWidth = 1
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    layout.minimumInteritemSpacing = 15
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+    
+    interestsCollectionView = InterestsCollectionViewController(collectionViewLayout: layout)
   }
   
   private func setupReactionView() {
@@ -198,16 +178,16 @@ extension UserView {
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
     }
     
-    infoViewContainer.addSubview(interestView)
-    interestView.snp.makeConstraints { make in
+    infoViewContainer.addSubview(interestsCollectionView.view)
+    interestsCollectionView.view.snp.makeConstraints { make in
       make.top.equalTo(interestsLabelsStackView.snp.bottom).offset(18)
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
-      make.height.equalTo(40)
+      make.height.equalTo(60)
     }
     
     infoViewContainer.addSubview(reactionView)
     reactionView.snp.makeConstraints { make in
-      make.top.equalTo(interestView.snp.bottom).offset(24)
+      make.top.equalTo(interestsCollectionView.view.snp.bottom).offset(24)
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalReactiovViewPaddingMultiplier * self.bounds.width)
       make.height.equalTo(75)
     }
