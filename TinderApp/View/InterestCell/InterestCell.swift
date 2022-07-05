@@ -23,7 +23,7 @@ class InterestCell: UICollectionViewCell {
   }
   
   func configure(with interest: Interest, matching: Bool) {
-    self.interestCell.text = interest.rawValue
+    self.interestCell.text = interest.rawValue.uppercasingFirstLetter
     self.backgroundColor = matching ? .firstGradientColor.withAlphaComponent(0.2) : .black.withAlphaComponent(0.1)
   }
   

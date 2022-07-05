@@ -13,6 +13,7 @@
 		7B2907E3286ED57300CB52EB /* UserView + Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E2286ED57300CB52EB /* UserView + Gestures.swift */; };
 		7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */; };
 		7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */; };
+		7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */; };
 		7B478C3E2844EC1500AB653E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3D2844EC1500AB653E /* CardView.swift */; };
 		7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3F2844EEBD00AB653E /* CardContainerView.swift */; };
 		7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */; };
@@ -94,6 +95,7 @@
 		7B2907E2286ED57300CB52EB /* UserView + Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserView + Gestures.swift"; sourceTree = "<group>"; };
 		7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocol.swift; sourceTree = "<group>"; };
 		7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsViewProtocol.swift; sourceTree = "<group>"; };
+		7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Uppercase.swift"; sourceTree = "<group>"; };
 		7B478C3D2844EC1500AB653E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7B478C3F2844EEBD00AB653E /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
 		7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + Bacground layer.swift"; sourceTree = "<group>"; };
@@ -191,6 +193,14 @@
 				7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */,
 			);
 			path = PeopleViewController;
+			sourceTree = "<group>";
+		};
+		7B3FB0402874C1BD00FA82A4 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */,
+			);
+			path = String;
 			sourceTree = "<group>";
 		};
 		7B478C412844EEE700AB653E /* MainTabBarController */ = {
@@ -424,6 +434,7 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B3FB0402874C1BD00FA82A4 /* String */,
 				7B5BFDCA2870522800F070F7 /* UIImage */,
 				7BA8AF6328682D4500B254CC /* UIVIewController */,
 				7B795B692856542B007FAA53 /* CGFloat */,
@@ -695,6 +706,7 @@
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
 				7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */,
 				7BB2FED82870B6CD00A2731E /* CardViewProtocol.swift in Sources */,
+				7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BF85C7728721C9800B296CC /* InterestsCollectionViewController.swift in Sources */,
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
