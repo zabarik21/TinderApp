@@ -14,7 +14,7 @@
 
 
 ## Images 
-* Main screen with cards 
+* Main screen with cards   
 ![alt text](https://i.postimg.cc/9QGdcZ0n/main-screen.png) 
-* User view
+* User view   
 ![alt text](https://i.postimg.cc/85stH4B0/userview.png) 
