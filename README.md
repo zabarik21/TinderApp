@@ -19,4 +19,4 @@
 * User view   
 ![alt text](https://i.postimg.cc/85stH4B0/userview.png) 
 * Video
-![alt text](https://vk.com/doc261522031_643620198?hash=ajrZ6KOeXtfW3rOB7NdPLhlZukGCSbAzfWzIupxZSRX&dl=hH82rzQZx9eVCU25S0wlAyamJCpWP1mnULM6HrXNjo0&wnd=1&module=im) 
+https://youtube.com/shorts/6ZZRfWR6z2w?feature=share
