@@ -194,3 +194,15 @@ extension UserView {
   }
 }
 
+// MARK: - ReactionViewDelegate
+extension UserView: ReactionViewDelegate {
+  
+  func reacted(liked: Bool) {
+    self.userViewDelegate?.hide()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+      self.interestsCollectionView.collectionView.setContentOffset(.zero, animated: false)
+      self.reactionsDelegate?.reacted(liked: liked)
+    }
+  }
+  
+}
