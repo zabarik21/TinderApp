@@ -22,7 +22,7 @@ struct UserCardModel: Codable {
   var id: ID
   var interests: Set<Interest>?
   
-  enum CodingKeys: String, CodingKey {
+  enum CodingKeys: String, CodingKey, CaseIterable {
     case birthDate = "dob"
     case picture
     case location
@@ -31,6 +31,13 @@ struct UserCardModel: Codable {
     case id
     case interests
   }
+  
+}
+
+
+struct Coordinates: Codable {
+  var latitude: String
+  var longitude: String
 }
 
 struct ID: Codable {
@@ -60,4 +67,5 @@ struct BirthDate: Codable {
 
 struct Location: Codable {
   var city: String
+  var coordinates: Coordinates
 }

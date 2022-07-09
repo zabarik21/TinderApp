@@ -52,12 +52,18 @@ class PeopleViewController: UIViewController {
 // MARK: - Setup Constraints and Elements
 extension PeopleViewController {
   private func setupConstraints() {
-    view.addSubview(titleLabel)
+    
+    let titleVisible = self.view.bounds.height > 600 ? true : false
+    
+    if titleVisible {
+      view.addSubview(titleLabel)
 
-    titleLabel.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(70)
-      make.leading.equalToSuperview().offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
+      titleLabel.snp.makeConstraints { make in
+        make.top.equalToSuperview().offset(70)
+        make.leading.equalToSuperview().offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
+      }
     }
+    
     
     view.addSubview(reactionsView)
     
@@ -70,8 +76,9 @@ extension PeopleViewController {
     
     view.addSubview(cardContainer)
     
+    
     cardContainer.snp.makeConstraints { make in
-      make.height.equalTo(Int(PeopleVCConstants.cardContainerHeightMultiplier * self.view.bounds.height))
+      make.height.equalTo(Int(PeopleVCConstants.cardContainerHeightMultiplier * (titleVisible ? 1 : 1.1) * self.view.bounds.height))
       make.horizontalEdges.equalToSuperview().inset(CardContainerConstants.horizontalCardOffset * self.view.bounds.width)
       make.bottom.equalTo(reactionsView.snp.top).offset(-30)
     }
