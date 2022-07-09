@@ -9,4 +9,5 @@ import Foundation
 
 protocol CardContainerViewViewModelDelegate: AnyObject {
   func usersLoaded()
+  func showNetworkErrorAlert(with message: String)
 }

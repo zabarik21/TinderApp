@@ -32,7 +32,7 @@ extension MainTabBarController {
   }
   
   func actualizePath() {
-    let x: CGFloat = self.view.bounds.width * MainTabBarVCConstants.tabBarLayerHorizontalPaddingMultiplier
+    let x: CGFloat = self.view.bounds.width * MainTabBarVCConstants.tabBarLayerHorizontalPaddingMultiplier + MainTabBarVCConstants.itemPadding
     let y: CGFloat = MainTabBarVCConstants.tabBarLayerVerticalPadding
     layerWidth = self.tabBar.bounds.width - x * 2
     tabBarLayer.path = UIBezierPath(roundedRect: CGRect(x: x,
@@ -46,7 +46,7 @@ extension MainTabBarController {
     let width = layerWidth / 3
     itemWidth = width
     let height = layerHeight - 4
-    let x = MainTabBarVCConstants.tabBarLayerHorizontalPaddingMultiplier * self.view.bounds.width
+    let x = MainTabBarVCConstants.tabBarLayerHorizontalPaddingMultiplier * self.view.bounds.width + MainTabBarVCConstants.itemPadding
     
     itemLayer.fillColor = UIColor.itemLayerColor.cgColor
     itemLayer.opacity = 0.69
@@ -66,9 +66,9 @@ extension MainTabBarController {
       let vc = ViewControllers(rawValue: index)
       switch vc {
       case .people:
-        return 3
+        return MainTabBarVCConstants.itemPadding
       case .profile:
-        return -3
+        return -MainTabBarVCConstants.itemPadding
       case .messages:
         return 0
       case .none:

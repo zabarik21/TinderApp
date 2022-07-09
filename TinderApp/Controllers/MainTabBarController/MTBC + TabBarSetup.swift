@@ -21,6 +21,7 @@ extension MainTabBarController {
     setupVCTabBar(viewController: profileVC, title: "Profile", image: profileTabBarImage)
     
     tabBar.tintColor = UIColor.barItemColor
+    tabBar.unselectedItemTintColor = UIColor.black.withAlphaComponent(0.5)
     tabBar.backgroundColor = .clear
     tabBar.itemPositioning = .centered
     viewControllers = [

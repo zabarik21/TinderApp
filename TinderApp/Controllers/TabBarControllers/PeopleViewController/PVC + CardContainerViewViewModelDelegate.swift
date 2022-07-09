@@ -6,9 +6,21 @@
 //
 
 import Foundation
+import UIKit
 
 
 extension PeopleViewController: CardContainerViewViewModelDelegate {
+  
+  func showNetworkErrorAlert(with message: String) {
+      let alertController = UIAlertController(title: "Some error occured",
+                                              message: message, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    alertController.addAction(okAction)
+    DispatchQueue.main.async {
+      self.present(alertController, animated: true, completion: nil)
+    }
+  }
+  
   func usersLoaded() {
     cardContainer.fillCards()
   }

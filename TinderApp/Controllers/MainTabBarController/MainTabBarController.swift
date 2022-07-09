@@ -17,6 +17,7 @@ enum ViewControllers: Int {
 enum MainTabBarVCConstants  {
   static var tabBarLayerHorizontalPaddingMultiplier: CGFloat = 0.0695
   static var tabBarLayerVerticalPadding: CGFloat = 5
+  static var itemPadding: CGFloat = 3
 }
 
 class MainTabBarController: UITabBarController {

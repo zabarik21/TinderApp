@@ -11,6 +11,7 @@ import Foundation
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     
   var users: [UserCardViewViewModelProtocol]
+  var usersApi = RandomUserApi()
   weak var delegate: CardContainerViewViewModelDelegate?
   
   // remake by adding user global property or some else
@@ -18,7 +19,7 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
   func nextCard() -> UserCardViewViewModelProtocol? {
     if users.count < 5 {
-      loadUsers()
+      fetchViewModels()
     }
     return users.shift()
   }
@@ -27,35 +28,23 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   init(users: [UserCardViewViewModel], user: UserCardModel) {
     self.users = users
     self.user = user
-    loadUsers()
+    self.fetchViewModels()
   }
   
-  func loadUsers() {
-    guard let url = URL(string: "https://randomuser.me/api/?results=30&inc=gender,name,dob,location,picture,coordinates,id&noinfo") else { return }
-    let request = URLRequest(url: url)
-    URLSession.shared.dataTask(with: request) { data, _, error in
-      if let error = error {
-        print(error)
-      }
-      guard let data = data else { return }
-      var newUsers: [UserCardModel]?
-      do {
-        newUsers = try JSONDecoder().decode(RandomPeopleApiResponce.self, from: data).results
-      } catch {
-        print(error)
-      }
-      
-      if let newUsers = newUsers {
-        for newUser in newUsers {
-          // remove optional when non api model added
-          var userWithInterest = newUser
+  func fetchViewModels() {
+    usersApi.fetchPeopleWithParametrs(count: 10) { result in
+      switch result {
+      case .success(let downloadedUsers):
+        for user in downloadedUsers {
+          var userWithInterest = user
           userWithInterest.interests = Interest.getRandomCases()
-          self.users.append(UserCardViewViewModel(with: userWithInterest, myInterests: self.user.interests!))
+          let viewModel = UserCardViewViewModel(with: userWithInterest, myInterests: self.user.interests)
+          self.users.append(viewModel)
         }
-        print("users loaded")
         self.delegate?.usersLoaded()
+      case .failure(let error):
+        self.delegate?.showNetworkErrorAlert(with: error.localizedDescription)
       }
-      
-    }.resume()
+    }
   }
 }

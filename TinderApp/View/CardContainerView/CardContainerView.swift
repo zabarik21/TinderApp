@@ -40,8 +40,12 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   }
   
   func fillCards() {
-    topCardView.viewModel = viewModel?.nextCard()
-    bottomCardView.viewModel = viewModel?.nextCard()
+    if topCardView.viewModel == nil {
+      topCardView.viewModel = viewModel?.nextCard()
+    }
+    if bottomCardView.viewModel == nil {
+      bottomCardView.viewModel = viewModel?.nextCard()
+    }
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -24,18 +24,22 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   }
   
   
-  init(with userCardModel: UserCardModel, myInterests: Set<Interest>) {
+  init(with userCardModel: UserCardModel, myInterests: Set<Interest>?) {
     // make individual model with not optional interests (non api responce model)
-    let compatablityScore: Double = userCardModel.interests!.reduce(0, { partialResult, interest in
-      partialResult + (myInterests.contains(interest) ? 1 : 0)
-    }) / Double(myInterests.count) * 10
+    if let myInterests = myInterests {
+      let compatablityScore: Double = userCardModel.interests!.reduce(0, { partialResult, interest in
+        partialResult + (myInterests.contains(interest) ? 1 : 0)
+      }) / Double(myInterests.count) * 10
+      self.compatabilityScore = Int(compatablityScore)
+    } else {
+      self.compatabilityScore = 0
+    }
     
     self.interests = userCardModel.interests!
     self.age = userCardModel.birthDate.age
     self.city = userCardModel.location.city
     self.name = userCardModel.name.first
     self.imageUrlString = userCardModel.picture.large
-    self.compatabilityScore = Int(compatablityScore)
     
   }
   
