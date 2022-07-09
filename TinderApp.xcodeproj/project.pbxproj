@@ -48,6 +48,8 @@
 		7BA467ED286D9221001016E1 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA467EC286D9221001016E1 /* UserInfoView.swift */; };
 		7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */; };
 		7BABE56D2873700800BC792E /* UserViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BABE56C2873700800BC792E /* UserViewDelegate.swift */; };
+		7BB0B3E5287996140043F893 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0B3E4287996140043F893 /* StartScreenController.swift */; };
+		7BB0B3E72879A5BC0043F893 /* LayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */; };
 		7BB2FED22870AD3B00A2731E /* UIColor + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED12870AD3B00A2731E /* UIColor + Constants.swift */; };
 		7BB2FED42870B65700A2731E /* CardContainerView + ReeactionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED32870B65700A2731E /* CardContainerView + ReeactionDelegate.swift */; };
 		7BB2FED62870B68700A2731E /* CardContainerView + CardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED52870B68700A2731E /* CardContainerView + CardViewDelegate.swift */; };
@@ -125,6 +127,8 @@
 		7BA467EC286D9221001016E1 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + TabBar.swift"; sourceTree = "<group>"; };
 		7BABE56C2873700800BC792E /* UserViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewDelegate.swift; sourceTree = "<group>"; };
+		7BB0B3E4287996140043F893 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
+		7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerFactory.swift; sourceTree = "<group>"; };
 		7BB2FED12870AD3B00A2731E /* UIColor + Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Constants.swift"; sourceTree = "<group>"; };
 		7BB2FED32870B65700A2731E /* CardContainerView + ReeactionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardContainerView + ReeactionDelegate.swift"; sourceTree = "<group>"; };
 		7BB2FED52870B68700A2731E /* CardContainerView + CardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardContainerView + CardViewDelegate.swift"; sourceTree = "<group>"; };
@@ -298,6 +302,14 @@
 			path = UIVIewController;
 			sourceTree = "<group>";
 		};
+		7BB0B3E3287995C90043F893 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7BB0B3E4287996140043F893 /* StartScreenController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		7BCB99B42845C91A004EFC29 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +414,7 @@
 		7BED5ED8284111BF0081E71E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7BB0B3E3287995C90043F893 /* Authentication */,
 				7BF85C7528721C6400B296CC /* InterestViewController */,
 				7B478C412844EEE700AB653E /* MainTabBarController */,
 				7BED5EE628411FCB0081E71E /* TabBarControllers */,
@@ -462,6 +475,7 @@
 			children = (
 				7BED5EAA284111730081E71E /* SceneDelegate.swift */,
 				7BED5EA8284111730081E71E /* AppDelegate.swift */,
+				7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -696,6 +710,7 @@
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
 				7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */,
 				7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */,
+				7BB0B3E72879A5BC0043F893 /* LayerFactory.swift in Sources */,
 				7BA1BC7C2878A53C00E9C5E8 /* RandomUserApi.swift in Sources */,
 				7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */,
 				7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */,
@@ -715,6 +730,7 @@
 				7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */,
 				7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */,
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,
+				7BB0B3E5287996140043F893 /* StartScreenController.swift in Sources */,
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */,

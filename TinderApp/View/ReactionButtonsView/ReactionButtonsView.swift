@@ -15,7 +15,7 @@ enum ReactionButtonsViewConstants {
 }
 
 class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
-
+  
   var delegate: ReactionViewDelegate?
   
   var likeButton: UIButton!
@@ -106,14 +106,7 @@ extension ReactionButtonsView {
   }
   
   private func setupGradientLayer() {
-    let gradientLayer = CAGradientLayer()
-    gradientLayer.colors = [
-        UIColor.firstGradientColor.cgColor,
-        UIColor.secondGradientColor.cgColor
-    ]
-    gradientLayer.locations = [0.0, 1.0]
-    gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-    gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+    let gradientLayer = LayerFactory.shared.getGradientLayer(with: [.firstGradientColor,         .secondGradientColor])
     
     gradientLayer.frame = dislikeButton.frame
     gradientLayer.cornerRadius = frame.height / 2

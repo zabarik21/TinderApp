@@ -12,15 +12,7 @@ import UIKit
 extension PeopleViewController {
   
   func setupGradientLayer() {
-    gradientLayer = CAGradientLayer()
-    gradientLayer.colors = [
-      UIColor.firstGradientColor.cgColor,
-      UIColor.secondGradientColor.cgColor
-    ]
-    gradientLayer.locations = [0.0, 1.0]
-    gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-    gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-    
+    gradientLayer = LayerFactory.shared.getGradientLayer(with: [.firstGradientColor, .secondGradientColor])
     gradientLayer.mask = headerOvalLayerMask
     self.view.layer.addSublayer(gradientLayer)
   }
