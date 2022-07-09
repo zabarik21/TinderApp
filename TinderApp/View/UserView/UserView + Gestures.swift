@@ -52,3 +52,8 @@ extension UserView: UIGestureRecognizerDelegate {
   }
   
 }
+
+
+extension UserView: UIScrollViewDelegate {
+  
+}

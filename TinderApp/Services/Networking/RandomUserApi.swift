@@ -32,7 +32,7 @@ class RandomUserApi {
       switch result {
       case .success(let data):
         if let apiResponce = try? JSONDecoder().decode(RandomPeopleApiResponce.self, from: data) {
-          completion(.success(apiResponce.results)) 
+          completion(.success(apiResponce.results))
         } else {
           completion(.failure(NetworkError.decodeData))
         }

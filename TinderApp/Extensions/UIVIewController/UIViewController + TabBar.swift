@@ -13,7 +13,7 @@ extension UITabBarController {
     if animated {
       let frame = self.tabBar.frame
       let sign: CGFloat = hidden ? 1 : -1
-      let y = frame.origin.y + (frame.size.height * sign)
+      let y = frame.origin.y + (frame.size.height * sign * 1.2)
       UIView.animate(withDuration: duration) {
         self.tabBar.frame.origin.y = y
       }

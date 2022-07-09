@@ -25,6 +25,7 @@ class UserView: UIView, UserViewProtocol {
   private var interestsCollectionView: InterestsCollectionViewController!
   private var reactionView: ReactionButtonsView!
   private var userInfoView: UserInfoView!
+  private var scrollView: UIScrollView!
   
   weak var userViewDelegate: UserViewDelegate?
   weak var reactionsDelegate: ReactionViewDelegate?
@@ -86,12 +87,19 @@ extension UserView {
   private func setupElements() {
     setupUserImageView()
     setupInfoViewContainer()
+    setupScrollView()
     setupLabels()
     setupReactionView()
     setupUserInfoView()
     setupInterestView()
     fillUI()
     self.backgroundColor = .peopleViewControllerBackground
+  }
+  
+  private func setupScrollView() {
+    scrollView = UIScrollView()
+    scrollView.delegate = self
+    scrollView.showsVerticalScrollIndicator = false
   }
   
   private func updateInterestsView() {
@@ -156,14 +164,23 @@ extension UserView {
     infoViewContainer.snp.makeConstraints { make in
       make.top.equalTo(userImageView.snp.bottom).offset(-Constants.infoViewCornerRadius)
       make.bottom.equalToSuperview().offset(Constants.infoViewCornerRadius)
-      make.left.right.equalToSuperview()
+      make.horizontalEdges.equalToSuperview()
     }
     
-    infoViewContainer.addSubview(userInfoView)
+    infoViewContainer.addSubview(scrollView)
+    
+    scrollView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+      make.centerY.equalToSuperview()
+      make.centerX.equalToSuperview()
+    }
+    
+    scrollView.addSubview(userInfoView)
     
     userInfoView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(26)
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
+      make.width.equalToSuperview().offset(-Constants.horizontalPaddingMultiplier * self.bounds.width * 2)
       make.height.equalTo(70)
     }
     
@@ -172,27 +189,35 @@ extension UserView {
     interestsLabelsStackView.alignment = .center
     interestsLabelsStackView.distribution = .fill
     
-    infoViewContainer.addSubview(interestsLabelsStackView)
+    scrollView.addSubview(interestsLabelsStackView)
     interestsLabelsStackView.snp.makeConstraints { make in
       make.top.equalTo(userInfoView.snp.bottom).offset(30)
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
     }
     
-    infoViewContainer.addSubview(interestsCollectionView.view)
+    scrollView.addSubview(interestsCollectionView.view)
     interestsCollectionView.view.snp.makeConstraints { make in
       make.top.equalTo(interestsLabelsStackView.snp.bottom).offset(18)
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
       make.height.equalTo(60)
     }
     
-    infoViewContainer.addSubview(reactionView)
+    scrollView.addSubview(reactionView)
     reactionView.snp.makeConstraints { make in
       make.top.equalTo(interestsCollectionView.view.snp.bottom).offset(24)
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalReactiovViewPaddingMultiplier * self.bounds.width)
       make.height.equalTo(75)
+      make.bottom.equalTo(-20)
     }
   }
+  
+  func toIdentity() {
+    self.interestsCollectionView.collectionView.setContentOffset(.zero, animated: false)
+    scrollView.setContentOffset(.zero, animated: false)
+  }
 }
+
+
 
 // MARK: - ReactionViewDelegate
 extension UserView: ReactionViewDelegate {
@@ -200,7 +225,6 @@ extension UserView: ReactionViewDelegate {
   func reacted(liked: Bool) {
     self.userViewDelegate?.hide()
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-      self.interestsCollectionView.collectionView.setContentOffset(.zero, animated: false)
       self.reactionsDelegate?.reacted(liked: liked)
     }
   }

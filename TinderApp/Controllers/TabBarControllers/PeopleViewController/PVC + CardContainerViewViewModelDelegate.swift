@@ -10,7 +10,6 @@ import UIKit
 
 
 extension PeopleViewController: CardContainerViewViewModelDelegate {
-  
   func showNetworkErrorAlert(with message: String) {
       let alertController = UIAlertController(title: "Some error occured",
                                               message: message, preferredStyle: .alert)

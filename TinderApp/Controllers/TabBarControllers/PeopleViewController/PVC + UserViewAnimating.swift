@@ -18,6 +18,7 @@ extension PeopleViewController: UserViewDelegate {
       self.view.layoutIfNeeded()
     } completion: { _ in
       self.tabBarController?.setTabBarHidden(false, animated: true, duration: PeopleVCConstants.cardDisappearTime * 2)
+      self.userView.toIdentity()
     }
   }
   
