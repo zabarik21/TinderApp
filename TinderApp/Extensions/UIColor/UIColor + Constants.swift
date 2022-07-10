@@ -18,4 +18,5 @@ extension UIColor {
   static let highCompatabilityColor = UIColor(named: "highCompatableColor") ?? .green
   static let medCompatabilityColor = UIColor(named: "medCompatableColor") ?? .yellow
   static let lowCompatabilityColor = UIColor(named: "lowCompatableColor") ?? .red
+  static let logoColor = UIColor(named: "logoColor") ?? .red
 }

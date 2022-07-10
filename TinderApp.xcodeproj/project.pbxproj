@@ -27,6 +27,7 @@
 		7B5BFDCE2870553F00F070F7 /* UserView + ReactionsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDCD2870553F00F070F7 /* UserView + ReactionsDelegate.swift */; };
 		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
 		7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E89BF286B7AF100732985 /* Interestlabel.swift */; };
+		7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71D542287AA527002E7340 /* StartScreenButton.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
 		7B7F817F2870C86B00223A37 /* CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F817E2870C86A00223A37 /* CardContainerViewViewModelDelegate.swift */; };
 		7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */; };
@@ -106,6 +107,7 @@
 		7B5BFDCD2870553F00F070F7 /* UserView + ReactionsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserView + ReactionsDelegate.swift"; sourceTree = "<group>"; };
 		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
 		7B5E89BF286B7AF100732985 /* Interestlabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interestlabel.swift; sourceTree = "<group>"; };
+		7B71D542287AA527002E7340 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
 		7B7F817E2870C86A00223A37 /* CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelDelegate.swift; sourceTree = "<group>"; };
 		7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerViewViewModelDelegate.swift"; sourceTree = "<group>"; };
@@ -249,6 +251,14 @@
 				7B5E89BF286B7AF100732985 /* Interestlabel.swift */,
 			);
 			path = InterestLabel;
+			sourceTree = "<group>";
+		};
+		7B71D541287AA519002E7340 /* StartScreenButton */ = {
+			isa = PBXGroup;
+			children = (
+				7B71D542287AA527002E7340 /* StartScreenButton.swift */,
+			);
+			path = StartScreenButton;
 			sourceTree = "<group>";
 		};
 		7B795B692856542B007FAA53 /* CGFloat */ = {
@@ -444,6 +454,7 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B71D541287AA519002E7340 /* StartScreenButton */,
 				7BF85C7828721CE600B296CC /* InterestCell */,
 				7BA467EB286D91FE001016E1 /* UserView */,
 				7BA467EA286D91C2001016E1 /* UserInfoView */,
@@ -715,6 +726,7 @@
 				7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */,
 				7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */,
 				7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */,
+				7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */,
 				7BABE56D2873700800BC792E /* UserViewDelegate.swift in Sources */,
 				7B7F81832870D04000223A37 /* UsersInfoViewViewModel.swift in Sources */,
 				7BB2FEDA2870B6E900A2731E /* CardContainerViewProtocol.swift in Sources */,
