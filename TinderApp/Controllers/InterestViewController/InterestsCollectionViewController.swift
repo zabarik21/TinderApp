@@ -12,6 +12,7 @@ class InterestsCollectionViewController: UICollectionViewController {
   typealias InterestPair = (interest: Interest, match: Bool)
   
   private let cellIdentifier: String = "interestCell"
+  private var isChoosable = false
   public var interests: [InterestPair] = [] {
     didSet {
       DispatchQueue.main.async {
@@ -27,10 +28,26 @@ class InterestsCollectionViewController: UICollectionViewController {
     self.collectionView.showsHorizontalScrollIndicator = false
   }
   
+  func changeStyleToChoosable() {
+    isChoosable = true
+    collectionView.backgroundColor = .white.withAlphaComponent(0.8)
+    collectionView.layer.cornerRadius = 10
+    collectionView.layer.masksToBounds = true
+  }
+  
+  
   private func registerCell() {
     self.collectionView.register(UINib(nibName: "InterestCell", bundle: nil), forCellWithReuseIdentifier: "interestCell")
   }
   
+}
+
+extension InterestsCollectionViewController {
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard isChoosable == true else { return }
+    
+  }
 }
 
 // MARK: - DataSource
@@ -54,7 +71,7 @@ extension InterestsCollectionViewController {
   }
   
 }
-
+// MARK: - Layout
 extension InterestsCollectionViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -35,12 +35,29 @@ class StartScreenController: UIViewController {
     setupConstraints()
   }
   
+  @objc func demoAppTouched() {
+    let demoSetupProfileViewController = DemoSetupProfileViewController()
+    self.navigationController?.pushViewController(demoSetupProfileViewController, animated: true)
+  }
+  
+}
+
+
+// MARK: - Setup UI & Constraints
+extension StartScreenController {
   private func setupElements() {
     setupBackground()
     setupLogo()
     setupButtons()
+    setupButtonTargets()
   }
   
+  
+  
+  private func setupButtonTargets() {
+    demoAppButton.addTarget(self, action: #selector(demoAppTouched), for: .touchUpInside)
+  }
+
   private func setupLogo() {
     logoImageView = UIImageView()
     logoImageView.image = UIImage(systemName: "lasso.and.sparkles")
@@ -54,13 +71,13 @@ class StartScreenController: UIViewController {
     
     logoContainer = UIView()
   }
-  
+
   private func setupButtons() {
     signUpButton = StartScreenButton(with: .dark, title: "Sign Up")
     loginButton = StartScreenButton(with: .light, title: "Log in")
     demoAppButton = StartScreenButton(with: .demoApp, title: "Try Demo App")
   }
-  
+
   private func setupConstraints() {
     
     let width = self.view.bounds.width
@@ -114,7 +131,7 @@ class StartScreenController: UIViewController {
       make.bottom.equalTo(logoLabel.snp.top)
     }
   }
-  
+
   private func setupBackground() {
     let gradientLayer = LayerFactory.shared.getGradientLayer()
     gradientLayer.frame = self.view.bounds
@@ -127,11 +144,8 @@ class StartScreenController: UIViewController {
     }
   }
 
-  
-  
+
 }
-
-
 
 
 

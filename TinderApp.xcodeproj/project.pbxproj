@@ -15,6 +15,7 @@
 		7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */; };
 		7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */; };
 		7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */; };
+		7B4389BE287C994100791C56 /* SetupProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4389BD287C994100791C56 /* SetupProfileTextField.swift */; };
 		7B478C3E2844EC1500AB653E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3D2844EC1500AB653E /* CardView.swift */; };
 		7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3F2844EEBD00AB653E /* CardContainerView.swift */; };
 		7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */; };
@@ -61,6 +62,8 @@
 		7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */; };
 		7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */; };
 		7BD80E5B287832A300BB2C74 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */; };
+		7BE2E90C287C2EA800D0BA75 /* DemoSetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */; };
+		7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */; };
 		7BE709DF284B4C3700DCAE30 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7BE709DE284B4C3700DCAE30 /* Kingfisher */; };
 		7BEBD960284A8A9200C3DF30 /* CardContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */; };
 		7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EA8284111730081E71E /* AppDelegate.swift */; };
@@ -96,6 +99,7 @@
 		7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocol.swift; sourceTree = "<group>"; };
 		7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsViewProtocol.swift; sourceTree = "<group>"; };
 		7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Uppercase.swift"; sourceTree = "<group>"; };
+		7B4389BD287C994100791C56 /* SetupProfileTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileTextField.swift; sourceTree = "<group>"; };
 		7B478C3D2844EC1500AB653E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7B478C3F2844EEBD00AB653E /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
 		7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + Bacground layer.swift"; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 		7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewDeleagate.swift; sourceTree = "<group>"; };
 		7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSetupProfileViewController.swift; sourceTree = "<group>"; };
+		7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerDelegate.swift; sourceTree = "<group>"; };
 		7BED5EA5284111730081E71E /* TinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BED5EA8284111730081E71E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +223,14 @@
 				7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */,
 			);
 			path = String;
+			sourceTree = "<group>";
+		};
+		7B4389BC287C992D00791C56 /* SetupProfileTextField */ = {
+			isa = PBXGroup;
+			children = (
+				7B4389BD287C994100791C56 /* SetupProfileTextField.swift */,
+			);
+			path = SetupProfileTextField;
 			sourceTree = "<group>";
 		};
 		7B478C412844EEE700AB653E /* MainTabBarController */ = {
@@ -316,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB0B3E4287996140043F893 /* StartScreenController.swift */,
+				7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -361,6 +376,14 @@
 				7B9FCBAC28676EE10031518D /* Interests.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7BE2E90D287C2ECB00D0BA75 /* ProfileImageView */ = {
+			isa = PBXGroup;
+			children = (
+				7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */,
+			);
+			path = ProfileImageView;
 			sourceTree = "<group>";
 		};
 		7BED5E9C284111730081E71E = {
@@ -454,6 +477,8 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B4389BC287C992D00791C56 /* SetupProfileTextField */,
+				7BE2E90D287C2ECB00D0BA75 /* ProfileImageView */,
 				7B71D541287AA519002E7340 /* StartScreenButton */,
 				7BF85C7828721CE600B296CC /* InterestCell */,
 				7BA467EB286D91FE001016E1 /* UserView */,
@@ -704,6 +729,7 @@
 				7BB2FED22870AD3B00A2731E /* UIColor + Constants.swift in Sources */,
 				7BA1BC7A2878917300E9C5E8 /* NetworkManager.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
+				7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */,
 				7B9FCBB0286772F50031518D /* UserView.swift in Sources */,
 				7B2907DF286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
@@ -744,12 +770,14 @@
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,
 				7BB0B3E5287996140043F893 /* StartScreenController.swift in Sources */,
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,
+				7BE2E90C287C2EA800D0BA75 /* DemoSetupProfileViewController.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */,
 				7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */,
 				7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,
+				7B4389BE287C994100791C56 /* SetupProfileTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
