@@ -14,6 +14,7 @@ protocol UserCardViewViewModelProtocol {
   var imageUrlString: String { get }
   var compatabilityScore: Int { get }
   var interests: Set<Interest> { get }
+  var similarInterestsCount: Int { get }
   var userInfoViewViewModel: UsersInfoViewViewModelProtocol { get }
   
   func nameAgeLabelText() -> String

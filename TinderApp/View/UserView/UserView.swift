@@ -64,7 +64,7 @@ class UserView: UIView, UserViewProtocol {
                                   options: [
                                     .transition(.fade(0.2))
                                   ])
-        self.similarInterestLabel.text = "\(viewModel.interests.count) Similar"
+        self.similarInterestLabel.text = "\(viewModel.similarInterestsCount) Similar"
         self.userInfoView.viewModel = viewModel.userInfoViewViewModel
         self.updateInterestsView()
       }

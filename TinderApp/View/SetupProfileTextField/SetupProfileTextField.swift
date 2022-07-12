@@ -25,6 +25,7 @@ class SetupProfileTextField: UITextField {
   }
   
   private func setupFont() {
+    textAlignment = .left
     font = .systemFont(ofSize: 16, weight: .semibold)
     textColor = .logoColor
     attributedPlaceholder = NSAttributedString(

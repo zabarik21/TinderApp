@@ -11,6 +11,8 @@ class InterestCell: UICollectionViewCell {
   
   @IBOutlet var interestCell: UILabel!
   @IBOutlet var interestLabel: UILabel!
+  private var match: Bool = false
+  
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -22,9 +24,11 @@ class InterestCell: UICollectionViewCell {
     self.layer.masksToBounds = true
   }
   
-  func configure(with interest: Interest, matching: Bool) {
+  func configure(with interest: Interest, matching: Bool, interactionEnabled: Bool = false) {
+    let matchColorOpacity = interactionEnabled ? 0.5 : 0.2
+    self.match = matching
     self.interestCell.text = interest.rawValue.uppercasingFirstLetter
-    self.backgroundColor = matching ? .firstGradientColor.withAlphaComponent(0.2) : .black.withAlphaComponent(0.1)
+    self.backgroundColor = matching ? .firstGradientColor.withAlphaComponent(matchColorOpacity) : .black.withAlphaComponent(0.1)
   }
   
 }

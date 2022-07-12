@@ -22,21 +22,11 @@ enum MainTabBarVCConstants  {
 
 class MainTabBarController: UITabBarController {
   
+  var user: UserCardModel
   
-  
-  let user = UserCardModel(name: Name(first: "Тимофей", last: "Резвых"),
-                           gender: .male,
-                           location: Location(city: "Perm",
-                                              coordinates: Coordinates(latitude: "2", longitude: "3")),
-                           birthDate: .init(date: "03.03.02", age: 19),
-                           picture: WebImage(large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
-                                             thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
-                           id: ID.init(value: "id"),
-                           interests: Interest.getAllCases())
-  
-  lazy var peopleVC = PeopleViewController(user: user)
-  lazy var messagesVC = MessagerViewController()
-  lazy var profileVC = ProfileViewController()
+  var peopleVC: PeopleViewController!
+  var messagesVC:  MessagerViewController!
+  var profileVC: ProfileViewController!
   
   let tabBarLayer = CAShapeLayer()
   let itemLayer = CAShapeLayer()
@@ -45,6 +35,10 @@ class MainTabBarController: UITabBarController {
   var itemWidth = CGFloat()
   let appearence = UITabBarAppearance()
   
+  init(user: UserCardModel) {
+    self.user = user
+    super.init(nibName: nil, bundle: nil)
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,6 +49,9 @@ class MainTabBarController: UITabBarController {
     super.viewWillLayoutSubviews()
     actualizePath()
   }
-    
+   
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 }
 

@@ -13,10 +13,13 @@ class InterestsCollectionViewController: UICollectionViewController {
   
   private let cellIdentifier: String = "interestCell"
   private var isChoosable = false
+  var oneItemReload = false
   public var interests: [InterestPair] = [] {
     didSet {
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
+      if !oneItemReload {
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
       }
     }
   }
@@ -46,7 +49,10 @@ extension InterestsCollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard isChoosable == true else { return }
-    
+    oneItemReload = true
+    interests[indexPath.row].match.toggle()
+    collectionView.reloadItems(at: [indexPath])
+    oneItemReload = false
   }
 }
 
@@ -66,7 +72,7 @@ extension InterestsCollectionViewController {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as? InterestCell else { return UICollectionViewCell() }
     let interest = interests[indexPath.row].interest
     let match = interests[indexPath.row].match
-    cell.configure(with: interest, matching: match)
+    cell.configure(with: interest, matching: match, interactionEnabled: self.isChoosable)
     return cell
   }
   
@@ -74,8 +80,6 @@ extension InterestsCollectionViewController {
 // MARK: - Layout
 extension InterestsCollectionViewController: UICollectionViewDelegateFlowLayout {
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 15
-  }
+  
   
 }

@@ -267,6 +267,14 @@
 			path = InterestLabel;
 			sourceTree = "<group>";
 		};
+		7B716792287D4CFB00064F36 /* DemoSetupProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */,
+			);
+			path = DemoSetupProfileVC;
+			sourceTree = "<group>";
+		};
 		7B71D541287AA519002E7340 /* StartScreenButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,7 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB0B3E4287996140043F893 /* StartScreenController.swift */,
-				7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */,
+				7B716792287D4CFB00064F36 /* DemoSetupProfileVC */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";

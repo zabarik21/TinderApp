@@ -18,9 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.windowScene = windowScene
     let ssc = StartScreenController()
     let nvc = UINavigationController(rootViewController: ssc)
-//    nvc.navigationBar.isHidden = true
+    //    nvc.navigationBar.isHidden = true
     window?.rootViewController = nvc
     window?.makeKeyAndVisible()
+  }
+  
+  func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+    guard let window = self.window else {
+      return
+    }
+    window.rootViewController = vc
+    UIView.transition(with: window, duration: 0.5, options: [.transitionCrossDissolve], animations: nil, completion: nil)
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {

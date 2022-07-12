@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol ProfileImageViewDelegate {
-  func chooseImage() -> UIImage?
+  func chooseImage() 
 }
 
 class ProfileImageView: UIImageView {
@@ -35,14 +35,17 @@ class ProfileImageView: UIImageView {
     tintColor = .logoColor
     layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
     layer.borderWidth = 1
+    clipsToBounds = true
+  }
+  
+  func updateImage(with newImage: UIImage) {
+    contentMode = .scaleAspectFill
+    self.image = newImage
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if let newImage = delegate?.chooseImage() {
-      self.image = newImage
-    }
+    delegate?.chooseImage()
     super.touchesEnded(touches, with: event)
-    
   }
   
   required init?(coder: NSCoder) {

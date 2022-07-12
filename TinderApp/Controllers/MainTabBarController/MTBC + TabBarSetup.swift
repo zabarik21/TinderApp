@@ -16,6 +16,10 @@ extension MainTabBarController {
     let messagesTabBarImage = UIImage(systemName: "message", withConfiguration: regularConfiguration)!
     let profileTabBarImage = UIImage(systemName: "person", withConfiguration: regularConfiguration)!
     
+    peopleVC = PeopleViewController(user: user)
+    messagesVC = MessagerViewController()
+    profileVC = ProfileViewController()
+    
     setupVCTabBar(viewController: peopleVC, title: "Discover", image: peopleTabBarImage)
     setupVCTabBar(viewController: messagesVC, title: "Messages", image: messagesTabBarImage)
     setupVCTabBar(viewController: profileVC, title: "Profile", image: profileTabBarImage)
