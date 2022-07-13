@@ -14,4 +14,12 @@ extension String {
     let firstLetter = self[startIndex].uppercased()
     return "\(firstLetter)\(tail)"
   }
+  
+  var lowercasingFirstLetter: Self {
+    guard count > 1 else { return self.uppercased() }
+    let tail = self.suffix(from: self.index(after: self.startIndex))
+    let firstLetter = self[startIndex].lowercased()
+    return "\(firstLetter)\(tail)"
+  }
+  
 }

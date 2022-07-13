@@ -39,7 +39,7 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   
   func checkFields() -> Bool {
     let nameEmpty = (nameTextField.text?.count ?? 0) == 0
-    let surnameEmpty = (nameTextField.text?.count ?? 0) == 0
+    let surnameEmpty = (surnameTextField.text?.count ?? 0) == 0
     let genderEmpty = genderPicker.text == "" ? true : false
     
     if nameEmpty {
@@ -65,7 +65,7 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
         .filter({ $0.match })
         .map({ $0.interest })
         .toSet()
-      let gender = Gender(rawValue: self.genderPicker.text!)!
+      let gender = Gender(rawValue: self.genderPicker.text!.lowercasingFirstLetter)!
       let date = birthDatePicker.date.formatted(date: .numeric, time: .omitted)
       
       let user = UserCardModel(name: name,
@@ -110,7 +110,7 @@ extension SetupProfileViewController {
   }
   
   private func setupPickers() {
-    let genders = Gender.allCases.map({ $0.rawValue })
+    let genders = Gender.allCases.map({ $0.rawValue.uppercasingFirstLetter })
     genderPicker = TextFieldPickerView(with: genders)
     genderPicker.backgroundColor = .white.withAlphaComponent(0.5)
     
@@ -260,7 +260,7 @@ extension SetupProfileViewController {
     }
     
     scrollView.addSubview(toDemoButton)
-
+    
     toDemoButton.snp.makeConstraints { make in
       make.top.equalTo(interestCollectionView.view.snp.bottom).offset(24)
       make.width.equalTo(interestCollectionView.view)

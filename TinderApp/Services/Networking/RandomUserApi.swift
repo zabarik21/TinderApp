@@ -28,17 +28,19 @@ class RandomUserApi {
     let includeParametr = ["results": count,
                            "inc": apiIncludes.joined(separator: ","),
                            "noinfo": nil] as [String : Any?]
-    networkManager.request(with: apiUrlString, parametrs: includeParametr) { result in
-      switch result {
-      case .success(let data):
-        do {
-          let apiResponce = try JSONDecoder().decode(RandomPeopleApiResponce.self, from: data)
-          completion(.success(apiResponce.results))
-        } catch {
-          print(error)
+    DispatchQueue.global(qos: .utility).async { [weak self] in
+      self?.networkManager.request(with: self!.apiUrlString, parametrs: includeParametr) { result in
+        switch result {
+        case .success(let data):
+          do {
+            let apiResponce = try JSONDecoder().decode(RandomPeopleApiResponce.self, from: data)
+            completion(.success(apiResponce.results))
+          } catch {
+            print(error)
+          }
+        case .failure(let error):
+          completion(.failure(error))
         }
-      case .failure(let error):
-        completion(.failure(error))
       }
     }
   }
