@@ -4,7 +4,7 @@
 # 📲 About App: 
 - MVVM architecrure 
 - Full programmatically UI (no storyboard) 
-- Demo option avaliable (without registration)
+- You can try app without need to registration (demo option avaliable - without registration)
 - Fetching users data from backend (Random People API when app is in demo mode / Firebase when user is logged in)
 - See detailed information about the user and its interests
 - Like ot dislike users by buttons or by swipe
