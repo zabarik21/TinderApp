@@ -7,8 +7,3 @@
 
 import UIKit
 
-extension PeopleViewController: ReactionViewDelegate {
-  func reacted(liked: Bool) {
-    cardContainer.reacted(liked: liked)
-  }
-}

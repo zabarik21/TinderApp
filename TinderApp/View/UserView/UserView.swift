@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxRelay
+import RxSwift
 
 enum Constants {
   static var imageViewHeightMultiplier: CGFloat = 0.63
@@ -27,8 +29,18 @@ class UserView: UIView, UserViewProtocol {
   private var userInfoView: UserInfoView!
   private var scrollView: UIScrollView!
   
-  weak var userViewDelegate: UserViewDelegate?
-  weak var reactionsDelegate: ReactionViewDelegate?
+  private var hideUserViewPublishRelay  =  PublishRelay<Void>()
+  private var reactionsPublishRelay = PublishRelay<Reaction>()
+  private var bag = DisposeBag()
+  
+  var userViewHideObservable: Observable<Void> {
+    return hideUserViewPublishRelay.asObservable()
+  }
+  
+  var reactionsObservable: Observable<Reaction> {
+    return reactionsPublishRelay.asObservable()
+  }
+  
   var viewModel: UserCardViewViewModelProtocol? {
     didSet {
       fillUI()
@@ -45,6 +57,15 @@ class UserView: UIView, UserViewProtocol {
     super.init(frame: .zero)
     setupElements()
     setupGestures()
+    setupObserver()
+  }
+  
+  private func setupObserver() {
+    reactionView.reactedObservable.subscribe { [weak self] event in
+      guard let reaction = event.element else { return }
+      self?.reacted(reaction: reaction)
+    }.disposed(by: bag)
+    
   }
   
   override func layoutSubviews() {
@@ -76,13 +97,21 @@ class UserView: UIView, UserViewProtocol {
     }
   }
   
+  func reacted(reaction: Reaction) {
+    hideUserViewPublishRelay.accept(())
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+      self.reactionsPublishRelay.accept(reaction)
+    }
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 }
 
 // MARK: - Setup Elements & Constraints
-extension UserView {
+// remove uiscrollview deleagte
+extension UserView: UIScrollViewDelegate {
   
   private func setupElements() {
     setupUserImageView()
@@ -126,7 +155,10 @@ extension UserView {
   
   private func setupReactionView() {
     reactionView = ReactionButtonsView()
-    reactionView.delegate = self
+    reactionView.reactedObservable.subscribe { [weak self] event in
+      guard let reaction = event.element else { return }
+      self?.reactionsPublishRelay.accept(reaction)
+    }.disposed(by: bag)
   }
   
   private func setupLabels() {
@@ -212,14 +244,47 @@ extension UserView {
 }
 
 
-
-// MARK: - ReactionViewDelegate
-extension UserView: ReactionViewDelegate {
+// MARK: - UIGestureRecognizerDelegate
+extension UserView: UIGestureRecognizerDelegate {
   
-  func reacted(liked: Bool) {
-    self.userViewDelegate?.hide()
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-      self.reactionsDelegate?.reacted(liked: liked)
+  private func setupGestures() {
+    let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+    gestureRecognizer.delegate = self
+    addGestureRecognizer(gestureRecognizer)
+  }
+  
+  @objc private func handlePan(_ recognizer: UIPanGestureRecognizer) {
+    let velocity = recognizer.velocity(in: self)
+    switch recognizer.state {
+    case .began:
+      break
+    case .changed:
+      onChange(recognizer)
+    case .ended:
+      gestureEnded(with: velocity.y)
+      break
+    @unknown default:
+      print("oknown")
+    }
+  }
+  
+  private func onChange(_ recognizer: UIPanGestureRecognizer) {
+    let translation = recognizer.translation(in: self)
+    if (frame.minY <= 0 && translation.y < 0) { return }
+    guard let gestureView = recognizer.view else { return }
+    let yDelta = center.y
+    gestureView.center = CGPoint(x: center.x,
+                                 y: yDelta + translation.y)
+    recognizer.setTranslation(.zero, in: self)
+  }
+  
+  private func gestureEnded(with velocity: CGFloat) {
+    if velocity > 1000 || frame.minY > (self.viewHieght / 3) {
+      self.hideUserViewPublishRelay.accept(())
+    } else {
+      UIView.animate(withDuration: Constants.viewDissappearTime) {
+        self.center.y = self.viewHieght / 2
+      }
     }
   }
   

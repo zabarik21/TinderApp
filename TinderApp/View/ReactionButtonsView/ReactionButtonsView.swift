@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxRelay
 
 enum ReactionButtonsViewConstants {
   static var shadowOpacity: Float = 0.3
@@ -14,12 +16,21 @@ enum ReactionButtonsViewConstants {
   static var delay: TimeInterval = 0.3
 }
 
+enum Reaction {
+  case like
+  case dislike
+}
+
 class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
   
-  var delegate: ReactionViewDelegate?
+  private var likeButton: UIButton!
+  private var dislikeButton: UIButton!
+  private var publishRelay = PublishRelay<Reaction>()
   
-  var likeButton: UIButton!
-  var dislikeButton: UIButton!
+  var reactedObservable: Observable<Reaction> {
+    return publishRelay.asObservable()
+  }
+  
   var delayIsOn = false
   
   init() {
@@ -48,9 +59,9 @@ class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
     }
     guard delayIsOn != true else { return }
     if sender === likeButton {
-      delegate?.reacted(liked: true)
+      publishRelay.accept(.like)
     } else {
-      delegate?.reacted(liked: false)
+      publishRelay.accept(.dislike)
     }
     delayIsOn = true
     DispatchQueue.main.asyncAfter(deadline: .now() + ReactionButtonsViewConstants.delay, execute: {

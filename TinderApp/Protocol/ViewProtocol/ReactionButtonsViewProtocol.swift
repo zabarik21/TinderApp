@@ -6,7 +6,8 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol ReactionButtonsViewProtocol: UIView {
-  var delegate: ReactionViewDelegate? { get set }
+  var reactedObservable: Observable<Reaction> { get }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 enum PeopleVCConstants {
   static var cardContainerHeightMultiplier: CGFloat = 0.553
@@ -28,6 +29,8 @@ class PeopleViewController: UIViewController {
   var userView: UserViewProtocol!
   var user: UserCardModel
   
+  var bag = DisposeBag()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupElements()
@@ -42,6 +45,11 @@ class PeopleViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     actualizePath()
+  }
+  
+  func reacted(reaction: Reaction) {
+    let liked = reaction == .like ? true : false
+    cardContainer.reacted(liked: liked)
   }
   
   required init?(coder: NSCoder) {
@@ -99,12 +107,28 @@ extension PeopleViewController {
     setupCardContainer()
     setupTitleLabel()
     setupUserView()
+    setupObservers()
+  }
+  
+  private func setupObservers() {
+    
+    userView.userViewHideObservable.subscribe { [weak self] event in
+      self?.hide()
+    }.disposed(by: bag)
+    
+    userView.reactionsObservable.subscribe { event in
+      guard let reaction = event.element else { return }
+      self.reacted(reaction: reaction)
+    }.disposed(by: bag)
+    
+    reactionsView.reactedObservable.subscribe { [weak self] event in
+      guard let reaction = event.element else { return }
+      self?.reacted(reaction: reaction)
+    }.disposed(by: bag)
   }
   
   private func setupUserView() {
     userView = UserView(user: self.user)
-    userView.userViewDelegate = self
-    userView.reactionsDelegate = self
     userView.alpha = 0
   }
   
@@ -114,7 +138,6 @@ extension PeopleViewController {
   
   private func setupReactionsView(){
     reactionsView = ReactionButtonsView()
-    reactionsView.delegate = self
   }
   
   private func setupCardContainer() {

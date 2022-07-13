@@ -9,6 +9,7 @@ target 'TinderApp' do
   pod 'Kingfisher'
   pod 'RxSwift'
   pod 'SnapKit'
+  pod 'RxRelay'
 
   target 'TinderAppTests' do
     inherit! :search_paths

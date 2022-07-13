@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxRelay
+import RxSwift
 
 
 protocol HideShowView {
@@ -14,8 +16,8 @@ protocol HideShowView {
 
 protocol UserViewProtocol: UIView, HideShowView {
   var viewModel: UserCardViewViewModelProtocol? { get set }
-  var reactionsDelegate: ReactionViewDelegate? { get set }
-  var userViewDelegate: UserViewDelegate? { get set }
+  var userViewHideObservable: Observable<Void> { get }
+  var reactionsObservable: Observable<Reaction> { get }
   
   func toIdentity()
 }
