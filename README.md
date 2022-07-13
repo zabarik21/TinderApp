@@ -2,7 +2,7 @@
 🙎‍♂️🙍‍♀️ A dating application built with Swift 5 and UIKit where the user can find an friend by swiping throught cards and  if another user likes you too you can chat.
 
 # 📲 About App: 
-- MVVM architecrure 
+- MVVM architecrure pattern
 - Full programmatically UI (no storyboard) 
 - You can try app without need to registration (demo option avaliable - without registration)
 - Fetching users data from backend (Random People API when app is in demo mode / Firebase when user is logged in)
