@@ -18,7 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.windowScene = windowScene
     let ssc = StartScreenController()
     let nvc = UINavigationController(rootViewController: ssc)
-    //    nvc.navigationBar.isHidden = true
+    nvc.navigationBar.tintColor = .logoColor
+    nvc.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    nvc.navigationBar.shadowImage = UIImage()
+    nvc.navigationBar.isTranslucent = true
+    nvc.view.backgroundColor = .clear
     window?.rootViewController = nvc
     window?.makeKeyAndVisible()
   }

@@ -83,12 +83,8 @@ extension UserInfoView {
   }
   
   private func setupLabels() {
-    nameAgeLabel = UILabel()
-    cityLabel = UILabel()
-    nameAgeLabel.font = .systemFont(ofSize: 24, weight: .bold)
-    cityLabel.font = .systemFont(ofSize: 12, weight: .bold)
-    nameAgeLabel.textColor = UIColor.cardLabelTextColor
-    cityLabel.textColor = UIColor.cardLabelTextColor
+    nameAgeLabel = UILabel(text: "", fontSize: 24, weight: .bold, textColor: .cardLabelTextColor)
+    cityLabel = UILabel(text: "", fontSize: 12, weight: .bold, textColor: .cardLabelTextColor)
     
     labelsStackView = UIStackView(arrangedSubviews: [nameAgeLabel, cityLabel])
     labelsStackView.axis = .vertical

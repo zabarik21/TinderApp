@@ -130,14 +130,8 @@ extension UserView {
   }
   
   private func setupLabels() {
-    interestLabel = UILabel()
-    interestLabel.font = .systemFont(ofSize: 18, weight: .bold)
-    interestLabel.textColor = .black
-    interestLabel.text = "Interests"
-    similarInterestLabel = UILabel()
-    similarInterestLabel.font = .systemFont(ofSize: 14, weight: .bold)
-    similarInterestLabel.textColor = UIColor.firstGradientColor.withAlphaComponent(0.6)
-    similarInterestLabel.text = "0 Similar"
+    interestLabel = UILabel(text: "Interests", fontSize: 18, weight: .bold, textColor: .black)
+    similarInterestLabel = UILabel(text: "0 Similar", fontSize: 14, weight: .bold, textColor: .firstGradientColor.withAlphaComponent(0.6))
   }
   
   private func setupUserImageView() {

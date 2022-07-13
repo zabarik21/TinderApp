@@ -45,9 +45,10 @@ struct ID: Codable {
 }
 
 
-enum Gender: String, Codable {
+enum Gender: String, Codable, CaseIterable {
   case female
   case male
+//   other = "other"
 }
 
 struct Name: Codable {

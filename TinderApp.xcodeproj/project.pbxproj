@@ -37,6 +37,10 @@
 		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
 		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
 		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
+		7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */; };
+		7B929B55287E97D600B6AE35 /* UILabel + Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B54287E97D600B6AE35 /* UILabel + Init.swift */; };
+		7B929B58287EC4E000B6AE35 /* UIView + Draggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B57287EC4E000B6AE35 /* UIView + Draggle.swift */; };
+		7B929B5B287ECB3700B6AE35 /* Array + Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B5A287ECB3700B6AE35 /* Array + Set.swift */; };
 		7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9332142860495C00D46E69 /* HiddenReactionView.swift */; };
 		7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B933216286049A400D46E69 /* HiddenReactionViewProtocol.swift */; };
 		7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */; };
@@ -62,7 +66,7 @@
 		7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */; };
 		7BCB99C52845DAA4004EFC29 /* CardViewDeleagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */; };
 		7BD80E5B287832A300BB2C74 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */; };
-		7BE2E90C287C2EA800D0BA75 /* DemoSetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */; };
+		7BE2E90C287C2EA800D0BA75 /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90B287C2EA800D0BA75 /* SetupProfileViewController.swift */; };
 		7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */; };
 		7BE709DF284B4C3700DCAE30 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7BE709DE284B4C3700DCAE30 /* Kingfisher */; };
 		7BEBD960284A8A9200C3DF30 /* CardContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */; };
@@ -120,6 +124,10 @@
 		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
 		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
 		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
+		7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPickerView.swift; sourceTree = "<group>"; };
+		7B929B54287E97D600B6AE35 /* UILabel + Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Init.swift"; sourceTree = "<group>"; };
+		7B929B57287EC4E000B6AE35 /* UIView + Draggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Draggle.swift"; sourceTree = "<group>"; };
+		7B929B5A287ECB3700B6AE35 /* Array + Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Set.swift"; sourceTree = "<group>"; };
 		7B9332142860495C00D46E69 /* HiddenReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenReactionView.swift; sourceTree = "<group>"; };
 		7B933216286049A400D46E69 /* HiddenReactionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenReactionViewProtocol.swift; sourceTree = "<group>"; };
 		7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsView.swift; sourceTree = "<group>"; };
@@ -145,7 +153,7 @@
 		7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		7BCB99C42845DAA4004EFC29 /* CardViewDeleagate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewDeleagate.swift; sourceTree = "<group>"; };
 		7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
-		7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSetupProfileViewController.swift; sourceTree = "<group>"; };
+		7BE2E90B287C2EA800D0BA75 /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7BEBD95F284A8A9200C3DF30 /* CardContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerDelegate.swift; sourceTree = "<group>"; };
 		7BED5EA5284111730081E71E /* TinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,12 +275,12 @@
 			path = InterestLabel;
 			sourceTree = "<group>";
 		};
-		7B716792287D4CFB00064F36 /* DemoSetupProfileVC */ = {
+		7B716792287D4CFB00064F36 /* SetupProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
-				7BE2E90B287C2EA800D0BA75 /* DemoSetupProfileViewController.swift */,
+				7BE2E90B287C2EA800D0BA75 /* SetupProfileViewController.swift */,
 			);
-			path = DemoSetupProfileVC;
+			path = SetupProfileViewController;
 			sourceTree = "<group>";
 		};
 		7B71D541287AA519002E7340 /* StartScreenButton */ = {
@@ -289,6 +297,38 @@
 				7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */,
 			);
 			path = CGFloat;
+			sourceTree = "<group>";
+		};
+		7B929B50287E8A2100B6AE35 /* TextFieldPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */,
+			);
+			path = TextFieldPickerView;
+			sourceTree = "<group>";
+		};
+		7B929B53287E97C400B6AE35 /* UILabel + Convinience init */ = {
+			isa = PBXGroup;
+			children = (
+				7B929B54287E97D600B6AE35 /* UILabel + Init.swift */,
+			);
+			path = "UILabel + Convinience init";
+			sourceTree = "<group>";
+		};
+		7B929B56287EB08200B6AE35 /* UIView + Draggle */ = {
+			isa = PBXGroup;
+			children = (
+				7B929B57287EC4E000B6AE35 /* UIView + Draggle.swift */,
+			);
+			path = "UIView + Draggle";
+			sourceTree = "<group>";
+		};
+		7B929B59287ECB3100B6AE35 /* Array + Set */ = {
+			isa = PBXGroup;
+			children = (
+				7B929B5A287ECB3700B6AE35 /* Array + Set.swift */,
+			);
+			path = "Array + Set";
 			sourceTree = "<group>";
 		};
 		7B9332132860493700D46E69 /* HiddenReactionView */ = {
@@ -338,7 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB0B3E4287996140043F893 /* StartScreenController.swift */,
-				7B716792287D4CFB00064F36 /* DemoSetupProfileVC */,
+				7B716792287D4CFB00064F36 /* SetupProfileViewController */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -485,6 +525,7 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B929B50287E8A2100B6AE35 /* TextFieldPickerView */,
 				7B4389BC287C992D00791C56 /* SetupProfileTextField */,
 				7BE2E90D287C2ECB00D0BA75 /* ProfileImageView */,
 				7B71D541287AA519002E7340 /* StartScreenButton */,
@@ -504,6 +545,9 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B929B59287ECB3100B6AE35 /* Array + Set */,
+				7B929B56287EB08200B6AE35 /* UIView + Draggle */,
+				7B929B53287E97C400B6AE35 /* UILabel + Convinience init */,
 				7B3FB0402874C1BD00FA82A4 /* String */,
 				7B5BFDCA2870522800F070F7 /* UIImage */,
 				7BA8AF6328682D4500B254CC /* UIVIewController */,
@@ -735,7 +779,9 @@
 				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,
 				7BB2FED42870B65700A2731E /* CardContainerView + ReeactionDelegate.swift in Sources */,
 				7BB2FED22870AD3B00A2731E /* UIColor + Constants.swift in Sources */,
+				7B929B5B287ECB3700B6AE35 /* Array + Set.swift in Sources */,
 				7BA1BC7A2878917300E9C5E8 /* NetworkManager.swift in Sources */,
+				7B929B58287EC4E000B6AE35 /* UIView + Draggle.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */,
 				7B9FCBB0286772F50031518D /* UserView.swift in Sources */,
@@ -769,6 +815,7 @@
 				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
 				7B2907E1286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift in Sources */,
 				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
+				7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */,
 				7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */,
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B93C06428511860002B0A00 /* ReactionViewDelegate.swift in Sources */,
@@ -778,7 +825,8 @@
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,
 				7BB0B3E5287996140043F893 /* StartScreenController.swift in Sources */,
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,
-				7BE2E90C287C2EA800D0BA75 /* DemoSetupProfileViewController.swift in Sources */,
+				7B929B55287E97D600B6AE35 /* UILabel + Init.swift in Sources */,
+				7BE2E90C287C2EA800D0BA75 /* SetupProfileViewController.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */,
 				7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */,

@@ -36,7 +36,7 @@ class StartScreenController: UIViewController {
   }
   
   @objc func demoAppTouched() {
-    let demoSetupProfileViewController = DemoSetupProfileViewController()
+    let demoSetupProfileViewController = SetupProfileViewController()
     self.navigationController?.pushViewController(demoSetupProfileViewController, animated: true)
   }
   
@@ -64,10 +64,7 @@ extension StartScreenController {
     logoImageView.tintColor = .logoColor
     logoImageView.contentMode = .scaleAspectFit
     
-    logoLabel = UILabel()
-    logoLabel.text = "コミュニ"
-    logoLabel.font = .systemFont(ofSize: 51, weight: .semibold)
-    logoLabel.textColor = .logoColor
+    logoLabel = UILabel(text: "コミュニ", fontSize: 51, weight: .semibold, textColor: .logoColor)
     
     logoContainer = UIView()
   }

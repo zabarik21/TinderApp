@@ -18,8 +18,9 @@ class SetupProfileTextField: UITextField {
     updatePath()
   }
   
-  init() {
+  init(placeHolder: String) {
     super.init(frame: .zero)
+    self.placeholder = placeHolder
     setupLayer()
     setupFont()
   }
@@ -29,8 +30,8 @@ class SetupProfileTextField: UITextField {
     font = .systemFont(ofSize: 16, weight: .semibold)
     textColor = .logoColor
     attributedPlaceholder = NSAttributedString(
-        string: "Name",
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.logoColor.withAlphaComponent(0.5)]
+      string: self.placeholder!,
+      attributes: [NSAttributedString.Key.foregroundColor: UIColor.logoColor.withAlphaComponent(0.5)]
     )
   }
   

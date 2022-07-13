@@ -89,9 +89,7 @@ extension CompatabilityView {
   }
   
   private func setupLabel() {
-    scoreLabel = UILabel()
-    scoreLabel.font = .systemFont(ofSize: 14)
-    scoreLabel.textColor = UIColor.cardLabelTextColor
+    scoreLabel = UILabel(text: "", fontSize: 14, weight: .bold, textColor: .cardLabelTextColor)
     scoreLabel.textAlignment = .center
     
     addSubview(scoreLabel)

@@ -31,10 +31,11 @@ class RandomUserApi {
     networkManager.request(with: apiUrlString, parametrs: includeParametr) { result in
       switch result {
       case .success(let data):
-        if let apiResponce = try? JSONDecoder().decode(RandomPeopleApiResponce.self, from: data) {
+        do {
+          let apiResponce = try JSONDecoder().decode(RandomPeopleApiResponce.self, from: data)
           completion(.success(apiResponce.results))
-        } else {
-          completion(.failure(NetworkError.decodeData))
+        } catch {
+          print(error)
         }
       case .failure(let error):
         completion(.failure(error))

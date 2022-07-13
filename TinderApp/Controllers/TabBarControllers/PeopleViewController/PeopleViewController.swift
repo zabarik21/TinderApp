@@ -109,10 +109,7 @@ extension PeopleViewController {
   }
   
   private func setupTitleLabel() {
-    titleLabel = UILabel()
-    titleLabel.text = "People Nearby"
-    titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
-    titleLabel.textColor = UIColor.peopleViewControllerBackground
+    titleLabel = UILabel(text: "People Nearby", fontSize: 30, weight: .bold, textColor: .peopleViewControllerBackground)
   }
   
   private func setupReactionsView(){

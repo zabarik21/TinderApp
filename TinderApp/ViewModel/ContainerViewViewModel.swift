@@ -43,7 +43,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
         }
         self.delegate?.usersLoaded()
       case .failure(let error):
-        self.delegate?.showNetworkErrorAlert(with: error.localizedDescription)
+        DispatchQueue.main.async {
+          self.delegate?.showNetworkErrorAlert(with: error.localizedDescription)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
           self.fetchViewModels()
         })

@@ -29,6 +29,7 @@ class InterestsCollectionViewController: UICollectionViewController {
     registerCell()
     self.collectionView.backgroundColor = .peopleViewControllerBackground
     self.collectionView.showsHorizontalScrollIndicator = false
+    self.collectionView.showsVerticalScrollIndicator = false
   }
   
   func changeStyleToChoosable() {
