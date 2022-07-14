@@ -79,7 +79,7 @@ class PeopleViewController: UIViewController {
           // temporary descision
           self?.showNetworkErrorAlert(with: "Some error occured")
         }
-      })
+      }).disposed(by: bag)
   }
   
   func reacted(reaction: Reaction) {

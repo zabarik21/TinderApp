@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension CardContainerView: CardViewDeleagate {
+extension CardContainerView {
   
   func swiped(liked: Bool) {
     //    updateCardConstraints()
@@ -18,10 +18,10 @@ extension CardContainerView: CardViewDeleagate {
   func updateCurrentBottomCard() {
     let cardViewModel = viewModel?.nextCard()
     if topCardTurn {
-      topCardView.viewModel = cardViewModel
+      topCardView.viewModelRelay.accept(cardViewModel)
     }
     else {
-      bottomCardView.viewModel = cardViewModel
+      bottomCardView.viewModelRelay.accept(cardViewModel)
     }
   }
   

@@ -39,8 +39,8 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   init() {
     super.init(frame: .zero)
     setupElements()
+    setupObserver()
   }
-  
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -48,20 +48,32 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   }
   
   func fillCards() {
-    if topCardView.viewModel == nil {
-      topCardView.viewModel = viewModel?.nextCard()
+    if topCardView.viewModelRelay.value == nil {
+      topCardView.viewModelRelay.accept(viewModel?.nextCard())
     }
-    if bottomCardView.viewModel == nil {
-      bottomCardView.viewModel = viewModel?.nextCard()
+    if bottomCardView.viewModelRelay.value == nil {
+      bottomCardView.viewModelRelay.accept(viewModel?.nextCard())
     }
+  }
+  
+  private func setupObserver() {
+    topCardView.swipedObservable
+      .subscribe { [weak self] liked in
+        self?.swiped(liked: liked)
+      }.disposed(by: bag)
+    
+    bottomCardView.swipedObservable
+      .subscribe { [weak self] liked in
+        self?.swiped(liked: liked)
+      }.disposed(by: bag)
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if topCardTurn {
-      cardTouchPublisher.onNext(topCardView.viewModel)
+      cardTouchPublisher.onNext(topCardView.viewModelRelay.value)
     }
     else {
-      cardTouchPublisher.onNext(bottomCardView.viewModel)
+      cardTouchPublisher.onNext(bottomCardView.viewModelRelay.value)
     }
   }
   
@@ -77,11 +89,8 @@ extension CardContainerView {
   
   private func setupElements() {
     backgroundColor = .clear
-    topCardView = CardView(with: viewModel?.nextCard())
-    bottomCardView = CardView(with: viewModel?.nextCard())
-    
-    topCardView.delegate = self
-    bottomCardView.delegate = self
+    topCardView = CardView()
+    bottomCardView = CardView()
   }
   
   private func setupConstraints() {

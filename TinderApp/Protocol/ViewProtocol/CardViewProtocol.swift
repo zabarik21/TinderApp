@@ -5,12 +5,13 @@
 //  Created by Timofey on 2/7/22.
 //
 
-import UIKit
+import RxRelay
+import RxSwift
 
 
 protocol CardViewProtocol: UIView {
-  var delegate: CardViewDeleagate? { get set }
-  var viewModel: UserCardViewViewModelProtocol? { get set }
+  var viewModelRelay: BehaviorRelay<UserCardViewViewModelProtocol?> { get }
+  var swipedObservable: Observable<Bool> { get }
   var isSwipeble: Bool { get }
   
   func swipe(liked: Bool, fromButton: Bool)
