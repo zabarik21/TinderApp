@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 enum CardContainerConstants {
   static var topAnchorCardOffset: CGFloat = 5
@@ -20,10 +21,16 @@ enum CardContainerConstants {
 
 class CardContainerView: UIView, CardContainerViewProtocol {
   
-  var viewModel: CardContainerViewViewModelProtocol?
-  weak var delegate: CardContainerDelagate?
+  private var bag = DisposeBag()
+  private var cardTouchPublisher = PublishSubject<UserCardViewViewModelProtocol?>()
   
-  var backCardContainer: UIView!
+  var cardTouchObservable: Observable<UserCardViewViewModelProtocol?> {
+    return cardTouchPublisher.asObservable()
+  }
+  
+  var viewModel: CardContainerViewViewModelProtocol?
+  
+  private var backCardContainer: UIView!
   var bottomCardView: CardViewProtocol!
   var topCardView: CardViewProtocol!
   
@@ -32,6 +39,7 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   init() {
     super.init(frame: .zero)
     setupElements()
+    setupObserver()
   }
   
   override func layoutSubviews() {
@@ -40,20 +48,32 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   }
   
   func fillCards() {
-    if topCardView.viewModel == nil {
-      topCardView.viewModel = viewModel?.nextCard()
+    if topCardView.viewModelRelay.value == nil {
+      topCardView.viewModelRelay.accept(viewModel?.nextCard())
     }
-    if bottomCardView.viewModel == nil {
-      bottomCardView.viewModel = viewModel?.nextCard()
+    if bottomCardView.viewModelRelay.value == nil {
+      bottomCardView.viewModelRelay.accept(viewModel?.nextCard())
     }
+  }
+  
+  private func setupObserver() {
+    topCardView.swipedObservable
+      .subscribe { [weak self] liked in
+        self?.reacted(liked: liked)
+      }.disposed(by: bag)
+    
+    bottomCardView.swipedObservable
+      .subscribe { [weak self] liked in
+        self?.reacted(liked: liked)
+      }.disposed(by: bag)
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if topCardTurn {
-      delegate?.cardTouched(with: topCardView.viewModel)
+      cardTouchPublisher.onNext(topCardView.viewModelRelay.value)
     }
     else {
-      delegate?.cardTouched(with: bottomCardView.viewModel)
+      cardTouchPublisher.onNext(bottomCardView.viewModelRelay.value)
     }
   }
   
@@ -64,19 +84,13 @@ class CardContainerView: UIView, CardContainerViewProtocol {
 
 
 
-
-
-
-// MARK: - Setup constraints
+// MARK: - Setup Elements & UI
 extension CardContainerView {
   
   private func setupElements() {
     backgroundColor = .clear
-    topCardView = CardView(with: viewModel?.nextCard())
-    bottomCardView = CardView(with: viewModel?.nextCard())
-    
-    topCardView.delegate = self
-    bottomCardView.delegate = self
+    topCardView = CardView()
+    bottomCardView = CardView()
   }
   
   private func setupConstraints() {

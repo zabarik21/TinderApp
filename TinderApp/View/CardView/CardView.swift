@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import RxRelay
+import RxSwift
 
 enum CardViewConstants {
   static let xShift: CGFloat = 300
@@ -25,12 +27,15 @@ enum CardViewConstants {
 
 class CardView: UIView, CardViewProtocol {
   
-  var viewModel: UserCardViewViewModelProtocol? {
-    didSet {
-      fillUI()
-    }
+  var viewModelRelay = BehaviorRelay<UserCardViewViewModelProtocol?>(value: nil)
+  
+  private var swipedPublisher = PublishSubject<Bool>()
+  private var bag = DisposeBag()
+  
+  var swipedObservable: Observable<Bool> {
+    return swipedPublisher.asObservable()
   }
-  weak var delegate: CardViewDeleagate?
+  
   
   var anchorPoint: CGPoint = .zero
   var startPoint: CGPoint = .zero
@@ -41,11 +46,19 @@ class CardView: UIView, CardViewProtocol {
   private var userInfoView: UserInfoView!
   var isSwipeble = false
   
-  init(with viewModel: UserCardViewViewModelProtocol?) {
-    self.viewModel = viewModel
+  init() {
     super.init(frame: .zero)
     setupElements()
     setupGestures()
+    setupObserver()
+  }
+  
+  private func setupObserver() {
+    viewModelRelay
+      .subscribe(on: MainScheduler.instance)
+      .subscribe { [weak self] viewModel in
+        self?.fillUI(with: viewModel)
+      }.disposed(by: bag)
   }
   
   override func layoutSubviews() {
@@ -53,38 +66,33 @@ class CardView: UIView, CardViewProtocol {
     self.startPoint = center
     setupConstraints()
   }
-  
-  init() {
-    super.init(frame: .zero)
-    setupElements()
-    setupGestures()
-  }
+
   
   func swipe(liked: Bool, fromButton: Bool = false) {
     let xShift: CGFloat = liked ? CardViewConstants.xShift : -CardViewConstants.xShift
     let angle: CGFloat = liked ? CardViewConstants.swipedAngle : -CardViewConstants.swipedAngle
     let duration = fromButton ? PeopleVCConstants.cardDisappearTime * 3 : PeopleVCConstants.cardDisappearTime
-    UIView.animate(withDuration: duration) { 
-      self.transform = CGAffineTransform(rotationAngle: angle)
-      self.center.x += xShift
-      self.hiddenTopReactionView.toggleReaction(like: liked)
-      self.hiddenTopReactionView.alpha = 1
-      self.alpha = 0
-    } completion: { _ in
-      self.transform = .identity
-      self.hiddenTopReactionView.alpha = 0
-      self.center = self.startPoint
-      self.delegate?.swiped(liked: liked)
+    UIView.animate(withDuration: duration) { [weak self] in
+      self?.transform = CGAffineTransform(rotationAngle: angle)
+      self?.center.x += xShift
+      self?.hiddenTopReactionView.toggleReaction(like: liked)
+      self?.hiddenTopReactionView.alpha = 1
+      self?.alpha = 0
+    } completion: { [weak self] _ in
+      self?.transform = .identity
+      self?.hiddenTopReactionView.alpha = 0
+      self?.center = self?.startPoint ?? .zero
+      self?.swipedPublisher.onNext(liked)
     }
   }
 
-  private func fillUI() {
-      if let viewModel = self.viewModel {
+  private func fillUI(with viewModel: UserCardViewViewModelProtocol?) {
+      if let viewModel = viewModel {
         self.isSwipeble = true
         guard let url = URL(string: viewModel.imageUrlString) else { return }
         self.userInfoView.viewModelRelay.accept(viewModel.userInfoViewViewModel)
-        DispatchQueue.main.async {
-          self.profileImage.kf.setImage(with: url,
+        DispatchQueue.main.async { [weak self] in
+          self?.profileImage.kf.setImage(with: url,
                                    options: [
                                     .transition(.fade(0.2)),
                                    ]) { result in
@@ -125,7 +133,7 @@ extension CardView {
     setupImageView()
     setupUserInfoView()
     setupHiddenTopReactionView()
-    fillUI()
+    fillUI(with: nil)
   }
   
   func setupHiddenTopReactionView() {

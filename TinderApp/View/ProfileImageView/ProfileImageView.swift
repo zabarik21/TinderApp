@@ -6,16 +6,17 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
-
-
-protocol ProfileImageViewDelegate {
-  func chooseImage() 
-}
 
 class ProfileImageView: UIImageView {
   
-  var delegate: ProfileImageViewDelegate?
+  private var imageChoose = PublishRelay<Void>()
+  
+  var imageChooseObservable: Observable<Void> {
+    return imageChoose.asObservable()
+  }
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -44,7 +45,7 @@ class ProfileImageView: UIImageView {
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    delegate?.chooseImage()
+    imageChoose.accept(())
     super.touchesEnded(touches, with: event)
   }
   

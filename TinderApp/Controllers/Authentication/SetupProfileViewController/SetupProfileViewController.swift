@@ -8,6 +8,7 @@
 import UIKit
 import PhotosUI
 import SnapKit
+import RxSwift
 
 
 class SetupProfileViewController: UIViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
@@ -18,6 +19,8 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
     static let horizontalPaddingMultiplier: CGFloat = 0.055555555555556
   }
   
+  private var bag = DisposeBag()
+
   private var profileImageView: ProfileImageView!
   private var nameTextField: SetupProfileTextField!
   private var surnameTextField: SetupProfileTextField!
@@ -35,6 +38,13 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
     super.viewDidLoad()
     setupElements()
     setupConstraints()
+  }
+  
+  private func setupObserver() {
+    profileImageView.imageChooseObservable
+      .subscribe { [weak self] _ in
+        self?.chooseImage()
+      }.disposed(by: bag)
   }
   
   func checkFields() -> Bool {
@@ -101,6 +111,7 @@ extension SetupProfileViewController {
     setupButton()
     setupInterestsCollectionView()
     setupImagePicker()
+    setupObserver()
   }
   
   private func setupScrollView() {
@@ -170,7 +181,6 @@ extension SetupProfileViewController {
   
   private func setupImageView() {
     profileImageView = ProfileImageView()
-    profileImageView.delegate = self
   }
   
   private func setupBackground() {
@@ -288,8 +298,8 @@ extension SetupProfileViewController: PHPickerViewControllerDelegate {
 }
 
 
-// MARK: - ProfileImageViewDelegate
-extension SetupProfileViewController: ProfileImageViewDelegate {
+// MARK: - chooseImage observer func
+extension SetupProfileViewController {
   
   func chooseImage() {
     present(imagePicker, animated: true, completion: nil)

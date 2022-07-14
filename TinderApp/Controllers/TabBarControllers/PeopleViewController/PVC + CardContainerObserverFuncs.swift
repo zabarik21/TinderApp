@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension PeopleViewController: CardContainerDelagate {
+extension PeopleViewController {
   
   func cardTouched(with viewModel: UserCardViewViewModelProtocol?) {
     self.tabBarController?.setTabBarHidden(true, animated: true, duration: PeopleVCConstants.cardDisappearTime)

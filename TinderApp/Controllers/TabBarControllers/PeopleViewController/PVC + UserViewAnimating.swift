@@ -1,5 +1,5 @@
 //
-//  PVC + UserViewDelegate.swift
+//  PVC + UserViewAnimating.swift
 //  TinderApp
 //
 //  Created by Timofey on 2/7/22.

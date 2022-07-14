@@ -6,16 +6,21 @@
 //
 
 import Foundation
-
+import RxSwift
 
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     
   var users: [UserCardViewViewModelProtocol]
   var usersApi = RandomUserApi()
-  weak var delegate: CardContainerViewViewModelDelegate?
   
   // remake by adding user global property or some else
   var user: UserCardModel
+  
+  private var userLoadPublisher = PublishSubject<Bool>()
+  
+  var userLoadObservable: Observable<Bool> {
+    return userLoadPublisher.asObservable()
+  }
   
   func nextCard() -> UserCardViewViewModelProtocol? {
     if users.count < 5 {
@@ -41,10 +46,11 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
           let viewModel = UserCardViewViewModel(with: userWithInterest, myInterests: self.user.interests)
           self.users.append(viewModel)
         }
-        self.delegate?.usersLoaded()
+        self.userLoadPublisher.onNext(true)
       case .failure(let error):
-        DispatchQueue.main.async {
-          self.delegate?.showNetworkErrorAlert(with: error.localizedDescription)
+        DispatchQueue.main.async { [weak self] in
+          self?.userLoadPublisher.onNext(false)
+          print(error)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
           self.fetchViewModels()
