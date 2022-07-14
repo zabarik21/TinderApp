@@ -61,7 +61,7 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   @objc func toDemo() {
     if checkFields() {
       let name = Name(first: self.nameTextField.text!, last: self.surnameTextField.text!)
-      let interests = interestCollectionView.interests
+      let interests = interestCollectionView.interestsRelay.value
         .filter({ $0.match })
         .map({ $0.interest })
         .toSet()
@@ -143,9 +143,7 @@ extension SetupProfileViewController {
     
     interestCollectionView = InterestsCollectionViewController(collectionViewLayout: layout)
     interestCollectionView.changeStyleToChoosable()
-    interestCollectionView.interests = Interest.allCases.map({ interest in
-      (interest, false)
-    })
+    interestCollectionView.interestsRelay.accept(Interest.allCases.map {($0, false)} )
   }
   
   private func setupLabels() {

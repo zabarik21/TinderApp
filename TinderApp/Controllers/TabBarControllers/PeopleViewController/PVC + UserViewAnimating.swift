@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-extension PeopleViewController: UserViewDelegate {
+extension PeopleViewController {
   
-  func hide() {
+  func hideUserView() {
     userView.snp.updateConstraints { make in
       make.top.equalTo(self.view.snp.bottom).offset(0)
     }

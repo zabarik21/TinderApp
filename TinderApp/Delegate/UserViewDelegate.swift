@@ -9,5 +9,5 @@ import Foundation
 
 
 protocol UserViewDelegate: AnyObject {
-  func hide()
+  func hideUserView()
 }

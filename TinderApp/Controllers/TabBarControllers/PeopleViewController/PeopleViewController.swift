@@ -49,13 +49,11 @@ class PeopleViewController: UIViewController {
   
   private func setupObservers() {
     userView.hideUserViewObservable
-      .debug()
       .subscribe { [weak self] event in
-      self?.hide()
+      self?.hideUserView()
     }.disposed(by: bag)
     
     userView.reactionsObservable
-      .debug()
       .subscribe { [weak self] event in
       guard let reaction = event.element else { return }
       self?.reacted(reaction: reaction)

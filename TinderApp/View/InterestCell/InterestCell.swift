@@ -9,10 +9,11 @@ import UIKit
 
 class InterestCell: UICollectionViewCell {
   
+  public static let cellIdentifier: String = "interestCell"
+  
   @IBOutlet var interestCell: UILabel!
   @IBOutlet var interestLabel: UILabel!
   private var match: Bool = false
-  
   
   override func awakeFromNib() {
     super.awakeFromNib()

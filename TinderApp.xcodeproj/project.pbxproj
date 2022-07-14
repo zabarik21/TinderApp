@@ -11,7 +11,6 @@
 		7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1A9090284B61B0006C7C3F /* MTBC + TabBarSetup.swift */; };
 		7B1AFB0128774D0F007B943C /* CardContainerViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AFB0028774D0F007B943C /* CardContainerViewViewModelTests.swift */; };
 		7B2907DF286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907DE286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift */; };
-		7B2907E1286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E0286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift */; };
 		7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */; };
 		7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */; };
 		7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */; };
@@ -100,7 +99,6 @@
 		7B1A9090284B61B0006C7C3F /* MTBC + TabBarSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarSetup.swift"; sourceTree = "<group>"; };
 		7B1AFB0028774D0F007B943C /* CardContainerViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelTests.swift; sourceTree = "<group>"; };
 		7B2907DE286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerDelegate.swift"; sourceTree = "<group>"; };
-		7B2907E0286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + ReactionViewDelegate.swift"; sourceTree = "<group>"; };
 		7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocol.swift; sourceTree = "<group>"; };
 		7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsViewProtocol.swift; sourceTree = "<group>"; };
 		7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Uppercase.swift"; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 				7BED5EAC284111730081E71E /* PeopleViewController.swift */,
 				7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */,
 				7B2907DE286ECE1E00CB52EB /* PVC + CardContainerDelegate.swift */,
-				7B2907E0286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift */,
 				7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */,
 				7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */,
 			);
@@ -509,7 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB0B3E3287995C90043F893 /* Authentication */,
-				7BF85C7528721C6400B296CC /* InterestViewController */,
+				7BF85C7528721C6400B296CC /* InterestCollectionViewController */,
 				7B478C412844EEE700AB653E /* MainTabBarController */,
 				7BED5EE628411FCB0081E71E /* TabBarControllers */,
 			);
@@ -600,12 +597,12 @@
 			path = TabBarControllers;
 			sourceTree = "<group>";
 		};
-		7BF85C7528721C6400B296CC /* InterestViewController */ = {
+		7BF85C7528721C6400B296CC /* InterestCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
 				7BF85C7628721C9800B296CC /* InterestsCollectionViewController.swift */,
 			);
-			path = InterestViewController;
+			path = InterestCollectionViewController;
 			sourceTree = "<group>";
 		};
 		7BF85C7828721CE600B296CC /* InterestCell */ = {
@@ -893,7 +890,6 @@
 				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
 				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,
 				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
-				7B2907E1286ECE3D00CB52EB /* PVC + ReactionViewDelegate.swift in Sources */,
 				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
 				7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */,
 				7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */,

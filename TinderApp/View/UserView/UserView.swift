@@ -98,11 +98,6 @@ class UserView: UIView, UserViewProtocol {
     
   }
   
-  func reacted(reaction: Reaction) {
-    
-   
-  }
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -130,9 +125,9 @@ extension UserView: UIScrollViewDelegate {
   }
   
   private func updateInterestsView(with userInterests: Set<Interest>?) {
-    let array: [(Interest, Bool)] = userInterests?
+    let pairs: [(Interest, Bool)] = userInterests?
       .map( { ($0, user.interests!.contains($0)) } ) ?? []
-    interestsCollectionView.interests = array
+    interestsCollectionView.interestsRelay.accept(pairs)
   }
   
   private func setupUserInfoView() {

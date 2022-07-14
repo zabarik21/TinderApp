@@ -10,11 +10,7 @@ import SnapKit
 import RxSwift
 import RxRelay
 
-enum ReactionButtonsViewConstants {
-  static var shadowOpacity: Float = 0.3
-  static var shadowBlur: CGFloat = 10
-  static var delay: TimeInterval = 0.3
-}
+
 
 enum Reaction {
   case like
@@ -22,6 +18,12 @@ enum Reaction {
 }
 
 class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
+  
+  private enum Constants {
+    static var shadowOpacity: Float = 0.3
+    static var shadowBlur: CGFloat = 10
+    static var delay: TimeInterval = 0.3
+  }
   
   private var likeButton: UIButton!
   private var dislikeButton: UIButton!
@@ -69,7 +71,7 @@ extension ReactionButtonsView {
   
   @objc private func touchUpInside(_ sender: UIButton) {
     UIView.animate(withDuration: 0.3) {
-      sender.layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
+      sender.layer.shadowOpacity = Constants.shadowOpacity
     }
     guard delayIsOn != true else { return }
     if sender === likeButton {
@@ -78,7 +80,7 @@ extension ReactionButtonsView {
       publishRelay.accept(.dislike)
     }
     delayIsOn = true
-    DispatchQueue.main.asyncAfter(deadline: .now() + ReactionButtonsViewConstants.delay, execute: {
+    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay, execute: {
       self.delayIsOn.toggle()
     })
   }
@@ -120,9 +122,9 @@ extension ReactionButtonsView {
   
   private func setupShadow(_ layer: CALayer) {
     layer.shadowColor = UIColor.black.cgColor
-    layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
+    layer.shadowOpacity = Constants.shadowOpacity
     layer.shadowOffset = CGSize(width: 0, height: 2)
-    layer.shadowRadius = ReactionButtonsViewConstants.shadowBlur
+    layer.shadowRadius = Constants.shadowBlur
   }
   
   private func setupGradientLayer() {

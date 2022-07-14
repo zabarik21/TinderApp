@@ -6,30 +6,49 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 class InterestsCollectionViewController: UICollectionViewController {
 
   typealias InterestPair = (interest: Interest, match: Bool)
   
-  private let cellIdentifier: String = "interestCell"
   private var isChoosable = false
   var oneItemReload = false
-  public var interests: [InterestPair] = [] {
+  
+  private var bag = DisposeBag()
+  
+  private var interests: [InterestPair] = [] {
     didSet {
       if !oneItemReload {
         DispatchQueue.main.async {
+          print("reload")
           self.collectionView.reloadData()
         }
       }
     }
   }
   
+  var interestsRelay = BehaviorRelay<[InterestPair]>(value: [])
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     registerCell()
+    setupObserver()
     self.collectionView.backgroundColor = .peopleViewControllerBackground
     self.collectionView.showsHorizontalScrollIndicator = false
     self.collectionView.showsVerticalScrollIndicator = false
+  }
+  
+  func setupObserver() {
+    interestsRelay
+      .distinctUntilChanged({ fst, snd in
+        return (fst.count == 0 && snd.count == 0)
+      })
+      .subscribe(on: MainScheduler.instance)
+      .subscribe { [weak self] pairs in
+        self?.interests = pairs.element ?? []
+      }.disposed(by: bag)
   }
   
   func changeStyleToChoosable() {
@@ -41,11 +60,12 @@ class InterestsCollectionViewController: UICollectionViewController {
   
   
   private func registerCell() {
-    self.collectionView.register(UINib(nibName: "InterestCell", bundle: nil), forCellWithReuseIdentifier: "interestCell")
+    self.collectionView.register(UINib(nibName: String(describing: InterestCell.self), bundle: nil), forCellWithReuseIdentifier: InterestCell.cellIdentifier)
   }
   
 }
 
+// MARK: - Delegate
 extension InterestsCollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -76,11 +96,5 @@ extension InterestsCollectionViewController {
     cell.configure(with: interest, matching: match, interactionEnabled: self.isChoosable)
     return cell
   }
-  
-}
-// MARK: - Layout
-extension InterestsCollectionViewController: UICollectionViewDelegateFlowLayout {
-  
-  
   
 }
