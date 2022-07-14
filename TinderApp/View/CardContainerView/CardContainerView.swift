@@ -59,12 +59,12 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   private func setupObserver() {
     topCardView.swipedObservable
       .subscribe { [weak self] liked in
-        self?.reacted(liked: liked)
+        self?.swiped(liked: liked)
       }.disposed(by: bag)
     
     bottomCardView.swipedObservable
       .subscribe { [weak self] liked in
-        self?.reacted(liked: liked)
+        self?.swiped(liked: liked)
       }.disposed(by: bag)
   }
   

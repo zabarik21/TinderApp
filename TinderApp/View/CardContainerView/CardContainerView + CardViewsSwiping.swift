@@ -10,6 +10,7 @@ import UIKit
 extension CardContainerView {
   
   func swiped(liked: Bool) {
+    // send request for like/dislike
     //    updateCardConstraints()
     swapViews()
     updateCurrentBottomCard()

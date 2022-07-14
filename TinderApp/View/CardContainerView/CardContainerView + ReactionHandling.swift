@@ -1,5 +1,5 @@
 //
-//  CardContainerView + ReactionHandling.swift
+//  CardContainerView + ReactionView ObserversHandling.swift
 //  TinderApp
 //
 //  Created by Timofey on 2/7/22.
@@ -14,11 +14,9 @@ extension CardContainerView  {
     if topCardTurn {
       guard topCardView.isSwipeble != false else { return }
       topCardView.swipe(liked: liked, fromButton: true)
-      // send reaction request
     } else {
       guard bottomCardView.isSwipeble != false else { return }
       bottomCardView.swipe(liked: liked, fromButton: true)
-      // send reaction request
     }
   }
 }
