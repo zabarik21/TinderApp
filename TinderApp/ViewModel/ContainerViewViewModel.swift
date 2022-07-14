@@ -12,7 +12,6 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     
   var users: [UserCardViewViewModelProtocol]
   var usersApi = RandomUserApi()
-  weak var delegate: CardContainerViewViewModelDelegate?
   
   // remake by adding user global property or some else
   var user: UserCardModel

@@ -1,5 +1,5 @@
 //
-//  CardContainerView + CardViewDelegate.swift
+//  CardContainerView + Cards swiping manipulation.swift
 //  TinderApp
 //
 //  Created by Timofey on 2/7/22.

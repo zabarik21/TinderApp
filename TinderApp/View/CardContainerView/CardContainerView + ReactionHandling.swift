@@ -1,5 +1,5 @@
 //
-//  CardContainerView + ReeactionDelegate.swift
+//  CardContainerView + ReactionHandling.swift
 //  TinderApp
 //
 //  Created by Timofey on 2/7/22.
@@ -8,7 +8,7 @@
 import UIKit
 
 
-extension CardContainerView: ReactionViewDelegate {
+extension CardContainerView  {
   
   func reacted(liked: Bool) {
     if topCardTurn {

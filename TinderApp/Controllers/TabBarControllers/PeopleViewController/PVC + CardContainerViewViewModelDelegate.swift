@@ -1,5 +1,5 @@
 //
-//  PVC + CardContainerViewViewModelDelegate.swift
+//  PVC + CardContainerObserver functions.swift
 //  TinderApp
 //
 //  Created by Timofey on 2/7/22.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-extension PeopleViewController: CardContainerViewViewModelDelegate {
+extension PeopleViewController  {
   func showNetworkErrorAlert(with message: String) {
       let alertController = UIAlertController(title: "Some error occured",
                                               message: message, preferredStyle: .alert)

@@ -299,7 +299,7 @@ extension SetupProfileViewController: PHPickerViewControllerDelegate {
 
 
 // MARK: - chooseImage observer func
-extension SetupProfileViewController: ProfileImageViewDelegate {
+extension SetupProfileViewController {
   
   func chooseImage() {
     present(imagePicker, animated: true, completion: nil)

@@ -161,7 +161,6 @@ extension PeopleViewController {
   private func setupCardContainer() {
     // let cachedUsers = ...
     let viewModel = CardContainerViewViewModel(users: [], user: self.user)
-    // delegate for telling viewController that users have loaded and cards must be showedw
     cardContainer = CardContainerView()
     cardContainer.viewModel = viewModel
   }

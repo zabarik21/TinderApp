@@ -9,9 +9,6 @@ import UIKit
 import RxSwift
 import RxRelay
 
-protocol ProfileImageViewDelegate {
-  func chooseImage() 
-}
 
 class ProfileImageView: UIImageView {
   
