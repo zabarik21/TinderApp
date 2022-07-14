@@ -3,6 +3,7 @@
 
 # 📲 About App: 
 - MVVM architecrure pattern
+- Using RxSwift
 - Full programmatically UI (no storyboard) 
 - You can try app without need to registration (demo option avaliable - without registration)
 - Fetching users data from backend (Random People API when app is in demo mode / Firebase when user is logged in)
@@ -15,6 +16,8 @@
 * ☕️ Cocoapods: 
   - pod 'Kingfisher'
   - pod 'SnapKit'
+  - pod 'RxSwift'
+  - pod 'RxRelay'
 
 # How to install? 🤔
 1. ️ Clone this repository
