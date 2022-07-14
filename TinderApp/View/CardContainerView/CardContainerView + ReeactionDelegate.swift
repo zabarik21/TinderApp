@@ -8,7 +8,7 @@
 import UIKit
 
 
-extension CardContainerView: ReactionViewDelegate {
+extension CardContainerView {
   
   func reacted(liked: Bool) {
     if topCardTurn {

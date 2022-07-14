@@ -64,6 +64,22 @@ class PeopleViewController: UIViewController {
       guard let reaction = event.element else { return }
       self?.reacted(reaction: reaction)
     }.disposed(by: bag)
+    
+    cardContainer.cardTouchObservable
+      .subscribe { [weak self] viewModel in
+        self?.cardTouched(with: viewModel)
+      }.disposed(by: bag)
+    
+    cardContainer.viewModel?.userLoadObservable
+      .subscribe(on: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] status in
+        if status {
+          self?.cardContainer.fillCards()
+        } else {
+          // temporary descision
+          self?.showNetworkErrorAlert(with: "Some error occured")
+        }
+      })
   }
   
   func reacted(reaction: Reaction) {
@@ -146,9 +162,7 @@ extension PeopleViewController {
     // let cachedUsers = ...
     let viewModel = CardContainerViewViewModel(users: [], user: self.user)
     // delegate for telling viewController that users have loaded and cards must be showedw
-    viewModel.delegate = self
     cardContainer = CardContainerView()
-    cardContainer.delegate = self
     cardContainer.viewModel = viewModel
   }
 }
