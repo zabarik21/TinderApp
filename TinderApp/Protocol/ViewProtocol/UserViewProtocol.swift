@@ -15,7 +15,7 @@ protocol HideShowView {
 }
 
 protocol UserViewProtocol: UIView, HideShowView {
-  var viewModel: UserCardViewViewModelProtocol? { get set }
+  var viewModel: BehaviorRelay<UserCardViewViewModelProtocol?> { get }
   var hideUserViewObservable: Observable<Void> { get }
   var reactionsObservable: Observable<Reaction> { get }
   

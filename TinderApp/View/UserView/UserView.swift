@@ -43,11 +43,7 @@ class UserView: UIView, UserViewProtocol {
       .asObservable()
   }
   
-  var viewModel: UserCardViewViewModelProtocol? {
-    didSet {
-      fillUI()
-    }
-  }
+  var viewModel = BehaviorRelay<UserCardViewViewModelProtocol?>(value: nil)
   
   var viewHieght: CGFloat!
   
@@ -68,6 +64,11 @@ class UserView: UIView, UserViewProtocol {
       self?.hideUserViewPublishRelay.accept(())
       self?.reactionsPublishRelay.accept(reaction)
     }.disposed(by: bag)
+    
+    viewModel.subscribe { [weak self] viewModel in
+      self?.fillUI(with: viewModel)
+    }.disposed(by: bag)
+      
   }
   
   override func layoutSubviews() {
@@ -79,24 +80,22 @@ class UserView: UIView, UserViewProtocol {
     }
   }
   
-  func fillUI() {
-    if let viewModel = viewModel {
-      let url = URL(string: viewModel.imageUrlString)
-      DispatchQueue.main.async {
+  func fillUI(with viewModel: UserCardViewViewModelProtocol?) {
+    DispatchQueue.main.async {
+      if let viewModel = viewModel {
+        let url = URL(string: viewModel.imageUrlString)
         self.userImageView.kf.setImage(with: url,
                                        options: [
                                         .transition(.fade(0.2))
                                        ])
-        self.similarInterestLabel.text = "\(viewModel.similarInterestsCount) Similar"
-        self.userInfoView.viewModel = viewModel.userInfoViewViewModel
-        self.updateInterestsView()
-      }
-    } else {
-      DispatchQueue.main.async {
+      } else {
         self.userImageView.image = .userPlaceholderImage
-        self.userInfoView.viewModel = nil
       }
+      self.similarInterestLabel.text = "\(viewModel?.similarInterestsCount ?? 0) Similar"
+      self.userInfoView.viewModel = viewModel?.userInfoViewViewModel
+      self.updateInterestsView(with: viewModel?.interests)
     }
+    
   }
   
   func reacted(reaction: Reaction) {
@@ -121,7 +120,7 @@ extension UserView: UIScrollViewDelegate {
     setupReactionView()
     setupUserInfoView()
     setupInterestView()
-    fillUI()
+    fillUI(with: nil)
     self.backgroundColor = .peopleViewControllerBackground
   }
   
@@ -131,10 +130,9 @@ extension UserView: UIScrollViewDelegate {
     scrollView.showsVerticalScrollIndicator = false
   }
   
-  private func updateInterestsView() {
-    let array = viewModel?.interests.map({ i in
-      return (i, user.interests!.contains(i))
-    }) ?? []
+  private func updateInterestsView(with userInterests: Set<Interest>?) {
+    let array: [(Interest, Bool)] = userInterests?
+      .map( { ($0, user.interests!.contains($0)) } ) ?? []
     interestsCollectionView.interests = array
   }
   
