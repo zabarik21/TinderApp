@@ -82,7 +82,7 @@ class CardView: UIView, CardViewProtocol {
       if let viewModel = self.viewModel {
         self.isSwipeble = true
         guard let url = URL(string: viewModel.imageUrlString) else { return }
-        self.userInfoView.viewModel = viewModel.userInfoViewViewModel
+        self.userInfoView.viewModelRelay.accept(viewModel.userInfoViewViewModel)
         DispatchQueue.main.async {
           self.profileImage.kf.setImage(with: url,
                                    options: [
@@ -97,7 +97,7 @@ class CardView: UIView, CardViewProtocol {
         }
       } else {
         self.isSwipeble = false
-        self.userInfoView.viewModel = nil
+        self.userInfoView.viewModelRelay.accept(nil)
         DispatchQueue.main.async {
           self.profileImage.image = .userPlaceholderImage
         }

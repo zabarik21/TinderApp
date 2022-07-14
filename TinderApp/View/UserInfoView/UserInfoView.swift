@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-
+import RxSwift
+import RxRelay
 
 
 
@@ -17,44 +18,30 @@ class UserInfoView: UIView {
   private var nameAgeLabel: UILabel!
   private var cityLabel: UILabel!
   private var labelsStackView: UIStackView!
-  private var unfilled = true
-  var viewModel: UsersInfoViewViewModelProtocol? {
-    didSet {
-      fillUI()
-    }
-  }
+  private var bag = DisposeBag()
   
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    if (viewModel == nil) && (unfilled != true) {
-      unfillUI()
-    }
-  }
+  
+  var viewModelRelay = BehaviorRelay<UsersInfoViewViewModelProtocol?>(value: nil)
   
   init() {
     super.init(frame: .zero)
     setupElements()
-    unfillUI()
+    setupObserver()
   }
   
-  private func fillUI() {
+  private func setupObserver() {
+    viewModelRelay
+      .subscribe { [weak self] viewModel in
+        self?.fillUI(with: viewModel)
+      }.disposed(by: bag)
+  }
+  
+  private func fillUI(with viewModel: UsersInfoViewViewModelProtocol?) {
     DispatchQueue.main.async {
-      if let viewModel = self.viewModel {
-        self.compatabilityView.compatability = viewModel.compatabilityScore
-        self.nameAgeLabel.text = viewModel.nameAgeText
-        self.cityLabel.text = viewModel.cityText
-        self.unfilled = false
-      } else {
-        self.unfillUI()
-      }
+      self.compatabilityView.compatability = viewModel?.compatabilityScore ?? 10
+      self.nameAgeLabel.text = viewModel?.nameAgeText ?? "Your future frend"
+      self.cityLabel.text = viewModel?.cityText ?? "Nearby"
     }
-  }
-  
-  private func unfillUI() {
-    unfilled = true
-    self.nameAgeLabel.text = "Your future frend"
-    self.cityLabel.text = "Nearby"
-    self.compatabilityView.compatability = 10
   }
   
   required init?(coder: NSCoder) {

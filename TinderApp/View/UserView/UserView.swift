@@ -92,7 +92,7 @@ class UserView: UIView, UserViewProtocol {
         self.userImageView.image = .userPlaceholderImage
       }
       self.similarInterestLabel.text = "\(viewModel?.similarInterestsCount ?? 0) Similar"
-      self.userInfoView.viewModel = viewModel?.userInfoViewViewModel
+      self.userInfoView.viewModelRelay.accept(viewModel?.userInfoViewViewModel) 
       self.updateInterestsView(with: viewModel?.interests)
     }
     
