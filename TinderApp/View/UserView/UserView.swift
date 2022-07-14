@@ -126,7 +126,6 @@ extension UserView: UIScrollViewDelegate {
   
   private func setupScrollView() {
     scrollView = UIScrollView()
-    scrollView.delegate = self
     scrollView.showsVerticalScrollIndicator = false
   }
   
@@ -214,6 +213,11 @@ extension UserView: UIScrollViewDelegate {
       make.top.equalTo(userInfoView.snp.bottom).offset(30)
       make.horizontalEdges.equalToSuperview().inset(Constants.horizontalPaddingMultiplier * self.bounds.width)
     }
+    
+    interestLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    interestLabel.snp.makeConstraints { $0.leading.equalToSuperview() }
+    similarInterestLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    similarInterestLabel.snp.makeConstraints { $0.trailing.equalToSuperview() }
     
     scrollView.addSubview(interestsCollectionView.view)
     interestsCollectionView.view.snp.makeConstraints { make in

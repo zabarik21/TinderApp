@@ -43,17 +43,31 @@ class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
     super.layoutSubviews()
     likeButton.layer.cornerRadius = frame.height / 2
     dislikeButton.layer.cornerRadius = frame.height / 2
+    updateShadowPath()
     setupGradientLayer()
-    
   }
   
-  @objc func touchDown(_ sender: UIButton) {
+  private func updateShadowPath() {
+    likeButton.layer.shadowPath = UIBezierPath(roundedRect: likeButton.bounds, cornerRadius: likeButton.frame.height / 2).cgPath
+    dislikeButton.layer.shadowPath = UIBezierPath(roundedRect: dislikeButton.bounds, cornerRadius: dislikeButton.frame.height / 2).cgPath
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+}
+
+// MARK: - Button functions
+extension ReactionButtonsView {
+  
+  @objc private func touchDown(_ sender: UIButton) {
     UIView.animate(withDuration: 0.3) {
       sender.layer.shadowOpacity = 0
     }
   }
   
-  @objc func touchUpInside(_ sender: UIButton) {
+  @objc private func touchUpInside(_ sender: UIButton) {
     UIView.animate(withDuration: 0.3) {
       sender.layer.shadowOpacity = ReactionButtonsViewConstants.shadowOpacity
     }
@@ -68,17 +82,17 @@ class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
       self.delayIsOn.toggle()
     })
   }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
 }
 
 // MARK: - Setup Elements & Constraints
 extension ReactionButtonsView {
   
   private func setupElements() {
+    setupButtons()
+    setupConstraints()
+  }
+  
+  private func setupButtons() {
     likeButton = UIButton(type: .system)
     dislikeButton = UIButton(type: .system)
     
@@ -93,20 +107,15 @@ extension ReactionButtonsView {
     dislikeButton.setImage(dislikeImage, for: .normal)
     
     likeButton.tintColor = .white
-    dislikeButton.tintColor = UIColor.firstGradientColor
+    dislikeButton.tintColor = .firstGradientColor
     
     setupShadow(likeButton.layer)
     setupShadow(dislikeButton.layer)
-    
-    addSubview(likeButton)
-    addSubview(dislikeButton)
     
     likeButton.addTarget(self, action: #selector(touchDown), for: .touchDown)
     dislikeButton.addTarget(self, action: #selector(touchDown), for: .touchDown)
     likeButton.addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
     dislikeButton.addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
-    
-    setupConstraints()
   }
   
   private func setupShadow(_ layer: CALayer) {
@@ -126,6 +135,10 @@ extension ReactionButtonsView {
   }
   
   private func setupConstraints() {
+    
+    addSubview(likeButton)
+    addSubview(dislikeButton)
+    
     likeButton.snp.makeConstraints { make in
       make.trailing.equalToSuperview()
       make.top.equalToSuperview()
