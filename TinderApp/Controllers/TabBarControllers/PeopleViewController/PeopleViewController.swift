@@ -47,6 +47,27 @@ class PeopleViewController: UIViewController {
     actualizePath()
   }
   
+  private func setupObservers() {
+    userView.hideUserViewObservable
+      .debug()
+      .subscribe { [weak self] event in
+      self?.hide()
+    }.disposed(by: bag)
+    
+    userView.reactionsObservable
+      .debug()
+      .subscribe { [weak self] event in
+      guard let reaction = event.element else { return }
+      self?.reacted(reaction: reaction)
+    }.disposed(by: bag)
+    
+    reactionsView.reactedObservable
+      .subscribe { [weak self] event in
+      guard let reaction = event.element else { return }
+      self?.reacted(reaction: reaction)
+    }.disposed(by: bag)
+  }
+  
   func reacted(reaction: Reaction) {
     let liked = reaction == .like ? true : false
     cardContainer.reacted(liked: liked)
@@ -108,23 +129,6 @@ extension PeopleViewController {
     setupTitleLabel()
     setupUserView()
     setupObservers()
-  }
-  
-  private func setupObservers() {
-    
-    userView.userViewHideObservable.subscribe { [weak self] event in
-      self?.hide()
-    }.disposed(by: bag)
-    
-    userView.reactionsObservable.subscribe { event in
-      guard let reaction = event.element else { return }
-      self.reacted(reaction: reaction)
-    }.disposed(by: bag)
-    
-    reactionsView.reactedObservable.subscribe { [weak self] event in
-      guard let reaction = event.element else { return }
-      self?.reacted(reaction: reaction)
-    }.disposed(by: bag)
   }
   
   private func setupUserView() {

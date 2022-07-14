@@ -33,12 +33,14 @@ class UserView: UIView, UserViewProtocol {
   private var reactionsPublishRelay = PublishRelay<Reaction>()
   private var bag = DisposeBag()
   
-  var userViewHideObservable: Observable<Void> {
+  var hideUserViewObservable: Observable<Void> {
     return hideUserViewPublishRelay.asObservable()
   }
   
   var reactionsObservable: Observable<Reaction> {
-    return reactionsPublishRelay.asObservable()
+    return reactionsPublishRelay
+      .delay(.milliseconds(300), scheduler: MainScheduler.instance)
+      .asObservable()
   }
   
   var viewModel: UserCardViewViewModelProtocol? {
@@ -63,9 +65,9 @@ class UserView: UIView, UserViewProtocol {
   private func setupObserver() {
     reactionView.reactedObservable.subscribe { [weak self] event in
       guard let reaction = event.element else { return }
-      self?.reacted(reaction: reaction)
+      self?.hideUserViewPublishRelay.accept(())
+      self?.reactionsPublishRelay.accept(reaction)
     }.disposed(by: bag)
-    
   }
   
   override func layoutSubviews() {
@@ -82,9 +84,9 @@ class UserView: UIView, UserViewProtocol {
       let url = URL(string: viewModel.imageUrlString)
       DispatchQueue.main.async {
         self.userImageView.kf.setImage(with: url,
-                                  options: [
-                                    .transition(.fade(0.2))
-                                  ])
+                                       options: [
+                                        .transition(.fade(0.2))
+                                       ])
         self.similarInterestLabel.text = "\(viewModel.similarInterestsCount) Similar"
         self.userInfoView.viewModel = viewModel.userInfoViewViewModel
         self.updateInterestsView()
@@ -98,10 +100,8 @@ class UserView: UIView, UserViewProtocol {
   }
   
   func reacted(reaction: Reaction) {
-    hideUserViewPublishRelay.accept(())
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-      self.reactionsPublishRelay.accept(reaction)
-    }
+    
+   
   }
   
   required init?(coder: NSCoder) {
@@ -155,10 +155,6 @@ extension UserView: UIScrollViewDelegate {
   
   private func setupReactionView() {
     reactionView = ReactionButtonsView()
-    reactionView.reactedObservable.subscribe { [weak self] event in
-      guard let reaction = event.element else { return }
-      self?.reactionsPublishRelay.accept(reaction)
-    }.disposed(by: bag)
   }
   
   private func setupLabels() {

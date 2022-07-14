@@ -16,7 +16,7 @@ protocol HideShowView {
 
 protocol UserViewProtocol: UIView, HideShowView {
   var viewModel: UserCardViewViewModelProtocol? { get set }
-  var userViewHideObservable: Observable<Void> { get }
+  var hideUserViewObservable: Observable<Void> { get }
   var reactionsObservable: Observable<Reaction> { get }
   
   func toIdentity()
