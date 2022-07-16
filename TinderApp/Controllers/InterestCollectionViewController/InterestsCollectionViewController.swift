@@ -18,7 +18,7 @@ class InterestsCollectionViewController: UICollectionViewController {
   
   private var bag = DisposeBag()
   
-  private var interests: [InterestPair] = [] {
+  var interests: [InterestPair] = [] {
     didSet {
       if !oneItemReload {
         DispatchQueue.main.async {

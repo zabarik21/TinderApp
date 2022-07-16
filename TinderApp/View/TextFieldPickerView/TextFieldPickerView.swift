@@ -36,7 +36,6 @@ class TextFieldPickerView: UITextField {
   
 }
 
-
 extension TextFieldPickerView: UIPickerViewDataSource, UIPickerViewDelegate {
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

@@ -71,10 +71,11 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   @objc func toDemo() {
     if checkFields() {
       let name = Name(first: self.nameTextField.text!, last: self.surnameTextField.text!)
-      let interests = interestCollectionView.interestsRelay.value
+      let interests = interestCollectionView.interests
         .filter({ $0.match })
         .map({ $0.interest })
         .toSet()
+      
       let gender = Gender(rawValue: self.genderPicker.text!.lowercasingFirstLetter)!
       let date = birthDatePicker.date.formatted(date: .numeric, time: .omitted)
       
@@ -88,10 +89,17 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
                                id: ID.init(value: "id"),
                                interests: interests)
       
-      let mainVC = MainTabBarController(user: user)
-      if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-        sceneDelegate.changeRootViewController(mainVC, animated: true)
+      DispatchQueue.global(qos: .background).async {
+        StorageService.shared.saveUser(user: user)
       }
+      
+      DispatchQueue.main.async {
+        let mainVC = MainTabBarController(user: user)
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+          sceneDelegate.changeRootViewController(mainVC, animated: true)
+        }
+      }
+      
     }
   }
   

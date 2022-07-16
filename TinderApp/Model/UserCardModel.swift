@@ -32,6 +32,26 @@ struct UserCardModel: Codable {
     case interests
   }
   
+  func jsonRepresent() -> Data? {
+    do {
+      let json = try JSONEncoder().encode(self)
+      return json
+    }
+    catch {
+      print(error)
+      return nil
+    }
+  }
+}
+
+extension UserCardModel: Equatable {
+  static func == (lhs: UserCardModel, rhs: UserCardModel) -> Bool {
+    guard let lid = lhs.id.value,
+          let rid = rhs.id.value else {
+            return false
+          }
+    return lid == rid
+  }
 }
 
 
