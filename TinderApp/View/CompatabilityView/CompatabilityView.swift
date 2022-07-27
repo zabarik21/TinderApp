@@ -58,11 +58,12 @@ class CompatabilityView: UIView {
   private func configurePath() -> CGPath {
     let angle = CGFloat((360 * self.compatability / 10) - 90)
     let radius = self.bounds.height / 2 - CompatabilityViewConstants.strokeWidth
-    return UIBezierPath(arcCenter: self.viewCenter,
-                        radius: radius,
-                        startAngle: CGFloat(-90).degreesToRadians,
-                        endAngle: angle.degreesToRadians,
-                        clockwise: true).cgPath
+    return UIBezierPath(
+      arcCenter: self.viewCenter,
+      radius: radius,
+      startAngle: CGFloat(-90).degreesToRadians,
+      endAngle: angle.degreesToRadians,
+      clockwise: true).cgPath
   }
   
   func changeLabelColor(with color: UIColor) {

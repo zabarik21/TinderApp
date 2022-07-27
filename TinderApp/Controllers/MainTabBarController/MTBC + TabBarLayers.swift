@@ -18,11 +18,13 @@ extension MainTabBarController {
     tabBarLayer.fillColor = UIColor.white.cgColor
     tabBarLayer.borderColor = UIColor.black.cgColor
     tabBarLayer.borderWidth = 0.1
-    tabBarLayer.path = UIBezierPath(roundedRect: CGRect(x: x,
-                                                        y: self.tabBar.bounds.minY - y * 0.5,
-                                                        width: layerWidth,
-                                                        height: layerHeight),
-                                    cornerRadius: layerHeight / 2).cgPath
+    tabBarLayer.path = UIBezierPath(
+      roundedRect: CGRect(
+        x: x,
+        y: self.tabBar.bounds.minY - y * 0.5,
+        width: layerWidth,
+        height: layerHeight),
+      cornerRadius: layerHeight / 2).cgPath
     tabBarLayer.shadowPath = tabBarLayer.path
     tabBarLayer.shadowColor = UIColor.black.cgColor
     tabBarLayer.shadowOffset = CGSize(width: 0, height: 1)
@@ -35,11 +37,13 @@ extension MainTabBarController {
     let x: CGFloat = self.view.bounds.width * MainTabBarVCConstants.tabBarLayerHorizontalPaddingMultiplier + MainTabBarVCConstants.itemPadding
     let y: CGFloat = MainTabBarVCConstants.tabBarLayerVerticalPadding
     layerWidth = self.tabBar.bounds.width - x * 2
-    tabBarLayer.path = UIBezierPath(roundedRect: CGRect(x: x,
-                                                        y: self.tabBar.bounds.minY - y * 0.5,
-                                                        width: layerWidth,
-                                                        height: layerHeight),
-                                    cornerRadius: layerHeight / 2).cgPath
+    tabBarLayer.path = UIBezierPath(
+      roundedRect: CGRect(
+        x: x,
+        y: self.tabBar.bounds.minY - y * 0.5,
+        width: layerWidth,
+        height: layerHeight),
+      cornerRadius: layerHeight / 2).cgPath
   }
   
   func setupItemLayer() {
@@ -50,11 +54,13 @@ extension MainTabBarController {
     
     itemLayer.fillColor = UIColor.itemLayerColor.cgColor
     itemLayer.opacity = 0.69
-    itemLayer.path = UIBezierPath(roundedRect: CGRect(x: x,
-                                                      y: -0.5,
-                                                      width: width,
-                                                      height: height),
-                                  cornerRadius: height /  2).cgPath
+    itemLayer.path = UIBezierPath(
+      roundedRect: CGRect(
+        x: x,
+        y: -0.5,
+        width: width,
+        height: height),
+      cornerRadius: height / 2).cgPath
     
     tabBarLayer.insertSublayer(itemLayer, at: 0)
   }
@@ -63,8 +69,8 @@ extension MainTabBarController {
     guard let index = tabBar.items?.firstIndex(of: item) else { return }
     
     var padding: CGFloat {
-      let vc = ViewControllers(rawValue: index)
-      switch vc {
+      let viewController = ViewControllers(rawValue: index)
+      switch viewController {
       case .people:
         return MainTabBarVCConstants.itemPadding
       case .profile:
@@ -79,4 +85,3 @@ extension MainTabBarController {
   }
   
 }
-

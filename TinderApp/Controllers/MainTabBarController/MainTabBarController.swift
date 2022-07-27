@@ -14,7 +14,7 @@ enum ViewControllers: Int {
   case profile
 }
 
-enum MainTabBarVCConstants  {
+enum MainTabBarVCConstants {
   static var tabBarLayerHorizontalPaddingMultiplier: CGFloat = 0.0695
   static var tabBarLayerVerticalPadding: CGFloat = 5
   static var itemPadding: CGFloat = 3
@@ -25,7 +25,7 @@ class MainTabBarController: UITabBarController {
   var user: UserCardModel
   
   var peopleVC: PeopleViewController!
-  var messagesVC:  MessagerViewController!
+  var messagesVC: MessagerViewController!
   var profileVC: ProfileViewController!
   
   let tabBarLayer = CAShapeLayer()
@@ -54,4 +54,3 @@ class MainTabBarController: UITabBarController {
     fatalError("init(coder:) has not been implemented")
   }
 }
-

@@ -16,7 +16,7 @@ class NetworkService {
   
   func request(with url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
     let session = URLSession.shared
-    session.dataTask(with: url) { data, responce, error in
+    session.dataTask(with: url) { data, _, error in
       DispatchQueue.main.async {
         if let error = error {
           completion(.failure(error))

@@ -14,7 +14,7 @@ class HiddenReactionView: UIView, HiddenReactionViewProtocol {
   private var reactionLabel = UILabel()
   
   private let likeText = "のように"
-  private var liked: Bool = true
+  private var liked = true
   private let dislikeText = "いいえ。."
   private let config = UIImage.SymbolConfiguration(pointSize: 144, weight: .bold)
   private lazy var dislikeImage = UIImage(systemName: "multiply", withConfiguration: config)
@@ -76,4 +76,3 @@ extension HiddenReactionView {
     }
   }
 }
-

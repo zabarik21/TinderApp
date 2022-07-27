@@ -52,8 +52,6 @@ extension StartScreenController {
     setupButtonTargets()
   }
   
-  
-  
   private func setupButtonTargets() {
     demoAppButton.addTarget(self, action: #selector(demoAppTouched), for: .touchUpInside)
   }
@@ -143,6 +141,3 @@ extension StartScreenController {
 
 
 }
-
-
-

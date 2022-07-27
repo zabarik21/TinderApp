@@ -36,12 +36,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
   }
   
-  func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+  func changeRootViewController(_ viewController: UIViewController, animated: Bool = true) {
     guard let window = self.window else {
       return
     }
-    window.rootViewController = vc
-    UIView.transition(with: window, duration: 0.5, options: [.transitionCrossDissolve], animations: nil, completion: nil)
+    window.rootViewController = viewController
+    UIView.transition(
+      with: window,
+      duration: 0.5,
+      options: [.transitionCrossDissolve],
+      animations: nil,
+      completion: nil)
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {
@@ -72,6 +77,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
   }
   
-  
 }
-

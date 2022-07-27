@@ -24,10 +24,14 @@ class RandomUserApi {
     self.apiIncludes = inc
   }
   
-  func fetchPeopleWithParametrs(count: Int = 25, completion: @escaping (Result<[UserCardModel], Error>) -> ()) {
-    let includeParametr = ["results": count,
-                           "inc": apiIncludes.joined(separator: ","),
-                           "noinfo": nil] as [String : Any?]
+  func fetchPeopleWithParametrs(
+    count: Int = 25,
+    completion: @escaping (Result<[UserCardModel], Error>) -> Void
+  ) {
+    let includeParametr = [
+      "results": count,
+      "inc": apiIncludes.joined(separator: ","),
+      "noinfo": nil] as [String: Any?]
     DispatchQueue.global(qos: .utility).async { [weak self] in
       self?.networkManager.request(with: self!.apiUrlString, parametrs: includeParametr) { result in
         switch result {

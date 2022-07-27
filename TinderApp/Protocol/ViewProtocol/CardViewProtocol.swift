@@ -16,4 +16,3 @@ protocol CardViewProtocol: UIView {
   
   func swipe(liked: Bool, fromButton: Bool)
 }
-

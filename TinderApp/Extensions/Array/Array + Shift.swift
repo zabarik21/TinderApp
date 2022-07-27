@@ -9,7 +9,7 @@ import Foundation
 
 extension Array {
   mutating func shift() -> Element? {
-    guard count > 0 else { return nil }
+    guard !isEmpty else { return nil }
     let topElement = self[0]
     self.remove(at: 0)
     return topElement

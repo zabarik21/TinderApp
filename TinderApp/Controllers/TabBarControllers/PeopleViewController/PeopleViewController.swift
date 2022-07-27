@@ -49,26 +49,30 @@ class PeopleViewController: UIViewController {
   
   private func setupObservers() {
     userView.hideUserViewObservable
-      .subscribe { [weak self] event in
-      self?.hideUserView()
-    }.disposed(by: bag)
+      .subscribe { [weak self] _ in
+        self?.hideUserView()
+      }
+      .disposed(by: bag)
     
     userView.reactionsObservable
       .subscribe { [weak self] event in
       guard let reaction = event.element else { return }
       self?.reacted(reaction: reaction)
-    }.disposed(by: bag)
+      }
+      .disposed(by: bag)
     
     reactionsView.reactedObservable
       .subscribe { [weak self] event in
       guard let reaction = event.element else { return }
       self?.reacted(reaction: reaction)
-    }.disposed(by: bag)
+      }
+      .disposed(by: bag)
     
     cardContainer.cardTouchObservable
       .subscribe { [weak self] viewModel in
         self?.cardTouched(with: viewModel)
-      }.disposed(by: bag)
+      }
+      .disposed(by: bag)
     
     cardContainer.viewModel?.userLoadObservable
       .subscribe(on: MainScheduler.instance)
@@ -77,9 +81,10 @@ class PeopleViewController: UIViewController {
           self?.cardContainer.fillCards()
         } else {
           // temporary descision
-          self?.showNetworkErrorAlert(with: "Some error occured")
+          self?.showAlert(title: "Some error occured", message: "Failed to load users")
         }
-      }).disposed(by: bag)
+      })
+      .disposed(by: bag)
   }
   
   func reacted(reaction: Reaction) {
@@ -103,7 +108,8 @@ extension PeopleViewController {
 
       titleLabel.snp.makeConstraints { make in
         make.top.equalToSuperview().offset(70)
-        make.leading.equalToSuperview().offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
+        make.leading.equalToSuperview()
+          .offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
       }
     }
     
@@ -112,8 +118,10 @@ extension PeopleViewController {
     
     let tabBarFrame = self.tabBarController!.tabBar.frame
     reactionsView.snp.makeConstraints { make in
-      make.bottom.equalTo(tabBarFrame.origin.y).offset(-self.view.bounds.height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
-      make.horizontalEdges.equalToSuperview().inset(PeopleVCConstants.buttonsHorizontalOffsetMultiplier * self.view.bounds.width)
+      make.bottom.equalTo(tabBarFrame.origin.y)
+        .offset(-self.view.bounds.height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
+      make.horizontalEdges.equalToSuperview()
+        .inset(PeopleVCConstants.buttonsHorizontalOffsetMultiplier * self.view.bounds.width)
       make.height.equalTo(75)
     }
     
@@ -154,7 +162,7 @@ extension PeopleViewController {
     titleLabel = UILabel(text: "People Nearby", fontSize: 30, weight: .bold, textColor: .peopleViewControllerBackground)
   }
   
-  private func setupReactionsView(){
+  private func setupReactionsView() {
     reactionsView = ReactionButtonsView()
   }
   

@@ -10,7 +10,12 @@ import UIKit
 extension CardView: UIGestureRecognizerDelegate {
   
   func animateToIdentity() {
-    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: .curveEaseInOut) {
+    UIView.animate(
+      withDuration: 0.3,
+      delay: 0,
+      usingSpringWithDamping: 0.7,
+      initialSpringVelocity: 5,
+      options: .curveEaseInOut) {
       self.transform = .identity
       self.alpha = 1
       self.hiddenTopReactionView.alpha = 0
@@ -44,8 +49,9 @@ extension CardView: UIGestureRecognizerDelegate {
     let xDelta = center.x - startPoint.x
     
     // moving view
-    gestureView.center = CGPoint(x: gestureView.center.x + translation.x * CardViewConstants.xTranslateMultiplier,
-                                 y: gestureView.center.y + translation.y * CardViewConstants.yTranslateMultiplier)
+    gestureView.center = CGPoint(
+      x: gestureView.center.x + translation.x * CardViewConstants.xTranslateMultiplier,
+      y: gestureView.center.y + translation.y * CardViewConstants.yTranslateMultiplier)
     // rotating view
     let angle: CGFloat = CardViewConstants.maxAngle * (CGFloat(xDelta) * 10 / 21)
     self.transform = CGAffineTransform(rotationAngle: angle.degreesToRadians)

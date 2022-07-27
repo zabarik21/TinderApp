@@ -20,6 +20,3 @@ protocol UserCardViewViewModelProtocol {
   func nameAgeLabelText() -> String
   func cityDistanceLabelText() -> String
 }
-
-
-

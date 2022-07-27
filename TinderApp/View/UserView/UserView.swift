@@ -29,7 +29,7 @@ class UserView: UIView, UserViewProtocol {
   private var userInfoView: UserInfoView!
   private var scrollView: UIScrollView!
   
-  private var hideUserViewPublishRelay  =  PublishRelay<Void>()
+  private var hideUserViewPublishRelay = PublishRelay<Void>()
   private var reactionsPublishRelay = PublishRelay<Reaction>()
   private var bag = DisposeBag()
   
@@ -63,11 +63,13 @@ class UserView: UIView, UserViewProtocol {
       guard let reaction = event.element else { return }
       self?.hideUserViewPublishRelay.accept(())
       self?.reactionsPublishRelay.accept(reaction)
-    }.disposed(by: bag)
+    }
+    .disposed(by: bag)
     
     viewModel.subscribe { [weak self] viewModel in
       self?.fillUI(with: viewModel)
-    }.disposed(by: bag)
+    }
+    .disposed(by: bag)
       
   }
   
@@ -84,15 +86,14 @@ class UserView: UIView, UserViewProtocol {
     DispatchQueue.main.async {
       if let viewModel = viewModel {
         let url = URL(string: viewModel.imageUrlString)
-        self.userImageView.kf.setImage(with: url,
-                                       options: [
-                                        .transition(.fade(0.2))
-                                       ])
+        self.userImageView.kf.setImage(
+          with: url,
+          options: [.transition(.fade(0.2))])
       } else {
         self.userImageView.image = .userPlaceholderImage
       }
       self.similarInterestLabel.text = "\(viewModel?.similarInterestsCount ?? 0) Similar"
-      self.userInfoView.viewModelRelay.accept(viewModel?.userInfoViewViewModel) 
+      self.userInfoView.viewModelRelay.accept(viewModel?.userInfoViewViewModel)
       self.updateInterestsView(with: viewModel?.interests)
     }
     
@@ -126,7 +127,7 @@ extension UserView: UIScrollViewDelegate {
   
   private func updateInterestsView(with userInterests: Set<Interest>?) {
     let pairs: [(Interest, Bool)] = userInterests?
-      .map( { ($0, user.interests!.contains($0)) } ) ?? []
+      .map { ($0, user.interests!.contains($0)) }  ?? []
     interestsCollectionView.interestsRelay.accept(pairs)
   }
   
@@ -150,8 +151,16 @@ extension UserView: UIScrollViewDelegate {
   }
   
   private func setupLabels() {
-    interestLabel = UILabel(text: "Interests", fontSize: 18, weight: .bold, textColor: .black)
-    similarInterestLabel = UILabel(text: "0 Similar", fontSize: 14, weight: .bold, textColor: .firstGradientColor.withAlphaComponent(0.6))
+    interestLabel = UILabel(
+      text: "Interests",
+      fontSize: 18,
+      weight: .bold,
+      textColor: .black)
+    similarInterestLabel = UILabel(
+      text: "0 Similar",
+      fontSize: 14,
+      weight: .bold,
+      textColor: .firstGradientColor.withAlphaComponent(0.6))
   }
   
   private func setupUserImageView() {
@@ -224,7 +233,8 @@ extension UserView: UIScrollViewDelegate {
     scrollView.addSubview(reactionView)
     reactionView.snp.makeConstraints { make in
       make.top.equalTo(interestsCollectionView.view.snp.bottom).offset(24)
-      make.horizontalEdges.equalToSuperview().inset(Constants.horizontalReactiovViewPaddingMultiplier * self.bounds.width)
+      make.horizontalEdges.equalToSuperview()
+        .inset(Constants.horizontalReactiovViewPaddingMultiplier * self.bounds.width)
       make.height.equalTo(75)
       make.bottom.equalTo(-20)
     }
@@ -249,13 +259,12 @@ extension UserView: UIGestureRecognizerDelegate {
   @objc private func handlePan(_ recognizer: UIPanGestureRecognizer) {
     let velocity = recognizer.velocity(in: self)
     switch recognizer.state {
-    case .began:
+    case .began, .possible, .cancelled, .failed:
       break
     case .changed:
       onChange(recognizer)
     case .ended:
       gestureEnded(with: velocity.y)
-      break
     @unknown default:
       print("oknown")
     }
@@ -263,11 +272,12 @@ extension UserView: UIGestureRecognizerDelegate {
   
   private func onChange(_ recognizer: UIPanGestureRecognizer) {
     let translation = recognizer.translation(in: self)
-    if (frame.minY <= 0 && translation.y < 0) { return }
+    guard (frame.minY > 0 && translation.y < 0) else { return }
     guard let gestureView = recognizer.view else { return }
     let yDelta = center.y
-    gestureView.center = CGPoint(x: center.x,
-                                 y: yDelta + translation.y)
+    gestureView.center = CGPoint(
+      x: center.x,
+      y: yDelta + translation.y)
     recognizer.setTranslation(.zero, in: self)
   }
   

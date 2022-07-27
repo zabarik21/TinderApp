@@ -13,12 +13,14 @@ class RandomUserApiTests: XCTestCase {
   
   var sut: RandomUserApi!
   
-  override func setUpWithError() throws {
+  override func setUp() {
+    super.setUp()
     sut = RandomUserApi()
   }
   
-  override func tearDownWithError() throws {
+  override func tearDown() {
     sut = nil
+    super.tearDown()
   }
   
   func testApiLoadsAndDecodeUsersWithRightCount() {
@@ -32,7 +34,7 @@ class RandomUserApiTests: XCTestCase {
       case .failure(let error):
         print(error)
         // fails if coordinates not nil
-        XCTFail()
+        XCTFail(error.localizedDescription)
       }
     }
     wait(for: [loadExpectation], timeout: 3)

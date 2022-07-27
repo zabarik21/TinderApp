@@ -13,33 +13,44 @@ class StorageServiceTests: XCTestCase {
   
   var sut: StorageService!
   
-  let user = UserCardModel(name: Name(first: "Тимофей", last: "Резвых"),
-                           gender: .male,
-                           location: Location(city: "Perm",
-                                              coordinates: Coordinates(latitude: "2", longitude: "3")),
-                           birthDate: .init(date: "03.03.02", age: 19),
-                           picture: WebImage(large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
-                                             thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
-                           id: ID.init(value: "3241145"),
-                                 interests: Interest.getAllCases())
+  let user = UserCardModel(
+    name: Name(
+      first: "Тимофей",
+      last: "Резвых"),
+    gender: .male,
+    location: Location(
+      city: "Perm",
+      coordinates: Coordinates(
+        latitude: "2",
+        longitude: "3")),
+    birthDate: BirthDate(
+      date: "03.03.02",
+      age: 19),
+    picture: WebImage(
+      large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
+      thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
+    id: USERID.init(value: "3241145"),
+    interests: Interest.getAllCases())
   
-  override func setUpWithError() throws {
+  override func setUp() {
+    super.setUp()
     sut = StorageService.shared
   }
   
-  override func tearDownWithError() throws {
+  override func tearDown() {
+    super.tearDown()
     sut.resetData()
     sut = nil
   }
   
   func testUserModelCorrectDecodesAndEncodesIntoJson() {
     guard let jsonData = user.jsonRepresent() else {
-      XCTFail()
+      XCTFail("failed to encode json")
       return
     }
     
     guard let decodedUser = try? JSONDecoder().decode(UserCardModel.self, from: jsonData) else {
-      XCTFail()
+      XCTFail("failed to decode json")
       return
     }
             
@@ -50,11 +61,11 @@ class StorageServiceTests: XCTestCase {
     sut.saveUser(user: user)
     
     guard let savedUser = sut.loadUser() else {
-      XCTFail()
+      XCTFail("falied to load user")
       return
     }
     
-    XCTAssertEqual(user, savedUser) 
+    XCTAssertEqual(user, savedUser)
   }
   
 }

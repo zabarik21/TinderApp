@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Find people close to you, if you refuse users will show randomly </string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Find people close to you, if you refuse users will show randomly </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Find people close to you, if you refuse users will show randomly </string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Find people close to you, if you refuse users will show randomly </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

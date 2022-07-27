@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E206E9509163402D42CC90D /* Pods_TinderAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5240B67A5E1719D157E925 /* Pods_TinderAppTests.framework */; };
 		7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1A9090284B61B0006C7C3F /* MTBC + TabBarSetup.swift */; };
-		7B1AFB0128774D0F007B943C /* CardContainerViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1AFB0028774D0F007B943C /* CardContainerViewViewModelTests.swift */; };
 		7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */; };
 		7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */; };
 		7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */; };
@@ -26,7 +25,6 @@
 		7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */; };
 		7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */; };
 		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
-		7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E89BF286B7AF100732985 /* Interestlabel.swift */; };
 		7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71D542287AA527002E7340 /* StartScreenButton.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
 		7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */; };
@@ -35,6 +33,7 @@
 		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
 		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
 		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
+		7B9284A52891095600183A6C /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9284A42891095600183A6C /* LocationService.swift */; };
 		7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */; };
 		7B929B55287E97D600B6AE35 /* UILabel + Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B54287E97D600B6AE35 /* UILabel + Init.swift */; };
 		7B929B58287EC4E000B6AE35 /* UIView + Draggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B57287EC4E000B6AE35 /* UIView + Draggle.swift */; };
@@ -44,7 +43,6 @@
 		7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */; };
 		7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9469EF2848EF5F0079568C /* CardView + Gestures.swift */; };
 		7B9FCBAD28676EE10031518D /* Interests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FCBAC28676EE10031518D /* Interests.swift */; };
-		7B9FCBB0286772F50031518D /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FCBAF286772F50031518D /* UserView.swift */; };
 		7BA1BC7A2878917300E9C5E8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1BC792878917300E9C5E8 /* NetworkManager.swift */; };
 		7BA1BC7C2878A53C00E9C5E8 /* RandomUserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1BC7B2878A53C00E9C5E8 /* RandomUserApi.swift */; };
 		7BA1BC7E2878A54900E9C5E8 /* RandomUserApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1BC7D2878A54900E9C5E8 /* RandomUserApiTests.swift */; };
@@ -57,6 +55,8 @@
 		7BB2FED62870B68700A2731E /* CardContainerView + CardViewsSwiping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED52870B68700A2731E /* CardContainerView + CardViewsSwiping.swift */; };
 		7BB2FED82870B6CD00A2731E /* CardViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED72870B6CD00A2731E /* CardViewProtocol.swift */; };
 		7BB2FEDA2870B6E900A2731E /* CardContainerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED92870B6E900A2731E /* CardContainerViewProtocol.swift */; };
+		7BC7EBBC289134C40051D0CD /* UIViewController + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7EBBB289134C40051D0CD /* UIViewController + UIAlertController.swift */; };
+		7BC7EBC0289137DC0051D0CD /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7EBBF289137DC0051D0CD /* UserView.swift */; };
 		7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */; };
 		7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */; };
 		7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */; };
@@ -94,7 +94,6 @@
 		5C5240B67A5E1719D157E925 /* Pods_TinderAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinderAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78D02E41009EA6B19D314671 /* Pods-TinderApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinderApp.debug.xcconfig"; path = "Target Support Files/Pods-TinderApp/Pods-TinderApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7B1A9090284B61B0006C7C3F /* MTBC + TabBarSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarSetup.swift"; sourceTree = "<group>"; };
-		7B1AFB0028774D0F007B943C /* CardContainerViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelTests.swift; sourceTree = "<group>"; };
 		7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerObserverFuncs.swift"; sourceTree = "<group>"; };
 		7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocol.swift; sourceTree = "<group>"; };
 		7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsViewProtocol.swift; sourceTree = "<group>"; };
@@ -111,7 +110,6 @@
 		7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + UserViewAnimating.swift"; sourceTree = "<group>"; };
 		7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + PlaceholderImage.swift"; sourceTree = "<group>"; };
 		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
-		7B5E89BF286B7AF100732985 /* Interestlabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interestlabel.swift; sourceTree = "<group>"; };
 		7B71D542287AA527002E7340 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
 		7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerViewViewModelDelegate.swift"; sourceTree = "<group>"; };
@@ -120,6 +118,7 @@
 		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
 		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
 		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
+		7B9284A42891095600183A6C /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPickerView.swift; sourceTree = "<group>"; };
 		7B929B54287E97D600B6AE35 /* UILabel + Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Init.swift"; sourceTree = "<group>"; };
 		7B929B57287EC4E000B6AE35 /* UIView + Draggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Draggle.swift"; sourceTree = "<group>"; };
@@ -129,7 +128,6 @@
 		7B93C0612851180F002B0A00 /* ReactionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsView.swift; sourceTree = "<group>"; };
 		7B9469EF2848EF5F0079568C /* CardView + Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardView + Gestures.swift"; sourceTree = "<group>"; };
 		7B9FCBAC28676EE10031518D /* Interests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interests.swift; sourceTree = "<group>"; };
-		7B9FCBAF286772F50031518D /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		7BA1BC792878917300E9C5E8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7BA1BC7B2878A53C00E9C5E8 /* RandomUserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUserApi.swift; sourceTree = "<group>"; };
 		7BA1BC7D2878A54900E9C5E8 /* RandomUserApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUserApiTests.swift; sourceTree = "<group>"; };
@@ -142,6 +140,8 @@
 		7BB2FED52870B68700A2731E /* CardContainerView + CardViewsSwiping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardContainerView + CardViewsSwiping.swift"; sourceTree = "<group>"; };
 		7BB2FED72870B6CD00A2731E /* CardViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewProtocol.swift; sourceTree = "<group>"; };
 		7BB2FED92870B6E900A2731E /* CardContainerViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewProtocol.swift; sourceTree = "<group>"; };
+		7BC7EBBB289134C40051D0CD /* UIViewController + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + UIAlertController.swift"; sourceTree = "<group>"; };
+		7BC7EBBF289137DC0051D0CD /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		7BCB99B52845C931004EFC29 /* UserCardViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
 		7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
@@ -157,8 +157,6 @@
 		7BED5EB6284111750081E71E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BED5EBB284111750081E71E /* TinderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BED5EBF284111750081E71E /* TinderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderAppTests.swift; sourceTree = "<group>"; };
-		7BED5EC9284111750081E71E /* TinderAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderAppUITests.swift; sourceTree = "<group>"; };
-		7BED5ECB284111750081E71E /* TinderAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7BED5ED9284111CF0081E71E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7BED5EDF284114720081E71E /* MessagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagerViewController.swift; sourceTree = "<group>"; };
 		7BED5EE428411F050081E71E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +213,7 @@
 		7B1AFB02287754F3007B943C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7B9284A32891094B00183A6C /* LocationService */,
 				7B52B8AA2882A55800A64A7B /* StorageService */,
 				7B1AFB052877569B007B943C /* Networking */,
 			);
@@ -280,14 +279,6 @@
 			path = CompatabilityView;
 			sourceTree = "<group>";
 		};
-		7B5E89BE286B7AE000732985 /* InterestLabel */ = {
-			isa = PBXGroup;
-			children = (
-				7B5E89BF286B7AF100732985 /* Interestlabel.swift */,
-			);
-			path = InterestLabel;
-			sourceTree = "<group>";
-		};
 		7B716792287D4CFB00064F36 /* SetupProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +301,14 @@
 				7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */,
 			);
 			path = CGFloat;
+			sourceTree = "<group>";
+		};
+		7B9284A32891094B00183A6C /* LocationService */ = {
+			isa = PBXGroup;
+			children = (
+				7B9284A42891095600183A6C /* LocationService.swift */,
+			);
+			path = LocationService;
 			sourceTree = "<group>";
 		};
 		7B929B50287E8A2100B6AE35 /* TextFieldPickerView */ = {
@@ -369,18 +368,11 @@
 			path = UserInfoView;
 			sourceTree = "<group>";
 		};
-		7BA467EB286D91FE001016E1 /* UserView */ = {
-			isa = PBXGroup;
-			children = (
-				7B9FCBAF286772F50031518D /* UserView.swift */,
-			);
-			path = UserView;
-			sourceTree = "<group>";
-		};
 		7BA8AF6328682D4500B254CC /* UIVIewController */ = {
 			isa = PBXGroup;
 			children = (
 				7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */,
+				7BC7EBBB289134C40051D0CD /* UIViewController + UIAlertController.swift */,
 			);
 			path = UIVIewController;
 			sourceTree = "<group>";
@@ -392,6 +384,21 @@
 				7B716792287D4CFB00064F36 /* SetupProfileViewController */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7BC7EBBD289137420051D0CD /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		7BC7EBBE289137B30051D0CD /* UserView */ = {
+			isa = PBXGroup;
+			children = (
+				7BC7EBBF289137DC0051D0CD /* UserView.swift */,
+			);
+			path = UserView;
 			sourceTree = "<group>";
 		};
 		7BCB99B42845C91A004EFC29 /* Delegate */ = {
@@ -445,7 +452,6 @@
 			children = (
 				7BED5EA7284111730081E71E /* TinderApp */,
 				7BED5EBE284111750081E71E /* TinderAppTests */,
-				7BED5EC8284111750081E71E /* TinderAppUITests */,
 				7BED5EA6284111730081E71E /* Products */,
 				63ED87B1C0001C56CB0917E3 /* Pods */,
 				D193420E2F212661967CA5C2 /* Frameworks */,
@@ -484,21 +490,11 @@
 			children = (
 				7BED5EBF284111750081E71E /* TinderAppTests.swift */,
 				7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */,
-				7B1AFB0028774D0F007B943C /* CardContainerViewViewModelTests.swift */,
 				7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */,
 				7BA1BC7D2878A54900E9C5E8 /* RandomUserApiTests.swift */,
 				7B52B8AD2882AC3000A64A7B /* StorageServiceTests.swift */,
 			);
 			path = TinderAppTests;
-			sourceTree = "<group>";
-		};
-		7BED5EC8284111750081E71E /* TinderAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7BED5EC9284111750081E71E /* TinderAppUITests.swift */,
-				7BED5ECB284111750081E71E /* TinderAppUITestsLaunchTests.swift */,
-			);
-			path = TinderAppUITests;
 			sourceTree = "<group>";
 		};
 		7BED5ED8284111BF0081E71E /* Controllers */ = {
@@ -534,14 +530,14 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7BC7EBBE289137B30051D0CD /* UserView */,
+				7BC7EBBD289137420051D0CD /* New Group */,
 				7B929B50287E8A2100B6AE35 /* TextFieldPickerView */,
 				7B4389BC287C992D00791C56 /* SetupProfileTextField */,
 				7BE2E90D287C2ECB00D0BA75 /* ProfileImageView */,
 				7B71D541287AA519002E7340 /* StartScreenButton */,
 				7BF85C7828721CE600B296CC /* InterestCell */,
-				7BA467EB286D91FE001016E1 /* UserView */,
 				7BA467EA286D91C2001016E1 /* UserInfoView */,
-				7B5E89BE286B7AE000732985 /* InterestLabel */,
 				7B9332132860493700D46E69 /* HiddenReactionView */,
 				7B5C28BB2855F8EF0001212A /* CompatabilityView */,
 				7BFC9A632851ACD4009B6D8A /* CardContainerView */,
@@ -664,12 +660,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BED5ECF284111750081E71E /* Build configuration list for PBXNativeTarget "TinderApp" */;
 			buildPhases = (
+				7BE9EF2C286E1B5A004C18F4 /* ShellScript */,
 				9C0908DCBDBAFD7F8992C554 /* [CP] Check Pods Manifest.lock */,
 				7BED5EA1284111730081E71E /* Sources */,
 				7BED5EA2284111730081E71E /* Frameworks */,
 				7BED5EA3284111730081E71E /* Resources */,
-				7BE9EF2C286E1B5A004C18F4 /* ShellScript */,
 				A1959C7140618C600A4449FA /* [CP] Embed Pods Frameworks */,
+				7B6BB2242882E21C00DC2A63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -762,6 +759,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7B6BB2242882E21C00DC2A63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		7BE9EF2C286E1B5A004C18F4 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -777,7 +791,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftLint >/dev/null; then\n  swiftLint\nelse \n  echo \"warning SwiftLint not installed\"\nfi\n";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		90F3BB6D600642E4029E14A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -860,7 +874,6 @@
 				7B929B58287EC4E000B6AE35 /* UIView + Draggle.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */,
-				7B9FCBB0286772F50031518D /* UserView.swift in Sources */,
 				7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7BA467ED286D9221001016E1 /* UserInfoView.swift in Sources */,
@@ -870,6 +883,7 @@
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
 				7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */,
 				7BB2FED82870B6CD00A2731E /* CardViewProtocol.swift in Sources */,
+				7BC7EBBC289134C40051D0CD /* UIViewController + UIAlertController.swift in Sources */,
 				7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BF85C7728721C9800B296CC /* InterestsCollectionViewController.swift in Sources */,
@@ -882,6 +896,7 @@
 				7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */,
 				7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */,
 				7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */,
+				7B9284A52891095600183A6C /* LocationService.swift in Sources */,
 				7B7F81832870D04000223A37 /* UsersInfoViewViewModel.swift in Sources */,
 				7BB2FEDA2870B6E900A2731E /* CardContainerViewProtocol.swift in Sources */,
 				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
@@ -898,9 +913,9 @@
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,
 				7B929B55287E97D600B6AE35 /* UILabel + Init.swift in Sources */,
 				7BE2E90C287C2EA800D0BA75 /* SetupProfileViewController.swift in Sources */,
+				7BC7EBC0289137DC0051D0CD /* UserView.swift in Sources */,
 				7BED5EDA284111CF0081E71E /* MainTabBarController.swift in Sources */,
 				7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */,
-				7B5E89C0286B7AF100732985 /* Interestlabel.swift in Sources */,
 				7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,
@@ -917,7 +932,6 @@
 				7BA1BC7E2878A54900E9C5E8 /* RandomUserApiTests.swift in Sources */,
 				7BED5EC0284111750081E71E /* TinderAppTests.swift in Sources */,
 				7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */,
-				7B1AFB0128774D0F007B943C /* CardContainerViewViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,8 +20,7 @@ extension CardContainerView {
     let cardViewModel = viewModel?.nextCard()
     if topCardTurn {
       topCardView.viewModelRelay.accept(cardViewModel)
-    }
-    else {
+    } else {
       bottomCardView.viewModelRelay.accept(cardViewModel)
     }
   }

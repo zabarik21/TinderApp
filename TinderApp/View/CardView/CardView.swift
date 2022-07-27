@@ -58,7 +58,8 @@ class CardView: UIView, CardViewProtocol {
       .subscribe(on: MainScheduler.instance)
       .subscribe { [weak self] viewModel in
         self?.fillUI(with: viewModel)
-      }.disposed(by: bag)
+      }
+      .disposed(by: bag)
   }
   
   override func layoutSubviews() {
@@ -66,7 +67,7 @@ class CardView: UIView, CardViewProtocol {
     self.startPoint = center
     setupConstraints()
   }
-
+  
   
   func swipe(liked: Bool, fromButton: Bool = false) {
     let xShift: CGFloat = liked ? CardViewConstants.xShift : -CardViewConstants.xShift
@@ -85,36 +86,25 @@ class CardView: UIView, CardViewProtocol {
       self?.swipedPublisher.onNext(liked)
     }
   }
-
+  
   private func fillUI(with viewModel: UserCardViewViewModelProtocol?) {
-      if let viewModel = viewModel {
-        self.isSwipeble = true
-        guard let url = URL(string: viewModel.imageUrlString) else { return }
-        self.userInfoView.viewModelRelay.accept(viewModel.userInfoViewViewModel)
-        DispatchQueue.main.async { [weak self] in
-          self?.profileImage.kf.setImage(with: url,
-                                   options: [
-                                    .transition(.fade(0.2)),
-                                   ]) { result in
-                                     switch result {
-                                     case .success( _):
-                                       break
-                                     case .failure(_): break
-                                     }
-                                   }
-        }
-      } else {
-        self.isSwipeble = false
-        self.userInfoView.viewModelRelay.accept(nil)
-        DispatchQueue.main.async {
-          self.profileImage.image = .userPlaceholderImage
-        }
+    if let viewModel = viewModel {
+      self.isSwipeble = true
+      guard let url = URL(string: viewModel.imageUrlString) else { return }
+      self.userInfoView.viewModelRelay.accept(viewModel.userInfoViewViewModel)
+      DispatchQueue.main.async { [weak self] in
+        self?.profileImage.kf.setImage(
+          with: url,
+          options: [.transition(.fade(0.2))])
       }
+    } else {
+      self.isSwipeble = false
+      self.userInfoView.viewModelRelay.accept(nil)
+      DispatchQueue.main.async {
+        self.profileImage.image = .userPlaceholderImage
+      }
+    }
   }
-  
-  
-  
-  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

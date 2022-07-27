@@ -39,8 +39,14 @@ class SetupProfileTextField: UITextField {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func updatePath(){
-    lineLayer.path = UIBezierPath(rect: CGRect(x: 0, y: self.bounds.maxY + 1, width: self.bounds.width, height: 1)).cgPath
+  private func updatePath() {
+    lineLayer.path = UIBezierPath(
+      rect: CGRect(
+        x: 0,
+        y: self.bounds.maxY + 1,
+        width: self.bounds.width,
+        height: 1)
+    ).cgPath
   }
   
   private func setupLayer() {

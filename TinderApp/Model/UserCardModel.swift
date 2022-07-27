@@ -12,14 +12,13 @@ struct RandomPeopleApiResponce: Codable {
 }
 
 
-// add new model for non api responce user where interests arent optional
 struct UserCardModel: Codable {
   var name: Name
   var gender: Gender
   var location: Location
   var birthDate: BirthDate
   var picture: WebImage
-  var id: ID
+  var id: USERID
   var interests: Set<Interest>?
   
   enum CodingKeys: String, CodingKey, CaseIterable {
@@ -36,8 +35,7 @@ struct UserCardModel: Codable {
     do {
       let json = try JSONEncoder().encode(self)
       return json
-    }
-    catch {
+    } catch {
       print(error)
       return nil
     }
@@ -46,10 +44,7 @@ struct UserCardModel: Codable {
 
 extension UserCardModel: Equatable {
   static func == (lhs: UserCardModel, rhs: UserCardModel) -> Bool {
-    guard let lid = lhs.id.value,
-          let rid = rhs.id.value else {
-            return false
-          }
+    guard let lid = lhs.id.value, let rid = rhs.id.value else { return false }
     return lid == rid
   }
 }
@@ -60,7 +55,7 @@ struct Coordinates: Codable {
   var longitude: String
 }
 
-struct ID: Codable {
+struct USERID: Codable {
   var value: String?
 }
 
@@ -89,4 +84,16 @@ struct BirthDate: Codable {
 struct Location: Codable {
   var city: String
   var coordinates: Coordinates
+  
+  init(city: String, coordinates: Coordinates) {
+    self.city = city
+    self.coordinates = coordinates
+  }
+  
+  // Location init for users who hide their location
+  init() {
+    self.city = "Hided"
+    self.coordinates = Coordinates(latitude: "54", longitude: "54")
+  }
+  
 }

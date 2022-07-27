@@ -11,7 +11,6 @@ import RxSwift
 import RxRelay
 
 
-
 enum Reaction {
   case like
   case dislike
@@ -50,8 +49,14 @@ class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {
   }
   
   private func updateShadowPath() {
-    likeButton.layer.shadowPath = UIBezierPath(roundedRect: likeButton.bounds, cornerRadius: likeButton.frame.height / 2).cgPath
-    dislikeButton.layer.shadowPath = UIBezierPath(roundedRect: dislikeButton.bounds, cornerRadius: dislikeButton.frame.height / 2).cgPath
+    likeButton.layer.shadowPath = UIBezierPath(
+      roundedRect: likeButton.bounds,
+      cornerRadius: likeButton.frame.height / 2)
+      .cgPath
+    dislikeButton.layer.shadowPath = UIBezierPath(
+      roundedRect: dislikeButton.bounds,
+      cornerRadius: dislikeButton.frame.height / 2)
+      .cgPath
   }
   
   required init?(coder: NSCoder) {
@@ -128,7 +133,9 @@ extension ReactionButtonsView {
   }
   
   private func setupGradientLayer() {
-    let gradientLayer = LayerFactory.shared.getGradientLayer(with: [.firstGradientColor,         .secondGradientColor])
+    let gradientLayer = LayerFactory.shared.getGradientLayer(
+      with: [.firstGradientColor, .secondGradientColor]
+    )
     
     gradientLayer.frame = dislikeButton.frame
     gradientLayer.cornerRadius = frame.height / 2

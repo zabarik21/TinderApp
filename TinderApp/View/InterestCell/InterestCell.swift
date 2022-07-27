@@ -13,7 +13,7 @@ class InterestCell: UICollectionViewCell {
   
   @IBOutlet var interestCell: UILabel!
   @IBOutlet var interestLabel: UILabel!
-  private var match: Bool = false
+  private var match = false
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -29,7 +29,9 @@ class InterestCell: UICollectionViewCell {
     let matchColorOpacity = interactionEnabled ? 0.5 : 0.2
     self.match = matching
     self.interestCell.text = interest.rawValue.uppercasingFirstLetter
-    self.backgroundColor = matching ? .firstGradientColor.withAlphaComponent(matchColorOpacity) : .black.withAlphaComponent(0.1)
+    self.backgroundColor = matching
+      ? .firstGradientColor.withAlphaComponent(matchColorOpacity)
+      : .black.withAlphaComponent(0.1)
   }
   
 }

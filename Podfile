@@ -10,7 +10,7 @@ target 'TinderApp' do
   pod 'RxSwift'
   pod 'SnapKit'
   pod 'RxRelay'
-
+  pod 'SwiftLint'
   target 'TinderAppTests' do
     inherit! :search_paths
     # Pods for testing

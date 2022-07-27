@@ -34,7 +34,7 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   var bottomCardView: CardViewProtocol!
   var topCardView: CardViewProtocol!
   
-  var topCardTurn: Bool = true
+  var topCardTurn = true
   
   init() {
     super.init(frame: .zero)
@@ -60,19 +60,20 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     topCardView.swipedObservable
       .subscribe { [weak self] liked in
         self?.swiped(liked: liked)
-      }.disposed(by: bag)
+      }
+      .disposed(by: bag)
     
     bottomCardView.swipedObservable
       .subscribe { [weak self] liked in
         self?.swiped(liked: liked)
-      }.disposed(by: bag)
+      }
+      .disposed(by: bag)
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if topCardTurn {
       cardTouchPublisher.onNext(topCardView.viewModelRelay.value)
-    }
-    else {
+    } else {
       cardTouchPublisher.onNext(bottomCardView.viewModelRelay.value)
     }
   }
@@ -81,7 +82,6 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
 }
-
 
 
 // MARK: - Setup Elements & UI

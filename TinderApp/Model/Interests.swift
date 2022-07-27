@@ -32,10 +32,10 @@ enum Interest: String, Codable, CaseIterable {
   
   static func getRandomCases() -> Set<Interest> {
     let allCases = Interest.allCases
-    let n = Int.random(in: 1...(Interest.allCases.count))
+    let count = Int.random(in: 1...(Interest.allCases.count))
     var res = Set<Interest>()
-    for _ in 0...n {
-      let rand = Int.random(in: 0...n - 1)
+    for _ in 0...count {
+      let rand = Int.random(in: 0...(count - 1))
       res.insert(allCases[rand])
     }
     return res

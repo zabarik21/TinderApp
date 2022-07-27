@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 
 class InterestsCollectionViewController: UICollectionViewController {
-
+  
   typealias InterestPair = (interest: Interest, match: Bool)
   
   private var isChoosable = false
@@ -43,12 +43,13 @@ class InterestsCollectionViewController: UICollectionViewController {
   func setupObserver() {
     interestsRelay
       .distinctUntilChanged({ fst, snd in
-        return (fst.count == 0 && snd.count == 0)
+        return (!fst.isEmpty && !snd.isEmpty)
       })
       .subscribe(on: MainScheduler.instance)
       .subscribe { [weak self] pairs in
         self?.interests = pairs.element ?? []
-      }.disposed(by: bag)
+      }
+      .disposed(by: bag)
   }
   
   func changeStyleToChoosable() {
@@ -60,7 +61,11 @@ class InterestsCollectionViewController: UICollectionViewController {
   
   
   private func registerCell() {
-    self.collectionView.register(UINib(nibName: String(describing: InterestCell.self), bundle: nil), forCellWithReuseIdentifier: InterestCell.cellIdentifier)
+    self.collectionView.register(
+      UINib(
+        nibName: String(describing: InterestCell.self),
+        bundle: nil),
+      forCellWithReuseIdentifier: InterestCell.cellIdentifier)
   }
   
 }
@@ -90,7 +95,9 @@ extension InterestsCollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as? InterestCell else { return UICollectionViewCell() }
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: "interestCell",
+      for: indexPath) as? InterestCell else { return UICollectionViewCell() }
     let interest = interests[indexPath.row].interest
     let match = interests[indexPath.row].match
     cell.configure(with: interest, matching: match, interactionEnabled: self.isChoosable)

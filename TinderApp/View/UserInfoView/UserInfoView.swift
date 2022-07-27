@@ -11,7 +11,6 @@ import RxSwift
 import RxRelay
 
 
-
 class UserInfoView: UIView {
   
   private var compatabilityView: CompatabilityView!
@@ -33,7 +32,8 @@ class UserInfoView: UIView {
     viewModelRelay
       .subscribe { [weak self] viewModel in
         self?.fillUI(with: viewModel)
-      }.disposed(by: bag)
+      }
+      .disposed(by: bag)
   }
   
   private func fillUI(with viewModel: UsersInfoViewViewModelProtocol?) {

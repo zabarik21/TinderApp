@@ -20,7 +20,8 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   }
   
   private var bag = DisposeBag()
-
+  private var location: Location?
+  
   private var profileImageView: ProfileImageView!
   private var nameTextField: SetupProfileTextField!
   private var surnameTextField: SetupProfileTextField!
@@ -38,19 +39,29 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
     super.viewDidLoad()
     setupElements()
     setupConstraints()
+    LocationService.shared.requestLocation()
   }
   
   private func setupObserver() {
     profileImageView.imageChooseObservable
+      .subscribe(on: MainScheduler.instance)
       .subscribe { [weak self] _ in
         self?.chooseImage()
-      }.disposed(by: bag)
+      }
+      .disposed(by: bag)
+    
+    LocationService.shared.locationObservable
+      .subscribe(on: MainScheduler.instance)
+      .subscribe { [weak self] userLocation in
+        self?.location = userLocation
+      }
+      .disposed(by: bag)
   }
   
   func checkFields() -> Bool {
     let nameEmpty = (nameTextField.text?.count ?? 0) == 0
     let surnameEmpty = (surnameTextField.text?.count ?? 0) == 0
-    let genderEmpty = genderPicker.text == "" ? true : false
+    let genderEmpty = (genderPicker.text?.isEmpty ?? true) ? true : false
     
     if nameEmpty {
       nameTextField.twitch()
@@ -68,7 +79,7 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
     }
   }
   
-  @objc func toDemo() {
+  @objc func toMainScreen() {
     if checkFields() {
       let name = Name(first: self.nameTextField.text!, last: self.surnameTextField.text!)
       let interests = interestCollectionView.interests
@@ -79,15 +90,16 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
       let gender = Gender(rawValue: self.genderPicker.text!.lowercasingFirstLetter)!
       let date = birthDatePicker.date.formatted(date: .numeric, time: .omitted)
       
-      let user = UserCardModel(name: name,
-                               gender: gender,
-                               location: Location(city: "Perm",
-                                                  coordinates: Coordinates(latitude: "2", longitude: "3")),
-                               birthDate: BirthDate(date: date, age: 19),
-                               picture: WebImage(large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
-                                                 thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
-                               id: ID.init(value: "id"),
-                               interests: interests)
+      let user = UserCardModel(
+        name: name,
+        gender: gender,
+        location: self.location ?? Location(),
+        birthDate: BirthDate(date: date, age: 19),
+        picture: WebImage(
+          large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
+          thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
+        id: USERID.init(value: "id"),
+        interests: interests)
       
       DispatchQueue.global(qos: .background).async {
         StorageService.shared.saveUser(user: user)
@@ -126,10 +138,11 @@ extension SetupProfileViewController {
     scrollView = UIScrollView()
     scrollView.delegate = self
     scrollView.showsVerticalScrollIndicator = false
+    scrollView.bounces = false
   }
   
   private func setupPickers() {
-    let genders = Gender.allCases.map({ $0.rawValue.uppercasingFirstLetter })
+    let genders = Gender.allCases.map { $0.rawValue.uppercasingFirstLetter }
     genderPicker = TextFieldPickerView(with: genders)
     genderPicker.backgroundColor = .white.withAlphaComponent(0.5)
     
@@ -150,7 +163,7 @@ extension SetupProfileViewController {
   
   private func setupButton() {
     toDemoButton = StartScreenButton(with: .light, title: "Find your friend")
-    toDemoButton.addTarget(self, action: #selector(toDemo), for: .touchUpInside)
+    toDemoButton.addTarget(self, action: #selector(toMainScreen), for: .touchUpInside)
   }
   
   private func setupInterestsCollectionView() {
@@ -162,24 +175,30 @@ extension SetupProfileViewController {
     
     interestCollectionView = InterestsCollectionViewController(collectionViewLayout: layout)
     interestCollectionView.changeStyleToChoosable()
-    interestCollectionView.interestsRelay.accept(Interest.allCases.map {($0, false)} )
+    let interests = Interest.allCases
+      .map { ($0, false) }
+    
+    interestCollectionView.interestsRelay.accept(interests)
   }
   
   private func setupLabels() {
-    genderLabel = UILabel(text: "Gender",
-                          fontSize: 16,
-                          weight: .semibold,
-                          textColor: .logoColor)
+    genderLabel = UILabel(
+      text: "Gender",
+      fontSize: 16,
+      weight: .semibold,
+      textColor: .logoColor)
     
-    birthDateLabel = UILabel(text: "Birth date",
-                             fontSize: 16,
-                             weight: .semibold,
-                             textColor: .logoColor)
+    birthDateLabel = UILabel(
+      text: "Birth date",
+      fontSize: 16,
+      weight: .semibold,
+      textColor: .logoColor)
     
-    interestsLabel = UILabel(text: "Choose Interests",
-                             fontSize: 18,
-                             weight: .semibold,
-                             textColor: .logoColor)
+    interestsLabel = UILabel(
+      text: "Choose Interests",
+      fontSize: 18,
+      weight: .semibold,
+      textColor: .logoColor)
   }
   
   private func setupTextFields() {
@@ -294,7 +313,7 @@ extension SetupProfileViewController: PHPickerViewControllerDelegate {
   func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
     picker.dismiss(animated: true, completion: nil)
     for result in results {
-      result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
+      result.itemProvider.loadObject(ofClass: UIImage.self) { object, _ in
         if let image = object as? UIImage {
           DispatchQueue.main.async { [weak self] in
             self?.profileImageView.updateImage(with: image)
@@ -314,4 +333,3 @@ extension SetupProfileViewController {
   }
   
 }
-

@@ -19,20 +19,19 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   var interests: Set<Interest>
   
   var userInfoViewViewModel: UsersInfoViewViewModelProtocol {
-    return UsersInfoViewViewModel(nameAgeText: self.nameAgeLabelText(),
-                                  cityText: self.cityDistanceLabelText(),
-                                  compatabilityScore: self.compatabilityScore)
+    return UsersInfoViewViewModel(
+      nameAgeText: self.nameAgeLabelText(),
+      cityText: self.cityDistanceLabelText(),
+      compatabilityScore: self.compatabilityScore)
   }
   
   
   init(with userCardModel: UserCardModel, myInterests: Set<Interest>?) {
-    // make individual model with not optional interests (non api responce model)
-    if let myInterests = myInterests,
-       myInterests.count > 0 {
+    if let myInterests = myInterests, !myInterests.isEmpty {
       let similarInterests = userCardModel.interests!.reduce(0, { partialResult, interest in
         partialResult + (myInterests.contains(interest) ? 1 : 0)
       })
-      let compatablityScore: Double = Double(similarInterests) / Double(myInterests.count) * 10
+      let compatablityScore = Double(similarInterests) / Double(myInterests.count) * 10
       self.compatabilityScore = Int(compatablityScore)
       self.similarInterestsCount = similarInterests
     } else {

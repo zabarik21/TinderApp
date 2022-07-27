@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 extension PeopleViewController {
   
   func setupGradientLayer() {
