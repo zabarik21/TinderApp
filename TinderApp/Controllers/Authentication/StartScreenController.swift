@@ -37,7 +37,20 @@ class StartScreenController: UIViewController {
   
   @objc func demoAppTouched() {
     let demoSetupProfileViewController = SetupProfileViewController()
-    self.navigationController?.pushViewController(demoSetupProfileViewController, animated: true)
+    DispatchQueue.main.async { [weak self] in
+      self?.navigationController?.pushViewController(
+        demoSetupProfileViewController,
+        animated: true)
+    }
+  }
+  
+  @objc func signUpTouched() {
+    let signUpVC = SignUpViewController()
+    DispatchQueue.main.async { [weak self] in
+      self?.navigationController?.pushViewController(
+        signUpVC,
+        animated: true)
+    }
   }
   
 }
@@ -54,6 +67,8 @@ extension StartScreenController {
   
   private func setupButtonTargets() {
     demoAppButton.addTarget(self, action: #selector(demoAppTouched), for: .touchUpInside)
+    signUpButton.addTarget(self, action: #selector(signUpTouched), for: .touchUpInside)
+    
   }
 
   private func setupLogo() {

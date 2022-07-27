@@ -41,7 +41,10 @@ class NetworkManagerTests: XCTestCase {
     for parametr in parametrs {
       let item: URLQueryItem!
       if let parametrValue = parametr.value {
-        item = URLQueryItem(name: parametr.key, value: "\(parametrValue)".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed))
+        item = URLQueryItem(
+          name: parametr.key,
+          value: "\(parametrValue)".addingPercentEncoding(
+            withAllowedCharacters: .urlPathAllowed))
       } else {
         item = URLQueryItem(name: parametr.key, value: nil)
       }

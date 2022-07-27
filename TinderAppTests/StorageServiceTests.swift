@@ -49,6 +49,8 @@ class StorageServiceTests: XCTestCase {
       return
     }
     
+    print(String(data: jsonData, encoding: .utf8)!)
+    
     guard let decodedUser = try? JSONDecoder().decode(UserCardModel.self, from: jsonData) else {
       XCTFail("failed to decode json")
       return

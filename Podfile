@@ -11,6 +11,9 @@ target 'TinderApp' do
   pod 'SnapKit'
   pod 'RxRelay'
   pod 'SwiftLint'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   target 'TinderAppTests' do
     inherit! :search_paths
     # Pods for testing
