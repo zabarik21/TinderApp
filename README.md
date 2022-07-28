@@ -11,6 +11,12 @@
 - Like ot dislike users by buttons or by swipe
 - See all chats in messanger tab (not done yet)
 
+# ToDo
+- Impliment coordinator pattern
+- Connect Firebase
+- Add chats 
+- Add setup user screen
+
 ## Requirements
 * 🛠 Xcode 
 * ☕️ Cocoapods: 
