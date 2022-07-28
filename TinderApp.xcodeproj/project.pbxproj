@@ -12,6 +12,9 @@
 		7B1D46412891577900AACFCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D46402891577900AACFCD /* GoogleService-Info.plist */; };
 		7B1D46442891615000AACFCD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D46432891615000AACFCD /* SignUpViewController.swift */; };
 		7B1D4647289161DB00AACFCD /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D4646289161DB00AACFCD /* SignUpTextField.swift */; };
+		7B261C912892660C00241CB2 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C902892660C00241CB2 /* PaddingTextField.swift */; };
+		7B261C9528928AED00241CB2 /* BounceScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C9428928AED00241CB2 /* BounceScrollView.swift */; };
+		7B261C9728928D6300241CB2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C9628928D6300241CB2 /* LoginViewController.swift */; };
 		7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */; };
 		7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */; };
 		7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */; };
@@ -100,6 +103,9 @@
 		7B1D46402891577900AACFCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7B1D46432891615000AACFCD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = TinderApp/View/UserView/SignUpViewController.swift; sourceTree = SOURCE_ROOT; };
 		7B1D4646289161DB00AACFCD /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpTextField.swift; path = TinderApp/View/UserView/SignUpTextField.swift; sourceTree = SOURCE_ROOT; };
+		7B261C902892660C00241CB2 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
+		7B261C9428928AED00241CB2 /* BounceScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceScrollView.swift; sourceTree = "<group>"; };
+		7B261C9628928D6300241CB2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerObserverFuncs.swift"; sourceTree = "<group>"; };
 		7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocol.swift; sourceTree = "<group>"; };
 		7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsViewProtocol.swift; sourceTree = "<group>"; };
@@ -249,6 +255,30 @@
 				7B1D4646289161DB00AACFCD /* SignUpTextField.swift */,
 			);
 			path = SignUpTextField;
+			sourceTree = "<group>";
+		};
+		7B261C8F289265EC00241CB2 /* PaddingTextField */ = {
+			isa = PBXGroup;
+			children = (
+				7B261C902892660C00241CB2 /* PaddingTextField.swift */,
+			);
+			path = PaddingTextField;
+			sourceTree = "<group>";
+		};
+		7B261C9228928A9600241CB2 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7B261C9628928D6300241CB2 /* LoginViewController.swift */,
+			);
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		7B261C9328928ABF00241CB2 /* BounceScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				7B261C9428928AED00241CB2 /* BounceScrollView.swift */,
+			);
+			path = BounceScrollView;
 			sourceTree = "<group>";
 		};
 		7B3FB0402874C1BD00FA82A4 /* String */ = {
@@ -402,18 +432,12 @@
 		7BB0B3E3287995C90043F893 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				7B261C9228928A9600241CB2 /* LoginViewController */,
 				7B1D46422891614000AACFCD /* SignUpViewController */,
 				7BB0B3E4287996140043F893 /* StartScreenController.swift */,
 				7B716792287D4CFB00064F36 /* SetupProfileViewController */,
 			);
 			path = Authentication;
-			sourceTree = "<group>";
-		};
-		7BC7EBBD289137420051D0CD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		7BC7EBBE289137B30051D0CD /* UserView */ = {
@@ -554,9 +578,10 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B261C9328928ABF00241CB2 /* BounceScrollView */,
+				7B261C8F289265EC00241CB2 /* PaddingTextField */,
 				7B1D4645289161CC00AACFCD /* SignUpTextField */,
 				7BC7EBBE289137B30051D0CD /* UserView */,
-				7BC7EBBD289137420051D0CD /* New Group */,
 				7B929B50287E8A2100B6AE35 /* TextFieldPickerView */,
 				7B4389BC287C992D00791C56 /* SetupProfileTextField */,
 				7BE2E90D287C2ECB00D0BA75 /* ProfileImageView */,
@@ -908,12 +933,14 @@
 				7BB2FED82870B6CD00A2731E /* CardViewProtocol.swift in Sources */,
 				7BC7EBBC289134C40051D0CD /* UIViewController + UIAlertController.swift in Sources */,
 				7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */,
+				7B261C9528928AED00241CB2 /* BounceScrollView.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BF85C7728721C9800B296CC /* InterestsCollectionViewController.swift in Sources */,
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
 				7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */,
 				7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */,
 				7BB0B3E72879A5BC0043F893 /* LayerFactory.swift in Sources */,
+				7B261C912892660C00241CB2 /* PaddingTextField.swift in Sources */,
 				7BA1BC7C2878A53C00E9C5E8 /* RandomUserApi.swift in Sources */,
 				7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */,
 				7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */,
@@ -925,6 +952,7 @@
 				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
 				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,
 				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
+				7B261C9728928D6300241CB2 /* LoginViewController.swift in Sources */,
 				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
 				7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */,
 				7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */,

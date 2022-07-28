@@ -1,14 +1,13 @@
 //
-//  SignUpViewController.swift
+//  LoginViewController.swift
 //  TinderApp
 //
-//  Created by Timofey on 27/7/22.
+//  Created by Timofey on 28/7/22.
 //
-
 import Foundation
 import UIKit
 
-class SignUpViewController: UIViewController {
+class LoginViewController: UIViewController {
   
   private enum Constants {
     static let topLabelMarginMult: CGFloat = 0.1284
@@ -17,12 +16,10 @@ class SignUpViewController: UIViewController {
     static let buttonHeight: CGFloat = 60
   }
   
-  private var signUpLabel: UILabel!
+  private var loginLabel: UILabel!
   private var emailTextFieldView: SignUpTextField!
   private var passwordTextFieldView: SignUpTextField!
-  private var confirmPasswordTextFieldView: SignUpTextField!
-  private var setupProfileButton: StartScreenButton!
-  private var scrollView: UIScrollView!
+  private var toChatsButton: StartScreenButton!
   private var textFieldsStackView: UIStackView!
   
   override func viewDidLoad() {
@@ -32,51 +29,62 @@ class SignUpViewController: UIViewController {
   }
   
   private func setupButtonTargets() {
-    setupProfileButton.addTarget(self, action: #selector(toSetupProfile), for: .touchUpInside)
+    toChatsButton.addTarget(self, action: #selector(toChats), for: .touchUpInside)
   }
   
-  @objc private func toSetupProfile() {
-    let setupProfileVC = SetupProfileViewController(demoMode: false)
-    DispatchQueue.main.async { [weak self] in
-      self?.navigationController?.pushViewController(setupProfileVC, animated: true)
+  @objc private func toChats() {
+    let user = UserCardModel(
+      name: Name(
+        first: "Тимофей",
+        last: "Резвых"),
+      gender: .male,
+      location: Location(
+        city: "Perm",
+        coordinates: Coordinates(
+          latitude: "2",
+          longitude: "3")),
+      birthDate: BirthDate(
+        date: "03.03.02",
+        age: 19),
+      picture: WebImage(
+        large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
+        thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
+      id: USERID.init(value: "3241145"),
+      interests: Interest.getAllCases())
+    DispatchQueue.main.async {
+      let mainVC = MainTabBarController(user: user)
+      if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+        sceneDelegate.changeRootViewController(mainVC, animated: true)
+      }
     }
   }
 }
 
 // MARK: - Setup elements & Constraints
-extension SignUpViewController {
+extension LoginViewController {
   
   private func setupElements() {
     setupBG()
     setupTextFields()
     setupLabels()
-    setupScrollView()
     setupButton()
     setupConstraints()
   }
-  
- 
-  private func setupScrollView() {
-    scrollView = UIScrollView()
-    scrollView.showsVerticalScrollIndicator = false
-    scrollView.showsHorizontalScrollIndicator = false
-  }
+
   
   private func setupButton() {
-    setupProfileButton = StartScreenButton(
+    toChatsButton = StartScreenButton(
       with: .light,
-      title: "Setup profile")
+      title: "Log in")
   }
   
   private func setupTextFields() {
     emailTextFieldView = SignUpTextField(type: .email)
     passwordTextFieldView = SignUpTextField(type: .password)
-    confirmPasswordTextFieldView = SignUpTextField(type: .confirmPassword)
     
     textFieldsStackView = UIStackView(arrangedSubviews: [
       emailTextFieldView,
       passwordTextFieldView,
-      confirmPasswordTextFieldView
     ])
     textFieldsStackView.distribution = .fillEqually
     textFieldsStackView.axis = .vertical
@@ -90,57 +98,42 @@ extension SignUpViewController {
   }
   
   private func setupLabels() {
-    signUpLabel = UILabel(
-      text: "Sign up to get started!",
+    loginLabel = UILabel(
+      text: "Welcome Back!",
       fontSize: 51,
       weight: .semibold,
       textColor: .logoColor)
-    signUpLabel.numberOfLines = 0
+    loginLabel.numberOfLines = 0
   }
   
   private func setupConstraints() {
     let height = view.bounds.height
     let width = view.bounds.width
     
-    view.addSubview(scrollView)
+    view.addSubview(loginLabel)
     
-    scrollView.addSubview(signUpLabel)
-    
-    scrollView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
-    }
-    
-    signUpLabel.snp.makeConstraints { make in
+    loginLabel.snp.makeConstraints { make in
       make.top
         .equalToSuperview()
         .offset(height * Constants.topLabelMarginMult)
-      make.width.equalToSuperview()
-        .offset(width * Constants.horizontalMarginMult * 2)
       make.horizontalEdges.equalTo(view)
         .inset(width * Constants.horizontalMarginMult)
     }
     
-    scrollView.addSubview(textFieldsStackView)
+    view.addSubview(textFieldsStackView)
     
     textFieldsStackView.snp.makeConstraints { make in
-      make.top
-        .equalTo(signUpLabel.snp.bottom)
-        .offset(40)
-      make.width.equalTo(signUpLabel)
+      make.horizontalEdges.equalTo(view)
+        .inset(width * Constants.horizontalMarginMult)
+      make.centerY.equalToSuperview()
       make.centerX.equalToSuperview()
     }
     
-    scrollView.addSubview(setupProfileButton)
+    view.addSubview(toChatsButton)
     
-    setupProfileButton.snp.makeConstraints { make in
+    toChatsButton.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
-      make.width
-        .equalToSuperview()
-        .offset(width * Constants.horizontalMarginMult * 2)
       make.height.equalTo(Constants.buttonHeight)
-      make.top
-        .equalTo(textFieldsStackView.snp.bottom)
-        .offset(Constants.buttonHeight / 2)
       make.horizontalEdges.equalTo(view)
         .inset(width * Constants.horizontalMarginMult)
       make.bottom.equalToSuperview().inset(Constants.buttonHeight / 2)

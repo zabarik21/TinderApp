@@ -9,16 +9,15 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-private enum StartScrenConstants {
-  static let horizontalEdgeMarginMultiplier: CGFloat = 0.0555
-  static let bottomEdgeMarginMultiplier: CGFloat = 0.0591
-  static let topLogoMarginMultiplier: CGFloat = 0.239
-  static let horizontalLogoPaddingMultiplier: CGFloat = 0.223
-  static let heightLogoPaddingMultiplier: CGFloat = 0.355
-}
-
 class StartScreenController: UIViewController {
   
+  private enum Constants {
+    static let horizontalEdgeMarginMultiplier: CGFloat = 0.0555
+    static let bottomEdgeMarginMultiplier: CGFloat = 0.0591
+    static let topLogoMarginMultiplier: CGFloat = 0.239
+    static let horizontalLogoPaddingMultiplier: CGFloat = 0.223
+    static let heightLogoPaddingMultiplier: CGFloat = 0.355
+  }
   
   private var loginButton: StartScreenButton!
   private var signUpButton: StartScreenButton!
@@ -28,27 +27,29 @@ class StartScreenController: UIViewController {
   private var logoLabel: UILabel!
   private var logoContainer: UIView!
   
+  private var demoSetupProfileVC = SetupProfileViewController(demoMode: true)
+  private var signUpVC = SignUpViewController()
+  private var loginVC = LoginViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupElements()
     setupConstraints()
   }
-  
-  @objc func demoAppTouched() {
-    let demoSetupProfileViewController = SetupProfileViewController()
-    DispatchQueue.main.async { [weak self] in
-      self?.navigationController?.pushViewController(
-        demoSetupProfileViewController,
-        animated: true)
+ 
+  @objc func authenticationButtonTouched(_ sender: UIButton) {
+    var viewController: UIViewController?
+    if sender === loginButton {
+      viewController = loginVC
+    } else if sender === signUpButton {
+      viewController = signUpVC
+    } else {
+      viewController = demoSetupProfileVC
     }
-  }
-  
-  @objc func signUpTouched() {
-    let signUpVC = SignUpViewController()
     DispatchQueue.main.async { [weak self] in
-      self?.navigationController?.pushViewController(
-        signUpVC,
+      guard let self = self else { return }
+      self.navigationController?.pushViewController(
+        viewController!,
         animated: true)
     }
   }
@@ -66,9 +67,9 @@ extension StartScreenController {
   }
   
   private func setupButtonTargets() {
-    demoAppButton.addTarget(self, action: #selector(demoAppTouched), for: .touchUpInside)
-    signUpButton.addTarget(self, action: #selector(signUpTouched), for: .touchUpInside)
-    
+    demoAppButton.addTarget(self, action: #selector(authenticationButtonTouched), for: .touchUpInside)
+    signUpButton.addTarget(self, action: #selector(authenticationButtonTouched), for: .touchUpInside)
+    loginButton.addTarget(self, action: #selector(authenticationButtonTouched), for: .touchUpInside)
   }
 
   private func setupLogo() {
@@ -97,15 +98,15 @@ extension StartScreenController {
     
     demoAppButton.snp.makeConstraints { make in
       make.height.equalTo(55)
-      make.horizontalEdges.equalToSuperview().inset(StartScrenConstants.horizontalEdgeMarginMultiplier * width)
-      make.bottom.equalToSuperview().inset(StartScrenConstants.bottomEdgeMarginMultiplier * height)
+      make.horizontalEdges.equalToSuperview().inset(Constants.horizontalEdgeMarginMultiplier * width)
+      make.bottom.equalToSuperview().inset(Constants.bottomEdgeMarginMultiplier * height)
     }
     
     self.view.addSubview(signUpButton)
     
     signUpButton.snp.makeConstraints { make in
       make.height.equalTo(55)
-      make.horizontalEdges.equalToSuperview().inset(StartScrenConstants.horizontalEdgeMarginMultiplier * width)
+      make.horizontalEdges.equalToSuperview().inset(Constants.horizontalEdgeMarginMultiplier * width)
       make.bottom.equalTo(demoAppButton.snp.top).offset(-11)
     }
 
@@ -114,15 +115,15 @@ extension StartScreenController {
     loginButton.snp.makeConstraints { make in
       make.bottom.equalTo(signUpButton.snp.top).offset(-11)
       make.height.equalTo(55)
-      make.horizontalEdges.equalToSuperview().inset(StartScrenConstants.horizontalEdgeMarginMultiplier * width)
+      make.horizontalEdges.equalToSuperview().inset(Constants.horizontalEdgeMarginMultiplier * width)
     }
     
     self.view.addSubview(logoContainer)
     
     logoContainer.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(StartScrenConstants.topLogoMarginMultiplier * height)
-      make.horizontalEdges.equalToSuperview().inset(StartScrenConstants.horizontalLogoPaddingMultiplier * width)
-      make.height.equalTo(StartScrenConstants.heightLogoPaddingMultiplier * height)
+      make.top.equalToSuperview().offset(Constants.topLogoMarginMultiplier * height)
+      make.horizontalEdges.equalToSuperview().inset(Constants.horizontalLogoPaddingMultiplier * width)
+      make.height.equalTo(Constants.heightLogoPaddingMultiplier * height)
     }
     
     logoContainer.addSubview(logoLabel)

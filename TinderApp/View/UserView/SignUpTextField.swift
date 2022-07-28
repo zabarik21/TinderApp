@@ -12,6 +12,7 @@ import SnapKit
 enum SignUpTextFieldType {
   case email
   case password
+  case confirmPassword
   
   func titleText() -> String {
     switch self {
@@ -19,6 +20,8 @@ enum SignUpTextFieldType {
       return "Email"
     case .password:
       return "Password"
+    case .confirmPassword:
+      return "Confirm password"
     }
   }
   
@@ -26,7 +29,7 @@ enum SignUpTextFieldType {
     switch self {
     case .email:
       return "example@mail.com"
-    case .password:
+    case .password, .confirmPassword:
       return "********"
     }
   }
@@ -35,7 +38,7 @@ enum SignUpTextFieldType {
     switch self {
     case .email:
       return .emailAddress
-    case .password:
+    case .password, .confirmPassword:
       return .default
     }
   }
@@ -43,6 +46,10 @@ enum SignUpTextFieldType {
 
 class SignUpTextField: UIView {
 
+  private enum Constants {
+    static let textFieldHeight: CGFloat = 60
+  }
+  
   private var textField: UITextField!
   private var label: UILabel!
   
@@ -70,13 +77,24 @@ extension SignUpTextField {
   }
   
   private func setupTextField() {
-    textField = UITextField()
-    textField.keyboardType = type.keyboardType()
-    textField.attributedPlaceholder = NSAttributedString(
+    let placeHolder = NSAttributedString(
       string: type.placeHolderText(),
-      attributes: [NSAttributedString.Key.foregroundColor: UIColor.logoColor.withAlphaComponent(0.5)])
-    textField.font = .systemFont(ofSize: 16, weight: .semibold)
-    textField.textColor = .black
+      attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+    
+    textField = PaddingTextField(
+      insets: UIEdgeInsets(
+        top: 0,
+        left: 17,
+        bottom: 0,
+        right: 17),
+      placeHolder: placeHolder,
+      textColor: .black,
+      keyboardType: type.keyboardType(),
+      font: .systemFont(
+        ofSize: 16,
+        weight: .semibold))
+    
+    textField.layer.cornerRadius = 10
     textField.backgroundColor = .white
   }
   
@@ -101,6 +119,7 @@ extension SignUpTextField {
       make.top.equalTo(label.snp.bottom).offset(7)
       make.horizontalEdges.equalToSuperview()
       make.bottom.equalToSuperview()
+      make.height.equalTo(Constants.textFieldHeight)
     }
   }
 }

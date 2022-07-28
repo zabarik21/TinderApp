@@ -35,6 +35,17 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   private var toDemoButton: StartScreenButton!
   private var imagePicker: PHPickerViewController!
   
+  private var demoMode: Bool
+  
+  init(demoMode: Bool) {
+    self.demoMode = demoMode
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupElements()
@@ -80,6 +91,7 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   }
   
   @objc func toMainScreen() {
+    
     if checkFields() {
       let name = Name(first: self.nameTextField.text!, last: self.surnameTextField.text!)
       let interests = interestCollectionView.interests
@@ -100,18 +112,20 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
           thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
         id: USERID.init(value: "id"),
         interests: interests)
-      
-      DispatchQueue.global(qos: .background).async {
-        StorageService.shared.saveUser(user: user)
-      }
-      
-      DispatchQueue.main.async {
-        let mainVC = MainTabBarController(user: user)
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-          sceneDelegate.changeRootViewController(mainVC, animated: true)
+      if demoMode {
+        DispatchQueue.global(qos: .background).async {
+          StorageService.shared.saveUser(user: user)
         }
+        
+        DispatchQueue.main.async {
+          let mainVC = MainTabBarController(user: user)
+          if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.changeRootViewController(mainVC, animated: true)
+          }
+        }
+      } else {
+        
       }
-      
     }
   }
   
@@ -138,7 +152,6 @@ extension SetupProfileViewController {
     scrollView = UIScrollView()
     scrollView.delegate = self
     scrollView.showsVerticalScrollIndicator = false
-    scrollView.bounces = false
   }
   
   private func setupPickers() {
@@ -300,7 +313,7 @@ extension SetupProfileViewController {
       make.top.equalTo(interestCollectionView.view.snp.bottom).offset(24)
       make.width.equalTo(interestCollectionView.view)
       make.centerX.equalToSuperview()
-      make.bottom.equalToSuperview().offset(-28)
+      make.bottom.equalToSuperview().inset(28)
       make.height.equalTo(55)
     }
     

@@ -33,6 +33,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       window?.rootViewController = viewController
       window?.makeKeyAndVisible()
     }
+//    let signUpVC = SignUpViewController()
+//    window?.rootViewController = signUpVC
+//    window?.makeKeyAndVisible()
     
   }
   
