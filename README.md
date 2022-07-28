@@ -21,9 +21,14 @@
 * 🛠 Xcode 
 * ☕️ Cocoapods: 
   - pod 'Kingfisher'
-  - pod 'SnapKit'
   - pod 'RxSwift'
+  - pod 'SnapKit'
   - pod 'RxRelay'
+  - pod 'RxCocoa'
+  - pod 'SwiftLint'
+  - pod 'Firebase/Firestore'
+  - pod 'Firebase/Auth'
+  - pod 'Firebase/Storage'
 
 # How to install? 🤔
 1. ️ Clone this repository
