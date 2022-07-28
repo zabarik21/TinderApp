@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       window?.rootViewController = viewController
       window?.makeKeyAndVisible()
     } else {
-      let ssc = StartScreenController()
+      let ssc = AuthenticationViewController()
       let viewController = UINavigationController(rootViewController: ssc)
       viewController.navigationBar.tintColor = .logoColor
       viewController.navigationBar.setBackgroundImage(UIImage(), for: .default)

@@ -9,7 +9,7 @@ import UIKit
 import PhotosUI
 import SnapKit
 import RxSwift
-
+import FirebaseAuth
 
 class SetupProfileViewController: UIViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
   
@@ -36,9 +36,11 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   private var imagePicker: PHPickerViewController!
   
   private var demoMode: Bool
+  private var user: User?
   
-  init(demoMode: Bool) {
+  init(demoMode: Bool, user: User? = nil) {
     self.demoMode = demoMode
+    self.user = user
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -101,6 +103,9 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
       
       let gender = Gender(rawValue: self.genderPicker.text!.lowercasingFirstLetter)!
       let date = birthDatePicker.date.formatted(date: .numeric, time: .omitted)
+      let image = profileImageView.image
+      let birthDate = CustomDateFormatter.shared.getFormattedString(birthDatePicker.date)
+      let age = CustomDateFormatter.shared.yearsBetweenDate(startDate: birthDatePicker.date)
       
       let user = UserCardModel(
         name: name,
@@ -124,7 +129,35 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
           }
         }
       } else {
-        
+        if let id = self.user?.uid,
+           let email = self.user?.email {
+          DispatchQueue.main.async { [weak self] in
+            FirestoreService.shared.saveProfileWith(
+              id: id,
+              name: name,
+              email: email,
+              image: image,
+              gender: gender,
+              location: self?.location,
+              birthDate: BirthDate(
+                date: birthDate,
+                age: age),
+              interests: interests,
+              completion: { result in
+                switch result {
+                case .success(let userModel):
+                  let mainVC = MainTabBarController(user: userModel)
+                  if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                    sceneDelegate.changeRootViewController(mainVC, animated: true)
+                  }
+                case .failure(let error):
+                  self?.showAlert(title: "Error", message: error.localizedDescription)
+                }
+              })
+          }
+        } else {
+          self.showAlert(title: "Error", message: "Failed to get current user")
+        }
       }
     }
   }

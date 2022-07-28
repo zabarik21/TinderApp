@@ -10,6 +10,7 @@ target 'TinderApp' do
   pod 'RxSwift'
   pod 'SnapKit'
   pod 'RxRelay'
+  pod 'RxCocoa'
   pod 'SwiftLint'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'

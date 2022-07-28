@@ -9,6 +9,7 @@ disabled_rules:
   - orphaned_doc_comment
   - todo
   - unused_capture_list
+  - function_parameter_count
 
 opt_in_rules:
   - array_init

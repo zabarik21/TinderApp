@@ -15,6 +15,16 @@
 		7B261C912892660C00241CB2 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C902892660C00241CB2 /* PaddingTextField.swift */; };
 		7B261C9528928AED00241CB2 /* BounceScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C9428928AED00241CB2 /* BounceScrollView.swift */; };
 		7B261C9728928D6300241CB2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C9628928D6300241CB2 /* LoginViewController.swift */; };
+		7B261C9A289296FE00241CB2 /* FirebaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C99289296FE00241CB2 /* FirebaseServiceTests.swift */; };
+		7B261C9D2892A2C900241CB2 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C9C2892A2C900241CB2 /* FirestoreService.swift */; };
+		7B261CA02892A60F00241CB2 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261C9F2892A60F00241CB2 /* AuthenticationService.swift */; };
+		7B261CA32892A89A00241CB2 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CA22892A89A00241CB2 /* Validator.swift */; };
+		7B261CA52892AB2A00241CB2 /* AuthenticationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CA42892AB2A00241CB2 /* AuthenticationServiceTests.swift */; };
+		7B261CA82892BF3100241CB2 /* RxSwift  + notNilValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CA72892BF3100241CB2 /* RxSwift  + notNilValue.swift */; };
+		7B261CAA2892C72B00241CB2 /* CustomDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CA92892C72B00241CB2 /* CustomDateFormatter.swift */; };
+		7B261CAC2892C78000241CB2 /* DateFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CAB2892C78000241CB2 /* DateFormatterTests.swift */; };
+		7B261CAF2892D0FD00241CB2 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CAE2892D0FD00241CB2 /* FirebaseStorageService.swift */; };
+		7B261CB12892D22200241CB2 /* UIImage + scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CB02892D22200241CB2 /* UIImage + scaled.swift */; };
 		7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */; };
 		7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */; };
 		7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */; };
@@ -54,7 +64,7 @@
 		7BA1BC7E2878A54900E9C5E8 /* RandomUserApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA1BC7D2878A54900E9C5E8 /* RandomUserApiTests.swift */; };
 		7BA467ED286D9221001016E1 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA467EC286D9221001016E1 /* UserInfoView.swift */; };
 		7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */; };
-		7BB0B3E5287996140043F893 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0B3E4287996140043F893 /* StartScreenController.swift */; };
+		7BB0B3E5287996140043F893 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0B3E4287996140043F893 /* AuthenticationViewController.swift */; };
 		7BB0B3E72879A5BC0043F893 /* LayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */; };
 		7BB2FED22870AD3B00A2731E /* UIColor + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED12870AD3B00A2731E /* UIColor + Constants.swift */; };
 		7BB2FED42870B65700A2731E /* CardContainerView + ReactionHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED32870B65700A2731E /* CardContainerView + ReactionHandling.swift */; };
@@ -106,6 +116,16 @@
 		7B261C902892660C00241CB2 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		7B261C9428928AED00241CB2 /* BounceScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceScrollView.swift; sourceTree = "<group>"; };
 		7B261C9628928D6300241CB2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7B261C99289296FE00241CB2 /* FirebaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServiceTests.swift; sourceTree = "<group>"; };
+		7B261C9C2892A2C900241CB2 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		7B261C9F2892A60F00241CB2 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		7B261CA22892A89A00241CB2 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		7B261CA42892AB2A00241CB2 /* AuthenticationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceTests.swift; sourceTree = "<group>"; };
+		7B261CA72892BF3100241CB2 /* RxSwift  + notNilValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift  + notNilValue.swift"; sourceTree = "<group>"; };
+		7B261CA92892C72B00241CB2 /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
+		7B261CAB2892C78000241CB2 /* DateFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterTests.swift; sourceTree = "<group>"; };
+		7B261CAE2892D0FD00241CB2 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
+		7B261CB02892D22200241CB2 /* UIImage + scaled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + scaled.swift"; sourceTree = "<group>"; };
 		7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerObserverFuncs.swift"; sourceTree = "<group>"; };
 		7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocol.swift; sourceTree = "<group>"; };
 		7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsViewProtocol.swift; sourceTree = "<group>"; };
@@ -145,7 +165,7 @@
 		7BA1BC7D2878A54900E9C5E8 /* RandomUserApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUserApiTests.swift; sourceTree = "<group>"; };
 		7BA467EC286D9221001016E1 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		7BA8AF6428682D5300B254CC /* UIViewController + TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + TabBar.swift"; sourceTree = "<group>"; };
-		7BB0B3E4287996140043F893 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
+		7BB0B3E4287996140043F893 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerFactory.swift; sourceTree = "<group>"; };
 		7BB2FED12870AD3B00A2731E /* UIColor + Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Constants.swift"; sourceTree = "<group>"; };
 		7BB2FED32870B65700A2731E /* CardContainerView + ReactionHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardContainerView + ReactionHandling.swift"; sourceTree = "<group>"; };
@@ -225,6 +245,9 @@
 		7B1AFB02287754F3007B943C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7B261CAD2892D0EF00241CB2 /* FirebaseStorageService */,
+				7B261C9E2892A60600241CB2 /* AuthenticationService */,
+				7B261C9B2892A2BF00241CB2 /* FirebaseService */,
 				7B9284A32891094B00183A6C /* LocationService */,
 				7B52B8AA2882A55800A64A7B /* StorageService */,
 				7B1AFB052877569B007B943C /* Networking */,
@@ -281,6 +304,46 @@
 			path = BounceScrollView;
 			sourceTree = "<group>";
 		};
+		7B261C982892956B00241CB2 /* AuthenticationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7BB0B3E4287996140043F893 /* AuthenticationViewController.swift */,
+			);
+			path = AuthenticationViewController;
+			sourceTree = "<group>";
+		};
+		7B261C9B2892A2BF00241CB2 /* FirebaseService */ = {
+			isa = PBXGroup;
+			children = (
+				7B261C9C2892A2C900241CB2 /* FirestoreService.swift */,
+			);
+			path = FirebaseService;
+			sourceTree = "<group>";
+		};
+		7B261C9E2892A60600241CB2 /* AuthenticationService */ = {
+			isa = PBXGroup;
+			children = (
+				7B261C9F2892A60F00241CB2 /* AuthenticationService.swift */,
+			);
+			path = AuthenticationService;
+			sourceTree = "<group>";
+		};
+		7B261CA62892BF1B00241CB2 /* RxSwift  + notNilValue */ = {
+			isa = PBXGroup;
+			children = (
+				7B261CA72892BF3100241CB2 /* RxSwift  + notNilValue.swift */,
+			);
+			path = "RxSwift  + notNilValue";
+			sourceTree = "<group>";
+		};
+		7B261CAD2892D0EF00241CB2 /* FirebaseStorageService */ = {
+			isa = PBXGroup;
+			children = (
+				7B261CAE2892D0FD00241CB2 /* FirebaseStorageService.swift */,
+			);
+			path = FirebaseStorageService;
+			sourceTree = "<group>";
+		};
 		7B3FB0402874C1BD00FA82A4 /* String */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */,
+				7B261CB02892D22200241CB2 /* UIImage + scaled.swift */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -432,9 +496,9 @@
 		7BB0B3E3287995C90043F893 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				7B261C982892956B00241CB2 /* AuthenticationViewController */,
 				7B261C9228928A9600241CB2 /* LoginViewController */,
 				7B1D46422891614000AACFCD /* SignUpViewController */,
-				7BB0B3E4287996140043F893 /* StartScreenController.swift */,
 				7B716792287D4CFB00064F36 /* SetupProfileViewController */,
 			);
 			path = Authentication;
@@ -541,6 +605,9 @@
 				7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */,
 				7BA1BC7D2878A54900E9C5E8 /* RandomUserApiTests.swift */,
 				7B52B8AD2882AC3000A64A7B /* StorageServiceTests.swift */,
+				7B261C99289296FE00241CB2 /* FirebaseServiceTests.swift */,
+				7B261CA42892AB2A00241CB2 /* AuthenticationServiceTests.swift */,
+				7B261CAB2892C78000241CB2 /* DateFormatterTests.swift */,
 			);
 			path = TinderAppTests;
 			sourceTree = "<group>";
@@ -600,6 +667,7 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B261CA62892BF1B00241CB2 /* RxSwift  + notNilValue */,
 				7B929B59287ECB3100B6AE35 /* Array + Set */,
 				7B929B56287EB08200B6AE35 /* UIView + Draggle */,
 				7B929B53287E97C400B6AE35 /* UILabel + Convinience init */,
@@ -619,6 +687,8 @@
 				7BED5EAA284111730081E71E /* SceneDelegate.swift */,
 				7BED5EA8284111730081E71E /* AppDelegate.swift */,
 				7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */,
+				7B261CA22892A89A00241CB2 /* Validator.swift */,
+				7B261CA92892C72B00241CB2 /* CustomDateFormatter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -923,8 +993,10 @@
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */,
 				7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */,
+				7B261CA02892A60F00241CB2 /* AuthenticationService.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7BA467ED286D9221001016E1 /* UserInfoView.swift in Sources */,
+				7B261CA82892BF3100241CB2 /* RxSwift  + notNilValue.swift in Sources */,
 				7B52B8AC2882A56B00A64A7B /* StorageService.swift in Sources */,
 				7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
@@ -936,14 +1008,17 @@
 				7B261C9528928AED00241CB2 /* BounceScrollView.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BF85C7728721C9800B296CC /* InterestsCollectionViewController.swift in Sources */,
+				7B261CAA2892C72B00241CB2 /* CustomDateFormatter.swift in Sources */,
 				7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */,
 				7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */,
 				7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */,
 				7BB0B3E72879A5BC0043F893 /* LayerFactory.swift in Sources */,
 				7B261C912892660C00241CB2 /* PaddingTextField.swift in Sources */,
+				7B261CAF2892D0FD00241CB2 /* FirebaseStorageService.swift in Sources */,
 				7BA1BC7C2878A53C00E9C5E8 /* RandomUserApi.swift in Sources */,
 				7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */,
 				7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */,
+				7B261CB12892D22200241CB2 /* UIImage + scaled.swift in Sources */,
 				7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */,
 				7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */,
 				7B9284A52891095600183A6C /* LocationService.swift in Sources */,
@@ -954,13 +1029,14 @@
 				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
 				7B261C9728928D6300241CB2 /* LoginViewController.swift in Sources */,
 				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
+				7B261C9D2892A2C900241CB2 /* FirestoreService.swift in Sources */,
 				7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */,
 				7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */,
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */,
 				7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */,
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,
-				7BB0B3E5287996140043F893 /* StartScreenController.swift in Sources */,
+				7BB0B3E5287996140043F893 /* AuthenticationViewController.swift in Sources */,
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,
 				7B929B55287E97D600B6AE35 /* UILabel + Init.swift in Sources */,
 				7BE2E90C287C2EA800D0BA75 /* SetupProfileViewController.swift in Sources */,
@@ -970,6 +1046,7 @@
 				7B1A9091284B61B0006C7C3F /* MTBC + TabBarSetup.swift in Sources */,
 				7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
+				7B261CA32892A89A00241CB2 /* Validator.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,
 				7B4389BE287C994100791C56 /* SetupProfileTextField.swift in Sources */,
 			);
@@ -979,7 +1056,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B261CAC2892C78000241CB2 /* DateFormatterTests.swift in Sources */,
+				7B261C9A289296FE00241CB2 /* FirebaseServiceTests.swift in Sources */,
 				7BD80E5B287832A300BB2C74 /* NetworkManagerTests.swift in Sources */,
+				7B261CA52892AB2A00241CB2 /* AuthenticationServiceTests.swift in Sources */,
 				7B52B8AE2882AC3000A64A7B /* StorageServiceTests.swift in Sources */,
 				7BA1BC7E2878A54900E9C5E8 /* RandomUserApiTests.swift in Sources */,
 				7BED5EC0284111750081E71E /* TinderAppTests.swift in Sources */,

@@ -7,7 +7,8 @@
 
 import UIKit
 import SnapKit
-
+import RxSwift
+import RxCocoa
 
 enum SignUpTextFieldType {
   case email
@@ -50,15 +51,20 @@ class SignUpTextField: UIView {
     static let textFieldHeight: CGFloat = 60
   }
   
+  private let bag = DisposeBag()
+  
   private var textField: UITextField!
   private var label: UILabel!
   
   private var type: SignUpTextFieldType
   
+  public var text: String = ""
+  
   init(type: SignUpTextFieldType) {
     self.type = type
     super.init(frame: .zero)
     setupElements()
+    setupObserver()
   }
   
   required init?(coder: NSCoder) {
@@ -74,6 +80,19 @@ extension SignUpTextField {
     setupTextField()
     setupLabel()
     setupConstraints()
+  }
+  
+  private func setupObserver() {
+    textField
+      .rx
+      .text
+      .observe(on: MainScheduler.instance)
+      .throttle(.milliseconds(50), scheduler: MainScheduler.instance)
+      .unwrappedOptional()
+      .subscribe(onNext: { [weak self] newText in
+        self?.text = newText ?? ""
+      })
+      .disposed(by: bag)
   }
   
   private func setupTextField() {

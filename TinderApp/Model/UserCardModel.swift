@@ -13,6 +13,40 @@ struct RandomPeopleApiResponce: Codable {
 
 
 struct UserCardModel: Codable {
+  
+  var representation: [String: Any] {
+    var dict = [String: Any]()
+    var name = [String: String]()
+    var location = [String: Any]()
+    var coordinates = [String: Any]()
+    var birthDate = [String: Any]()
+    var picture = [String: Any]()
+    var id = [String: Any]()
+    var interestsCollection = [String: Any]()
+    let interests = self.interests?.map { $0.rawValue } ?? []
+    interestsCollection["interests"] = interests
+    id["value"] = self.id.value
+    picture["large"] = self.picture.large
+    picture["thumbnail"] = self.picture.thumbnail
+    birthDate["age"] = self.birthDate.age
+    birthDate["date"] = self.birthDate.date
+    name["first"] = self.name.first
+    name["last"] = self.name.last
+    coordinates["latitude"] = self.location.coordinates.latitude
+    coordinates["longitude"] = self.location.coordinates.longitude
+    location["city"] = self.location.city
+    
+    dict["name"] = name
+    dict["gender"] = self.gender.rawValue.uppercasingFirstLetter
+    dict["location"] = location
+    dict["dob"] = birthDate
+    dict["picture"] = picture
+    dict["id"] = id
+    dict["interests"] = interests
+    
+    return dict
+  }
+  
   var name: Name
   var gender: Gender
   var location: Location

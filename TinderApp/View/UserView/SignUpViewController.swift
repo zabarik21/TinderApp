@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class SignUpViewController: UIViewController {
   
@@ -25,6 +26,7 @@ class SignUpViewController: UIViewController {
   private var scrollView: UIScrollView!
   private var textFieldsStackView: UIStackView!
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupElements()
@@ -36,9 +38,29 @@ class SignUpViewController: UIViewController {
   }
   
   @objc private func toSetupProfile() {
-    let setupProfileVC = SetupProfileViewController(demoMode: false)
-    DispatchQueue.main.async { [weak self] in
-      self?.navigationController?.pushViewController(setupProfileVC, animated: true)
+    let email = emailTextFieldView.text
+    let password = passwordTextFieldView.text
+    let confirmPassword = confirmPasswordTextFieldView.text
+    guard Validator.isFilled(
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword) else { return }
+    
+    DispatchQueue.global().async { [weak self] in
+      AuthenticationService.shared.registerUser(
+        email: email,
+        password: password) { result in
+          switch result {
+          case .success(let user):
+            let setupProfileVC = SetupProfileViewController(
+              demoMode: false,
+              user: user)
+            self?.navigationController?.pushViewController(setupProfileVC, animated: true)
+          case .failure(let error):
+            self?.showAlert(title: "Error", message: error.localizedDescription)
+            return
+        }
+      }
     }
   }
 }
@@ -55,7 +77,7 @@ extension SignUpViewController {
     setupConstraints()
   }
   
- 
+  
   private func setupScrollView() {
     scrollView = UIScrollView()
     scrollView.showsVerticalScrollIndicator = false
