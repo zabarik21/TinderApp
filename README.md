@@ -16,14 +16,20 @@
 - Connect Firebase
 - Add chats 
 - Add setup user screen
+- Ability for users to add more than one photo
 
 ## Requirements
 * 🛠 Xcode 
 * ☕️ Cocoapods: 
   - pod 'Kingfisher'
-  - pod 'SnapKit'
   - pod 'RxSwift'
+  - pod 'SnapKit'
   - pod 'RxRelay'
+  - pod 'RxCocoa'
+  - pod 'SwiftLint'
+  - pod 'Firebase/Firestore'
+  - pod 'Firebase/Auth'
+  - pod 'Firebase/Storage'
 
 # How to install? 🤔
 1. ️ Clone this repository
