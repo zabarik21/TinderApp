@@ -101,15 +101,21 @@ class PeopleViewController: UIViewController {
 extension PeopleViewController {
   private func setupConstraints() {
     
-    let titleVisible = self.view.bounds.height > 600 ? true : false
+    let height = self.view.bounds.height
+    let width = self.view.bounds.width
+    
+    let titleVisible = height > 600 ? true : false
     
     if titleVisible {
       view.addSubview(titleLabel)
 
       titleLabel.snp.makeConstraints { make in
-        make.top.equalToSuperview().offset(70)
-        make.leading.equalToSuperview()
-          .offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * self.view.bounds.width)
+        make.top
+          .equalToSuperview()
+          .offset(70)
+        make.leading
+          .equalToSuperview()
+          .offset(PeopleVCConstants.cardContainerHorizontalOffsetMultiplier * width)
       }
     }
     
@@ -118,19 +124,21 @@ extension PeopleViewController {
     
     let tabBarFrame = self.tabBarController!.tabBar.frame
     reactionsView.snp.makeConstraints { make in
-      make.bottom.equalTo(tabBarFrame.origin.y)
-        .offset(-self.view.bounds.height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
-      make.horizontalEdges.equalToSuperview()
-        .inset(PeopleVCConstants.buttonsHorizontalOffsetMultiplier * self.view.bounds.width)
+      make.bottom
+        .equalTo(tabBarFrame.origin.y)
+        .offset(-height * PeopleVCConstants.buttonsBottomOffsetMultiplier)
+      make.horizontalEdges
+        .equalToSuperview()
+        .inset(PeopleVCConstants.buttonsHorizontalOffsetMultiplier * width)
       make.height.equalTo(75)
     }
     
     view.addSubview(cardContainer)
     
-    
     cardContainer.snp.makeConstraints { make in
-      make.height.equalTo(Int(PeopleVCConstants.cardContainerHeightMultiplier * (titleVisible ? 1 : 1.1) * self.view.bounds.height))
-      make.horizontalEdges.equalToSuperview().inset(CardContainerConstants.horizontalCardOffset * self.view.bounds.width)
+      make.height
+        .equalTo(Int(PeopleVCConstants.cardContainerHeightMultiplier * (titleVisible ? 1 : 1.1) * height))
+      make.horizontalEdges.equalToSuperview().inset(CardContainerConstants.horizontalCardOffset * width)
       make.bottom.equalTo(reactionsView.snp.top).offset(-30)
     }
     
@@ -139,7 +147,7 @@ extension PeopleViewController {
     userView.snp.makeConstraints { make in
       make.horizontalEdges.equalToSuperview()
       make.height.equalToSuperview()
-      make.top.equalTo(self.view.snp.bottom).offset(0)
+      make.top.equalTo(view.snp.bottom).offset(0)
     }
   }
   

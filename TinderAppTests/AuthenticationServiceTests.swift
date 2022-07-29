@@ -15,9 +15,7 @@ class AuthenticationServiceTests: XCTestCase {
   
   let email = "testemail@mail.com"
   let password = "password"
-  
     
-  
   override func setUp() {
     super.setUp()
     sut = AuthenticationService()

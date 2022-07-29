@@ -18,11 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.windowScene = windowScene
     
     
-    if let user = StorageService.shared.loadUser() {
-      let viewController = MainTabBarController(user: user)
-      window?.rootViewController = viewController
-      window?.makeKeyAndVisible()
-    } else {
+//    if let user = StorageService.shared.loadUser() {
+//      let viewController = MainTabBarController(user: user)
+//      window?.rootViewController = viewController
+//      window?.makeKeyAndVisible()
+//    } else {
       let ssc = AuthenticationViewController()
       let viewController = UINavigationController(rootViewController: ssc)
       viewController.navigationBar.tintColor = .logoColor
@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       viewController.view.backgroundColor = .clear
       window?.rootViewController = viewController
       window?.makeKeyAndVisible()
-    }
+//    }
 //    let signUpVC = SignUpViewController()
 //    window?.rootViewController = signUpVC
 //    window?.makeKeyAndVisible()

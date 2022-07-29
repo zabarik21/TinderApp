@@ -41,10 +41,23 @@ class SignUpViewController: UIViewController {
     let email = emailTextFieldView.text
     let password = passwordTextFieldView.text
     let confirmPassword = confirmPasswordTextFieldView.text
-    guard Validator.isFilled(
+    
+    let errors = Validator.isFilled(
       email: email,
       password: password,
-      confirmPassword: confirmPassword) else { return }
+      confirmPassword: confirmPassword)
+    for error in errors {
+      switch error {
+      case .email:
+        emailTextFieldView.twitch()
+      case .password:
+        passwordTextFieldView.twitch()
+      case .confirmPassword:
+        confirmPasswordTextFieldView.twitch()
+      }
+    }
+    
+    guard errors.isEmpty else { return }
     
     DispatchQueue.global().async { [weak self] in
       AuthenticationService.shared.registerUser(

@@ -102,21 +102,12 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
         .toSet()
       
       let gender = Gender(rawValue: self.genderPicker.text!.lowercasingFirstLetter)!
-      let date = birthDatePicker.date.formatted(date: .numeric, time: .omitted)
       let image = profileImageView.image
       let birthDate = CustomDateFormatter.shared.getFormattedString(birthDatePicker.date)
       let age = CustomDateFormatter.shared.yearsBetweenDate(startDate: birthDatePicker.date)
       
-      let user = UserCardModel(
-        name: name,
-        gender: gender,
-        location: self.location ?? Location(),
-        birthDate: BirthDate(date: date, age: 19),
-        picture: WebImage(
-          large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
-          thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
-        id: USERID.init(value: "id"),
-        interests: interests)
+      let user = UserCardModel.demoUser
+      
       if demoMode {
         DispatchQueue.global(qos: .background).async {
           StorageService.shared.saveUser(user: user)

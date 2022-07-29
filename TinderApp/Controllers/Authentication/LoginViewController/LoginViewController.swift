@@ -33,28 +33,48 @@ class LoginViewController: UIViewController {
   }
   
   @objc private func toChats() {
-    let user = UserCardModel(
-      name: Name(
-        first: "Тимофей",
-        last: "Резвых"),
-      gender: .male,
-      location: Location(
-        city: "Perm",
-        coordinates: Coordinates(
-          latitude: "2",
-          longitude: "3")),
-      birthDate: BirthDate(
-        date: "03.03.02",
-        age: 19),
-      picture: WebImage(
-        large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
-        thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
-      id: USERID.init(value: "3241145"),
-      interests: Interest.getAllCases())
+    let email = emailTextFieldView.text
+    let password = passwordTextFieldView.text
+    let errors = Validator.isFilled(
+      email: email,
+      password: password,
+      confirmPassword: password)
+    
+    for error in errors {
+      switch error {
+      case .email:
+        emailTextFieldView.twitch()
+      case .password, .confirmPassword:
+        passwordTextFieldView.twitch()
+      }
+    }
+    
+    guard errors.isEmpty else { return }
     DispatchQueue.main.async {
-      let mainVC = MainTabBarController(user: user)
-      if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-        sceneDelegate.changeRootViewController(mainVC, animated: true)
+      AuthenticationService.shared.loginUser(
+        email: email,
+        password: password) { result in
+          switch result {
+          case .success(let user):
+            self.showAlert(
+              title: "Youre successfuly logged in",
+              message: "Please wait a couple of seconds")
+            FirestoreService.shared.getUserData(user: user) { result in
+              switch result {
+              case .success(let userModel):
+                
+                let mainVC = MainTabBarController(user: userModel)
+                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                  sceneDelegate.changeRootViewController(mainVC, animated: true)
+                  
+                }
+              case .failure(let error):
+                self.showAlert(title: "Error", message: error.localizedDescription)
+              }
+            }
+          case .failure(let error):
+            self.showAlert(title: "Error", message: error.localizedDescription)
+          }
       }
     }
   }
@@ -70,7 +90,7 @@ extension LoginViewController {
     setupButton()
     setupConstraints()
   }
-
+  
   
   private func setupButton() {
     toChatsButton = StartScreenButton(

@@ -90,7 +90,7 @@ extension SignUpTextField {
       .throttle(.milliseconds(50), scheduler: MainScheduler.instance)
       .unwrappedOptional()
       .subscribe(onNext: { [weak self] newText in
-        self?.text = newText ?? ""
+        self?.text = newText
       })
       .disposed(by: bag)
   }

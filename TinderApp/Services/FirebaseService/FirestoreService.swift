@@ -7,7 +7,13 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 import UIKit
+
+enum UserError: Error {
+  case cannotGetUserData
+  case cannotUnwrapToMuser
+}
 
 class FirestoreService {
   
@@ -20,6 +26,29 @@ class FirestoreService {
   }
   
   init() {}
+  
+  func getUserData(
+    user: User,
+    _ completion: @escaping (Result<UserCardModel, Error>) -> Void
+  ) {
+    let userRef = usersRef.document(user.uid)
+    userRef.getDocument { document, error in
+      if let error = error {
+        completion(.failure(error))
+        return
+      }
+      guard let document = document else {
+        completion(.failure(UserError.cannotGetUserData))
+        return
+      }
+      guard let userModel = UserCardModel(document: document) else {
+        completion(.failure(UserError.cannotUnwrapToMuser))
+        return
+      }
+      completion(.success(userModel))
+    }
+    
+  }
   
   func saveProfileWith(
     id: String,
@@ -40,26 +69,27 @@ class FirestoreService {
       picture: WebImage(
         large: "nil",
         thumbnail: "nil"),
-      id: USERID(
+      id: UID(
         value: id),
       interests: interests)
     
     DispatchQueue.main.async {
-      DispatchQueue.global().sync {
-        if let image = image {
-          FirebaseStorageService.shared.uploadImage(image: image) { result in
-            switch result {
-            case .success(let url):
-              user.picture.large = url.absoluteString
-              user.picture.thumbnail = url.absoluteString
-            case .failure(let error):
-              print(error)
-            }
+      if let image = image {
+        FirebaseStorageService.shared.uploadImage(image: image) { result in
+          switch result {
+          case .success(let url):
+            user.picture.large = url.absoluteString
+            user.picture.thumbnail = url.absoluteString
+            self.usersRef.document(user.id.value!).setData(user.representation)
+            completion(.success(user))
+            return
+          case .failure(let error):
+            self.usersRef.document(user.id.value!).setData(user.representation)
+            completion(.success(user))
+            print(error)
           }
         }
       }
-      self.usersRef.document(user.id.value!).setData(user.representation)
-      completion(.success(user))
     }
   }
 }

@@ -32,23 +32,26 @@ class FirebaseStorageService {
     let metaData = StorageMetadata()
     metaData.contentType = "image/jpeg"
     
-    avatarsRef.child(currentUserId).putData(imageData,
-                                            metadata: metaData)
-    { storageMetadata, error in
-      guard let _ = storageMetadata else {
-        completion(.failure(error!))
-        return
-      }
-      
-      self.avatarsRef.child(self.currentUserId).downloadURL { url, error in
-        guard let downloadUrl = url else {
+    avatarsRef
+      .child(currentUserId)
+      .putData(
+        imageData,
+        metadata: metaData
+      ) { storageMetadata, error in
+        guard storageMetadata != nil else {
           completion(.failure(error!))
           return
         }
-        completion(.success(downloadUrl))
+        
+        self.avatarsRef.child(self.currentUserId).downloadURL { url, error in
+          guard let downloadUrl = url else {
+            completion(.failure(error!))
+            return
+          }
+          completion(.success(downloadUrl))
+        }
+        
       }
-      
-    }
     
   }
 }

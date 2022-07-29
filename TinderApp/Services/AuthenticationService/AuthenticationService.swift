@@ -18,17 +18,18 @@ class AuthenticationService {
   func registerUser(
     email: String,
     password: String,
-    completion: @escaping (Result<User, Error>) -> Void)
-  {
+    completion: @escaping (Result<User, Error>) -> Void
+  ) {
     auth.createUser(
       withEmail: email,
-      password: password) { result, error in
+      password: password
+    ) { result, error in
         guard let result = result else {
           completion(.failure(error!))
           return
         }
         completion(.success(result.user))
-      }
+    }
   }
   
   func logoutUser() throws {
@@ -38,17 +39,18 @@ class AuthenticationService {
   func loginUser(
     email: String,
     password: String,
-    _ completion: @escaping (Result<User, Error>) -> Void)
-  {
+    _ completion: @escaping (Result<User, Error>) -> Void
+  ) {
     auth.signIn(
       withEmail: email,
-      password: password) { result, error in
+      password: password
+    ) { result, error in
         guard let result = result else {
-            completion(.failure(error!))
-            return
+          completion(.failure(error!))
+          return
         }
         completion(.success(result.user))
-      }
+    }
   }
   
   func deleteUser(_ completion: @escaping (Result<Void, Error>) -> Void) {

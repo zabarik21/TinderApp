@@ -41,6 +41,13 @@
 		7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */; };
 		7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */; };
 		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
+		7B5D71E72893AF7E00F5223E /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71E62893AF7E00F5223E /* Coordinates.swift */; };
+		7B5D71E92893AFC100F5223E /* UID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71E82893AFC100F5223E /* UID.swift */; };
+		7B5D71EB2893B16F00F5223E /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71EA2893B16F00F5223E /* Gender.swift */; };
+		7B5D71ED2893B17A00F5223E /* Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71EC2893B17A00F5223E /* Name.swift */; };
+		7B5D71EF2893B18800F5223E /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71EE2893B18800F5223E /* WebImage.swift */; };
+		7B5D71F12893B1D800F5223E /* BirthDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71F02893B1D800F5223E /* BirthDate.swift */; };
+		7B5D71F32893B1E100F5223E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71F22893B1E100F5223E /* Location.swift */; };
 		7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71D542287AA527002E7340 /* StartScreenButton.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
 		7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */; };
@@ -142,6 +149,13 @@
 		7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + UserViewAnimating.swift"; sourceTree = "<group>"; };
 		7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + PlaceholderImage.swift"; sourceTree = "<group>"; };
 		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
+		7B5D71E62893AF7E00F5223E /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		7B5D71E82893AFC100F5223E /* UID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UID.swift; sourceTree = "<group>"; };
+		7B5D71EA2893B16F00F5223E /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		7B5D71EC2893B17A00F5223E /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
+		7B5D71EE2893B18800F5223E /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
+		7B5D71F02893B1D800F5223E /* BirthDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDate.swift; sourceTree = "<group>"; };
+		7B5D71F22893B1E100F5223E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7B71D542287AA527002E7340 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
 		7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerViewViewModelDelegate.swift"; sourceTree = "<group>"; };
@@ -545,7 +559,14 @@
 			isa = PBXGroup;
 			children = (
 				7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */,
+				7B5D71F22893B1E100F5223E /* Location.swift */,
+				7B5D71EC2893B17A00F5223E /* Name.swift */,
 				7B9FCBAC28676EE10031518D /* Interests.swift */,
+				7B5D71E62893AF7E00F5223E /* Coordinates.swift */,
+				7B5D71E82893AFC100F5223E /* UID.swift */,
+				7B5D71EA2893B16F00F5223E /* Gender.swift */,
+				7B5D71EE2893B18800F5223E /* WebImage.swift */,
+				7B5D71F02893B1D800F5223E /* BirthDate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -978,6 +999,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B5D71E92893AFC100F5223E /* UID.swift in Sources */,
 				7B1D4647289161DB00AACFCD /* SignUpTextField.swift in Sources */,
 				7B9FCBAD28676EE10031518D /* Interests.swift in Sources */,
 				7BB2FED62870B68700A2731E /* CardContainerView + CardViewsSwiping.swift in Sources */,
@@ -990,9 +1012,11 @@
 				7B929B5B287ECB3700B6AE35 /* Array + Set.swift in Sources */,
 				7BA1BC7A2878917300E9C5E8 /* NetworkManager.swift in Sources */,
 				7B929B58287EC4E000B6AE35 /* UIView + Draggle.swift in Sources */,
+				7B5D71F12893B1D800F5223E /* BirthDate.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */,
 				7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */,
+				7B5D71E72893AF7E00F5223E /* Coordinates.swift in Sources */,
 				7B261CA02892A60F00241CB2 /* AuthenticationService.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
 				7BA467ED286D9221001016E1 /* UserInfoView.swift in Sources */,
@@ -1000,6 +1024,7 @@
 				7B52B8AC2882A56B00A64A7B /* StorageService.swift in Sources */,
 				7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
+				7B5D71ED2893B17A00F5223E /* Name.swift in Sources */,
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
 				7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */,
 				7BB2FED82870B6CD00A2731E /* CardViewProtocol.swift in Sources */,
@@ -1032,10 +1057,13 @@
 				7B261C9D2892A2C900241CB2 /* FirestoreService.swift in Sources */,
 				7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */,
 				7BA8AF6528682D5300B254CC /* UIViewController + TabBar.swift in Sources */,
+				7B5D71F32893B1E100F5223E /* Location.swift in Sources */,
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
+				7B5D71EF2893B18800F5223E /* WebImage.swift in Sources */,
 				7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */,
 				7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */,
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,
+				7B5D71EB2893B16F00F5223E /* Gender.swift in Sources */,
 				7BB0B3E5287996140043F893 /* AuthenticationViewController.swift in Sources */,
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,
 				7B929B55287E97D600B6AE35 /* UILabel + Init.swift in Sources */,

@@ -10,6 +10,7 @@ disabled_rules:
   - todo
   - unused_capture_list
   - function_parameter_count
+  - force_cast
 
 opt_in_rules:
   - array_init
@@ -43,7 +44,6 @@ opt_in_rules:
   - redundant_type_annotation
   - strict_fileprivate
   - toggle_bool
-  - trailing_closure
   - unneeded_parentheses_in_closure_argument
   - unused_import
   - yoda_condition
@@ -55,7 +55,6 @@ attributes:
     - "@NSManaged"
     - "@objc"
 
-force_cast: warning
 force_try: warning
 function_body_length:
     warning: 60

@@ -41,7 +41,9 @@ class ProfileImageView: UIImageView {
   
   func updateImage(with newImage: UIImage) {
     contentMode = .scaleAspectFill
-    self.image = newImage
+    DispatchQueue.main.async {
+      self.image = newImage
+    }
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

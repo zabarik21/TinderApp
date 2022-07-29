@@ -47,9 +47,11 @@ class CompatabilityView: UIView {
       }
     }
     scoreLayer.strokeColor = strokeColor
-    DispatchQueue.main.async {
+    DispatchQueue.global().async {
       while self.viewCenter == nil {}
-      self.scoreLayer.path = self.configurePath()
+      DispatchQueue.main.async {
+        self.scoreLayer.path = self.configurePath()
+      }
     }
     
     scoreLabel.text = "\(Int(compatability))"

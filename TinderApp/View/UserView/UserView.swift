@@ -127,7 +127,7 @@ extension UserView: UIScrollViewDelegate {
   
   private func updateInterestsView(with userInterests: Set<Interest>?) {
     let pairs: [(Interest, Bool)] = userInterests?
-      .map { ($0, user.interests!.contains($0)) }  ?? []
+      .map { ($0, user.interests!.contains($0)) } ?? []
     interestsCollectionView.interestsRelay.accept(pairs)
   }
   
@@ -272,12 +272,14 @@ extension UserView: UIGestureRecognizerDelegate {
   
   private func onChange(_ recognizer: UIPanGestureRecognizer) {
     let translation = recognizer.translation(in: self)
-    guard (frame.minY > 0 && translation.y < 0) else { return }
+    let minY = frame.minY
+    let translationY = translation.y
+    if minY <= 0 && translationY <= 0 { return }
     guard let gestureView = recognizer.view else { return }
     let yDelta = center.y
     gestureView.center = CGPoint(
       x: center.x,
-      y: yDelta + translation.y)
+      y: yDelta + translationY)
     recognizer.setTranslation(.zero, in: self)
   }
   

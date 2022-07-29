@@ -28,7 +28,7 @@ class FirebaseServiceTests: XCTestCase {
     picture: WebImage(
       large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
       thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
-    id: USERID.init(value: "3241145"),
+    id: UID.init(value: "3241145"),
     interests: Interest.getAllCases())
   
   override func setUp() {
