@@ -16,6 +16,7 @@
 - Connect Firebase
 - Add chats 
 - Add setup user screen
+- Ability for users to add more than one photo
 
 ## Requirements
 * 🛠 Xcode 
