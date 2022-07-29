@@ -27,7 +27,7 @@ class AuthenticationViewController: UIViewController {
   private var logoLabel: UILabel!
   private var logoContainer: UIView!
   
-  private var demoSetupProfileVC = SetupProfileViewController(demoMode: true)
+  private var demoSetupProfileVC = SetupProfileViewController()
   private var signUpVC = SignUpViewController()
   private var loginVC = LoginViewController()
   
@@ -41,10 +41,13 @@ class AuthenticationViewController: UIViewController {
     var viewController: UIViewController?
     if sender === loginButton {
       viewController = loginVC
+      DemoModeService.isDemoMode = false
     } else if sender === signUpButton {
       viewController = signUpVC
+      DemoModeService.isDemoMode = false
     } else {
       viewController = demoSetupProfileVC
+      DemoModeService.isDemoMode = true
     }
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }

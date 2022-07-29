@@ -7,10 +7,12 @@
 
 import Foundation
 import RxSwift
+import FirebaseFirestore
 
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     
-  var users: [UserCardViewViewModelProtocol]
+  var viewModels: [UserCardViewViewModelProtocol]
+  var users = [UserCardModel]()
   var usersApi = RandomUserApi()
   
   // remake by adding user global property or some else
@@ -18,22 +20,53 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
   private var userLoadPublisher = PublishSubject<Bool>()
   
+  private var usersListener: ListenerRegistration?
+  
   var userLoadObservable: Observable<Bool> {
     return userLoadPublisher.asObservable()
   }
   
   func nextCard() -> UserCardViewViewModelProtocol? {
-    if users.count < 5 {
-      fetchViewModels()
+    if DemoModeService.isDemoMode {
+      if viewModels.count < 5 {
+        fetchViewModels()
+      }
     }
-    return users.shift()
+    return viewModels.shift()
   }
   
   // init with users for случая when there are old saved users left in memory 
   init(users: [UserCardViewViewModel], user: UserCardModel) {
-    self.users = users
+    self.viewModels = users
     self.user = user
-    self.fetchViewModels()
+    guard !DemoModeService.isDemoMode else {
+      self.fetchViewModels()
+      return
+    }
+    getUsersFromFirestore()
+  }
+  
+  deinit {
+    usersListener?.remove()
+  }
+  
+  func getUsersFromFirestore() {
+    usersListener = ListenerService.shared.observeUsers(
+      users: self.users,
+      completion: { result in
+        switch result {
+        case .success(let users):
+          self.users = users
+          self.updateViewModels()
+        case .failure(let error):
+          print(error)
+        }
+      })
+  }
+  
+  func updateViewModels() {
+    viewModels = users.map { UserCardViewViewModel(with: $0, myInterests: self.user.interests) }
+    self.userLoadPublisher.onNext(true)
   }
   
   func fetchViewModels() {
@@ -44,7 +77,7 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
           var userWithInterest = user
           userWithInterest.interests = Interest.getRandomCases()
           let viewModel = UserCardViewViewModel(with: userWithInterest, myInterests: self.user.interests)
-          self.users.append(viewModel)
+          self.viewModels.append(viewModel)
         }
         self.userLoadPublisher.onNext(true)
       case .failure(let error):

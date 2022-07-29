@@ -65,9 +65,7 @@ class SignUpViewController: UIViewController {
         password: password) { result in
           switch result {
           case .success(let user):
-            let setupProfileVC = SetupProfileViewController(
-              demoMode: false,
-              user: user)
+            let setupProfileVC = SetupProfileViewController(user: user)
             self?.navigationController?.pushViewController(setupProfileVC, animated: true)
           case .failure(let error):
             self?.showAlert(title: "Error", message: error.localizedDescription)

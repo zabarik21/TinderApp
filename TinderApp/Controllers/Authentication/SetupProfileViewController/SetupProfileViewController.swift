@@ -35,11 +35,9 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   private var toDemoButton: StartScreenButton!
   private var imagePicker: PHPickerViewController!
   
-  private var demoMode: Bool
   private var user: User?
   
-  init(demoMode: Bool, user: User? = nil) {
-    self.demoMode = demoMode
+  init(user: User? = nil) {
     self.user = user
     super.init(nibName: nil, bundle: nil)
   }
@@ -106,9 +104,9 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
       let birthDate = CustomDateFormatter.shared.getFormattedString(birthDatePicker.date)
       let age = CustomDateFormatter.shared.yearsBetweenDate(startDate: birthDatePicker.date)
       
-      let user = UserCardModel.demoUser
-      
-      if demoMode {
+      if DemoModeService.isDemoMode {
+        let user = UserCardModel.demoUser
+        
         DispatchQueue.global(qos: .background).async {
           StorageService.shared.saveUser(user: user)
         }

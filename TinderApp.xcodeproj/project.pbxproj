@@ -48,6 +48,8 @@
 		7B5D71EF2893B18800F5223E /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71EE2893B18800F5223E /* WebImage.swift */; };
 		7B5D71F12893B1D800F5223E /* BirthDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71F02893B1D800F5223E /* BirthDate.swift */; };
 		7B5D71F32893B1E100F5223E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71F22893B1E100F5223E /* Location.swift */; };
+		7B622A6D2893F08300E8B228 /* ListenerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B622A6C2893F08300E8B228 /* ListenerService.swift */; };
+		7B622A702893FA6E00E8B228 /* DemoModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B622A6F2893FA6E00E8B228 /* DemoModeService.swift */; };
 		7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71D542287AA527002E7340 /* StartScreenButton.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
 		7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */; };
@@ -156,6 +158,8 @@
 		7B5D71EE2893B18800F5223E /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
 		7B5D71F02893B1D800F5223E /* BirthDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDate.swift; sourceTree = "<group>"; };
 		7B5D71F22893B1E100F5223E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		7B622A6C2893F08300E8B228 /* ListenerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerService.swift; sourceTree = "<group>"; };
+		7B622A6F2893FA6E00E8B228 /* DemoModeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoModeService.swift; sourceTree = "<group>"; };
 		7B71D542287AA527002E7340 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
 		7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerViewViewModelDelegate.swift"; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 		7B1AFB02287754F3007B943C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7B622A6E2893FA6200E8B228 /* DemoModeService */,
+				7B622A6B2893F07400E8B228 /* ListenerService */,
 				7B261CAD2892D0EF00241CB2 /* FirebaseStorageService */,
 				7B261C9E2892A60600241CB2 /* AuthenticationService */,
 				7B261C9B2892A2BF00241CB2 /* FirebaseService */,
@@ -407,6 +413,22 @@
 				7B5C28B92855F8EB0001212A /* CompatabilityView.swift */,
 			);
 			path = CompatabilityView;
+			sourceTree = "<group>";
+		};
+		7B622A6B2893F07400E8B228 /* ListenerService */ = {
+			isa = PBXGroup;
+			children = (
+				7B622A6C2893F08300E8B228 /* ListenerService.swift */,
+			);
+			path = ListenerService;
+			sourceTree = "<group>";
+		};
+		7B622A6E2893FA6200E8B228 /* DemoModeService */ = {
+			isa = PBXGroup;
+			children = (
+				7B622A6F2893FA6E00E8B228 /* DemoModeService.swift */,
+			);
+			path = DemoModeService;
 			sourceTree = "<group>";
 		};
 		7B716792287D4CFB00064F36 /* SetupProfileViewController */ = {
@@ -1013,6 +1035,7 @@
 				7BA1BC7A2878917300E9C5E8 /* NetworkManager.swift in Sources */,
 				7B929B58287EC4E000B6AE35 /* UIView + Draggle.swift in Sources */,
 				7B5D71F12893B1D800F5223E /* BirthDate.swift in Sources */,
+				7B622A6D2893F08300E8B228 /* ListenerService.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */,
 				7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */,
@@ -1025,6 +1048,7 @@
 				7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */,
 				7BCB99B62845C931004EFC29 /* UserCardViewViewModelProtocol.swift in Sources */,
 				7B5D71ED2893B17A00F5223E /* Name.swift in Sources */,
+				7B622A702893FA6E00E8B228 /* DemoModeService.swift in Sources */,
 				7BED5EAD284111730081E71E /* PeopleViewController.swift in Sources */,
 				7B933217286049A400D46E69 /* HiddenReactionViewProtocol.swift in Sources */,
 				7BB2FED82870B6CD00A2731E /* CardViewProtocol.swift in Sources */,

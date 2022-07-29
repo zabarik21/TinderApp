@@ -45,7 +45,7 @@ class AuthenticationService {
       withEmail: email,
       password: password
     ) { result, error in
-        guard let result = result else {
+      guard let result = result else {
           completion(.failure(error!))
           return
         }

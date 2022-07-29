@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol CardContainerViewViewModelProtocol {
-  var users: [UserCardViewViewModelProtocol] { get set }
+  var viewModels: [UserCardViewViewModelProtocol] { get set }
   var userLoadObservable: Observable<Bool> { get }
   func nextCard() -> UserCardViewViewModelProtocol?
 }
