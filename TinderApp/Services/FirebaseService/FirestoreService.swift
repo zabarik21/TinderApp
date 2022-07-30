@@ -26,7 +26,19 @@ class FirestoreService {
   }
   
   private var waitingChats: CollectionReference {
-    return database.collection(["users", currentUser.id.value!, "waitingChats"].joined(separator: "/"))
+    return database.collection([
+      "users",
+      currentUser.id.value!,
+      "waitingChats"
+    ].joined(separator: "/"))
+  }
+  
+  private var dislikedUsers: CollectionReference {
+    return database.collection([
+      "users",
+      currentUser.id.value!,
+      "dislikedUsers"
+    ].joined(separator: "/"))
   }
   
   var currentUser: UserCardModel!
@@ -135,6 +147,30 @@ class FirestoreService {
           return
         }
         completion(.success(()))
+      }
+    }
+  }
+    
+  func removeUser(
+    user: UserCardModel,
+    completion: @escaping (Result<Void, Error>) -> Void
+  ) {
+    dislikedUsers.document(user.id.value!).setData(user.id.representation)
+  }
+
+  func getDislikedUsers(completion: @escaping (Result<Set<String>, Error>) -> Void) {
+    dislikedUsers.getDocuments { quetySnapshot, error in
+      if let error = error {
+        completion(.failure(error))
+      }
+      if let documents = quetySnapshot?.documents {
+        var ids = Set<String>()
+        for document in documents {
+          if let id = UID(document: document) {
+            ids.insert(id.value!)
+          }
+        }
+        completion(.success(ids))
       }
     }
   }

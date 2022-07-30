@@ -12,5 +12,5 @@ protocol CardContainerViewViewModelProtocol {
   var viewModels: [UserCardViewViewModelProtocol] { get set }
   var userLoadObservable: Observable<Bool> { get }
   func nextCard() -> UserCardViewViewModelProtocol?
-  func getCurrentUser() -> UserCardModel?
+  func getDisplayedUser() -> UserCardModel?
 }

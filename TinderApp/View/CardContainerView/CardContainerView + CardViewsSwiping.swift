@@ -12,22 +12,33 @@ extension CardContainerView {
   func swiped(liked: Bool) {
     // send request for like/dislike if user in not demo mode
     if !DemoModeService.isDemoMode {
-      if let targetUser = viewModel?.getCurrentUser() {
-        FirestoreService.shared.createWaitingChat(reciever: targetUser) { result in
-          switch result {
-          case .success:
-            print("waiting chat created succesfully")
-          case .failure(let error):
-            AlertService.shared.alertPublisher.accept(
-              ("Error",
-               "\(error.localizedDescription)")
-            )
+      if let targetUser = viewModel?.getDisplayedUser() {
+        if liked {
+          FirestoreService.shared.createWaitingChat(reciever: targetUser) { result in
+            switch result {
+            case .success:
+              print("waiting chat created succesfully")
+            case .failure(let error):
+              AlertService.shared.alertPublisher.accept(
+                ("Error",
+                 "\(error.localizedDescription)")
+              )
+            }
+          }
+        } else {
+          FirestoreService.shared.removeUser(user: targetUser) { result in
+            switch result {
+            case .success:
+              print("User moved to disliked")
+            case .failure(let error):
+              print(error)
+            }
           }
         }
       }
-
     }
-        
+    
+    
     //    updateCardConstraints()
     swapViews()
     updateCurrentBottomCard()
@@ -47,7 +58,7 @@ extension CardContainerView {
     if topCardTurn {
       
     } else {
-
+      
     }
   }
   

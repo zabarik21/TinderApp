@@ -54,23 +54,26 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     usersListener?.remove()
   }
   
-  func getCurrentUser() -> UserCardModel? {
+  func getDisplayedUser() -> UserCardModel? {
     guard (userIndex - 2) < users.count else { return nil }
     return users[userIndex - 2]
   }
   
   func getUsersFromFirestore() {
-    usersListener = ListenerService.shared.observeUsers(
-      users: self.users,
-      completion: { result in
-        switch result {
-        case .success(let users):
-          self.users = users
-          self.updateViewModels()
-        case .failure(let error):
-          print(error)
-        }
-      })
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard let self = self else { return }
+      self.usersListener = ListenerService.shared.observeUsers(
+        users: self.users,
+        completion: { result in
+          switch result {
+          case .success(let users):
+            self.users = users
+            self.updateViewModels()
+          case .failure(let error):
+            print(error)
+          }
+        })
+    }
   }
   
   func updateViewModels() {

@@ -30,7 +30,26 @@ class ListenerService {
     users: [UserCardModel],
     completion: @escaping (Result<[UserCardModel], Error>) -> Void
   ) -> ListenerRegistration {
+    
     var users = users
+    var dislikedUsers = Set<String>()
+    
+    let group = DispatchGroup()
+    group.enter()
+    
+    DispatchQueue.global(qos: .utility).async {
+      FirestoreService.shared.getDislikedUsers(completion: { result in
+        switch result {
+        case .success(let ids):
+          dislikedUsers = ids
+        case .failure:
+          break
+        }
+        group.leave()
+      })
+    }
+    
+    group.wait()
     
     let usersListener = usersRef.addSnapshotListener { querySnapshot, error in
       if let error = error {
@@ -47,6 +66,8 @@ class ListenerService {
           completion(.failure(UserError.cannotUnwrapToMuser))
           return
         }
+        
+        guard !dislikedUsers.contains(userModel.id.value!) else { continue }
         
         switch difference.type {
         case .added:
