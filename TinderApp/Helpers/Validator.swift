@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import RxSwift
 
 enum ValidatorFieldsError {
   case email
   case password
   case confirmPassword
+}
+
+enum SetupProfileFields {
+  case name
+  case surname
+  case gender
 }
 
 enum Validator {
@@ -33,8 +40,26 @@ enum Validator {
     } else {
       errors.append(.password)
     }
-    if email == nil || !isValidEmail(email!) {
+    if !email.isNilOrEmpty() && !isValidEmail(email!) {
       errors.append(.email)
+    }
+    return errors
+  }
+  
+  static func isFilled(
+    name: String?,
+    surname: String?,
+    gender: String?
+  ) -> [SetupProfileFields] {
+    var errors = [SetupProfileFields]()
+    if !name.isNilOrEmpty() {
+      errors.append(.name)
+    }
+    if !surname.isNilOrEmpty() {
+      errors.append(.surname)
+    }
+    if !gender.isNilOrEmpty() {
+      errors.append(.gender)
     }
     return errors
   }

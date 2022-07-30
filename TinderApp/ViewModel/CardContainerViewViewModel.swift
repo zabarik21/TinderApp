@@ -15,7 +15,6 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   var users = [UserCardModel]()
   var usersApi = RandomUserApi()
   
-  // remake by adding user global property or some else
   var user: UserCardModel
   
   private var userLoadPublisher = PublishSubject<Bool>()
@@ -27,6 +26,8 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   }
   
   private var userIndex = 0
+  
+  var displayedUserModel: UserCardModel?
   
   func nextCard() -> UserCardViewViewModelProtocol? {
     if DemoModeService.isDemoMode {
@@ -54,8 +55,8 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   }
   
   func getCurrentUser() -> UserCardModel? {
-    guard userIndex < users.count else { return nil }
-    return users[userIndex]
+    guard (userIndex - 2) < users.count else { return nil }
+    return users[userIndex - 2]
   }
   
   func getUsersFromFirestore() {

@@ -70,24 +70,23 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   }
   
   func checkFields() -> Bool {
-    let nameEmpty = (nameTextField.text?.count ?? 0) == 0
-    let surnameEmpty = (surnameTextField.text?.count ?? 0) == 0
-    let genderEmpty = (genderPicker.text?.isEmpty ?? true) ? true : false
+    let empties = Validator.isFilled(
+      name: nameTextField.text,
+      surname: surnameTextField.text,
+      gender: genderPicker.text)
     
-    if nameEmpty {
-      nameTextField.twitch()
+    for empty in empties {
+      switch empty {
+      case .name:
+        nameTextField.twitch()
+      case .surname:
+        surnameTextField.twitch()
+      case .gender:
+        genderPicker.twitch()
+      }
     }
-    if surnameEmpty {
-      surnameTextField.twitch()
-    }
-    if genderEmpty {
-      genderPicker.twitch()
-    }
-    if !nameEmpty && !surnameEmpty && !genderEmpty {
-      return true
-    } else {
-      return false
-    }
+    
+    return empties.isEmpty
   }
   
   @objc func toMainScreen() {

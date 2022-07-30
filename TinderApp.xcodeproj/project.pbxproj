@@ -56,9 +56,12 @@
 		7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */; };
 		7B7F81832870D04000223A37 /* UsersInfoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */; };
 		7B7F81852870D07000223A37 /* UsersInfoViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81842870D07000223A37 /* UsersInfoViewViewModelProtocol.swift */; };
-		7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* ContainerViewViewModel.swift */; };
+		7B846C77284679370013AA22 /* CardContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* CardContainerViewViewModel.swift */; };
 		7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C7D284681BF0013AA22 /* UIColor + Random.swift */; };
 		7B856D562894FEC4004A6A79 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D552894FEC4004A6A79 /* AuthenticationNavigationController.swift */; };
+		7B856D5828950BB9004A6A79 /* TinderChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D5728950BB9004A6A79 /* TinderChat.swift */; };
+		7B856D5A28951213004A6A79 /* TinderMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D5928951213004A6A79 /* TinderMessage.swift */; };
+		7B856D5C28952DA8004A6A79 /* String + NilOrEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D5B28952DA8004A6A79 /* String + NilOrEmpty.swift */; };
 		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
 		7B9284A52891095600183A6C /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9284A42891095600183A6C /* LocationService.swift */; };
 		7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */; };
@@ -168,9 +171,12 @@
 		7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerViewViewModelDelegate.swift"; sourceTree = "<group>"; };
 		7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfoViewViewModel.swift; sourceTree = "<group>"; };
 		7B7F81842870D07000223A37 /* UsersInfoViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfoViewViewModelProtocol.swift; sourceTree = "<group>"; };
-		7B846C76284679370013AA22 /* ContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewViewModel.swift; sourceTree = "<group>"; };
+		7B846C76284679370013AA22 /* CardContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModel.swift; sourceTree = "<group>"; };
 		7B846C7D284681BF0013AA22 /* UIColor + Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Random.swift"; sourceTree = "<group>"; };
 		7B856D552894FEC4004A6A79 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
+		7B856D5728950BB9004A6A79 /* TinderChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderChat.swift; sourceTree = "<group>"; };
+		7B856D5928951213004A6A79 /* TinderMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderMessage.swift; sourceTree = "<group>"; };
+		7B856D5B28952DA8004A6A79 /* String + NilOrEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + NilOrEmpty.swift"; sourceTree = "<group>"; };
 		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
 		7B9284A42891095600183A6C /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPickerView.swift; sourceTree = "<group>"; };
@@ -373,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */,
+				7B856D5B28952DA8004A6A79 /* String + NilOrEmpty.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -611,6 +618,8 @@
 				7B5D71EA2893B16F00F5223E /* Gender.swift */,
 				7B5D71EE2893B18800F5223E /* WebImage.swift */,
 				7B5D71F02893B1D800F5223E /* BirthDate.swift */,
+				7B856D5728950BB9004A6A79 /* TinderChat.swift */,
+				7B856D5928951213004A6A79 /* TinderMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -692,7 +701,7 @@
 			isa = PBXGroup;
 			children = (
 				7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */,
-				7B846C76284679370013AA22 /* ContainerViewViewModel.swift */,
+				7B846C76284679370013AA22 /* CardContainerViewViewModel.swift */,
 				7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1078,6 +1087,7 @@
 				7BC7EBBC289134C40051D0CD /* UIViewController + UIAlertController.swift in Sources */,
 				7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */,
 				7B261C9528928AED00241CB2 /* BounceScrollView.swift in Sources */,
+				7B856D5828950BB9004A6A79 /* TinderChat.swift in Sources */,
 				7B622A73289401D300E8B228 /* AlertService.swift in Sources */,
 				7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */,
 				7BF85C7728721C9800B296CC /* InterestsCollectionViewController.swift in Sources */,
@@ -1097,9 +1107,10 @@
 				7B9284A52891095600183A6C /* LocationService.swift in Sources */,
 				7B7F81832870D04000223A37 /* UsersInfoViewViewModel.swift in Sources */,
 				7BB2FEDA2870B6E900A2731E /* CardContainerViewProtocol.swift in Sources */,
-				7B846C77284679370013AA22 /* ContainerViewViewModel.swift in Sources */,
+				7B846C77284679370013AA22 /* CardContainerViewViewModel.swift in Sources */,
 				7B846C7E284681BF0013AA22 /* UIColor + Random.swift in Sources */,
 				7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */,
+				7B856D5C28952DA8004A6A79 /* String + NilOrEmpty.swift in Sources */,
 				7B261C9728928D6300241CB2 /* LoginViewController.swift in Sources */,
 				7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */,
 				7B261C9D2892A2C900241CB2 /* FirestoreService.swift in Sources */,
@@ -1123,6 +1134,7 @@
 				7B9332152860495C00D46E69 /* HiddenReactionView.swift in Sources */,
 				7BED5EAB284111730081E71E /* SceneDelegate.swift in Sources */,
 				7B261CA32892A89A00241CB2 /* Validator.swift in Sources */,
+				7B856D5A28951213004A6A79 /* TinderMessage.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,
 				7B4389BE287C994100791C56 /* SetupProfileTextField.swift in Sources */,
 			);

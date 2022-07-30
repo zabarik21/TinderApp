@@ -48,9 +48,12 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   }
   
   func fillCards() {
+    // dont change the order 
+    // 1
     if topCardView.viewModelRelay.value == nil {
       topCardView.viewModelRelay.accept(viewModel?.nextCard())
     }
+    // 2
     if bottomCardView.viewModelRelay.value == nil {
       bottomCardView.viewModelRelay.accept(viewModel?.nextCard())
     }

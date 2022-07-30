@@ -10,13 +10,20 @@ import UIKit
 extension CardContainerView {
   
   func swiped(liked: Bool) {
-    // send request for like/dislike
+    // send request for like/dislike if user in not demo mode
     if !DemoModeService.isDemoMode {
-      if topCardTurn {
-        if let reactedUser = viewModel?.getCurrentUser() {
-          
+      if let targetUser = viewModel?.getCurrentUser() {
+        FirestoreService.shared.createWaitingChat(reciever: targetUser) { result in
+          switch result {
+          case .success:
+            print("waiting chat created succesfully")
+          case .failure(let error):
+            AlertService.shared.alertPublisher.accept(
+              ("Error",
+               "\(error.localizedDescription)")
+            )
+          }
         }
-        
       }
 
     }
