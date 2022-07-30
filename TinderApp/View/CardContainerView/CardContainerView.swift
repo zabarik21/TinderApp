@@ -56,6 +56,14 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     }
   }
   
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+// MARK: - Setup Observers
+extension CardContainerView {
+  
   private func setupObserver() {
     topCardView.swipedObservable
       .subscribe { [weak self] liked in
@@ -68,21 +76,23 @@ class CardContainerView: UIView, CardContainerViewProtocol {
         self?.swiped(liked: liked)
       }
       .disposed(by: bag)
+    
+    viewModel?.userLoadObservable
+      .subscribe(on: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] status in
+        if status {
+          self?.fillCards()
+        } else {
+          // temporary descision
+          AlertService.shared.alertPublisher.accept(
+            ("Some error occured",
+             "Failed to load users"))
+        }
+      })
+      .disposed(by: bag)
   }
   
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if topCardTurn {
-      cardTouchPublisher.onNext(topCardView.viewModelRelay.value)
-    } else {
-      cardTouchPublisher.onNext(bottomCardView.viewModelRelay.value)
-    }
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
 }
-
 
 // MARK: - Setup Elements & UI
 extension CardContainerView {
@@ -104,6 +114,17 @@ extension CardContainerView {
     
     topCardView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
+    }
+  }
+}
+
+// MARK: - Setup touch gestures
+extension CardContainerView {
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    if topCardTurn {
+      cardTouchPublisher.onNext(topCardView.viewModelRelay.value)
+    } else {
+      cardTouchPublisher.onNext(bottomCardView.viewModelRelay.value)
     }
   }
 }

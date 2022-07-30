@@ -10,7 +10,7 @@ import RxSwift
 import FirebaseFirestore
 
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
-    
+  
   var viewModels: [UserCardViewViewModelProtocol]
   var users = [UserCardModel]()
   var usersApi = RandomUserApi()
@@ -26,16 +26,19 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     return userLoadPublisher.asObservable()
   }
   
+  private var userIndex = 0
+  
   func nextCard() -> UserCardViewViewModelProtocol? {
     if DemoModeService.isDemoMode {
       if viewModels.count < 5 {
         fetchViewModels()
       }
     }
+    userIndex += 1
     return viewModels.shift()
   }
   
-  // init with users for случая when there are old saved users left in memory 
+  // init with users for случая when there are old saved users left in memory
   init(users: [UserCardViewViewModel], user: UserCardModel) {
     self.viewModels = users
     self.user = user
@@ -48,6 +51,11 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
   deinit {
     usersListener?.remove()
+  }
+  
+  func getCurrentUser() -> UserCardModel? {
+    guard userIndex < users.count else { return nil }
+    return users[userIndex]
   }
   
   func getUsersFromFirestore() {
@@ -65,10 +73,17 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   }
   
   func updateViewModels() {
-    viewModels = users.map { UserCardViewViewModel(with: $0, myInterests: self.user.interests) }
+    viewModels = users.map { UserCardViewViewModel(
+      with: $0,
+      myInterests: self.user.interests)
+    }
     self.userLoadPublisher.onNext(true)
   }
   
+}
+
+// fetch users for demo mode
+extension CardContainerViewViewModel {
   func fetchViewModels() {
     usersApi.fetchPeopleWithParametrs(count: 10) { result in
       switch result {

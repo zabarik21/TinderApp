@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 enum ViewControllers: Int {
   case people
@@ -35,6 +36,8 @@ class MainTabBarController: UITabBarController {
   var itemWidth = CGFloat()
   let appearence = UITabBarAppearance()
   
+  private let bag = DisposeBag()
+  
   init(user: UserCardModel) {
     self.user = user
     super.init(nibName: nil, bundle: nil)
@@ -43,6 +46,15 @@ class MainTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTabBar()
+    setupObserver()
+  }
+  
+  private func setupObserver() {
+    AlertService.shared.alertObservable
+      .subscribe(onNext: { [weak self] alertDescription in
+        self?.showAlert(title: alertDescription.title, message: alertDescription.message)
+      })
+      .disposed(by: bag)
   }
   
   override func viewWillLayoutSubviews() {

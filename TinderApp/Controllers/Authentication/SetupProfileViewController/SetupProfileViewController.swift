@@ -105,7 +105,18 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
       let age = CustomDateFormatter.shared.yearsBetweenDate(startDate: birthDatePicker.date)
       
       if DemoModeService.isDemoMode {
-        let user = UserCardModel.demoUser
+        let user = UserCardModel(
+          name: name,
+          gender: gender,
+          location: location ?? Location(),
+          birthDate: BirthDate(
+            date: birthDate,
+            age: age),
+          picture: WebImage(
+            large: "nil",
+            thumbnail: "nil"),
+          id: UID(value: "nil"),
+          interests: interests)
         
         DispatchQueue.global(qos: .background).async {
           StorageService.shared.saveUser(user: user)
@@ -135,6 +146,9 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
               completion: { result in
                 switch result {
                 case .success(let userModel):
+                  self?.showAlert(
+                    title: "Youre succesfully registered",
+                    message: "Please wait a couple of seconds")
                   let mainVC = MainTabBarController(user: userModel)
                   if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                     sceneDelegate.changeRootViewController(mainVC, animated: true)

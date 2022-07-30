@@ -11,9 +11,20 @@ extension CardContainerView {
   
   func swiped(liked: Bool) {
     // send request for like/dislike
+    if !DemoModeService.isDemoMode {
+      if topCardTurn {
+        if let reactedUser = viewModel?.getCurrentUser() {
+          
+        }
+        
+      }
+
+    }
+        
     //    updateCardConstraints()
     swapViews()
     updateCurrentBottomCard()
+    
   }
   
   func updateCurrentBottomCard() {

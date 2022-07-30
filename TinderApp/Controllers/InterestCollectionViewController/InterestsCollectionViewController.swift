@@ -42,9 +42,6 @@ class InterestsCollectionViewController: UICollectionViewController {
   
   func setupObserver() {
     interestsRelay
-      .distinctUntilChanged({ fst, snd in
-        return (!fst.isEmpty && !snd.isEmpty)
-      })
       .subscribe(on: MainScheduler.instance)
       .subscribe { [weak self] pairs in
         self?.interests = pairs.element ?? []

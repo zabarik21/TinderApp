@@ -128,7 +128,8 @@ extension UserView: UIScrollViewDelegate {
   private func updateInterestsView(with userInterests: Set<Interest>?) {
     let pairs: [(Interest, Bool)] = userInterests?
       .map { ($0, user.interests!.contains($0)) } ?? []
-    interestsCollectionView.interestsRelay.accept(pairs)
+    let sorted = pairs.sorted { ($0.1 ? 1 : 0) > ($1.1 ? 1 : 0 ) }
+    interestsCollectionView.interestsRelay.accept(sorted)
   }
   
   private func setupUserInfoView() {

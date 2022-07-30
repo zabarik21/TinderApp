@@ -14,29 +14,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
+    
     window = UIWindow(frame: windowScene.coordinateSpace.bounds)
     window?.windowScene = windowScene
     
+    if let user = StorageService.shared.loadUser() {
+      self.window?.rootViewController = MainTabBarController(user: user)
+    } else {
+      let startVc =
+      AuthenticationNavigationController(rootViewController: AuthenticationViewController())
+      self.window?.rootViewController = startVc
+    }
     
-//    if let user = StorageService.shared.loadUser() {
-//      let viewController = MainTabBarController(user: user)
-//      window?.rootViewController = viewController
-//      window?.makeKeyAndVisible()
-//    } else {
-      let ssc = AuthenticationViewController()
-      let viewController = UINavigationController(rootViewController: ssc)
-      viewController.navigationBar.tintColor = .logoColor
-      viewController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-      viewController.navigationBar.shadowImage = UIImage()
-      viewController.navigationBar.isTranslucent = true
-      viewController.view.backgroundColor = .clear
-      window?.rootViewController = viewController
-      window?.makeKeyAndVisible()
-//    }
-//    let signUpVC = SignUpViewController()
-//    window?.rootViewController = signUpVC
-//    window?.makeKeyAndVisible()
-    
+    window?.makeKeyAndVisible()
+
   }
   
   func changeRootViewController(_ viewController: UIViewController, animated: Bool = true) {

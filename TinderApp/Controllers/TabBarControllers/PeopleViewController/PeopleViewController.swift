@@ -39,6 +39,7 @@ class PeopleViewController: UIViewController {
   
   init(user: UserCardModel) {
     self.user = user
+    StorageService.shared.saveUser(user: user)
     super.init(nibName: nil, bundle: nil)
   }
   
