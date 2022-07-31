@@ -62,6 +62,9 @@
 		7B856D5828950BB9004A6A79 /* TinderChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D5728950BB9004A6A79 /* TinderChat.swift */; };
 		7B856D5A28951213004A6A79 /* TinderMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D5928951213004A6A79 /* TinderMessage.swift */; };
 		7B856D5C28952DA8004A6A79 /* String + NilOrEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D5B28952DA8004A6A79 /* String + NilOrEmpty.swift */; };
+		7B856D5F289592DF004A6A79 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B856D5E289592DF004A6A79 /* MatchView.swift */; };
+		7B85ACE7289649A400F27DE8 /* MovableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85ACE6289649A400F27DE8 /* MovableView.swift */; };
+		7B85ACE92896618F00F27DE8 /* MatchViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85ACE82896618F00F27DE8 /* MatchViewViewModel.swift */; };
 		7B8906192847245D008B1D7A /* MTBC + TabBarLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */; };
 		7B9284A52891095600183A6C /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9284A42891095600183A6C /* LocationService.swift */; };
 		7B929B52287E8A6100B6AE35 /* TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */; };
@@ -177,6 +180,9 @@
 		7B856D5728950BB9004A6A79 /* TinderChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderChat.swift; sourceTree = "<group>"; };
 		7B856D5928951213004A6A79 /* TinderMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderMessage.swift; sourceTree = "<group>"; };
 		7B856D5B28952DA8004A6A79 /* String + NilOrEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + NilOrEmpty.swift"; sourceTree = "<group>"; };
+		7B856D5E289592DF004A6A79 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
+		7B85ACE6289649A400F27DE8 /* MovableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableView.swift; sourceTree = "<group>"; };
+		7B85ACE82896618F00F27DE8 /* MatchViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewViewModel.swift; sourceTree = "<group>"; };
 		7B8906182847245D008B1D7A /* MTBC + TabBarLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTBC + TabBarLayers.swift"; sourceTree = "<group>"; };
 		7B9284A42891095600183A6C /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		7B929B51287E8A6100B6AE35 /* TextFieldPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPickerView.swift; sourceTree = "<group>"; };
@@ -475,12 +481,20 @@
 			path = CGFloat;
 			sourceTree = "<group>";
 		};
-		7B856D542894FEB2004A6A79 /* AuthenticationNavigationController */ = {
+		7B856D542894FEB2004A6A79 /* NavigationAuthenticationController */ = {
 			isa = PBXGroup;
 			children = (
 				7B856D552894FEC4004A6A79 /* AuthenticationNavigationController.swift */,
 			);
-			path = AuthenticationNavigationController;
+			path = NavigationAuthenticationController;
+			sourceTree = "<group>";
+		};
+		7B856D5D289592C6004A6A79 /* MatchView */ = {
+			isa = PBXGroup;
+			children = (
+				7B856D5E289592DF004A6A79 /* MatchView.swift */,
+			);
+			path = MatchView;
 			sourceTree = "<group>";
 		};
 		7B9284A32891094B00183A6C /* LocationService */ = {
@@ -560,7 +574,7 @@
 		7BB0B3E3287995C90043F893 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				7B856D542894FEB2004A6A79 /* AuthenticationNavigationController */,
+				7B856D542894FEB2004A6A79 /* NavigationAuthenticationController */,
 				7B261C982892956B00241CB2 /* AuthenticationViewController */,
 				7B261C9228928A9600241CB2 /* LoginViewController */,
 				7B1D46422891614000AACFCD /* SignUpViewController */,
@@ -602,6 +616,7 @@
 				7BB2FED72870B6CD00A2731E /* CardViewProtocol.swift */,
 				7BB2FED92870B6E900A2731E /* CardContainerViewProtocol.swift */,
 				7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */,
+				7B85ACE6289649A400F27DE8 /* MovableView.swift */,
 			);
 			path = ViewProtocol;
 			sourceTree = "<group>";
@@ -703,6 +718,7 @@
 				7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */,
 				7B846C76284679370013AA22 /* CardContainerViewViewModel.swift */,
 				7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */,
+				7B85ACE82896618F00F27DE8 /* MatchViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -719,6 +735,7 @@
 		7BED5EDD284113F80081E71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B856D5D289592C6004A6A79 /* MatchView */,
 				7B261C9328928ABF00241CB2 /* BounceScrollView */,
 				7B261C8F289265EC00241CB2 /* PaddingTextField */,
 				7B1D4645289161CC00AACFCD /* SignUpTextField */,
@@ -1120,10 +1137,12 @@
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B5D71EF2893B18800F5223E /* WebImage.swift in Sources */,
 				7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */,
+				7B856D5F289592DF004A6A79 /* MatchView.swift in Sources */,
 				7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */,
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,
 				7B5D71EB2893B16F00F5223E /* Gender.swift in Sources */,
 				7BB0B3E5287996140043F893 /* AuthenticationViewController.swift in Sources */,
+				7B85ACE7289649A400F27DE8 /* MovableView.swift in Sources */,
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,
 				7B929B55287E97D600B6AE35 /* UILabel + Init.swift in Sources */,
 				7BE2E90C287C2EA800D0BA75 /* SetupProfileViewController.swift in Sources */,
@@ -1137,6 +1156,7 @@
 				7B856D5A28951213004A6A79 /* TinderMessage.swift in Sources */,
 				7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */,
 				7B4389BE287C994100791C56 /* SetupProfileTextField.swift in Sources */,
+				7B85ACE92896618F00F27DE8 /* MatchViewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

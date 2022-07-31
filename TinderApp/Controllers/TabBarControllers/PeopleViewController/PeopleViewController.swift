@@ -27,6 +27,7 @@ class PeopleViewController: UIViewController {
   let headerOvalLayerMask = CAShapeLayer()
   var gradientLayer: CAGradientLayer!
   var userView: UserViewProtocol!
+  var matchView: MatchView!
   var user: UserCardModel
   
   var bag = DisposeBag()
@@ -49,9 +50,9 @@ class PeopleViewController: UIViewController {
   }
   
   private func setupObservers() {
-    userView.hideUserViewObservable
+    userView.hideViewObservable
       .subscribe { [weak self] _ in
-        self?.hideUserView()
+        self?.hideView(self!.userView)
       }
       .disposed(by: bag)
     
@@ -60,6 +61,12 @@ class PeopleViewController: UIViewController {
       guard let reaction = event.element else { return }
       self?.reacted(reaction: reaction)
       }
+      .disposed(by: bag)
+    
+    matchView.hideViewPublishRelay
+      .subscribe(onNext: { [weak self] _ in
+        self?.hideView(self!.matchView)
+      })
       .disposed(by: bag)
     
     reactionsView.reactedObservable
@@ -100,6 +107,7 @@ class PeopleViewController: UIViewController {
 
 // MARK: - Setup Constraints and Elements
 extension PeopleViewController {
+  
   private func setupConstraints() {
     
     let height = self.view.bounds.height
@@ -150,6 +158,14 @@ extension PeopleViewController {
       make.height.equalToSuperview()
       make.top.equalTo(view.snp.bottom).offset(0)
     }
+    
+    view.addSubview(matchView)
+    
+    matchView.snp.makeConstraints { make in
+      make.horizontalEdges.equalToSuperview()
+      make.height.equalToSuperview()
+      make.top.equalTo(view.snp.bottom).offset(0)
+    }
   }
   
   private func setupElements() {
@@ -159,7 +175,12 @@ extension PeopleViewController {
     setupCardContainer()
     setupTitleLabel()
     setupUserView()
+    setupMatchView()
     setupObservers()
+  }
+  
+  private func setupMatchView() {
+    matchView = MatchView()
   }
   
   private func setupUserView() {

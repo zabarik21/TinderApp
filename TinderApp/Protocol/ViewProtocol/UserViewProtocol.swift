@@ -10,13 +10,8 @@ import RxRelay
 import RxSwift
 
 
-protocol HideShowView {
-  
-}
-
-protocol UserViewProtocol: UIView, HideShowView {
+protocol UserViewProtocol: MovableView {
   var viewModel: BehaviorRelay<UserCardViewViewModelProtocol?> { get }
-  var hideUserViewObservable: Observable<Void> { get }
   var reactionsObservable: Observable<Reaction> { get }
   
   func toIdentity()

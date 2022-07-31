@@ -69,11 +69,18 @@ class LoginViewController: UIViewController {
                   
                 }
               case .failure(let error):
+                AlertService.shared.alertPublisher.accept(
+                  (title: "Error",
+                  message: error.localizedDescription)
+                )
                 self.showAlert(title: "Error", message: error.localizedDescription)
               }
             }
           case .failure(let error):
-            self.showAlert(title: "Error", message: error.localizedDescription)
+            AlertService.shared.alertPublisher.accept(
+              (title: "Error",
+              message: error.localizedDescription)
+            )
           }
       }
     }

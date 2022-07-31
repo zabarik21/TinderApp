@@ -90,7 +90,7 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   }
   
   @objc func toMainScreen() {
-    
+    toDemoButton.isEnabled = false
     if checkFields() {
       let name = Name(first: self.nameTextField.text!, last: self.surnameTextField.text!)
       let interests = interestCollectionView.interests
@@ -129,7 +129,10 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
         }
       } else {
         if let id = self.user?.uid,
-           let email = self.user?.email {
+           let email = self.user?.email {AlertService.shared.alertPublisher.accept((
+            "You will be registered",
+            "Please wait a couple of seconds"
+            ))
           DispatchQueue.main.async { [weak self] in
             FirestoreService.shared.saveProfileWith(
               id: id,
@@ -145,9 +148,6 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
               completion: { result in
                 switch result {
                 case .success(let userModel):
-                  self?.showAlert(
-                    title: "Youre succesfully registered",
-                    message: "Please wait a couple of seconds")
                   let mainVC = MainTabBarController(user: userModel)
                   if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                     sceneDelegate.changeRootViewController(mainVC, animated: true)

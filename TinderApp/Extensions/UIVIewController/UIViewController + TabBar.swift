@@ -10,6 +10,7 @@ import UIKit
 
 extension UITabBarController {
   func setTabBarHidden(_ hidden: Bool, animated: Bool, duration: TimeInterval) {
+    guard self.tabBarController?.tabBar.isHidden != hidden else { return }
     if animated {
       let frame = self.tabBar.frame
       let sign: CGFloat = hidden ? 1 : -1

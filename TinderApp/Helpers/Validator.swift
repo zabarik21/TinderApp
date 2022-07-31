@@ -40,7 +40,7 @@ enum Validator {
     } else {
       errors.append(.password)
     }
-    if !email.isNilOrEmpty() && !isValidEmail(email!) {
+    if !email.isNilOrEmpty() || !isValidEmail(email!) {
       errors.append(.email)
     }
     return errors

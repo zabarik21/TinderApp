@@ -19,6 +19,8 @@ enum Constants {
 
 class UserView: UIView, UserViewProtocol {
   
+  private var bag = DisposeBag()
+  
   private var userImageView: UIImageView!
   private var infoViewContainer: UIView!
   private var interestLabel: UILabel!
@@ -29,12 +31,11 @@ class UserView: UIView, UserViewProtocol {
   private var userInfoView: UserInfoView!
   private var scrollView: UIScrollView!
   
-  private var hideUserViewPublishRelay = PublishRelay<Void>()
+  var hideViewPublishRelay = PublishRelay<Void>()
   private var reactionsPublishRelay = PublishRelay<Reaction>()
-  private var bag = DisposeBag()
   
-  var hideUserViewObservable: Observable<Void> {
-    return hideUserViewPublishRelay.asObservable()
+  var hideViewObservable: Observable<Void> {
+    return hideViewPublishRelay.asObservable()
   }
   
   var reactionsObservable: Observable<Reaction> {
@@ -54,14 +55,14 @@ class UserView: UIView, UserViewProtocol {
     self.user = user
     super.init(frame: .zero)
     setupElements()
-    setupGestures()
+    setupGestures(action: #selector(handlePan))
     setupObserver()
   }
   
   private func setupObserver() {
     reactionView.reactedObservable.subscribe { [weak self] event in
       guard let reaction = event.element else { return }
-      self?.hideUserViewPublishRelay.accept(())
+      self?.hideViewPublishRelay.accept(())
       self?.reactionsPublishRelay.accept(reaction)
     }
     .disposed(by: bag)
@@ -105,8 +106,8 @@ class UserView: UIView, UserViewProtocol {
 }
 
 // MARK: - Setup Elements & Constraints
-// remove uiscrollview deleagte
-extension UserView: UIScrollViewDelegate {
+
+extension UserView {
   
   private func setupElements() {
     setupUserImageView()
@@ -251,13 +252,7 @@ extension UserView: UIScrollViewDelegate {
 // MARK: - UIGestureRecognizerDelegate
 extension UserView: UIGestureRecognizerDelegate {
   
-  private func setupGestures() {
-    let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-    gestureRecognizer.delegate = self
-    addGestureRecognizer(gestureRecognizer)
-  }
-  
-  @objc private func handlePan(_ recognizer: UIPanGestureRecognizer) {
+  @objc func handlePan(_ recognizer: UIPanGestureRecognizer) {
     let velocity = recognizer.velocity(in: self)
     switch recognizer.state {
     case .began, .possible, .cancelled, .failed:
@@ -268,29 +263,6 @@ extension UserView: UIGestureRecognizerDelegate {
       gestureEnded(with: velocity.y)
     @unknown default:
       print("oknown")
-    }
-  }
-  
-  private func onChange(_ recognizer: UIPanGestureRecognizer) {
-    let translation = recognizer.translation(in: self)
-    let minY = frame.minY
-    let translationY = translation.y
-    if minY <= 0 && translationY <= 0 { return }
-    guard let gestureView = recognizer.view else { return }
-    let yDelta = center.y
-    gestureView.center = CGPoint(
-      x: center.x,
-      y: yDelta + translationY)
-    recognizer.setTranslation(.zero, in: self)
-  }
-  
-  private func gestureEnded(with velocity: CGFloat) {
-    if velocity > 1000 || frame.minY > (self.viewHieght / 3) {
-      self.hideUserViewPublishRelay.accept(())
-    } else {
-      UIView.animate(withDuration: Constants.viewDissappearTime) {
-        self.center.y = self.viewHieght / 2
-      }
     }
   }
   

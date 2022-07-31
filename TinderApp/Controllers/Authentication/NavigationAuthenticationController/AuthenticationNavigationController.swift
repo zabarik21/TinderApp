@@ -7,9 +7,12 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 
 class AuthenticationNavigationController: UINavigationController {
+  
+  private let bag = DisposeBag()
   
   override init(rootViewController: UIViewController) {
     super.init(rootViewController: rootViewController)
@@ -18,6 +21,18 @@ class AuthenticationNavigationController: UINavigationController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavigationController()
+    setupAlertObserver()
+  }
+  
+  private func setupAlertObserver() {
+    AlertService.shared.alertObservable
+      .subscribe(onNext: { [weak self] alertDescription in
+        self?.showAlert(
+          title: alertDescription.title,
+          message: alertDescription.message
+        )
+      })
+      .disposed(by: bag)
   }
   
   private func setupNavigationController() {

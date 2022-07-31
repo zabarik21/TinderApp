@@ -11,7 +11,7 @@ import UIKit
 extension PeopleViewController {
   
   func setupGradientLayer() {
-    gradientLayer = LayerFactory.shared.getGradientLayer(with: [.firstGradientColor, .secondGradientColor])
+    gradientLayer = LayerFactory.shared.getGradientLayer()
     gradientLayer.mask = headerOvalLayerMask
     self.view.layer.addSublayer(gradientLayer)
   }

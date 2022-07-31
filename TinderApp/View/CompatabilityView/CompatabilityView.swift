@@ -22,12 +22,14 @@ class CompatabilityView: UIView {
   }
   
   private var scoreLayer = CAShapeLayer()
+  private var circleLayer = CAShapeLayer()
   private var scoreLabel: UILabel!
   private var viewCenter: CGPoint!
   
   override func layoutSubviews() {
     super.layoutSubviews()
     viewCenter = CGPoint(x: CGFloat(self.bounds.width / 2), y: CGFloat(self.bounds.height / 2))
+    self.layer.cornerRadius = self.bounds.height / 2
   }
   
   init() {
@@ -47,9 +49,14 @@ class CompatabilityView: UIView {
       }
     }
     scoreLayer.strokeColor = strokeColor
+    scoreLayer.lineCap = .round
+    
+    
     DispatchQueue.global().async {
       while self.viewCenter == nil {}
-      DispatchQueue.main.async {
+      DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
+        self.circleLayer.path = self.configurePath(forBackground: true)
         self.scoreLayer.path = self.configurePath()
       }
     }
@@ -57,19 +64,24 @@ class CompatabilityView: UIView {
     scoreLabel.text = "\(Int(compatability))"
   }
   
-  private func configurePath() -> CGPath {
-    let angle = CGFloat((360 * self.compatability / 10) - 90)
+  private func configurePath(forBackground: Bool = false) -> CGPath {
+    let angle = CGFloat((360 * self.compatability / 10) + 270)
     let radius = self.bounds.height / 2 - CompatabilityViewConstants.strokeWidth
     return UIBezierPath(
       arcCenter: self.viewCenter,
       radius: radius,
-      startAngle: CGFloat(-90).degreesToRadians,
-      endAngle: angle.degreesToRadians,
+      startAngle: CGFloat(270).degreesToRadians,
+      endAngle: forBackground ? CGFloat(630).degreesToRadians : angle.degreesToRadians,
       clockwise: true).cgPath
   }
   
   func changeLabelColor(with color: UIColor) {
     self.scoreLabel.textColor = color
+  }
+  
+  func lightenBackground() {
+    self.scoreLabel.textColor = .black
+    backgroundColor = .white
   }
   
   required init?(coder: NSCoder) {
@@ -88,11 +100,16 @@ extension CompatabilityView {
   private func setupScoreLayer() {
     scoreLayer.lineWidth = CompatabilityViewConstants.strokeWidth
     scoreLayer.fillColor = UIColor.clear.cgColor
-    layer.addSublayer(scoreLayer)
+    circleLayer.lineWidth = CompatabilityViewConstants.strokeWidth
+    circleLayer.fillColor = UIColor.clear.cgColor
+    circleLayer.strokeColor = UIColor.peopleViewControllerBackground.cgColor
+    
+    layer.insertSublayer(circleLayer, at: 0)
+    layer.insertSublayer(scoreLayer, at: 1)
   }
   
   private func setupLabel() {
-    scoreLabel = UILabel(text: "", fontSize: 14, weight: .bold, textColor: .cardLabelTextColor)
+    scoreLabel = UILabel(text: "10", fontSize: 14, weight: .bold, textColor: .cardLabelTextColor)
     scoreLabel.textAlignment = .center
     
     addSubview(scoreLabel)
