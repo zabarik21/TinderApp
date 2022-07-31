@@ -8,22 +8,32 @@
 import Foundation
 import RxSwift
 import FirebaseFirestore
+import RxRelay
 
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
+
+  private let bag = DisposeBag()
   
-  var viewModels: [UserCardViewViewModelProtocol]
+  var viewModels = [UserCardViewViewModelProtocol]()
   var users = [UserCardModel]()
   var usersApi = RandomUserApi()
   
   var user: UserCardModel
   
   private var userLoadPublisher = PublishSubject<Bool>()
+  var matchRelay = PublishRelay<MatchViewViewModel?>()
   
   private var usersListener: ListenerRegistration?
+  
+  public var matchObservable: Observable<MatchViewViewModel?> {
+    return matchRelay.asObservable()
+  }
   
   var userLoadObservable: Observable<Bool> {
     return userLoadPublisher.asObservable()
   }
+  
+  var topCardViewModelRelay = BehaviorRelay<UserCardViewViewModelProtocol?>(value: nil)
   
   private var userIndex = 0
   
@@ -39,15 +49,17 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     return viewModels.shift()
   }
   
-  // init with users for случая when there are old saved users left in memory
-  init(users: [UserCardViewViewModel], user: UserCardModel) {
-    self.viewModels = users
+  init(user: UserCardModel) {
     self.user = user
     guard !DemoModeService.isDemoMode else {
       self.fetchViewModels()
       return
     }
     getUsersFromFirestore()
+    topCardViewModelRelay
+      .debug()
+      .subscribe()
+      .disposed(by: bag)
   }
   
   deinit {

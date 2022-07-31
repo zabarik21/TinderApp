@@ -25,20 +25,20 @@
 		7B261CAC2892C78000241CB2 /* DateFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CAB2892C78000241CB2 /* DateFormatterTests.swift */; };
 		7B261CAF2892D0FD00241CB2 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CAE2892D0FD00241CB2 /* FirebaseStorageService.swift */; };
 		7B261CB12892D22200241CB2 /* UIImage + scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B261CB02892D22200241CB2 /* UIImage + scaled.swift */; };
-		7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */; };
+		7B2907DF286ECE1E00CB52EB /* PVC + ObserverActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907DE286ECE1E00CB52EB /* PVC + ObserverActions.swift */; };
 		7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */; };
 		7B2D283128730B440046CF69 /* ReactionButtonsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */; };
 		7B3FB0422874C1CB00FA82A4 /* String + Uppercase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */; };
 		7B4389BE287C994100791C56 /* SetupProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4389BD287C994100791C56 /* SetupProfileTextField.swift */; };
 		7B478C3E2844EC1500AB653E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3D2844EC1500AB653E /* CardView.swift */; };
 		7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C3F2844EEBD00AB653E /* CardContainerView.swift */; };
-		7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */; };
+		7B478C432844EF1800AB653E /* PVC + Background layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B478C422844EF1800AB653E /* PVC + Background layer.swift */; };
 		7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */; };
 		7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE62847177E00C692E0 /* Array + Shift.swift */; };
 		7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */; };
 		7B52B8AC2882A56B00A64A7B /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B8AB2882A56B00A64A7B /* StorageService.swift */; };
 		7B52B8AE2882AC3000A64A7B /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52B8AD2882AC3000A64A7B /* StorageServiceTests.swift */; };
-		7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */; };
+		7B5BFDC92870519B00F070F7 /* PVC + HideShowViewAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDC82870519B00F070F7 /* PVC + HideShowViewAnimating.swift */; };
 		7B5BFDCC2870523D00F070F7 /* UIImage + PlaceholderImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */; };
 		7B5C28BA2855F8EB0001212A /* CompatabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C28B92855F8EB0001212A /* CompatabilityView.swift */; };
 		7B5D71E72893AF7E00F5223E /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D71E62893AF7E00F5223E /* Coordinates.swift */; };
@@ -53,7 +53,6 @@
 		7B622A73289401D300E8B228 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B622A72289401D300E8B228 /* AlertService.swift */; };
 		7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B71D542287AA527002E7340 /* StartScreenButton.swift */; };
 		7B795B6B28565436007FAA53 /* CGFLoat + Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */; };
-		7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */; };
 		7B7F81832870D04000223A37 /* UsersInfoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */; };
 		7B7F81852870D07000223A37 /* UsersInfoViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81842870D07000223A37 /* UsersInfoViewViewModelProtocol.swift */; };
 		7B846C77284679370013AA22 /* CardContainerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B846C76284679370013AA22 /* CardContainerViewViewModel.swift */; };
@@ -84,7 +83,7 @@
 		7BB0B3E5287996140043F893 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0B3E4287996140043F893 /* AuthenticationViewController.swift */; };
 		7BB0B3E72879A5BC0043F893 /* LayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */; };
 		7BB2FED22870AD3B00A2731E /* UIColor + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED12870AD3B00A2731E /* UIColor + Constants.swift */; };
-		7BB2FED42870B65700A2731E /* CardContainerView + ReactionHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED32870B65700A2731E /* CardContainerView + ReactionHandling.swift */; };
+		7BB2FED42870B65700A2731E /* CardContainerView + ObserverReactionHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED32870B65700A2731E /* CardContainerView + ObserverReactionHandling.swift */; };
 		7BB2FED62870B68700A2731E /* CardContainerView + CardViewsSwiping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED52870B68700A2731E /* CardContainerView + CardViewsSwiping.swift */; };
 		7BB2FED82870B6CD00A2731E /* CardViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED72870B6CD00A2731E /* CardViewProtocol.swift */; };
 		7BB2FEDA2870B6E900A2731E /* CardContainerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FED92870B6E900A2731E /* CardContainerViewProtocol.swift */; };
@@ -143,20 +142,20 @@
 		7B261CAB2892C78000241CB2 /* DateFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterTests.swift; sourceTree = "<group>"; };
 		7B261CAE2892D0FD00241CB2 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		7B261CB02892D22200241CB2 /* UIImage + scaled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + scaled.swift"; sourceTree = "<group>"; };
-		7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerObserverFuncs.swift"; sourceTree = "<group>"; };
+		7B2907DE286ECE1E00CB52EB /* PVC + ObserverActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + ObserverActions.swift"; sourceTree = "<group>"; };
 		7B2907E4286EEAD400CB52EB /* UserViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewProtocol.swift; sourceTree = "<group>"; };
 		7B2D283028730B440046CF69 /* ReactionButtonsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButtonsViewProtocol.swift; sourceTree = "<group>"; };
 		7B3FB0412874C1CB00FA82A4 /* String + Uppercase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Uppercase.swift"; sourceTree = "<group>"; };
 		7B4389BD287C994100791C56 /* SetupProfileTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileTextField.swift; sourceTree = "<group>"; };
 		7B478C3D2844EC1500AB653E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7B478C3F2844EEBD00AB653E /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
-		7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + Bacground layer.swift"; sourceTree = "<group>"; };
+		7B478C422844EF1800AB653E /* PVC + Background layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + Background layer.swift"; sourceTree = "<group>"; };
 		7B47BAE4284716A700C692E0 /* CardContainerViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7B47BAE62847177E00C692E0 /* Array + Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Shift.swift"; sourceTree = "<group>"; };
 		7B47BAE8284717F500C692E0 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
 		7B52B8AB2882A56B00A64A7B /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		7B52B8AD2882AC3000A64A7B /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
-		7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + UserViewAnimating.swift"; sourceTree = "<group>"; };
+		7B5BFDC82870519B00F070F7 /* PVC + HideShowViewAnimating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + HideShowViewAnimating.swift"; sourceTree = "<group>"; };
 		7B5BFDCB2870523D00F070F7 /* UIImage + PlaceholderImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + PlaceholderImage.swift"; sourceTree = "<group>"; };
 		7B5C28B92855F8EB0001212A /* CompatabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatabilityView.swift; sourceTree = "<group>"; };
 		7B5D71E62893AF7E00F5223E /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
@@ -171,7 +170,6 @@
 		7B622A72289401D300E8B228 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		7B71D542287AA527002E7340 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B795B6A28565436007FAA53 /* CGFLoat + Radians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat + Radians.swift"; sourceTree = "<group>"; };
-		7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PVC + CardContainerViewViewModelDelegate.swift"; sourceTree = "<group>"; };
 		7B7F81822870D04000223A37 /* UsersInfoViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfoViewViewModel.swift; sourceTree = "<group>"; };
 		7B7F81842870D07000223A37 /* UsersInfoViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfoViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7B846C76284679370013AA22 /* CardContainerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewViewModel.swift; sourceTree = "<group>"; };
@@ -202,7 +200,7 @@
 		7BB0B3E4287996140043F893 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		7BB0B3E62879A5BC0043F893 /* LayerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerFactory.swift; sourceTree = "<group>"; };
 		7BB2FED12870AD3B00A2731E /* UIColor + Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Constants.swift"; sourceTree = "<group>"; };
-		7BB2FED32870B65700A2731E /* CardContainerView + ReactionHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardContainerView + ReactionHandling.swift"; sourceTree = "<group>"; };
+		7BB2FED32870B65700A2731E /* CardContainerView + ObserverReactionHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardContainerView + ObserverReactionHandling.swift"; sourceTree = "<group>"; };
 		7BB2FED52870B68700A2731E /* CardContainerView + CardViewsSwiping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardContainerView + CardViewsSwiping.swift"; sourceTree = "<group>"; };
 		7BB2FED72870B6CD00A2731E /* CardViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewProtocol.swift; sourceTree = "<group>"; };
 		7BB2FED92870B6E900A2731E /* CardContainerViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerViewProtocol.swift; sourceTree = "<group>"; };
@@ -268,10 +266,9 @@
 			isa = PBXGroup;
 			children = (
 				7BED5EAC284111730081E71E /* PeopleViewController.swift */,
-				7B478C422844EF1800AB653E /* PVC + Bacground layer.swift */,
-				7B2907DE286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift */,
-				7B5BFDC82870519B00F070F7 /* PVC + UserViewAnimating.swift */,
-				7B7F81802870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift */,
+				7B478C422844EF1800AB653E /* PVC + Background layer.swift */,
+				7B2907DE286ECE1E00CB52EB /* PVC + ObserverActions.swift */,
+				7B5BFDC82870519B00F070F7 /* PVC + HideShowViewAnimating.swift */,
 			);
 			path = PeopleViewController;
 			sourceTree = "<group>";
@@ -284,7 +281,7 @@
 				7B622A6B2893F07400E8B228 /* ListenerService */,
 				7B261CAD2892D0EF00241CB2 /* FirebaseStorageService */,
 				7B261C9E2892A60600241CB2 /* AuthenticationService */,
-				7B261C9B2892A2BF00241CB2 /* FirebaseService */,
+				7B261C9B2892A2BF00241CB2 /* FirestoreService */,
 				7B9284A32891094B00183A6C /* LocationService */,
 				7B52B8AA2882A55800A64A7B /* StorageService */,
 				7B1AFB052877569B007B943C /* Networking */,
@@ -349,12 +346,12 @@
 			path = AuthenticationViewController;
 			sourceTree = "<group>";
 		};
-		7B261C9B2892A2BF00241CB2 /* FirebaseService */ = {
+		7B261C9B2892A2BF00241CB2 /* FirestoreService */ = {
 			isa = PBXGroup;
 			children = (
 				7B261C9C2892A2C900241CB2 /* FirestoreService.swift */,
 			);
-			path = FirebaseService;
+			path = FirestoreService;
 			sourceTree = "<group>";
 		};
 		7B261C9E2892A60600241CB2 /* AuthenticationService */ = {
@@ -832,7 +829,7 @@
 			isa = PBXGroup;
 			children = (
 				7B478C3F2844EEBD00AB653E /* CardContainerView.swift */,
-				7BB2FED32870B65700A2731E /* CardContainerView + ReactionHandling.swift */,
+				7BB2FED32870B65700A2731E /* CardContainerView + ObserverReactionHandling.swift */,
 				7BB2FED52870B68700A2731E /* CardContainerView + CardViewsSwiping.swift */,
 			);
 			path = CardContainerView;
@@ -872,12 +869,10 @@
 			buildConfigurationList = 7BED5ECF284111750081E71E /* Build configuration list for PBXNativeTarget "TinderApp" */;
 			buildPhases = (
 				9C0908DCBDBAFD7F8992C554 /* [CP] Check Pods Manifest.lock */,
-				7BE9EF2C286E1B5A004C18F4 /* ShellScript */,
 				7BED5EA1284111730081E71E /* Sources */,
 				7BED5EA2284111730081E71E /* Frameworks */,
 				7BED5EA3284111730081E71E /* Resources */,
 				A1959C7140618C600A4449FA /* [CP] Embed Pods Frameworks */,
-				7B6BB2242882E21C00DC2A63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -967,40 +962,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7B6BB2242882E21C00DC2A63 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		7BE9EF2C286E1B5A004C18F4 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
 		90F3BB6D600642E4029E14A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1077,7 +1038,7 @@
 				7BED5EE528411F050081E71E /* ProfileViewController.swift in Sources */,
 				7BED5EE0284114720081E71E /* MessagerViewController.swift in Sources */,
 				7B478C402844EEBD00AB653E /* CardContainerView.swift in Sources */,
-				7BB2FED42870B65700A2731E /* CardContainerView + ReactionHandling.swift in Sources */,
+				7BB2FED42870B65700A2731E /* CardContainerView + ObserverReactionHandling.swift in Sources */,
 				7BB2FED22870AD3B00A2731E /* UIColor + Constants.swift in Sources */,
 				7B929B5B287ECB3700B6AE35 /* Array + Set.swift in Sources */,
 				7BA1BC7A2878917300E9C5E8 /* NetworkManager.swift in Sources */,
@@ -1086,7 +1047,7 @@
 				7B622A6D2893F08300E8B228 /* ListenerService.swift in Sources */,
 				7B47BAE72847177E00C692E0 /* Array + Shift.swift in Sources */,
 				7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */,
-				7B2907DF286ECE1E00CB52EB /* PVC + CardContainerObserverFuncs.swift in Sources */,
+				7B2907DF286ECE1E00CB52EB /* PVC + ObserverActions.swift in Sources */,
 				7B5D71E72893AF7E00F5223E /* Coordinates.swift in Sources */,
 				7B261CA02892A60F00241CB2 /* AuthenticationService.swift in Sources */,
 				7B478C3E2844EC1500AB653E /* CardView.swift in Sources */,
@@ -1116,8 +1077,7 @@
 				7B261C912892660C00241CB2 /* PaddingTextField.swift in Sources */,
 				7B261CAF2892D0FD00241CB2 /* FirebaseStorageService.swift in Sources */,
 				7BA1BC7C2878A53C00E9C5E8 /* RandomUserApi.swift in Sources */,
-				7B7F81812870C8AE00223A37 /* PVC + CardContainerViewViewModelDelegate.swift in Sources */,
-				7B5BFDC92870519B00F070F7 /* PVC + UserViewAnimating.swift in Sources */,
+				7B5BFDC92870519B00F070F7 /* PVC + HideShowViewAnimating.swift in Sources */,
 				7B261CB12892D22200241CB2 /* UIImage + scaled.swift in Sources */,
 				7B9469F02848EF5F0079568C /* CardView + Gestures.swift in Sources */,
 				7B71D543287AA527002E7340 /* StartScreenButton.swift in Sources */,
@@ -1136,7 +1096,7 @@
 				7B5D71F32893B1E100F5223E /* Location.swift in Sources */,
 				7B47BAE5284716A700C692E0 /* CardContainerViewViewModelProtocol.swift in Sources */,
 				7B5D71EF2893B18800F5223E /* WebImage.swift in Sources */,
-				7B478C432844EF1800AB653E /* PVC + Bacground layer.swift in Sources */,
+				7B478C432844EF1800AB653E /* PVC + Background layer.swift in Sources */,
 				7B856D5F289592DF004A6A79 /* MatchView.swift in Sources */,
 				7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */,
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,

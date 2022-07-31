@@ -30,14 +30,18 @@ class CardView: UIView, CardViewProtocol {
   var viewModelRelay = BehaviorRelay<UserCardViewViewModelProtocol?>(value: nil)
   
   private var swipedPublisher = PublishSubject<Bool>()
+  var cardTouchPublisher = PublishRelay<UserCardViewViewModelProtocol?>()
   private var bag = DisposeBag()
   
   var swipedObservable: Observable<Bool> {
     return swipedPublisher.asObservable()
   }
   
+  var touchCardObservable: Observable<UserCardViewViewModelProtocol?> {
+    return cardTouchPublisher.asObservable()
+  }
   
-  var anchorPoint: CGPoint = .zero
+  var touchLocation: CGPoint = .zero
   var startPoint: CGPoint = .zero
   
   private var profileImage: UIImageView!

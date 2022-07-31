@@ -41,13 +41,13 @@ class AuthenticationViewController: UIViewController {
     var viewController: UIViewController?
     if sender === loginButton {
       viewController = loginVC
-      DemoModeService.isDemoMode = false
+      DemoModeService.shared.toggleDemo(to: false)
     } else if sender === signUpButton {
       viewController = signUpVC
-      DemoModeService.isDemoMode = false
+      DemoModeService.shared.toggleDemo(to: false)
     } else {
       viewController = demoSetupProfileVC
-      DemoModeService.isDemoMode = true
+      DemoModeService.shared.toggleDemo(to: true)
     }
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }

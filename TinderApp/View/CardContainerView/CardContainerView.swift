@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import RxSwift
+import RxRelay
 
 enum CardContainerConstants {
   static var topAnchorCardOffset: CGFloat = 5
@@ -40,6 +41,7 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     super.init(frame: .zero)
     setupElements()
     setupObserver()
+    
   }
   
   override func layoutSubviews() {
@@ -68,10 +70,29 @@ class CardContainerView: UIView, CardContainerViewProtocol {
 extension CardContainerView {
   
   private func setupObserver() {
+    
+    viewModel?.userLoadObservable
+      .subscribe(onNext: { [weak self] _  in
+        self?.fillCards()
+      })
+      .disposed(by: bag)
+    
     topCardView.swipedObservable
       .subscribe { [weak self] liked in
         self?.swiped(liked: liked)
       }
+      .disposed(by: bag)
+    
+    topCardView.touchCardObservable
+      .subscribe(onNext: { [weak self] viewModel in
+        self?.cardTouchPublisher.onNext(viewModel)
+      })
+      .disposed(by: bag)
+    
+    bottomCardView.touchCardObservable
+      .subscribe(onNext: { [weak self] viewModel in
+        self?.cardTouchPublisher.onNext(viewModel)
+      })
       .disposed(by: bag)
     
     bottomCardView.swipedObservable
@@ -117,17 +138,6 @@ extension CardContainerView {
     
     topCardView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
-    }
-  }
-}
-
-// MARK: - Setup touch gestures
-extension CardContainerView {
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if topCardTurn {
-      cardTouchPublisher.onNext(topCardView.viewModelRelay.value)
-    } else {
-      cardTouchPublisher.onNext(bottomCardView.viewModelRelay.value)
     }
   }
 }

@@ -59,7 +59,7 @@ class PeopleViewController: UIViewController {
     userView.reactionsObservable
       .subscribe { [weak self] event in
       guard let reaction = event.element else { return }
-      self?.reacted(reaction: reaction)
+        self?.cardContainer.reacted(liked: reaction.bool())
       }
       .disposed(by: bag)
     
@@ -72,7 +72,7 @@ class PeopleViewController: UIViewController {
     reactionsView.reactedObservable
       .subscribe { [weak self] event in
       guard let reaction = event.element else { return }
-      self?.reacted(reaction: reaction)
+        self?.cardContainer.reacted(liked: reaction.bool())
       }
       .disposed(by: bag)
     
@@ -80,6 +80,14 @@ class PeopleViewController: UIViewController {
       .subscribe { [weak self] viewModel in
         self?.cardTouched(with: viewModel)
       }
+      .disposed(by: bag)
+    
+    cardContainer.viewModel?.matchRelay
+      .subscribe(onNext: { [weak self] matchViewModel in
+        guard let matchViewModel = matchViewModel else { return }
+        self?.matchView.viewModelRelay.accept(matchViewModel)
+        self?.showHiddenView(self!.matchView)
+      })
       .disposed(by: bag)
     
     cardContainer.viewModel?.userLoadObservable
@@ -93,11 +101,6 @@ class PeopleViewController: UIViewController {
         }
       })
       .disposed(by: bag)
-  }
-  
-  func reacted(reaction: Reaction) {
-    let liked = reaction == .like ? true : false
-    cardContainer.reacted(liked: liked)
   }
   
   required init?(coder: NSCoder) {
@@ -198,7 +201,7 @@ extension PeopleViewController {
   
   private func setupCardContainer() {
     // let cachedUsers = ...
-    let viewModel = CardContainerViewViewModel(users: [], user: self.user)
+    let viewModel = CardContainerViewViewModel(user: self.user)
     cardContainer = CardContainerView()
     cardContainer.viewModel = viewModel
   }

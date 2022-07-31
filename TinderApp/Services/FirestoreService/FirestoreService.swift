@@ -15,6 +15,11 @@ enum UserError: Error {
   case cannotUnwrapToMuser
 }
 
+enum MessagesError: Error {
+  case nilMessages
+  case decodeError
+}
+
 class FirestoreService {
   
   static let shared = FirestoreService()
@@ -38,6 +43,14 @@ class FirestoreService {
       "users",
       currentUser.id.value!,
       "dislikedUsers"
+    ].joined(separator: "/"))
+  }
+  
+  private var activeChats: CollectionReference {
+    return database.collection([
+      "users",
+      currentUser.id.value!,
+      "activeChats"
     ].joined(separator: "/"))
   }
   
@@ -151,6 +164,124 @@ class FirestoreService {
     }
   }
     
+  func getWaitingChatMessages(
+    chat: TinderChat,
+    completion: @escaping (Result<[TinderMessage], Error>) -> Void
+  ) {
+    waitingChats.document(chat.friendId).collection("mesasges").getDocuments { querySnapshot, error in
+      var messages = [TinderMessage]()
+      if let error = error {
+        completion(.failure(error))
+      }
+      guard let documents = querySnapshot?.documents else {
+        completion(.failure(MessagesError.nilMessages))
+        return
+      }
+      for document in documents {
+        guard let message = TinderMessage(document: document) else {
+          completion(.failure(MessagesError.decodeError))
+          return
+        }
+        messages.append(message)
+      }
+      completion(.success(messages))
+    }
+  }
+  
+  func changeChatToActive(
+    chat: TinderChat,
+    completion: @escaping (Result<Void, Error>) -> Void
+  ) {
+    getWaitingChatMessages(chat: chat) { result in
+      switch result {
+      case .success(let messages):
+        self.deleteWaitingChat(chat: chat) { result in
+          switch result {
+          case .failure(let error):
+            completion(.failure(error))
+          case .success:
+            self.createActiveChat(chat: chat, messages: messages) { result in
+              switch result {
+              case .failure(let error):
+                completion(.failure(error))
+              case .success:
+                completion(.success(()))
+              }
+            }
+          }
+        }
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
+  
+  func createActiveChat(
+    chat: TinderChat,
+    messages: [TinderMessage],
+    completion: @escaping (Result<Void, Error>) -> Void
+  ) {
+      let messageRef = activeChats.document(chat.friendId).collection("messages")
+      
+    messageRef.document(chat.friendId).setData(chat.representation) { error in
+      if let error = error {
+        completion(.failure(error))
+        return
+      }
+      
+      for message in messages {
+        messageRef.addDocument(data: message.representation) { error in
+          if let error = error {
+            completion(.failure(error))
+            return
+          }
+        }
+      }
+      completion(.success(()))
+    }
+      
+    
+    
+  }
+  
+  func deleteWaitingChat(
+    chat: TinderChat,
+    completion: @escaping (Result<Void, Error>) -> Void
+  ) {
+    waitingChats.document(chat.friendId).delete { error in
+      if let error = error {
+        completion(.failure(error))
+      }
+      completion(.success(()))
+    }
+    self.deleteMessages(chat: chat, completion: completion)
+  }
+  
+  func deleteMessages(
+    chat: TinderChat,
+    completion: @escaping (Result<Void, Error>) -> Void
+  ) {
+    let reference = waitingChats.document(chat.friendId).collection("messages")
+    getWaitingChatMessages(chat: chat) { result in
+      switch result {
+      case .success(let messages):
+        for message in messages {
+          guard let docId = message.id else { return }
+          let messageRef = reference.document(docId)
+          messageRef.delete { error in
+            if let error = error {
+              completion(.failure(error))
+              return
+            }
+          }
+          completion(.success(Void()))
+        }
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
+  
   func removeUser(
     user: UserCardModel,
     completion: @escaping (Result<Void, Error>) -> Void

@@ -38,6 +38,8 @@ extension CardView: UIGestureRecognizerDelegate {
       onChange(recognizer)
     case .ended:
       gestureEnded(with: velocity.x)
+    case .possible, .cancelled, .failed:
+      break
     @unknown default:
       print("oknown")
     }
@@ -80,6 +82,18 @@ extension CardView: UIGestureRecognizerDelegate {
       swipe(liked: false)
     } else {
       animateToIdentity()
+    }
+  }
+ 
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    touchLocation = touches.first!.location(in: self)
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    if touchLocation == touches.first!.location(in: self) {
+      self.cardTouchPublisher.accept(viewModelRelay.value)
     }
   }
   

@@ -26,7 +26,7 @@ extension PeopleViewController {
     view.snp.updateConstraints { make in
       make.top.equalTo(self.view.snp.bottom).offset(-self.view.bounds.height)
     }
-    
+    self.tabBarController?.setTabBarHidden(true, animated: true, duration: PeopleVCConstants.cardDisappearTime)
     UIView.animate(withDuration: PeopleVCConstants.cardDisappearTime * 3) {
       view.alpha = 1
       self.view.layoutIfNeeded()

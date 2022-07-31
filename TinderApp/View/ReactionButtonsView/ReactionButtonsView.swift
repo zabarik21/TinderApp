@@ -14,6 +14,10 @@ import RxRelay
 enum Reaction {
   case like
   case dislike
+
+  func bool() -> Bool {
+    return self == .like ? true : false
+  }
 }
 
 class ReactionButtonsView: UIView, ReactionButtonsViewProtocol {

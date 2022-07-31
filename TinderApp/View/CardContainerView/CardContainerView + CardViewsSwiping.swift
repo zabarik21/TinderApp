@@ -14,32 +14,19 @@ extension CardContainerView {
     if !DemoModeService.isDemoMode {
       if let targetUser = viewModel?.getDisplayedUser() {
         if liked {
-          FirestoreService.shared.createWaitingChat(reciever: targetUser) { result in
-            switch result {
-            case .success:
-              print("waiting chat created succesfully")
-            case .failure(let error):
-              AlertService.shared.alertPublisher.accept(
-                ("Error",
-                 "\(error.localizedDescription)")
-              )
-            }
-          }
+          likeUser(targetUser)
         } else {
-          FirestoreService.shared.removeUser(user: targetUser) { result in
-            switch result {
-            case .success:
-              print("User moved to disliked")
-            case .failure(let error):
-              print(error)
-            }
-          }
+          dislikeUser(targetUser)
         }
+      }
+    } else {
+      if liked {
+        demoLikeReaction()
       }
     }
     
     
-    //    updateCardConstraints()
+//    updateCardConstraints()
     swapViews()
     updateCurrentBottomCard()
     
@@ -62,7 +49,6 @@ extension CardContainerView {
     }
   }
   
-  
   func swapViews() {
     DispatchQueue.main.async {
       let currentTopCard = self.topCardTurn ? self.bottomCardView! : self.topCardView!
@@ -75,6 +61,53 @@ extension CardContainerView {
         currentBottomCard.alpha = 1
       }
       self.topCardTurn.toggle()
+      self.updateViewModelTopCard()
+    }
+  }
+  
+  private func updateViewModelTopCard() {
+    if topCardTurn {
+      viewModel?.topCardViewModelRelay.accept(topCardView.viewModelRelay.value)
+    } else {
+      viewModel?.topCardViewModelRelay.accept(bottomCardView.viewModelRelay.value)
+    }
+  }
+  
+  private func demoLikeReaction() {
+    if Int.random(in: 0...3) == 2 {
+      guard let viewModel = viewModel,
+            let topCardViewModel = viewModel.topCardViewModelRelay.value else { return }
+      self.viewModel?.matchRelay.accept(MatchViewViewModel(
+        userName: viewModel.user.name.first,
+        userImageUrlString: viewModel.user.picture.thumbnail,
+        friendName: topCardViewModel.name,
+        friendImageUrlString: topCardViewModel.imageUrlString,
+        compatabilityScore: topCardViewModel.compatabilityScore))
+    }
+  }
+  
+  private func likeUser(_ targetUser: UserCardModel) {
+    FirestoreService.shared.createWaitingChat(reciever: targetUser) { result in
+      switch result {
+      case .success:
+        print("waiting chat created succesfully")
+      case .failure(let error):
+        AlertService.shared.alertPublisher.accept(
+          ("Error",
+           "\(error.localizedDescription)")
+        )
+      }
+    }
+  }
+  
+  private func dislikeUser(_ targetUser: UserCardModel) {
+    FirestoreService.shared.removeUser(user: targetUser) { result in
+      switch result {
+      case .success:
+        print("User moved to disliked")
+      case .failure(let error):
+        print(error)
+      }
     }
   }
 }

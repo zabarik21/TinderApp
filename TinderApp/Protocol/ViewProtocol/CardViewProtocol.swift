@@ -11,6 +11,7 @@ import RxSwift
 
 protocol CardViewProtocol: UIView {
   var viewModelRelay: BehaviorRelay<UserCardViewViewModelProtocol?> { get }
+  var touchCardObservable: Observable<UserCardViewViewModelProtocol?> { get }
   var swipedObservable: Observable<Bool> { get }
   var isSwipeble: Bool { get }
   

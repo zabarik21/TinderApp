@@ -10,6 +10,14 @@ import Foundation
 
 class DemoModeService {
   
-  static var isDemoMode: Bool = false
+  static let shared = DemoModeService()
+  
+  static var isDemoMode: Bool {
+    return StorageService.shared.demoMode()
+  }
+  
+  func toggleDemo(to bool: Bool) {
+    StorageService.shared.setDemoMode(bool)
+  }
   
 }

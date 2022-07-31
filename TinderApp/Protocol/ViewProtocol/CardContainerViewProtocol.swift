@@ -11,8 +11,8 @@ import UIKit
 protocol CardContainerViewProtocol: UIView {
   var viewModel: CardContainerViewViewModelProtocol? { get set }
   var cardTouchObservable: Observable<UserCardViewViewModelProtocol?> { get }
-  var bottomCardView: CardViewProtocol! { get set }
-  var topCardView: CardViewProtocol! { get set }
+  var bottomCardView: CardViewProtocol! { get }
+  var topCardView: CardViewProtocol! { get }
   
   func reacted(liked: Bool)
   func fillCards()

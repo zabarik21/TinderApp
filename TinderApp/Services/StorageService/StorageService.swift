@@ -12,6 +12,7 @@ import Accelerate
 class StorageService {
   
   private let userKey = "USER"
+  private let demoKey = "DEMO"
   private let standart = UserDefaults.standard
   
   static var shared: StorageService {
@@ -25,13 +26,23 @@ class StorageService {
     standart.set(data, forKey: userKey)
   }
   
+  func demoMode() -> Bool {
+    return standart.bool(forKey: demoKey)
+  }
+  
+  func setDemoMode(_ bool: Bool) {
+    if bool {
+      standart.set(bool, forKey: demoKey)
+    }
+  }
+  
   func loadUser() -> UserCardModel? {
     var user: UserCardModel?
     do {
       if let savedUserData = UserDefaults.standard.data(forKey: userKey) {
         user = try JSONDecoder().decode(UserCardModel.self, from: savedUserData)
       }
-    } catch(let decodeError) {
+    } catch (let decodeError) {
       print(decodeError)
     }
     return user
