@@ -54,4 +54,10 @@
     <td><img src="https://i.postimg.cc/9QGdcZ0n/main-screen.png"></td>
     <td><img src="https://i.postimg.cc/85stH4B0/userview.png"></td>
   </tr>
+   <tr>
+    <td> Its a match view </td>
+  </tr>
+   <tr>
+    <td> <img src="https://i.postimg.cc/yNxT5DhY/Simulator-Screen-Shot-i-Phone-13-mini-2022-08-01-at-17-33-38.png"> </td>
+  </tr>
  </table>
