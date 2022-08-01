@@ -92,6 +92,67 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
     return empties.isEmpty
   }
   
+  private func launchInDemoMode(_ name: Name, _ gender: Gender, _ birthDate: String, _ age: Int, _ interests: Set<Interest>) {
+    let user = UserCardModel(
+      name: name,
+      gender: gender,
+      location: location ?? Location(),
+      birthDate: BirthDate(
+        date: birthDate,
+        age: age),
+      picture: WebImage(
+        large: "nil",
+        thumbnail: "nil"),
+      id: UID(value: "nil"),
+      interests: interests)
+    
+    DispatchQueue.global(qos: .background).async {
+      StorageService.shared.saveUser(user: user)
+    }
+    
+    DispatchQueue.main.async {
+      let mainVC = MainTabBarController(user: user)
+      if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+        sceneDelegate.changeRootViewController(mainVC, animated: true)
+      }
+    }
+  }
+  
+  private func launchInDefaultMode(_ name: Name, _ image: UIImage?, _ gender: Gender, _ birthDate: String, _ age: Int, _ interests: Set<Interest>) {
+    if let id = self.user?.uid,
+       let email = self.user?.email {AlertService.shared.alertPublisher.accept((
+        "You will be registered",
+        "Please wait a couple of seconds"
+       ))
+      DispatchQueue.main.async { [weak self] in
+        FirestoreService.shared.saveProfileWith(
+          id: id,
+          name: name,
+          email: email,
+          image: image,
+          gender: gender,
+          location: self?.location,
+          birthDate: BirthDate(
+            date: birthDate,
+            age: age),
+          interests: interests,
+          completion: { result in
+            switch result {
+            case .success(let userModel):
+              let mainVC = MainTabBarController(user: userModel)
+              if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.changeRootViewController(mainVC, animated: true)
+              }
+            case .failure(let error):
+              self?.showAlert(title: "Error", message: error.localizedDescription)
+            }
+          })
+      }
+    } else {
+      self.showAlert(title: "Error", message: "Failed to get current user")
+    }
+  }
+  
   @objc func toMainScreen() {
     toDemoButton.isEnabled = false
     if checkFields() {
@@ -107,62 +168,9 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
       let age = CustomDateFormatter.shared.yearsBetweenDate(startDate: birthDatePicker.date)
       
       if DemoModeService.isDemoMode {
-        let user = UserCardModel(
-          name: name,
-          gender: gender,
-          location: location ?? Location(),
-          birthDate: BirthDate(
-            date: birthDate,
-            age: age),
-          picture: WebImage(
-            large: "nil",
-            thumbnail: "nil"),
-          id: UID(value: "nil"),
-          interests: interests)
-        
-        DispatchQueue.global(qos: .background).async {
-          StorageService.shared.saveUser(user: user)
-        }
-        
-        DispatchQueue.main.async {
-          let mainVC = MainTabBarController(user: user)
-          if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            sceneDelegate.changeRootViewController(mainVC, animated: true)
-          }
-        }
+        launchInDemoMode(name, gender, birthDate, age, interests)
       } else {
-        if let id = self.user?.uid,
-           let email = self.user?.email {AlertService.shared.alertPublisher.accept((
-            "You will be registered",
-            "Please wait a couple of seconds"
-            ))
-          DispatchQueue.main.async { [weak self] in
-            FirestoreService.shared.saveProfileWith(
-              id: id,
-              name: name,
-              email: email,
-              image: image,
-              gender: gender,
-              location: self?.location,
-              birthDate: BirthDate(
-                date: birthDate,
-                age: age),
-              interests: interests,
-              completion: { result in
-                switch result {
-                case .success(let userModel):
-                  let mainVC = MainTabBarController(user: userModel)
-                  if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                    sceneDelegate.changeRootViewController(mainVC, animated: true)
-                  }
-                case .failure(let error):
-                  self?.showAlert(title: "Error", message: error.localizedDescription)
-                }
-              })
-          }
-        } else {
-          self.showAlert(title: "Error", message: "Failed to get current user")
-        }
+        launchInDefaultMode(name, image, gender, birthDate, age, interests)
       }
     }
   }

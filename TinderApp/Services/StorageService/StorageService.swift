@@ -7,6 +7,7 @@
 
 import Foundation
 import Accelerate
+import UIKit
 
 
 class StorageService {
@@ -45,7 +46,7 @@ class StorageService {
     }
     return user
   }
-  
+ 
   func resetData() {
     standart.removeObject(forKey: userKey)
     standart.removeObject(forKey: demoKey)
