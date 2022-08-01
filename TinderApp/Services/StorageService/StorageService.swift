@@ -15,9 +15,7 @@ class StorageService {
   private let demoKey = "DEMO"
   private let standart = UserDefaults.standard
   
-  static var shared: StorageService {
-    return StorageService()
-  }
+  static var shared = StorageService()
   
   private init() {}
   
@@ -50,5 +48,6 @@ class StorageService {
   
   func resetData() {
     standart.removeObject(forKey: userKey)
+    standart.removeObject(forKey: demoKey)
   }
 }

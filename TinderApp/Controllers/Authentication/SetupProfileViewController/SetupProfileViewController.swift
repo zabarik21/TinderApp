@@ -48,6 +48,9 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    if !DemoModeService.isDemoMode {
+      self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     setupElements()
     setupConstraints()
     LocationService.shared.requestLocation()

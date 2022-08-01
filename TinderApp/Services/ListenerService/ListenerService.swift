@@ -26,12 +26,11 @@ class ListenerService {
     return Auth.auth().currentUser!.uid
   }
   
-  func observeUsers(
-    users: [UserCardModel],
-    completion: @escaping (Result<[UserCardModel], Error>) -> Void
+  func observeLikedUsers(
+    liked: Set<String>,
+    completion: @escaping (Result<Set<String>, Error>) -> Void
   ) -> ListenerRegistration {
-    
-    var users = users
+    var liked = liked
     var dislikedUsers = Set<String>()
     
     let group = DispatchGroup()
@@ -49,7 +48,86 @@ class ListenerService {
       })
     }
     
-    group.wait()
+    group.wait(timeout: .now() + 5)
+    
+    let likedListenre = usersRef.document(currentUserId).collection("likedBy").addSnapshotListener { snapshot, error in
+      if let error = error {
+        completion(.failure(error))
+        return
+      }
+      guard let snapshot = snapshot else {
+        completion(.failure(ListenerError.nilSnapshot))
+        return
+      }
+      for difference in snapshot.documentChanges {
+        
+        guard let id = UID(document: difference.document)?.value else {
+          completion(.failure(FirestoreError.decodeDocumentError))
+          return
+        }
+        
+        guard !dislikedUsers.contains(id) else {
+          continue
+        }
+        
+        switch difference.type {
+        case .added:
+          liked.insert(id)
+        case .modified, .removed:
+          break
+        }
+      }
+      completion(.success(liked))
+    }
+    return likedListenre
+  }
+  
+  func observeUsers(
+    users: [UserCardModel],
+    completion: @escaping (Result<[UserCardModel], Error>) -> Void
+  ) -> ListenerRegistration {
+    
+    var users = users
+    var alreadyLikedUsers = Set<String>()
+    var dislikedUsers = Set<String>()
+    
+    let group = DispatchGroup()
+    
+    group.enter()
+    
+    DispatchQueue.global(qos: .utility).async {
+      FirestoreService.shared.getDislikedUsers(completion: { result in
+        switch result {
+        case .success(let ids):
+          dislikedUsers = ids
+        case .failure:
+          break
+        }
+        group.leave()
+      })
+    }
+    
+    if group.wait(timeout: .now() + 5) == .timedOut {
+      completion(.failure(FirestoreError.timeOut))
+    }
+    
+    group.enter()
+    
+    DispatchQueue.global(qos: .utility).async {
+      FirestoreService.shared.getAlreadyLikedUsers(completion: { result in
+        switch result {
+        case .success(let users):
+          alreadyLikedUsers = users
+        case .failure:
+          break
+        }
+        group.leave()
+      })
+    }
+    
+    if group.wait(timeout: .now() + 5) == .timedOut {
+      completion(.failure(FirestoreError.timeOut))
+    }
     
     let usersListener = usersRef.addSnapshotListener { querySnapshot, error in
       if let error = error {
@@ -63,11 +141,12 @@ class ListenerService {
       
       for difference in querySnapshot.documentChanges {
         guard let userModel = UserCardModel(document: difference.document) else {
-          completion(.failure(UserError.cannotUnwrapToMuser))
+          completion(.failure(FirestoreError.decodeDocumentError))
           return
         }
         
         guard !dislikedUsers.contains(userModel.id.value!) else { continue }
+        guard !alreadyLikedUsers.contains(userModel.id.value!) else { continue }
         
         switch difference.type {
         case .added:

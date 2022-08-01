@@ -9,15 +9,14 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 import UIKit
+import SwiftUI
 
-enum UserError: Error {
-  case cannotGetUserData
-  case cannotUnwrapToMuser
-}
 
-enum MessagesError: Error {
-  case nilMessages
-  case decodeError
+
+enum FirestoreError: Error {
+  case decodeDocumentError
+  case nilData
+  case timeOut
 }
 
 class FirestoreService {
@@ -38,7 +37,7 @@ class FirestoreService {
     ].joined(separator: "/"))
   }
   
-  private var dislikedUsers: CollectionReference {
+  private var checkedUsers: CollectionReference {
     return database.collection([
       "users",
       currentUser.id.value!,
@@ -73,11 +72,11 @@ class FirestoreService {
         return
       }
       guard let document = document else {
-        completion(.failure(UserError.cannotGetUserData))
+        completion(.failure(FirestoreError.nilData))
         return
       }
       guard let userModel = UserCardModel(document: document) else {
-        completion(.failure(UserError.cannotUnwrapToMuser))
+        completion(.failure(FirestoreError.decodeDocumentError))
         return
       }
       self.currentUser = userModel
@@ -163,6 +162,13 @@ class FirestoreService {
       }
     }
   }
+  
+  func addLikeInfoToUser(
+    likedUser: UserCardModel
+  ) {
+    let likedRef = usersRef.document(likedUser.id.value!).collection("likedBy").document("\(currentUser.id.value!)")
+    likedRef.setData(currentUser.id.representation)
+  }
     
   func getWaitingChatMessages(
     chat: TinderChat,
@@ -174,12 +180,12 @@ class FirestoreService {
         completion(.failure(error))
       }
       guard let documents = querySnapshot?.documents else {
-        completion(.failure(MessagesError.nilMessages))
+        completion(.failure(FirestoreError.nilData))
         return
       }
       for document in documents {
         guard let message = TinderMessage(document: document) else {
-          completion(.failure(MessagesError.decodeError))
+          completion(.failure(FirestoreError.nilData))
           return
         }
         messages.append(message)
@@ -188,10 +194,56 @@ class FirestoreService {
     }
   }
   
+  func getWaitingChatData(
+    chatId: String,
+    completion: @escaping (Result<TinderChat, Error>) -> Void
+  ) {
+    let chatReference = usersRef.document(chatId).collection("waitingChats").document(currentUser.id.value!)
+    
+    chatReference.getDocument { document, error in
+      if let error = error {
+        completion(.failure(error))
+        return
+      }
+      guard let document = document else {
+        completion(.failure(FirestoreError.nilData))
+        return
+      }
+      guard let chat = TinderChat(document: document) else {
+        completion(.failure(FirestoreError.decodeDocumentError))
+        return
+      }
+      completion(.success(chat))
+    }
+  }
+  
   func changeChatToActive(
-    chat: TinderChat,
+    friendId: String,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
+    let group = DispatchGroup()
+    group.enter()
+    var chat: TinderChat?
+    getWaitingChatData(chatId: friendId) { result in
+      switch result {
+      case .success(let chatInfo):
+        chat = chatInfo
+        group.leave()
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+    
+    if group.wait(timeout: .now() + 5) == .timedOut {
+      completion(.failure(FirestoreError.timeOut))
+      return
+    }
+    
+    guard let chat = chat else {
+      completion(.failure(FirestoreError.nilData))
+      return
+    }
+    
     getWaitingChatMessages(chat: chat) { result in
       switch result {
       case .success(let messages):
@@ -221,7 +273,7 @@ class FirestoreService {
     messages: [TinderMessage],
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
-      let messageRef = activeChats.document(chat.friendId).collection("messages")
+    let messageRef = activeChats.document(chat.friendId).collection("messages")
       
     messageRef.document(chat.friendId).setData(chat.representation) { error in
       if let error = error {
@@ -282,15 +334,15 @@ class FirestoreService {
     }
   }
   
-  func removeUser(
+  func addToCheckedUsers(
     user: UserCardModel,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
-    dislikedUsers.document(user.id.value!).setData(user.id.representation)
+    checkedUsers.document(user.id.value!).setData(user.id.representation)
   }
 
   func getDislikedUsers(completion: @escaping (Result<Set<String>, Error>) -> Void) {
-    dislikedUsers.getDocuments { quetySnapshot, error in
+    checkedUsers.getDocuments { quetySnapshot, error in
       if let error = error {
         completion(.failure(error))
       }
@@ -304,6 +356,35 @@ class FirestoreService {
         completion(.success(ids))
       }
     }
+  }
+  
+  func getAlreadyLikedUsers(completion: @escaping ((Result<Set<String>, Error>) -> Void)) {
+    var liked = Set<String>()
+    activeChats.getDocuments { snapshot, error in
+      if let error = error {
+        completion(.failure(error))
+      }
+      guard let snapshot = snapshot else {
+        completion(.failure(FirestoreError.nilData))
+        return
+      }
+      for document in snapshot.documents {
+        liked.insert(document.documentID)
+      }
+    }
+    waitingChats.getDocuments { snapshot, error in
+      if let error = error {
+        completion(.failure(error))
+      }
+      guard let snapshot = snapshot else {
+        completion(.failure(FirestoreError.nilData))
+        return
+      }
+      for document in snapshot.documents {
+        liked.insert(document.documentID)
+      }
+    }
+    completion(.success(liked))
   }
   
 }

@@ -82,7 +82,7 @@ class PeopleViewController: UIViewController {
       }
       .disposed(by: bag)
     
-    cardContainer.viewModel?.matchRelay
+    cardContainer.viewModel.matchRelay
       .subscribe(onNext: { [weak self] matchViewModel in
         guard let matchViewModel = matchViewModel else { return }
         self?.matchView.viewModelRelay.accept(matchViewModel)
@@ -90,7 +90,7 @@ class PeopleViewController: UIViewController {
       })
       .disposed(by: bag)
     
-    cardContainer.viewModel?.userLoadObservable
+    cardContainer.viewModel.userLoadObservable
       .subscribe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] status in
         if status {
@@ -202,7 +202,6 @@ extension PeopleViewController {
   private func setupCardContainer() {
     // let cachedUsers = ...
     let viewModel = CardContainerViewViewModel(user: self.user)
-    cardContainer = CardContainerView()
-    cardContainer.viewModel = viewModel
+    cardContainer = CardContainerView(viewModel: viewModel)
   }
 }

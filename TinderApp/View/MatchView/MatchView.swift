@@ -18,7 +18,8 @@ class MatchView: UIView, MovableView {
   var hideViewPublishRelay = PublishRelay<Void>()
   
   var hideViewObservable: Observable<Void> {
-    return hideViewPublishRelay.asObservable()
+    return hideViewPublishRelay
+      .asObservable()
   }
   
   private enum Constants {
@@ -40,6 +41,7 @@ class MatchView: UIView, MovableView {
   private var keepSwipingButton: StartScreenButton!
   
   private var gradientLayer: CAGradientLayer!
+  private var bgImgage: UIImageView!
   
   var viewHieght: CGFloat!
   
@@ -153,9 +155,18 @@ extension MatchView {
     gradientLayer = LayerFactory.shared.getGradientLayer()
     gradientLayer.frame = self.bounds
     layer.insertSublayer(gradientLayer, at: 0)
+    bgImgage = UIImageView()
+    bgImgage.image = UIImage(named: "emojis")
+    bgImgage.contentMode = .scaleAspectFit
   }
   
   private func setupConstraints() {
+    
+    addSubview(bgImgage)
+    
+    bgImgage.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
     
     addSubview(matchLabel)
     

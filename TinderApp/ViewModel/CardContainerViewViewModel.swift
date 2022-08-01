@@ -16,6 +16,7 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
   var viewModels = [UserCardViewViewModelProtocol]()
   var users = [UserCardModel]()
+  var liked = Set<String>()
   var usersApi = RandomUserApi()
   
   var user: UserCardModel
@@ -24,6 +25,7 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   var matchRelay = PublishRelay<MatchViewViewModel?>()
   
   private var usersListener: ListenerRegistration?
+  private var likesListener: ListenerRegistration?
   
   public var matchObservable: Observable<MatchViewViewModel?> {
     return matchRelay.asObservable()
@@ -39,6 +41,29 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
   var displayedUserModel: UserCardModel?
   
+  init(user: UserCardModel) {
+    self.user = user
+    guard !DemoModeService.isDemoMode else {
+      self.fetchViewModels()
+      return
+    }
+    getUsersFromFirestore()
+    getLikesFromFirestore()
+    topCardViewModelRelay
+      .subscribe()
+      .disposed(by: bag)
+  }
+  
+  deinit {
+    usersListener?.remove()
+  }
+  
+  func getDisplayedUser() -> UserCardModel? {
+    if viewModels.count == 0 { return users.last! }
+    guard (userIndex - 2) < users.count else { return nil }
+    return users[userIndex - 2]
+  }
+  
   func nextCard() -> UserCardViewViewModelProtocol? {
     if DemoModeService.isDemoMode {
       if viewModels.count < 5 {
@@ -49,26 +74,47 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     return viewModels.shift()
   }
   
-  init(user: UserCardModel) {
-    self.user = user
-    guard !DemoModeService.isDemoMode else {
-      self.fetchViewModels()
-      return
+  func updateViewModels() {
+    viewModels = users.map { UserCardViewViewModel(
+      with: $0,
+      myInterests: self.user.interests)
     }
-    getUsersFromFirestore()
-    topCardViewModelRelay
-      .debug()
-      .subscribe()
-      .disposed(by: bag)
+    self.userLoadPublisher.onNext(true)
   }
   
-  deinit {
-    usersListener?.remove()
+  func updateMatchRelay(with viewModel: UserCardViewViewModelProtocol) {
+    let matchViewModel = MatchViewViewModel(
+      userName: self.user.name.first,
+      userImageUrlString: self.user.picture.thumbnail,
+      friendName: viewModel.name,
+      friendImageUrlString: viewModel.imageUrlString,
+      compatabilityScore: viewModel.compatabilityScore)
+    matchRelay.accept(matchViewModel)
   }
   
-  func getDisplayedUser() -> UserCardModel? {
-    guard (userIndex - 2) < users.count else { return nil }
-    return users[userIndex - 2]
+  func isMutually() -> Bool {
+    guard let id = getDisplayedUser()?.id.value else { return false }
+    return liked.contains(id)
+  }
+}
+
+// MARK: - Firestore Listeners
+extension CardContainerViewViewModel {
+  
+  func getLikesFromFirestore() {
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      guard let self = self else { return }
+      self.likesListener = ListenerService.shared.observeLikedUsers(
+        liked: self.liked,
+        completion: { result in
+          switch result {
+          case .success(let likedUsers):
+            self.liked = likedUsers
+          case .failure(let error):
+            print(error)
+          }
+      })
+    }
   }
   
   func getUsersFromFirestore() {
@@ -87,15 +133,6 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
         })
     }
   }
-  
-  func updateViewModels() {
-    viewModels = users.map { UserCardViewViewModel(
-      with: $0,
-      myInterests: self.user.interests)
-    }
-    self.userLoadPublisher.onNext(true)
-  }
-  
 }
 
 // fetch users for demo mode

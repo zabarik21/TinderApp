@@ -17,4 +17,6 @@ protocol CardContainerViewViewModelProtocol {
   var userLoadObservable: Observable<Bool> { get }
   func nextCard() -> UserCardViewViewModelProtocol?
   func getDisplayedUser() -> UserCardModel?
+  func updateMatchRelay(with: UserCardViewViewModelProtocol)
+  func isMutually() -> Bool
 }

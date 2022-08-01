@@ -29,7 +29,7 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     return cardTouchPublisher.asObservable()
   }
   
-  var viewModel: CardContainerViewViewModelProtocol?
+  var viewModel: CardContainerViewViewModelProtocol
   
   private var backCardContainer: UIView!
   var bottomCardView: CardViewProtocol!
@@ -37,7 +37,8 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   
   var topCardTurn = true
   
-  init() {
+  init(viewModel: CardContainerViewViewModelProtocol) {
+    self.viewModel = viewModel
     super.init(frame: .zero)
     setupElements()
     setupObserver()
@@ -53,11 +54,11 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     // dont change the order 
     // 1
     if topCardView.viewModelRelay.value == nil {
-      topCardView.viewModelRelay.accept(viewModel?.nextCard())
+      topCardView.viewModelRelay.accept(viewModel.nextCard())
     }
     // 2
     if bottomCardView.viewModelRelay.value == nil {
-      bottomCardView.viewModelRelay.accept(viewModel?.nextCard())
+      bottomCardView.viewModelRelay.accept(viewModel.nextCard())
     }
   }
   
@@ -71,7 +72,7 @@ extension CardContainerView {
   
   private func setupObserver() {
     
-    viewModel?.userLoadObservable
+    viewModel.userLoadObservable
       .subscribe(onNext: { [weak self] _  in
         self?.fillCards()
       })
@@ -101,7 +102,7 @@ extension CardContainerView {
       }
       .disposed(by: bag)
     
-    viewModel?.userLoadObservable
+    viewModel.userLoadObservable
       .subscribe(on: MainScheduler.instance)
       .subscribe(onNext: { [weak self] status in
         if status {

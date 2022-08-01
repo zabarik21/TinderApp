@@ -40,8 +40,8 @@ struct TinderChat: Hashable, Decodable {
       self.friendUsername = friendUsername
   }
  
-  init?(document: QueryDocumentSnapshot) {
-      let data = document.data()
+  init?(document: DocumentSnapshot) {
+    guard let data = document.data() else { return nil }
       guard let friendId = data["friendId"] as? String,
             let friendImageString = data["friendImageString"] as? String,
             let friendUsername = data["friendUsername"] as? String,

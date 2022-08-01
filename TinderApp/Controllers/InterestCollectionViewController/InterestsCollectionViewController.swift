@@ -22,7 +22,6 @@ class InterestsCollectionViewController: UICollectionViewController {
     didSet {
       if !oneItemReload {
         DispatchQueue.main.async {
-          print("reload")
           self.collectionView.reloadData()
         }
       }

@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController {
     do {
       try AuthenticationService.shared.logoutUser()
       StorageService.shared.resetData()
+      
     } catch let signOutError {
       AlertService.shared.alertPublisher.accept((
         "Error",

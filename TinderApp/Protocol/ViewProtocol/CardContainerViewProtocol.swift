@@ -9,7 +9,7 @@ import RxSwift
 import UIKit
 
 protocol CardContainerViewProtocol: UIView {
-  var viewModel: CardContainerViewViewModelProtocol? { get set }
+  var viewModel: CardContainerViewViewModelProtocol { get set }
   var cardTouchObservable: Observable<UserCardViewViewModelProtocol?> { get }
   var bottomCardView: CardViewProtocol! { get }
   var topCardView: CardViewProtocol! { get }

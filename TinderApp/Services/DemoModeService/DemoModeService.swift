@@ -17,6 +17,7 @@ class DemoModeService {
   }
   
   func toggleDemo(to bool: Bool) {
+    print("Demo mode setted to \(bool)")
     StorageService.shared.setDemoMode(bool)
   }
   
