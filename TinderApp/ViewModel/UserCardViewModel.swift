@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 
 struct UserCardViewViewModel: UserCardViewViewModelProtocol {
@@ -16,6 +17,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   var age: Int
   var city: String
   var imageUrlString: String
+  var distance: Int
   var interests: Set<Interest>
   
   var userInfoViewViewModel: UsersInfoViewViewModelProtocol {
@@ -44,6 +46,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.city = userCardModel.location.city
     self.name = userCardModel.name.first
     self.imageUrlString = userCardModel.picture.large
+    self.distance = Int.random(in: 0...50)
     
   }
   
@@ -57,6 +60,11 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.compatabilityScore = Int.random(in: 0...10)
     self.interests = Interest.getRandomCases()
     self.similarInterestsCount = 0
+    self.distance = Int.random(in: 0...50)
+  }
+  
+  func calculateDistance() {
+    
   }
 }
 
@@ -68,8 +76,6 @@ extension UserCardViewViewModel {
   }
   
   func cityDistanceLabelText() -> String {
-    let randomDistance = Int.random(in: 0...50)
-    return "\(city) •\(randomDistance) km"
+    return "\(city) •\(distance) km"
   }
-  
 }
