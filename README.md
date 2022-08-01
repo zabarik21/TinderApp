@@ -13,8 +13,7 @@
 
 # ToDo
 - Impliment coordinator pattern
-- Connect Firebase
-- Add chats 
+- Add chats screen
 - Add setup user screen
 - Ability for users to add more than one photo
 
@@ -26,7 +25,6 @@
   - pod 'SnapKit'
   - pod 'RxRelay'
   - pod 'RxCocoa'
-  - pod 'SwiftLint'
   - pod 'Firebase/Firestore'
   - pod 'Firebase/Auth'
   - pod 'Firebase/Storage'
