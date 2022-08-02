@@ -30,7 +30,7 @@ struct TinderChat: Hashable, Decodable {
       return data
   }
   
-  init?(friendUsername: String,
+  init(friendUsername: String,
         lastMessageContent: String,
         friendImageString: String,
         friendId: String) {
@@ -53,6 +53,19 @@ struct TinderChat: Hashable, Decodable {
       self.friendImageString = friendImageString
       self.lastMessageContent = lastMessage
       self.friendUsername = friendUsername
+  }
+  
+//  var friendUsername: String
+//  var lastMessageContent: String
+//  var friendImageString: String
+//  var friendId: String
+  
+  func toFriendChat(user: UserCardModel) -> Self {
+    return TinderChat(
+      friendUsername: user.name.first,
+      lastMessageContent: self.lastMessageContent,
+      friendImageString: user.picture.thumbnail,
+      friendId: user.id.value!)
   }
   
   func hash(into hasher: inout Hasher) {

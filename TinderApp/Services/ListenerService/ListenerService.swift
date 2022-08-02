@@ -37,7 +37,7 @@ class ListenerService {
     group.enter()
     
     DispatchQueue.global(qos: .utility).async {
-      FirestoreService.shared.getDislikedUsers(completion: { result in
+      FirestoreService.shared.getCheckedUsers(completion: { result in
         switch result {
         case .success(let ids):
           dislikedUsers = ids
@@ -83,23 +83,22 @@ class ListenerService {
   }
   
   func observeUsers(
-    users: [UserCardModel],
-    completion: @escaping (Result<[UserCardModel], Error>) -> Void
+    users: [String: UserCardModel],
+    completion: @escaping (Result<[String: UserCardModel], Error>) -> Void
   ) -> ListenerRegistration {
     
     var users = users
-    var alreadyLikedUsers = Set<String>()
-    var dislikedUsers = Set<String>()
+    var checkedUsers = Set<String>()
     
     let group = DispatchGroup()
     
     group.enter()
     
     DispatchQueue.global(qos: .utility).async {
-      FirestoreService.shared.getDislikedUsers(completion: { result in
+      FirestoreService.shared.getCheckedUsers(completion: { result in
         switch result {
         case .success(let ids):
-          dislikedUsers = ids
+          checkedUsers = ids
         case .failure:
           break
         }
@@ -107,33 +106,14 @@ class ListenerService {
       })
     }
     
-    if group.wait(timeout: .now() + 5) == .timedOut {
-      completion(.failure(FirestoreError.timeOut))
-    }
-    
-    group.enter()
-    
-    DispatchQueue.global(qos: .utility).async {
-      FirestoreService.shared.getAlreadyLikedUsers(completion: { result in
-        switch result {
-        case .success(let users):
-          alreadyLikedUsers = users
-        case .failure:
-          break
-        }
-        group.leave()
-      })
-    }
-    
-    if group.wait(timeout: .now() + 5) == .timedOut {
-      completion(.failure(FirestoreError.timeOut))
-    }
+    group.wait(timeout: .now() + 5)
     
     let usersListener = usersRef.addSnapshotListener { querySnapshot, error in
       if let error = error {
         completion(.failure(error))
         return
       }
+      
       guard let querySnapshot = querySnapshot else {
         completion(.failure(ListenerError.nilSnapshot))
         return
@@ -145,20 +125,19 @@ class ListenerService {
           return
         }
         
-        guard !dislikedUsers.contains(userModel.id.value!) else { continue }
-        guard !alreadyLikedUsers.contains(userModel.id.value!) else { continue }
+        guard !checkedUsers.contains(userModel.id.value!) else { continue }
         
         switch difference.type {
         case .added:
-          guard !users.contains(userModel) else { continue }
+          guard users[userModel.id.value!] == nil else { continue }
           guard userModel.id.value != self.currentUserId else { continue }
-          users.append(userModel)
+          users[userModel.id.value!] = userModel
         case .modified:
-          guard let index = users.firstIndex(of: userModel) else { continue }
-          users[index] = userModel
+          if users[userModel.id.value!] != nil {
+            users[userModel.id.value!] = userModel
+          }
         case .removed:
-          guard let index = users.firstIndex(of: userModel) else { continue }
-          users.remove(at: index)
+          users.removeValue(forKey: userModel.id.value!)
         }
       }
       completion(.success(users))

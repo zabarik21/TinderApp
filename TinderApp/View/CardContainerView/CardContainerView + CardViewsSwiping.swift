@@ -11,9 +11,8 @@ import RxSwift
 extension CardContainerView {
   
   func swiped(liked: Bool) {
-    // send request for like/dislike if user in not demo mode
     if !DemoModeService.isDemoMode {
-      if let targetUser = viewModel.getDisplayedUser() {
+      if let targetUser = self.topCardUser {
         if liked {
           likeUser(targetUser)
         } 
@@ -81,16 +80,15 @@ extension CardContainerView {
   private func demoLikeReaction() {
     if Int.random(in: 0...3) == 2 {
       guard let topCardViewModel = viewModel.topCardViewModelRelay.value else { return }
-      self.viewModel.updateMatchRelay(with: topCardViewModel)
-      
+      self.viewModel.updateMatchViewRelay(with: topCardViewModel)
     }
   }
   
   private func likeUser(_ targetUser: UserCardModel) {
-    if viewModel.isMutually() {
+    if viewModel.isLikeMutually() {
       DispatchQueue.global(qos: .userInitiated).async {
-        FirestoreService.shared.changeChatToActive(
-          friendId: targetUser.id.value!) { result in
+        FirestoreService.shared.createChat(
+          friend: targetUser) { result in
             switch result {
             case .failure(let error):
               print(error)
@@ -103,30 +101,19 @@ extension CardContainerView {
             }
           }
       }
-      self.viewModel.updateMatchRelay(with: UserCardViewViewModel(with: targetUser, myInterests: self.viewModel.user.interests))
+      self.viewModel.updateMatchViewRelay(with: UserCardViewViewModel(with: targetUser, myInterests: self.viewModel.user.interests))
     } else {
       DispatchQueue.global(qos: .userInitiated).async {
         FirestoreService.shared.addLikeInfoToUser(likedUser: targetUser)
-        FirestoreService.shared.createWaitingChat(reciever: targetUser) { result in
-          switch result {
-          case .success:
-            print("waiting chat created succesfully")
-          case .failure(let error):
-            AlertService.shared.alertPublisher.accept(
-              ("Error",
-               "\(error.localizedDescription)")
-            )
-          }
-        }
       }
     }
   }
   
   private func checkUser(_ targetUser: UserCardModel) {
-    FirestoreService.shared.addToCheckedUsers(user: targetUser) { result in
+    FirestoreService.shared.addToChecked(user: targetUser) { result in
       switch result {
       case .success:
-        print("User moved to disliked")
+        print("User with id \(targetUser.id.value!) checked")
       case .failure(let error):
         print(error)
       }

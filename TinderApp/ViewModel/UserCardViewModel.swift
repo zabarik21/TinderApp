@@ -13,6 +13,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   
   var similarInterestsCount: Int
   var compatabilityScore: Int
+  var id: String
   var name: String
   var age: Int
   var city: String
@@ -37,6 +38,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
       self.compatabilityScore = Int(compatablityScore)
       self.similarInterestsCount = similarInterests
     } else {
+      self.id = userCardModel.id.value ?? ""
       self.compatabilityScore = 0
       self.similarInterestsCount = 0
     }
@@ -47,7 +49,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.name = userCardModel.name.first
     self.imageUrlString = userCardModel.picture.large
     self.distance = Int.random(in: 0...50)
-    
+    self.id = userCardModel.id.value!
   }
   
   // init for tests
@@ -61,6 +63,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.interests = Interest.getRandomCases()
     self.similarInterestsCount = 0
     self.distance = Int.random(in: 0...50)
+    self.id = UUID().uuidString
   }
   
   func calculateDistance() {

@@ -16,7 +16,7 @@ protocol CardContainerViewViewModelProtocol {
   var matchRelay: PublishRelay<MatchViewViewModel?> { get }
   var userLoadObservable: Observable<Bool> { get }
   func nextCard() -> UserCardViewViewModelProtocol?
-  func getDisplayedUser() -> UserCardModel?
-  func updateMatchRelay(with: UserCardViewViewModelProtocol)
-  func isMutually() -> Bool
+  func updateMatchViewRelay(with: UserCardViewViewModelProtocol)
+  func isLikeMutually() -> Bool
+  func topCardUser() -> UserCardModel?
 }

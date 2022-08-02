@@ -12,12 +12,13 @@ import RxRelay
 
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
 
+  var usersApi = RandomUserApi()
+
   private let bag = DisposeBag()
   
   var viewModels = [UserCardViewViewModelProtocol]()
-  var users = [UserCardModel]()
+  var users = [String: UserCardModel]()
   var liked = Set<String>()
-  var usersApi = RandomUserApi()
   
   var user: UserCardModel
   
@@ -37,9 +38,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
   
   var topCardViewModelRelay = BehaviorRelay<UserCardViewViewModelProtocol?>(value: nil)
   
-  private var userIndex = 0
+  var topCardViewModel: UserCardViewViewModelProtocol?
   
-  var displayedUserModel: UserCardModel?
+  private var userIndex = 0
   
   init(user: UserCardModel) {
     self.user = user
@@ -50,7 +51,9 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     getUsersFromFirestore()
     getLikesFromFirestore()
     topCardViewModelRelay
-      .subscribe()
+      .subscribe(onNext: { [weak self] cardViewModel in
+        self?.topCardViewModel = cardViewModel
+      })
       .disposed(by: bag)
   }
   
@@ -58,10 +61,10 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     usersListener?.remove()
   }
   
-  func getDisplayedUser() -> UserCardModel? {
-    if viewModels.count == 0 { return users.last! }
-    guard (userIndex - 2) < users.count else { return nil }
-    return users[userIndex - 2]
+  func topCardUser() -> UserCardModel? {
+    guard let id = topCardViewModel?.id else { return nil }
+    print(id)
+    return users[id]
   }
   
   func nextCard() -> UserCardViewViewModelProtocol? {
@@ -70,19 +73,18 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
         fetchViewModels()
       }
     }
-    userIndex += 1
     return viewModels.shift()
   }
   
   func updateViewModels() {
     viewModels = users.map { UserCardViewViewModel(
-      with: $0,
+      with: $0.value,
       myInterests: self.user.interests)
     }
     self.userLoadPublisher.onNext(true)
   }
   
-  func updateMatchRelay(with viewModel: UserCardViewViewModelProtocol) {
+  func updateMatchViewRelay(with viewModel: UserCardViewViewModelProtocol) {
     let matchViewModel = MatchViewViewModel(
       userName: self.user.name.first,
       userImageUrlString: self.user.picture.thumbnail,
@@ -92,8 +94,8 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     matchRelay.accept(matchViewModel)
   }
   
-  func isMutually() -> Bool {
-    guard let id = getDisplayedUser()?.id.value else { return false }
+  func isLikeMutually() -> Bool {
+    guard let id = topCardViewModel?.id else { return false }
     return liked.contains(id)
   }
 }
@@ -124,8 +126,8 @@ extension CardContainerViewViewModel {
         users: self.users,
         completion: { result in
           switch result {
-          case .success(let users):
-            self.users = users
+          case .success(let newUsers):
+            self.users = newUsers
             self.updateViewModels()
           case .failure(let error):
             print(error)

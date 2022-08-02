@@ -25,6 +25,10 @@ class CardContainerView: UIView, CardContainerViewProtocol {
   private var bag = DisposeBag()
   private var cardTouchPublisher = PublishSubject<UserCardViewViewModelProtocol?>()
   
+  var topCardUser: UserCardModel? {
+    return viewModel.topCardUser()
+  }
+  
   var cardTouchObservable: Observable<UserCardViewViewModelProtocol?> {
     return cardTouchPublisher.asObservable()
   }
@@ -42,7 +46,6 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     super.init(frame: .zero)
     setupElements()
     setupObserver()
-    
   }
   
   override func layoutSubviews() {
@@ -54,7 +57,9 @@ class CardContainerView: UIView, CardContainerViewProtocol {
     // dont change the order 
     // 1
     if topCardView.viewModelRelay.value == nil {
-      topCardView.viewModelRelay.accept(viewModel.nextCard())
+      let topCardViewModel = viewModel.nextCard()
+      topCardView.viewModelRelay.accept(topCardViewModel)
+      viewModel.topCardViewModelRelay.accept(topCardViewModel)
     }
     // 2
     if bottomCardView.viewModelRelay.value == nil {

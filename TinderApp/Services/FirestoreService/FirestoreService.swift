@@ -41,7 +41,7 @@ class FirestoreService {
     return database.collection([
       "users",
       currentUser.id.value!,
-      "dislikedUsers"
+      "checkedUsers"
     ].joined(separator: "/"))
   }
   
@@ -50,6 +50,22 @@ class FirestoreService {
       "users",
       currentUser.id.value!,
       "activeChats"
+    ].joined(separator: "/"))
+  }
+  
+  private var chatsRef: CollectionReference {
+    return database.collection([
+      "users",
+      currentUser.id.value!,
+      "chats"
+    ].joined(separator: "/"))
+  }
+  
+  private func friendChatsRef(friendId: String) -> CollectionReference {
+    return database.collection([
+      "users",
+      friendId,
+      "chats"
     ].joined(separator: "/"))
   }
   
@@ -138,14 +154,11 @@ class FirestoreService {
     
     let tinderMessage = TinderMessage(user: currentUser, content: message)
     
-    guard let chat = TinderChat(
+    let chat = TinderChat(
       friendUsername: reciever.name.first,
       lastMessageContent: message,
       friendImageString: reciever.picture.large,
-      friendId: reciever.id.value!) else {
-        completion(.failure(TinderChatError.chatRepresentationError))
-        return
-      }
+      friendId: reciever.id.value!)
     
     
     waitingChats.document(reciever.id.value!).setData(chat.representation) { error in
@@ -167,7 +180,13 @@ class FirestoreService {
     likedUser: UserCardModel
   ) {
     let likedRef = usersRef.document(likedUser.id.value!).collection("likedBy").document("\(currentUser.id.value!)")
-    likedRef.setData(currentUser.id.representation)
+    likedRef.setData(currentUser.id.representation) { error in
+      if let error = error {
+        print(error)
+      } else {
+        print("Sucessfully liked user")
+      }
+    }
   }
     
   func getWaitingChatMessages(
@@ -217,174 +236,75 @@ class FirestoreService {
     }
   }
   
-  func changeChatToActive(
-    friendId: String,
+  func createChat(
+    friend: UserCardModel,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
     let group = DispatchGroup()
     group.enter()
-    var chat: TinderChat?
-    getWaitingChatData(chatId: friendId) { result in
-      switch result {
-      case .success(let chatInfo):
-        chat = chatInfo
-        group.leave()
-      case .failure(let error):
-        completion(.failure(error))
-      }
-    }
+    let selfChat = TinderChat(
+      friendUsername: friend.name.first,
+      lastMessageContent: "",
+      friendImageString: friend.picture.thumbnail,
+      friendId: friend.id.value!)
+    let friendChat = selfChat.toFriendChat(user: self.currentUser)
+    let friendId = friend.id.value!
+    let selfId = self.currentUser.id.value!
     
-    if group.wait(timeout: .now() + 5) == .timedOut {
-      completion(.failure(FirestoreError.timeOut))
-      return
-    }
-    
-    guard let chat = chat else {
-      completion(.failure(FirestoreError.nilData))
-      return
-    }
-    
-    getWaitingChatMessages(chat: chat) { result in
-      switch result {
-      case .success(let messages):
-        self.deleteWaitingChat(chat: chat) { result in
-          switch result {
-          case .failure(let error):
-            completion(.failure(error))
-          case .success:
-            self.createActiveChat(chat: chat, messages: messages) { result in
-              switch result {
-              case .failure(let error):
-                completion(.failure(error))
-              case .success:
-                completion(.success(()))
-              }
-            }
-          }
-        }
-      case .failure(let error):
-        completion(.failure(error))
-      }
-    }
-  }
-  
-  func createActiveChat(
-    chat: TinderChat,
-    messages: [TinderMessage],
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    let messageRef = activeChats.document(chat.friendId).collection("messages")
-      
-    messageRef.document(chat.friendId).setData(chat.representation) { error in
+    chatsRef.document(friendId).setData(selfChat.representation) { error in
       if let error = error {
+        print(error)
         completion(.failure(error))
         return
       }
-      
-      for message in messages {
-        messageRef.addDocument(data: message.representation) { error in
-          if let error = error {
-            completion(.failure(error))
-            return
-          }
-        }
-      }
-      completion(.success(()))
     }
-      
     
+    let friendChatsRef = friendChatsRef(friendId: friendId)
     
-  }
-  
-  func deleteWaitingChat(
-    chat: TinderChat,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    waitingChats.document(chat.friendId).delete { error in
+    friendChatsRef.document(selfId).setData(friendChat.representation) { error in
       if let error = error {
+        print(error)
         completion(.failure(error))
+        return
       }
       completion(.success(()))
     }
-    self.deleteMessages(chat: chat, completion: completion)
   }
   
-  func deleteMessages(
-    chat: TinderChat,
-    completion: @escaping (Result<Void, Error>) -> Void
-  ) {
-    let reference = waitingChats.document(chat.friendId).collection("messages")
-    getWaitingChatMessages(chat: chat) { result in
-      switch result {
-      case .success(let messages):
-        for message in messages {
-          guard let docId = message.id else { return }
-          let messageRef = reference.document(docId)
-          messageRef.delete { error in
-            if let error = error {
-              completion(.failure(error))
-              return
-            }
-          }
-          completion(.success(Void()))
-        }
-      case .failure(let error):
-        completion(.failure(error))
-      }
-    }
-  }
   
-  func addToCheckedUsers(
+  func addToChecked(
     user: UserCardModel,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
-    checkedUsers.document(user.id.value!).setData(user.id.representation)
+    checkedUsers.document(user.id.value!).setData(user.id.representation) { error in
+      if let error = error {
+        print(error)
+        completion(.failure(error))
+      }
+      completion(.success(()))
+    }
   }
 
-  func getDislikedUsers(completion: @escaping (Result<Set<String>, Error>) -> Void) {
+  func getCheckedUsers(completion: @escaping (Result<Set<String>, Error>) -> Void) {
     checkedUsers.getDocuments { quetySnapshot, error in
+      
       if let error = error {
         completion(.failure(error))
       }
-      if let documents = quetySnapshot?.documents {
-        var ids = Set<String>()
-        for document in documents {
-          if let id = UID(document: document) {
-            ids.insert(id.value!)
-          }
+
+      guard let snapshot = quetySnapshot else {
+        completion(.failure(FirestoreError.nilData))
+        return
+      }
+
+      var ids = Set<String>()
+      for document in snapshot.documents {
+        if let id = UID(document: document) {
+          ids.insert(id.value!)
         }
-        completion(.success(ids))
       }
+      completion(.success(ids))
     }
-  }
-  
-  func getAlreadyLikedUsers(completion: @escaping ((Result<Set<String>, Error>) -> Void)) {
-    var liked = Set<String>()
-    activeChats.getDocuments { snapshot, error in
-      if let error = error {
-        completion(.failure(error))
-      }
-      guard let snapshot = snapshot else {
-        completion(.failure(FirestoreError.nilData))
-        return
-      }
-      for document in snapshot.documents {
-        liked.insert(document.documentID)
-      }
-    }
-    waitingChats.getDocuments { snapshot, error in
-      if let error = error {
-        completion(.failure(error))
-      }
-      guard let snapshot = snapshot else {
-        completion(.failure(FirestoreError.nilData))
-        return
-      }
-      for document in snapshot.documents {
-        liked.insert(document.documentID)
-      }
-    }
-    completion(.success(liked))
   }
   
 }
