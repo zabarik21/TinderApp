@@ -72,6 +72,7 @@ extension UserInfoView {
   private func setupLabels() {
     nameAgeLabel = UILabel(text: "", fontSize: 24, weight: .bold, textColor: .cardLabelTextColor)
     cityLabel = UILabel(text: "", fontSize: 12, weight: .bold, textColor: .cardLabelTextColor)
+    cityLabel.numberOfLines = 1
     
     labelsStackView = UIStackView(arrangedSubviews: [nameAgeLabel, cityLabel])
     labelsStackView.axis = .vertical
@@ -81,10 +82,6 @@ extension UserInfoView {
   
   private func setupConstraints() {
     addSubview(labelsStackView)
-    labelsStackView.snp.makeConstraints { make in
-      make.verticalEdges.equalToSuperview().inset(6)
-      make.leading.equalToSuperview()
-    }
     
     addSubview(compatabilityView)
     compatabilityView.snp.makeConstraints { make in
@@ -92,6 +89,12 @@ extension UserInfoView {
       make.width.equalTo(self.snp.height)
       make.trailing.equalToSuperview()
       make.top.equalToSuperview()
+    }
+    
+    labelsStackView.snp.makeConstraints { make in
+      make.verticalEdges.equalToSuperview().inset(6)
+      make.leading.equalToSuperview()
+      make.trailing.equalTo(compatabilityView.snp.leading).offset(-20)
     }
   }
 }

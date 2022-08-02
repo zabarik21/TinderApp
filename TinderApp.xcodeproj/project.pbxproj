@@ -94,6 +94,7 @@
 		7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */; };
 		7BD80E5B287832A300BB2C74 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */; };
 		7BE25E292898F73400B564FC /* LocationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE25E282898F73400B564FC /* LocationModelTests.swift */; };
+		7BE25E2D28991B5700B564FC /* Double + Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE25E2C28991B5700B564FC /* Double + Format.swift */; };
 		7BE2E90C287C2EA800D0BA75 /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90B287C2EA800D0BA75 /* SetupProfileViewController.swift */; };
 		7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */; };
 		7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EA8284111730081E71E /* AppDelegate.swift */; };
@@ -212,6 +213,7 @@
 		7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		7BE25E282898F73400B564FC /* LocationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelTests.swift; sourceTree = "<group>"; };
+		7BE25E2C28991B5700B564FC /* Double + Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Format.swift"; sourceTree = "<group>"; };
 		7BE2E90B287C2EA800D0BA75 /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7BED5EA5284111730081E71E /* TinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -638,6 +640,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7BE25E2B28991B4E00B564FC /* Double */ = {
+			isa = PBXGroup;
+			children = (
+				7BE25E2C28991B5700B564FC /* Double + Format.swift */,
+			);
+			path = Double;
+			sourceTree = "<group>";
+		};
 		7BE2E90D287C2ECB00D0BA75 /* ProfileImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +768,7 @@
 		7BED5EE1284114DA0081E71E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7BE25E2B28991B4E00B564FC /* Double */,
 				7B261CA62892BF1B00241CB2 /* RxSwift  + notNilValue */,
 				7B929B59287ECB3100B6AE35 /* Array + Set */,
 				7B929B56287EB08200B6AE35 /* UIView + Draggle */,
@@ -1104,6 +1115,7 @@
 				7B93C0622851180F002B0A00 /* ReactionButtonsView.swift in Sources */,
 				7BF85C7B28721D1400B296CC /* InterestCell.swift in Sources */,
 				7B5D71EB2893B16F00F5223E /* Gender.swift in Sources */,
+				7BE25E2D28991B5700B564FC /* Double + Format.swift in Sources */,
 				7BB0B3E5287996140043F893 /* AuthenticationViewController.swift in Sources */,
 				7B85ACE7289649A400F27DE8 /* MovableView.swift in Sources */,
 				7B2907E5286EEAD400CB52EB /* UserViewProtocol.swift in Sources */,

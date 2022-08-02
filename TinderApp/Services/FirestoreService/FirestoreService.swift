@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import CoreLocation
 import FirebaseAuth
 import UIKit
 import SwiftUI
@@ -188,7 +189,7 @@ class FirestoreService {
       }
     }
   }
-    
+  
   func getWaitingChatMessages(
     chat: TinderChat,
     completion: @escaping (Result<[TinderMessage], Error>) -> Void
@@ -284,19 +285,71 @@ class FirestoreService {
       completion(.success(()))
     }
   }
+  
+  func randomizeAllUsersLocation() {
+    var docs = [String]()
+    let group = DispatchGroup()
+    group.enter()
+    usersRef.getDocuments { snapshot, error in
+      guard let snapshot = snapshot else {
+        return
+      }
+      for doc in snapshot.documents {
+        docs.append(doc.documentID)
+      }
+      print(docs.first!)
+      group.leave()
+    }
+    
+    group.notify(queue: .main) {
+      for docId in docs {
+        let lat = Double.random(in: 56...65)
+        let lon = Double.random(in: 35...94)
+        let newLatString = "\(lat.format(f: ".6"))"
+        let newLonString = "\(lon.format(f: ".6"))"
+        let location = CLLocation(latitude: lat, longitude: lon)
+        var city: String?
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        CLGeocoder().reverseGeocodeLocation(location) { placeMark, error in
+          if let error = error {
+            print(error)
+          } else {
+            city = placeMark?.first?.locality
+          }
+          group.leave()
+        }
 
+        group.notify(queue: .main) {
+          let newCoordinates = [
+            "\(UserCardModel.CodingKeys.location.rawValue)" : [
+              "\(Location.CodingKeys.coordinates.rawValue)" : [
+                "\(Coordinates.CodingKeys.latitude.rawValue)" : "\(newLatString)",
+                "\(Coordinates.CodingKeys.longitude.rawValue)" : "\(newLonString)"
+              ],
+              "\(Location.CodingKeys.city.rawValue)" : "\(city ?? "Hided")"
+            ]
+          ]
+          self.usersRef.document(docId).updateData(newCoordinates)
+        }
+      }
+    }
+  }
+  
   func getCheckedUsers(completion: @escaping (Result<Set<String>, Error>) -> Void) {
     checkedUsers.getDocuments { quetySnapshot, error in
       
       if let error = error {
         completion(.failure(error))
       }
-
+      
       guard let snapshot = quetySnapshot else {
         completion(.failure(FirestoreError.nilData))
         return
       }
-
+      
       var ids = Set<String>()
       for document in snapshot.documents {
         if let id = UID(document: document) {
