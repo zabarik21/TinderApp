@@ -49,7 +49,7 @@ class SetupProfileViewController: UIViewController, UINavigationControllerDelega
   override func viewDidLoad() {
     super.viewDidLoad()
     if !DemoModeService.isDemoMode {
-      self.navigationController?.setNavigationBarHidden(true, animated: true)
+      self.navigationItem.setHidesBackButton(true, animated: true)
     }
     setupElements()
     setupConstraints()
