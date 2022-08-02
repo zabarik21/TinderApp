@@ -10,8 +10,8 @@
 - 🎫 See detailed information about the user and its interests
 - 💌 Like ot dislike users by buttons or by swipe
 - 📬 See all chats in messanger tab (not done yet)
-- ❤️Leave likes and get mutually reactions, see cool 'Its a Match View'
-- 🔮See all nearby people, your location is important, users displayed in distance decreasing order
+- ❤️  Leave likes and get mutually reactions, see cool 'Its a Match View'
+- 🔮 See all nearby people, your location is important, users displayed in distance decreasing order
 
 # ToDo
 - Impliment coordinator pattern
