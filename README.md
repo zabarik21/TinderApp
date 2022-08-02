@@ -1,6 +1,9 @@
 # TinderApp
 🙎‍♂️🙍‍♀️ A dating application built with Swift 5 and UIKit where the user can find an friend by swiping throught cards and  if another user likes you too you can chat.
 
+# Test user login & password
+test3@mail.ru 123123
+
 # 📲 About App: 
 - 📐 MVVM architecrure pattern
 - 🚀 Using RxSwift
