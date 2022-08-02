@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import FirebaseFirestore
 import RxRelay
+import CoreLocation
 
 class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
 
@@ -76,12 +77,41 @@ class CardContainerViewViewModel: CardContainerViewViewModelProtocol {
     return viewModels.shift()
   }
   
-  func updateViewModels() {
-    viewModels = users.map { UserCardViewViewModel(
-      with: $0.value,
-      myInterests: self.user.interests)
+  func updateViewModels(with newUsers: [String: UserCardModel]) {
+    let group = DispatchGroup()
+    group.enter()
+    if let lat = Double(self.user.location.coordinates.latitude),
+       let lon = Double(self.user.location.coordinates.longitude) {
+      DispatchQueue.global(qos: .userInitiated).async {
+        let location = CLLocation(latitude: lat, longitude: lon)
+        var newViewModels = [UserCardViewViewModelProtocol]()
+        for newUser in newUsers.values {
+          let distance = LocationService.shared.getDistance(
+            fst: location,
+            snd: newUser.location.coordinates
+          )
+          
+          newViewModels.append(UserCardViewViewModel(
+            with: newUser,
+            myInterests: self.user.interests,
+            distance: distance
+          ))
+        }
+        self.viewModels = newViewModels.sorted { $0.distance < $1.distance }
+        group.leave()
+      }
+    } else {
+      viewModels = newUsers.map { UserCardViewViewModel(
+        with: $0.value,
+        myInterests: self.user.interests,
+        distance: nil
+        )
+      }
+      group.leave()
     }
-    self.userLoadPublisher.onNext(true)
+    group.notify(queue: .main) {
+      self.userLoadPublisher.onNext(true)
+    }
   }
   
   func updateMatchViewRelay(with viewModel: UserCardViewViewModelProtocol) {
@@ -128,7 +158,7 @@ extension CardContainerViewViewModel {
           switch result {
           case .success(let newUsers):
             self.users = newUsers
-            self.updateViewModels()
+            self.updateViewModels(with: self.users)
           case .failure(let error):
             print(error)
           }
@@ -144,11 +174,13 @@ extension CardContainerViewViewModel {
       switch result {
       case .success(let downloadedUsers):
         for user in downloadedUsers {
+          print(user)
           var userWithInterest = user
           userWithInterest.interests = Interest.getRandomCases()
-          let viewModel = UserCardViewViewModel(with: userWithInterest, myInterests: self.user.interests)
+          let viewModel = UserCardViewViewModel(with: userWithInterest, myInterests: self.user.interests, distance: Location.distanceDemoKey)
           self.viewModels.append(viewModel)
         }
+        self.viewModels.sort { $0.distance < $1.distance }
         self.userLoadPublisher.onNext(true)
       case .failure(let error):
         DispatchQueue.main.async { [weak self] in

@@ -12,6 +12,7 @@ protocol UserCardViewViewModelProtocol {
   var age: Int { get }
   var city: String { get }
   var id: String { get }
+  var distance: Int { get set }
   var imageUrlString: String { get }
   var compatabilityScore: Int { get }
   var interests: Set<Interest> { get }

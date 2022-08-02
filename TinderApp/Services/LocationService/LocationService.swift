@@ -30,6 +30,13 @@ class LocationService: NSObject {
     setupObserver()
   }
   
+  func getDistance(fst: CLLocation, snd: Coordinates) -> Int? {
+    guard let lat = Double(snd.latitude),
+          let lon = Double(snd.longitude) else { return nil }
+    let sndLocation = CLLocation(latitude: lat, longitude: lon)
+    return Int(fst.distance(from: sndLocation) / 1000)
+  }
+  
   private func setupObserver() {
     locationStatusSubject
       .subscribe(on: MainScheduler.instance)

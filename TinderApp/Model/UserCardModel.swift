@@ -22,23 +22,6 @@ struct UserCardModel: Codable {
   var id: UID
   var interests: Set<Interest>?
   
-  static var demoUser: Self {
-    return UserCardModel(
-      name: Name(
-        first: "Demo",
-        last: "User"),
-      gender: .other,
-      location: Location(),
-      birthDate: BirthDate(
-        date: "01.01.2000",
-        age: 0),
-      picture: WebImage(
-        large: "https://vgmsite.com/soundtracks/spongebob-battle-for-bikini-bottom-gc-xbox-ps2/coverart.jpg",
-        thumbnail: "https://prodigits.co.uk/thumbs/android-games/thumbs/s/1396790468.jpg"),
-      id: UID.init(value: "id"),
-      interests: Interest.getRandomCases())
-  }
-  
   enum CodingKeys: String, CodingKey, CaseIterable {
     case birthDate = "dob"
     case picture

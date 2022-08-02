@@ -9,6 +9,10 @@ import Foundation
 
 
 struct Location: Codable {
+  
+  static let hidedKey = "Hided"
+  static let distanceDemoKey: Int = -1
+  
   var city: String
   var coordinates: Coordinates
   
@@ -19,13 +23,12 @@ struct Location: Codable {
   
   // Location init for users who hide their location
   init() {
-    self.city = "Hided"
-    self.coordinates = Coordinates(latitude: "54", longitude: "54")
+    self.city = Location.hidedKey
+    self.coordinates = Coordinates(latitude: Location.hidedKey, longitude: Location.hidedKey)
   }
   
   enum CodingKeys: String, CodingKey, CaseIterable {
     case city
     case coordinates
   }
-  
 }

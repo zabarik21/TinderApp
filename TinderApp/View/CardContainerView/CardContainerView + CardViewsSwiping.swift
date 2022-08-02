@@ -101,7 +101,7 @@ extension CardContainerView {
             }
           }
       }
-      self.viewModel.updateMatchViewRelay(with: UserCardViewViewModel(with: targetUser, myInterests: self.viewModel.user.interests))
+      self.viewModel.updateMatchViewRelay(with: UserCardViewViewModel(with: targetUser, myInterests: self.viewModel.user.interests, distance: nil))
     } else {
       DispatchQueue.global(qos: .userInitiated).async {
         FirestoreService.shared.addLikeInfoToUser(likedUser: targetUser)

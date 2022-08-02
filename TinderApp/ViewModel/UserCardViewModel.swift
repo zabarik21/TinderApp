@@ -29,7 +29,7 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
   }
   
   
-  init(with userCardModel: UserCardModel, myInterests: Set<Interest>?) {
+  init(with userCardModel: UserCardModel, myInterests: Set<Interest>?, distance: Int?) {
     if let myInterests = myInterests, !myInterests.isEmpty {
       let similarInterests = userCardModel.interests!.reduce(0, { partialResult, interest in
         partialResult + (myInterests.contains(interest) ? 1 : 0)
@@ -48,8 +48,18 @@ struct UserCardViewViewModel: UserCardViewViewModelProtocol {
     self.city = userCardModel.location.city
     self.name = userCardModel.name.first
     self.imageUrlString = userCardModel.picture.large
-    self.distance = Int.random(in: 0...50)
-    self.id = userCardModel.id.value!
+    if let distance = distance {
+      if distance == Location.distanceDemoKey {
+        self.distance = Int.random(in: 0...50)
+      } else {
+        self.distance = distance
+      }
+    } else {
+      self.distance = 0
+    }
+    
+    // optional because stupid random people api cant always give id
+    self.id = userCardModel.id.value ?? UUID().uuidString
   }
   
   // init for tests

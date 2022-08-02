@@ -93,6 +93,7 @@
 		7BCB99C02845CB8D004EFC29 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */; };
 		7BCB99C32845CFAE004EFC29 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */; };
 		7BD80E5B287832A300BB2C74 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */; };
+		7BE25E292898F73400B564FC /* LocationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE25E282898F73400B564FC /* LocationModelTests.swift */; };
 		7BE2E90C287C2EA800D0BA75 /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90B287C2EA800D0BA75 /* SetupProfileViewController.swift */; };
 		7BE2E90F287C2F0500D0BA75 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */; };
 		7BED5EA9284111730081E71E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED5EA8284111730081E71E /* AppDelegate.swift */; };
@@ -210,6 +211,7 @@
 		7BCB99BF2845CB8D004EFC29 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
 		7BCB99C22845CFAE004EFC29 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		7BD80E5A287832A300BB2C74 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		7BE25E282898F73400B564FC /* LocationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelTests.swift; sourceTree = "<group>"; };
 		7BE2E90B287C2EA800D0BA75 /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		7BE2E90E287C2F0500D0BA75 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7BED5EA5284111730081E71E /* TinderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -694,6 +696,7 @@
 				7B261C99289296FE00241CB2 /* FirebaseServiceTests.swift */,
 				7B261CA42892AB2A00241CB2 /* AuthenticationServiceTests.swift */,
 				7B261CAB2892C78000241CB2 /* DateFormatterTests.swift */,
+				7BE25E282898F73400B564FC /* LocationModelTests.swift */,
 			);
 			path = TinderAppTests;
 			sourceTree = "<group>";
@@ -1131,6 +1134,7 @@
 				7B52B8AE2882AC3000A64A7B /* StorageServiceTests.swift in Sources */,
 				7BA1BC7E2878A54900E9C5E8 /* RandomUserApiTests.swift in Sources */,
 				7BED5EC0284111750081E71E /* TinderAppTests.swift in Sources */,
+				7BE25E292898F73400B564FC /* LocationModelTests.swift in Sources */,
 				7B47BAE9284717F500C692E0 /* ArrayExtensionTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
