@@ -2,14 +2,16 @@
 🙎‍♂️🙍‍♀️ A dating application built with Swift 5 and UIKit where the user can find an friend by swiping throught cards and  if another user likes you too you can chat.
 
 # 📲 About App: 
-- MVVM architecrure pattern
-- Using RxSwift
-- Full programmatically UI (no storyboard) 
-- You can try app without need to registration (demo option avaliable - without registration)
-- Fetching users data from backend (Random People API when app is in demo mode / Firebase when user is logged in)
-- See detailed information about the user and its interests
-- Like ot dislike users by buttons or by swipe
-- See all chats in messanger tab (not done yet)
+- 📐 MVVM architecrure pattern
+- 🚀 Using RxSwift
+- 👨🏿‍🦯 Full programmatically UI (no storyboard) 
+- 🤝 You can try app without need to registration (demo option avaliable - without registration)
+- 📡 Fetching users data from backend (Random People API when app is in demo mode / Firebase when user is logged in)
+- 🎫 See detailed information about the user and its interests
+- 💌 Like ot dislike users by buttons or by swipe
+- 📬 See all chats in messanger tab (not done yet)
+- ❤️Leave likes and get mutually reactions, see cool 'Its a Match View'
+- 🔮See all nearby people, your location is important, users displayed in distance decreasing order
 
 # ToDo
 - Impliment coordinator pattern
